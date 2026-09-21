@@ -1,1 +1,12 @@
-[{"_test":true,"ts":"2026-09-21T22:19:42.663Z","autor":"auto"}]
+[
+  {
+    "_test": true,
+    "ts": "2026-09-21T22:19:42.663Z",
+    "autor": "auto",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "",
+    "parcelas": []
+  }
+]
