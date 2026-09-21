@@ -684,7 +684,8 @@
         "vencimento": "2026-09-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "credorOverride": "Geisa"
       },
       {
         "id": "mu8n9k1w6cdt5v",
