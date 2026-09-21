@@ -49,7 +49,7 @@
     background:linear-gradient(135deg,var(--laranja),var(--laranja-esc));
     color:#fff;font-weight:700;font-size:.85rem;padding:10px 16px;border-radius:10px;
     box-shadow:0 3px 10px rgba(234,88,12,.35);transition:.18s;margin-bottom:12px;border:2px solid #fff}
-  .btn-voltar:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(234,88,12,.45)}
+  .btn-voltar:hover{transform:translateY(-2px)}
   .btn-voltar::before{content:'←';font-size:1.15rem;font-weight:900;line-height:1}
   h2.titulo-tela{margin:0 0 12px;font-size:1.2rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
   .badge-hoje{background:linear-gradient(135deg,var(--laranja),var(--laranja-esc));color:#fff;
@@ -119,146 +119,105 @@
   .resultado-busca .st-tag.s-outros{background:var(--amarelo-bg);color:#92400e}
 
   /* ================================================
-     CALENDÁRIO — LAYOUT TRAVADO PARA NUNCA SAIR
+     CALENDÁRIO — fonte do mês/ano DOBRADA e bordas mais grossas
      ================================================ */
   .calendario-cartao{
     width:100%;
     max-width:100%;
     box-sizing:border-box;
     overflow:hidden;
-    padding:10px;
+    padding:14px;
     background:#fff;
-    border:1px solid var(--linha);
-    border-radius:var(--raio);
-    box-shadow:0 1px 3px rgba(15,23,42,.06);
+    /* Borda mais grossa — azul escuro, 3px */
+    border:3px solid #1e3a8a;
+    border-radius:16px;
+    box-shadow:0 4px 18px rgba(30,58,138,.12);
   }
 
   .calendario-cabecalho{
     display:flex;align-items:center;justify-content:space-between;
-    gap:8px;margin-bottom:10px;
+    gap:8px;margin-bottom:14px;
   }
   .calendario-cabecalho h3{
     flex:1;text-align:center;margin:0;
-    font-size:1rem;font-weight:800;color:#1e293b;
+    /* FONTE DOBRADA: 1rem → 2rem */
+    font-size:2rem;
+    font-weight:900;
+    color:#1e3a8a;
     text-transform:capitalize;
+    letter-spacing:-.5px;
+    line-height:1.1;
     min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    text-shadow:0 1px 2px rgba(30,58,138,.1);
   }
   .nav-mes{
     flex:0 0 auto;
-    width:36px;height:36px;
-    border-radius:10px;
-    background:#f1f5f9;border:1px solid #e2e8f0;
+    width:42px;height:42px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #bfdbfe;
     display:flex;align-items:center;justify-content:center;
-    font-size:1.15rem;font-weight:800;color:#334155;
+    font-size:1.4rem;font-weight:900;color:#1e40af;
     transition:.15s;
   }
-  .nav-mes:hover{background:#e2e8f0;color:var(--azul)}
+  .nav-mes:hover{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-color:#93c5fd}
   .nav-mes:active{transform:scale(.95)}
 
   .calendario-viewport{
-    width:100%;max-width:100%;
-    box-sizing:border-box;
-    overflow:hidden;
-    position:relative;
-    touch-action:pan-y;
-    user-select:none;
-    -webkit-user-select:none;
+    width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
+    position:relative;touch-action:pan-y;user-select:none;-webkit-user-select:none;
   }
   .calendario-slide{
-    width:100%;max-width:100%;
-    box-sizing:border-box;
-    backface-visibility:hidden;
-    -webkit-backface-visibility:hidden;
+    width:100%;max-width:100%;box-sizing:border-box;
+    backface-visibility:hidden;-webkit-backface-visibility:hidden;
   }
 
   .dias-semana{
-    display:grid;
-    grid-template-columns:repeat(7,minmax(0,1fr));
-    gap:2px;
-    width:100%;
-    max-width:100%;
-    box-sizing:border-box;
-    padding:0 3px;
-    margin-bottom:4px;
+    display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:2px;width:100%;max-width:100%;box-sizing:border-box;
+    padding:0 4px;margin-bottom:4px;
   }
   .dias-semana span{
-    text-align:center;
-    font-size:.6rem;
-    font-weight:800;
-    color:var(--suave);
-    text-transform:uppercase;
-    letter-spacing:.2px;
-    padding:2px 0;
-    min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+    text-align:center;font-size:.62rem;font-weight:800;color:var(--suave);
+    text-transform:uppercase;letter-spacing:.2px;padding:2px 0;
+    min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   }
   .dias-semana span.dom{color:var(--vermelho)}
 
   .grade-calendario{
-    display:grid;
-    grid-template-columns:repeat(7,minmax(0,1fr));
-    gap:2px;
-    width:100%;
-    max-width:100%;
-    box-sizing:border-box;
-    padding:3px;
+    display:grid;grid-template-columns:repeat(7,minmax(0,1fr));
+    gap:2px;width:100%;max-width:100%;box-sizing:border-box;
+    padding:5px;
     background:#f1f5f9;
-    border:1px solid #e2e8f0;
-    border-radius:10px;
+    /* Borda mais grossa na grade interna */
+    border:2.5px solid #cbd5e1;
+    border-radius:12px;
     overflow:hidden;
   }
 
   .dia{
-    width:100%;
-    min-width:0;
-    max-width:100%;
-    box-sizing:border-box;
-    aspect-ratio:1 / 1;
-    overflow:hidden;
-    padding:0;
-    border-radius:6px;
+    width:100%;min-width:0;max-width:100%;box-sizing:border-box;
+    aspect-ratio:1 / 1;overflow:hidden;padding:0;
+    border-radius:7px;
     border:1.5px solid #e2e8f0;
     background:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    font-weight:700;
-    color:#334155;
-    position:relative;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;font-weight:700;color:#334155;position:relative;
     transition:transform .12s ease, border-color .12s ease, box-shadow .12s ease;
   }
-  .dia .num{
-    font-size:clamp(.68rem,2.8vw,.92rem);
-    line-height:1;
-    font-weight:800;
-  }
+  .dia .num{font-size:clamp(.68rem,2.8vw,.92rem);line-height:1;font-weight:800}
   .dia .qtd{
-    position:absolute;
-    top:1px;right:1px;
+    position:absolute;top:1px;right:1px;
     background:var(--azul);color:#fff;
     font-size:.5rem;font-weight:800;
     min-width:12px;height:12px;border-radius:6px;
     display:flex;align-items:center;justify-content:center;
     padding:0 3px;line-height:1;
   }
-  .dia:hover{
-    border-color:var(--azul);
-    transform:scale(1.04);
-    box-shadow:0 3px 8px rgba(37,99,235,.2);
-    z-index:2;
-  }
+  .dia:hover{border-color:var(--azul);transform:scale(1.04);box-shadow:0 3px 8px rgba(37,99,235,.2);z-index:2}
   .dia:active{transform:scale(.97)}
 
-  .dia.fora-mes{
-    background:transparent;
-    border-color:transparent;
-    color:#cbd5e1;
-    cursor:default;
-    font-weight:500;
-  }
+  .dia.fora-mes{background:transparent;border-color:transparent;color:#cbd5e1;cursor:default;font-weight:500}
   .dia.fora-mes:hover{background:transparent;transform:none;box-shadow:none;border-color:transparent}
   .dia.fora-mes .num{font-weight:500;opacity:.5}
   .dia.fora-mes .qtd{display:none}
@@ -296,31 +255,30 @@
 
   .dia.hoje.domingo .num,.dia.hoje.dia-feriado .num{color:var(--laranja-esc)}
 
-  .legenda{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;padding-top:10px;
-    border-top:1px solid var(--linha);font-size:.7rem;color:var(--suave)}
+  .legenda{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;padding-top:12px;
+    border-top:2px solid var(--linha);font-size:.72rem;color:var(--suave)}
   .legenda span{display:flex;align-items:center;gap:4px}
-  .legenda i{width:11px;height:11px;border-radius:4px;display:inline-block;border:1.5px solid transparent}
+  .legenda i{width:12px;height:12px;border-radius:4px;display:inline-block;border:1.5px solid transparent}
   .legenda i.l-pago{background:var(--verde-claro);border-color:#86efac}
   .legenda i.l-aberto{background:var(--azul-claro);border-color:#bae6fd}
   .legenda i.l-atraso{background:var(--vermelho-bg);border-color:#fca5a5}
   .legenda i.l-outros{background:var(--amarelo-claro);border-color:#fcd34d}
   .legenda i.l-feriado{background:#fef2f2;border-color:#fca5a5;border-width:2px}
 
-  .feriados-mes{margin-top:10px;padding-top:10px;
-    border-top:1px dashed var(--linha);font-size:.76rem}
-  .feriados-mes .titulo{font-size:.62rem;font-weight:800;text-transform:uppercase;
+  .feriados-mes{margin-top:12px;padding-top:10px;
+    border-top:1px dashed var(--linha);font-size:.78rem}
+  .feriados-mes .titulo{font-size:.64rem;font-weight:800;text-transform:uppercase;
     letter-spacing:.5px;color:var(--verde-forte);margin-bottom:6px;display:flex;align-items:center;gap:5px}
   .feriados-mes ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:3px}
   .feriados-mes li{display:flex;gap:8px;align-items:baseline;color:var(--verde-forte);
-    font-weight:700;line-height:1.3;font-size:.76rem;min-width:0}
-  .feriados-mes li .data-f{font-variant-numeric:tabular-nums;min-width:42px;flex-shrink:0;
-    font-size:.72rem;background:var(--verde-bg);color:var(--verde-forte);
+    font-weight:700;line-height:1.3;font-size:.78rem;min-width:0}
+  .feriados-mes li .data-f{font-variant-numeric:tabular-nums;min-width:44px;flex-shrink:0;
+    font-size:.74rem;background:var(--verde-bg);color:var(--verde-forte);
     padding:1px 6px;border-radius:5px;text-align:center}
   .feriados-mes li .nome-f{font-weight:600;color:var(--verde-forte);
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-  .feriados-mes .nenhum{color:var(--verde-forte);opacity:.7;font-style:italic;font-size:.74rem}
-  .dica-swipe{text-align:center;font-size:.7rem;color:var(--suave);margin-top:8px;font-style:italic;
-    word-break:break-word}
+  .feriados-mes .nenhum{color:var(--verde-forte);opacity:.7;font-style:italic;font-size:.76rem}
+  .dica-swipe{text-align:center;font-size:.72rem;color:var(--suave);margin-top:10px;font-style:italic}
 
   .vazio{text-align:center;color:var(--suave);padding:26px 10px;font-size:.88rem;background:#fff;
     border:1px dashed var(--linha);border-radius:var(--raio)}
@@ -463,10 +421,6 @@
   .config-ajuda code{background:#fff;border:1px solid #bae6fd;border-radius:5px;
     padding:1px 5px;font-family:ui-monospace,monospace;font-size:.7rem;
     color:#0369a1;font-weight:600;word-break:break-all}
-  .config-perigo{background:linear-gradient(135deg,#fef2f2,#fee2e2);
-    border:1px solid #fecaca;border-radius:10px;
-    padding:12px;font-size:.76rem;color:#991b1b;margin-top:12px;line-height:1.55}
-  .config-perigo b{color:#7f1d1d}
   .diag-resultado{background:#f8fafc;border:1px solid var(--linha);border-radius:10px;
     padding:12px;margin-top:12px;font-size:.72rem;
     font-family:ui-monospace,monospace;color:#334155;
@@ -491,8 +445,7 @@
     font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:99px;margin-left:4px;
     text-transform:uppercase;letter-spacing:.3px}
   .tag-indefinida{display:inline-block;background:linear-gradient(135deg,var(--roxo),#a855f7);
-    color:#fff;font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:99px;
-    margin-left:4px;text-transform:uppercase}
+    color:#fff;font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:99px;margin-left:4px}
   .resumo-divida{display:flex;gap:10px;font-size:.72rem;color:var(--suave);flex-wrap:wrap}
   .resumo-divida b{color:var(--texto)}
   .tabela-area{overflow-x:auto;width:100%;-webkit-overflow-scrolling:touch}
@@ -545,16 +498,11 @@
   .opcao-escopo.cancelar{background:#fff;border-color:#fee2e2}
   .opcao-escopo.cancelar .info b{color:#b91c1c}
 
-  @media (max-width:380px){
-    .area{padding:10px}
-    .calendario-cartao{padding:8px}
-    .grade-calendario{gap:1.5px;padding:2.5px}
-    .dias-semana{gap:1.5px;padding:0 2.5px}
-    .dias-semana span{font-size:.52rem}
-    .dia .num{font-size:.7rem}
-    .dia .qtd{font-size:.46rem;min-width:11px;height:11px}
-  }
   @media (max-width:520px){
+    .calendario-cabecalho h3{font-size:1.6rem}
+    .calendario-cartao{padding:12px;border-width:3px}
+    .grade-calendario{padding:4px;border-width:2.5px}
+    .nav-mes{width:38px;height:38px;font-size:1.2rem}
     header.topo h1{font-size:.95rem}
     .status-sync{font-size:.58rem;padding:4px 8px}
     .btn-gh{width:30px;height:30px;font-size:.85rem}
@@ -564,6 +512,16 @@
     .item-resumo .texto-credencial b{font-size:.84rem}
     .item-resumo .valor-parcela{font-size:.95rem}
     .acoes-iniciais .btn{min-width:120px;font-size:.76rem;padding:9px 12px}
+  }
+  @media (max-width:380px){
+    .area{padding:10px}
+    .calendario-cabecalho h3{font-size:1.35rem}
+    .calendario-cartao{padding:10px}
+    .grade-calendario{gap:1.5px;padding:3px;border-width:2.5px}
+    .dias-semana{gap:1.5px;padding:0 3px}
+    .dias-semana span{font-size:.54rem}
+    .dia .num{font-size:.7rem}
+    .dia .qtd{font-size:.46rem;min-width:11px;height:11px}
   }
 </style>
 </head>
@@ -715,7 +673,7 @@
     <div class="filtro-periodo">
       <h3><span>📅</span> Período</h3>
       <div class="filtro-linha">
-        <button type="button" class="btn-periodo ativo" data-periodo="tudo">Tudo</button>
+        <button type="button" class="btn-periodo" data-periodo="tudo">Tudo</button>
         <button type="button" class="btn-periodo" data-periodo="este_mes">Este mês</button>
         <button type="button" class="btn-periodo" data-periodo="mes_passado">Mês passado</button>
         <button type="button" class="btn-periodo" data-periodo="ultimos_30">Últ. 30d</button>
@@ -799,7 +757,6 @@
         <li>Permissions → Contents → <b>Read and write</b></li>
         <li>Generate → cole acima</li>
       </ol>
-      <p style="margin:10px 0 0"><b>⚠️ O token precisa de</b> <code>Contents: Read and write</code>. Sem isso, o salvamento falha com erro 403.</p>
     </div>
   </section>
 
@@ -848,9 +805,10 @@
    ========================================================= */
 const CHAVE = 'sistemaPagamentos.v2';
 const GH_KEY = 'sistemaPagamentos.github';
+const FILTRO_KEY = 'sistemaPagamentos.filtroResumo'; /* Persistência do filtro do resumo */
 const PARCELAS_INICIAIS_CONTINUA = 24;
 const PARCELAS_MIN_FUTURAS = 12;
-const LIMITE_GITHUB_BYTES = 900 * 1024; // 900 KB (limite de segurança)
+const LIMITE_GITHUB_BYTES = 900 * 1024;
 
 let dividas = [];
 let editandoId = null;
@@ -879,6 +837,40 @@ function urlSegura(url){ const v=String(url||'').trim(); if(!v) return ''; retur
 function nomeMes(mes){ return ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][mes]; }
 function nomeDiaSemana(d){ return ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'][d]; }
 function normalizar(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+/* ---------- Persistência do filtro do resumo ---------- */
+function carregarFiltroResumo(){
+  try{
+    const raw = localStorage.getItem(FILTRO_KEY);
+    if(!raw) return;
+    const j = JSON.parse(raw);
+    if(j && typeof j === 'object'){
+      if(typeof j.periodo === 'string') filtroResumo.periodo = j.periodo;
+      if(typeof j.dataInicio === 'string') filtroResumo.dataInicio = j.dataInicio;
+      if(typeof j.dataFim === 'string') filtroResumo.dataFim = j.dataFim;
+    }
+  }catch(e){ console.warn('Erro ao carregar filtro:', e); }
+}
+function salvarFiltroResumo(){
+  try{ localStorage.setItem(FILTRO_KEY, JSON.stringify(filtroResumo)); }
+  catch(e){ console.warn('Erro ao salvar filtro:', e); }
+}
+/* Aplica o filtro salvo na UI (botões ativos, campos de data visíveis) */
+function aplicarFiltroSalvoUI(){
+  // Botões
+  document.querySelectorAll('.btn-periodo').forEach(b=>{
+    b.classList.toggle('ativo', b.dataset.periodo === filtroResumo.periodo);
+  });
+  // Campos personalizados
+  const pp = document.getElementById('filtroPersonalizado');
+  if(filtroResumo.periodo === 'personalizado'){
+    pp.classList.remove('escondido');
+    if(filtroResumo.dataInicio) filtroDataInicio.value = filtroResumo.dataInicio;
+    if(filtroResumo.dataFim) filtroDataFim.value = filtroResumo.dataFim;
+  } else {
+    pp.classList.add('escondido');
+  }
+}
 
 function calcularPascoa(ano){
   const a=ano%19,b=Math.floor(ano/100),c=ano%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),
@@ -999,9 +991,6 @@ function atualizarListaCredores(){
 }
 function vencimentosNoDia(iso){ let t=0; dividas.forEach(d=>d.parcelas.forEach(p=>{ if(p.vencimento===iso) t++; })); return t; }
 
-/* =========================================================
-   GITHUB
-   ========================================================= */
 let ghConfig = { owner:'', repo:'pagamentos', branch:'main', path:'dados/dividas.json', token:'', autoSync:true };
 let syncTimer = null;
 let syncing = false;
@@ -1014,12 +1003,9 @@ function setStatusSync(txt, tipo){
   el.textContent = txt;
   el.className = 'status-sync ' + (tipo||'');
 }
-
-/* Codificador base64 UTF-8 SEGURO (chunks de 8 KB) */
 function b64EncodeUTF8(str){
   const bytes = new TextEncoder().encode(str);
-  const CHUNK = 8192;
-  let bin = '';
+  const CHUNK = 8192; let bin = '';
   for(let i=0;i<bytes.length;i+=CHUNK){
     const end = Math.min(i+CHUNK, bytes.length);
     bin += String.fromCharCode.apply(null, bytes.subarray(i, end));
@@ -1040,8 +1026,6 @@ function headersGitHub(authType){
   };
 }
 function urlApiGitHub(){ return `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`; }
-
-/* Tenta com Bearer, cai para token se necessário */
 async function fetchGH(url, options){
   options = options || {};
   try{
@@ -1050,12 +1034,8 @@ async function fetchGH(url, options){
       resp = await fetch(url, { ...options, headers: { ...(options.headers||{}), ...headersGitHub('token') } });
     }
     return resp;
-  }catch(e){
-    throw e;
-  }
+  }catch(e){ throw e; }
 }
-
-/* ---------- LEITURA ---------- */
 async function carregarDoGitHub(){
   if(!ghConfigurado()) return { status:'config-ausente' };
   try{
@@ -1084,8 +1064,6 @@ async function carregarDoGitHub(){
     return { status:'erro', mensagem: e.message || String(e) };
   }
 }
-
-/* ---------- ESCRITA ---------- */
 async function salvarNoGitHub(opts){
   opts = opts || {};
   if(!ghConfigurado()) return false;
@@ -1093,8 +1071,6 @@ async function salvarNoGitHub(opts){
   syncing = true;
   try{
     setStatusSync('☁️ Salvando...', 'salvando');
-
-    // Verifica tamanho
     const conteudo = JSON.stringify(dividas, null, 2);
     const bytes = new Blob([conteudo]).size;
     if(bytes > LIMITE_GITHUB_BYTES){
@@ -1107,51 +1083,26 @@ async function salvarNoGitHub(opts){
       if(!opts.silencioso) alert(msg);
       return false;
     }
-
-    // Pega SHA
     let sha = null;
     const getResp = await fetchGH(urlApiGitHub() + `?ref=${encodeURIComponent(ghConfig.branch)}`);
-    if(getResp.ok){
-      const info = await getResp.json();
-      sha = info.sha;
-    } else if(getResp.status === 404){
-      sha = null;
-    } else if(getResp.status === 401){
-      setStatusSync('⚠️ Token inválido', 'erro');
-      throw new Error('Token inválido ou expirado.');
-    } else if(getResp.status === 403){
-      setStatusSync('⚠️ Sem permissão', 'erro');
-      throw new Error('Token sem permissão de escrita. Verifique "Contents: Read and write".');
-    } else {
-      const erro = await getResp.json().catch(()=>({}));
-      throw new Error('GET falhou: ' + (erro.message || 'HTTP '+getResp.status));
-    }
-
-    // Codifica
+    if(getResp.ok){ const info = await getResp.json(); sha = info.sha; }
+    else if(getResp.status === 404){ sha = null; }
+    else if(getResp.status === 401){ setStatusSync('⚠️ Token inválido','erro'); throw new Error('Token inválido ou expirado.'); }
+    else if(getResp.status === 403){ setStatusSync('⚠️ Sem permissão','erro'); throw new Error('Token sem permissão de escrita. Verifique "Contents: Read and write".'); }
+    else { const erro = await getResp.json().catch(()=>({})); throw new Error('GET falhou: ' + (erro.message || 'HTTP '+getResp.status)); }
     const base64 = b64EncodeUTF8(conteudo);
-
-    const body = {
-      message: `Atualização automática — ${new Date().toLocaleString('pt-BR')}`,
-      content: base64,
-      branch: ghConfig.branch
-    };
+    const body = { message: `Atualização automática — ${new Date().toLocaleString('pt-BR')}`, content: base64, branch: ghConfig.branch };
     if(sha) body.sha = sha;
-
     const putResp = await fetchGH(urlApiGitHub(), {
       method:'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
-
     if(!putResp.ok){
       const erroTexto = await putResp.text();
       let erroMsg = `HTTP ${putResp.status}`;
       let erroDetalhe = '';
-      try{
-        const ej = JSON.parse(erroTexto);
-        erroMsg = ej.message || erroMsg;
-        if(ej.errors) erroDetalhe = ' | ' + JSON.stringify(ej.errors);
-      }catch(_){}
+      try{ const ej = JSON.parse(erroTexto); erroMsg = ej.message || erroMsg; if(ej.errors) erroDetalhe = ' | ' + JSON.stringify(ej.errors); }catch(_){}
       console.error('[GitHub] PUT falhou:', putResp.status, erroTexto);
       setStatusSync('⚠️ Erro ao salvar', 'erro');
       if(!opts.silencioso){
@@ -1160,7 +1111,6 @@ async function salvarNoGitHub(opts){
       }
       return false;
     }
-
     const hora = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
     setStatusSync(`✅ Salvo ${hora}`, 'ok');
     return true;
@@ -1174,16 +1124,12 @@ async function salvarNoGitHub(opts){
     syncing = false;
   }
 }
-
 function agendarSyncGH(){
   if(!ghConfigurado() || !ghConfig.autoSync) return;
   if(syncTimer) clearTimeout(syncTimer);
   syncTimer = setTimeout(() => { salvarNoGitHub({silencioso:true}); }, 2500);
 }
 
-/* =========================================================
-   NAVEGAÇÃO
-   ========================================================= */
 const estado = { tela:'calendario', mesRef:new Date(), diaSelecionado:null, expandidos:new Set(), rascunhos:{}, animando:false };
 function mostrarTela(nome){
   ['calendario','dia','nova','todas','resumo','config'].forEach(t=>{
@@ -1223,7 +1169,6 @@ function parcelaNoPeriodo(v,ini,fim){
   if(fim&&v>fim) return false;
   return true;
 }
-
 function atualizarPainelGeral(){
   const {inicio,fim,descricao} = calcularPeriodoAtivo();
   document.getElementById('periodoDescricao').textContent = descricao;
@@ -1253,9 +1198,6 @@ function atualizarPainelGeral(){
     <div class="indicador roxo"><span>Dívidas</span><strong>${ds.size}</strong></div>`;
 }
 
-/* =========================================================
-   CALENDÁRIO
-   ========================================================= */
 function mapaDeVencimentos(){
   const m={}; dividas.forEach(d=>d.parcelas.forEach(p=>{
     if(!p.vencimento) return; (m[p.vencimento]=m[p.vencimento]||[]).push({divida:d,parcela:p});
@@ -1427,14 +1369,14 @@ function perguntarEscopo(d,p,mud){
   return new Promise(res=>{
     resolverEscopo=res; const l=[];
     if(mud.credor!==undefined){ const a=p.credorOverride||d.credor;
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Credor</span><span class="valor-mudanca">${escapar(a)} <span style="color:var(--azul);font-weight:900">→</span> <b>${escapar(mud.credor)}</b></span></div>`); }
+      l.push(`<div class="linha-mudanca"><span class="campo-nome">Credor</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.credor)}</b></span></div>`); }
     if(mud.descricao!==undefined){ const a=p.descricaoOverride||d.descricao;
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Descrição</span><span class="valor-mudanca">${escapar(a)} <span style="color:var(--azul);font-weight:900">→</span> <b>${escapar(mud.descricao)}</b></span></div>`); }
-    if(mud.valor!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Valor</span><span class="valor-mudanca">${formatarMoeda(p.valor)} <span style="color:var(--azul);font-weight:900">→</span> <b>${formatarMoeda(mud.valor)}</b></span></div>`);
-    if(mud.vencimento!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Vencimento</span><span class="valor-mudanca">${formatarDataBR(p.vencimento)} <span style="color:var(--azul);font-weight:900">→</span> <b>${formatarDataBR(mud.vencimento)}</b></span></div>`);
-    if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} <span style="color:var(--azul);font-weight:900">→</span> <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
+      l.push(`<div class="linha-mudanca"><span class="campo-nome">Descrição</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.descricao)}</b></span></div>`); }
+    if(mud.valor!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Valor</span><span class="valor-mudanca">${formatarMoeda(p.valor)} → <b>${formatarMoeda(mud.valor)}</b></span></div>`);
+    if(mud.vencimento!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Vencimento</span><span class="valor-mudanca">${formatarDataBR(p.vencimento)} → <b>${formatarDataBR(mud.vencimento)}</b></span></div>`);
+    if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} → <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
     if(mud.link!==undefined){ const a=p.link||'(vazio)', n=mud.link||'(vazio)';
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} <span style="color:var(--azul);font-weight:900">→</span> <b>${escapar(n)}</b></span></div>`); }
+      l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
     document.getElementById('textoEscopo').innerHTML =
       `Parcela <b>${p.numero} de ${d.parcelas.length}</b> de <b>${escapar(d.credor)}</b>.<br><br>Alterações:<div style="margin-top:8px">${l.join('')}</div><br>Aplicar a:`;
     abrirModal('modalEscopo');
@@ -1852,31 +1794,62 @@ listaTodas.addEventListener('click',(e)=>{
 listaTodas.addEventListener('toggle',(e)=>{ const c=e.target.closest('details[data-cartao-divida]'); if(!c) return;
   const d=dividas.find(x=>x.id===c.dataset.cartaoDivida); if(d){ d.aberto=c.open; salvar(); } },true);
 
-document.getElementById('btnAbrirResumo').addEventListener('click',()=>{ manutencaoContinuas(); atualizarPainelGeral(); mostrarTela('resumo'); });
+/* --- Ao abrir o resumo, aplica o filtro salvo e atualiza --- */
+document.getElementById('btnAbrirResumo').addEventListener('click',()=>{
+  manutencaoContinuas();
+  aplicarFiltroSalvoUI();
+  atualizarPainelGeral();
+  mostrarTela('resumo');
+});
 document.getElementById('voltarCalendario3').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
+
+/* --- Botões de período: salvam o filtro ao clicar --- */
 document.querySelectorAll('.btn-periodo').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.btn-periodo').forEach(b=>b.classList.remove('ativo'));
-    btn.classList.add('ativo'); filtroResumo.periodo=btn.dataset.periodo;
-    const pp=document.getElementById('filtroPersonalizado');
-    if(filtroResumo.periodo==='personalizado'){
+    btn.classList.add('ativo');
+    filtroResumo.periodo = btn.dataset.periodo;
+
+    const pp = document.getElementById('filtroPersonalizado');
+    if(filtroResumo.periodo === 'personalizado'){
       pp.classList.remove('escondido');
-      if(!filtroDataInicio.value){ const hj=new Date(); filtroDataInicio.value=dataParaIso(new Date(hj.getFullYear(),hj.getMonth(),1)); }
-      if(!filtroDataFim.value) filtroDataFim.value=hojeIso();
-      filtroResumo.dataInicio=filtroDataInicio.value; filtroResumo.dataFim=filtroDataFim.value;
-    } else pp.classList.add('escondido');
+      if(!filtroDataInicio.value){
+        const hj=new Date();
+        filtroDataInicio.value = dataParaIso(new Date(hj.getFullYear(),hj.getMonth(),1));
+      }
+      if(!filtroDataFim.value) filtroDataFim.value = hojeIso();
+      filtroResumo.dataInicio = filtroDataInicio.value;
+      filtroResumo.dataFim = filtroDataFim.value;
+    } else {
+      pp.classList.add('escondido');
+    }
+    salvarFiltroResumo();  /* PERSISTE O FILTRO */
     atualizarPainelGeral();
   });
 });
 const filtroDataInicio=document.getElementById('filtroDataInicio');
 const filtroDataFim=document.getElementById('filtroDataFim');
-function ativarPersonalizado(){ if(filtroResumo.periodo!=='personalizado'){
-  filtroResumo.periodo='personalizado';
-  document.querySelectorAll('.btn-periodo').forEach(b=>b.classList.remove('ativo'));
-  document.querySelector('.btn-periodo[data-periodo="personalizado"]').classList.add('ativo');
-  document.getElementById('filtroPersonalizado').classList.remove('escondido'); } }
-filtroDataInicio.addEventListener('change',()=>{ filtroResumo.dataInicio=filtroDataInicio.value; ativarPersonalizado(); atualizarPainelGeral(); });
-filtroDataFim.addEventListener('change',()=>{ filtroResumo.dataFim=filtroDataFim.value; ativarPersonalizado(); atualizarPainelGeral(); });
+function ativarPersonalizado(){
+  if(filtroResumo.periodo !== 'personalizado'){
+    filtroResumo.periodo = 'personalizado';
+    document.querySelectorAll('.btn-periodo').forEach(b=>b.classList.remove('ativo'));
+    const btnP = document.querySelector('.btn-periodo[data-periodo="personalizado"]');
+    if(btnP) btnP.classList.add('ativo');
+    document.getElementById('filtroPersonalizado').classList.remove('escondido');
+  }
+}
+filtroDataInicio.addEventListener('change',()=>{
+  filtroResumo.dataInicio = filtroDataInicio.value;
+  ativarPersonalizado();
+  salvarFiltroResumo();  /* PERSISTE */
+  atualizarPainelGeral();
+});
+filtroDataFim.addEventListener('change',()=>{
+  filtroResumo.dataFim = filtroDataFim.value;
+  ativarPersonalizado();
+  salvarFiltroResumo();  /* PERSISTE */
+  atualizarPainelGeral();
+});
 
 const campoGHOwner=document.getElementById('ghOwner');
 const campoGHRepo=document.getElementById('ghRepo');
@@ -1952,7 +1925,6 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
   btn.textContent=ta; btn.disabled=false;
 });
 
-/* NOVO: testa um PUT real com conteúdo mínimo */
 document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
   const ow=campoGHOwner.value.trim(); const rp=campoGHRepo.value.trim();
   const tk=campoGHToken.value.trim(); const br=campoGHBranch.value.trim()||'main';
@@ -1972,7 +1944,6 @@ document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
   try{
     const api = `https://api.github.com/repos/${ow}/${rp}/contents/${pt}`;
 
-    // 1) GET para SHA
     p(`<b>1)</b> GET para obter SHA atual...`);
     const getR = await fetch(api + `?ref=${encodeURIComponent(br)}`, {
       headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
@@ -1991,7 +1962,6 @@ document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
     }
     p('');
 
-    // 2) PUT com conteúdo de teste
     p(`<b>2)</b> PUT com conteúdo mínimo...`);
     const testContent = JSON.stringify([{_test:true, ts:new Date().toISOString(), autor:'auto'}]);
     const body = {
@@ -2022,7 +1992,7 @@ document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
       p(`Se o salvamento normal ainda falhar, o problema é o TAMANHO do JSON.`);
       p(`Tamanho atual dos dados: ${formatarBytes(new Blob([JSON.stringify(dividas)]).size)}`);
       out.innerHTML = L.join('\n');
-      alert('✅ Teste de escrita passou!\n\nO salvamento normal deve funcionar. Se falhar, será por tamanho do arquivo.');
+      alert('✅ Teste de escrita passou!\n\nO salvamento normal deve funcionar.');
     } else {
       const txt = await putR.text();
       let msgErro = '';
@@ -2031,17 +2001,17 @@ document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
       p(`   Mensagem: ${escapar(msgErro)}`);
       p('');
       p(`<b>Diagnóstico provável:</b>`);
-      if(putR.status===401) p(`<span class="erro">Token inválido. Gere um novo.</span>`);
-      else if(putR.status===403) p(`<span class="erro">Token SEM permissão "Contents: Read and write". Edite o token no GitHub e adicione essa permissão.</span>`);
+      if(putR.status===401) p(`<span class="erro">Token inválido.</span>`);
+      else if(putR.status===403) p(`<span class="erro">Token SEM permissão "Contents: Read and write".</span>`);
       else if(putR.status===404) p(`<span class="erro">Repositório/arquivo não encontrado, ou token sem acesso.</span>`);
-      else if(putR.status===409) p(`<span class="erro">Conflito — o SHA está desatualizado. Tente novamente.</span>`);
-      else if(putR.status===422) p(`<span class="erro">Dados inválidos. Pode ser arquivo muito grande ou payload malformado.</span>`);
-      else p(`<span class="erro">Erro ${putR.status}. Veja a resposta abaixo.</span>`);
+      else if(putR.status===409) p(`<span class="erro">Conflito — SHA desatualizado.</span>`);
+      else if(putR.status===422) p(`<span class="erro">Dados inválidos. Pode ser arquivo muito grande.</span>`);
+      else p(`<span class="erro">Erro ${putR.status}.</span>`);
       p('');
       p(`<b>Resposta completa do GitHub:</b>`);
       p(escapar(txt.slice(0,600)));
       out.innerHTML = L.join('\n');
-      alert(`❌ Teste de escrita falhou (HTTP ${putR.status}).\n\n${msgErro}\n\nVeja o diagnóstico na tela para mais detalhes.`);
+      alert(`❌ Teste de escrita falhou (HTTP ${putR.status}).\n\n${msgErro}`);
     }
   }catch(e){
     p(`<span class="erro">❌ Erro de rede: ${e.message}</span>`);
@@ -2065,7 +2035,7 @@ document.getElementById('btnDiagnostico').addEventListener('click',async()=>{
   p(`• Repositório: ${rp||'(vazio)'}`);
   p(`• Branch: ${br}`);
   p(`• Arquivo: ${pt}`);
-  p(`• Token: ${tk ? tk.length+' chars (início: '+tk.slice(0,10)+'...)' : '(vazio)'}`);
+  p(`• Token: ${tk ? tk.length+' chars' : '(vazio)'}`);
   p('');
   if(!ow||!rp||!tk){ p(`<span class="erro">❌ Preencha tudo.</span>`); out.innerHTML=L.join('\n'); return; }
 
@@ -2099,7 +2069,7 @@ document.getElementById('btnDiagnostico').addEventListener('click',async()=>{
         try{ const j=JSON.parse(texto.replace(/^\uFEFF/,'').trim());
           if(Array.isArray(j)) p(`<span class="ok">• JSON válido — ${j.length} dívidas</span>`);
           else p(`<span class="aviso">• JSON válido mas não array</span>`);
-        }catch(err){ p(`<span class="erro">• JSON inválido</span>`); p(`• Início: <code>${escapar(texto.slice(0,150))}</code>`); }
+        }catch(err){ p(`<span class="erro">• JSON inválido</span>`); }
       }
     } else if(r.status===404){ p(`<span class="aviso">⚠️ Ainda não existe.</span>`); }
     else { p(`<span class="erro">❌ HTTP ${r.status}</span>`); }
@@ -2195,6 +2165,8 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
 (async function iniciar(){
   carregarConfigGH();
   carregarLocal();
+  carregarFiltroResumo();  /* CARREGA O FILTRO SALVO */
+  aplicarFiltroSalvoUI();  /* APLICA NA UI */
 
   if(ghConfigurado()){
     setStatusSync('☁️ Carregando...','carregando');
