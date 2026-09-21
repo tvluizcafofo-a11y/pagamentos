@@ -1,0 +1,40 @@
+{
+  "name": "Sistema de Pagamentos",
+  "short_name": "Pagamentos",
+  "description": "Controle de dívidas, parcelas, boletos e comprovantes. Sincroniza automaticamente com GitHub.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f5f9",
+  "theme_color": "#2563eb",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "categories": ["finance", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nova dívida",
+      "short_name": "Nova",
+      "url": "./index.html#nova"
+    },
+    {
+      "name": "Resumo",
+      "short_name": "Resumo",
+      "url": "./index.html#resumo"
+    }
+  ]
+}
