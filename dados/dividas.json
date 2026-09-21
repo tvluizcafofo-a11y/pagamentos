@@ -3065,33 +3065,5 @@
         "comprovante": null
       }
     ]
-  },
-  {
-    "id": "mubpjumicrk7vp",
-    "credor": "Origo",
-    "descricao": "luz",
-    "valorTotal": 0,
-    "valorParcela": 33,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2026-09-22",
-    "qtdParcelas": 1,
-    "primeiroVencimento": "2026-09-22",
-    "ultimoVencimento": "2026-09-22",
-    "criadoEm": "2026-09-21T20:38:44.682Z",
-    "aberto": true,
-    "parcelas": [
-      {
-        "id": "mubpjumipzqz3g",
-        "numero": 1,
-        "valor": 33,
-        "vencimento": "2026-09-22",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
   }
 ]
