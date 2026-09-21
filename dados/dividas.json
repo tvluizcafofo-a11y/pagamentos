@@ -3081,7 +3081,7 @@
     "primeiroVencimento": "2026-09-22",
     "ultimoVencimento": "2026-09-22",
     "criadoEm": "2026-09-21T20:38:44.682Z",
-    "aberto": false,
+    "aberto": true,
     "parcelas": [
       {
         "id": "mubpjumipzqz3g",
