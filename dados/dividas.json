@@ -675,7 +675,7 @@
     "primeiroVencimento": "2026-09-25",
     "ultimoVencimento": "2027-03-05",
     "criadoEm": "2026-09-19T17:11:26.661Z",
-    "aberto": true,
+    "aberto": false,
     "parcelas": [
       {
         "id": "mu8n9k1wp4ppo2",
@@ -2790,7 +2790,7 @@
     "primeiroVencimento": "2026-09-18",
     "ultimoVencimento": "2028-08-18",
     "criadoEm": "2026-09-20T10:39:09.231Z",
-    "aberto": false,
+    "aberto": true,
     "parcelas": [
       {
         "id": "mu9oox4db9u86v",
