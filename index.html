@@ -10,7 +10,7 @@
 <title>Sistema de Pagamentos</title>
 <style>
   :root{
-    --fundo:#f1f5f9;--cartao:#fff;--texto:#1e293b;--suave:#64748b;--linha:#e2e8f0;
+    --fundo:#eef2f7;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
     --azul:#2563eb;--azul-esc:#1d4ed8;--azul-claro:#eff6ff;
     --verde:#16a34a;--verde-bg:#dcfce7;--verde-claro:#f0fdf4;--verde-forte:#15803d;
     --amarelo:#d97706;--amarelo-bg:#fef3c7;--amarelo-claro:#fffbeb;
@@ -126,63 +126,184 @@
   .resultado-busca .st-tag.s-em_atraso{background:var(--vermelho-bg);color:#b91c1c}
   .resultado-busca .st-tag.s-em_aberto{background:var(--info-bg);color:#0369a1}
   .resultado-busca .st-tag.s-outros{background:var(--amarelo-bg);color:#92400e}
+
+  /* ============ CALENDÁRIO — REDESENHADO ============ */
   .calendario-cartao{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);
     padding:16px;box-shadow:0 1px 3px rgba(15,23,42,.06);overflow:hidden}
-  .calendario-cabecalho{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:10px}
-  .calendario-cabecalho h3{margin:0;font-size:1.15rem;text-transform:capitalize}
-  .nav-mes{width:42px;height:42px;border-radius:10px;background:#f1f5f9;font-size:1.3rem;
-    display:flex;align-items:center;justify-content:center;font-weight:700;color:#334155;transition:.15s}
-  .nav-mes:hover{background:#e2e8f0}
-  .nav-mes:active{background:#cbd5e1;transform:scale(.95)}
-  .calendario-viewport{overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none;position:relative}
+  .calendario-cabecalho{display:flex;align-items:center;justify-content:space-between;
+    margin-bottom:14px;gap:10px}
+  .calendario-cabecalho h3{margin:0;font-size:1.15rem;text-transform:capitalize;
+    font-weight:800;color:#1e293b}
+  .nav-mes{width:42px;height:42px;border-radius:12px;
+    background:linear-gradient(135deg,#f8fafc,#e2e8f0);
+    border:1.5px solid #e2e8f0;font-size:1.3rem;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:800;color:#334155;transition:.15s;
+    box-shadow:0 1px 3px rgba(15,23,42,.05)}
+  .nav-mes:hover{background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-color:#bfdbfe;color:var(--azul);transform:translateY(-1px)}
+  .nav-mes:active{transform:translateY(0) scale(.96)}
+
+  .calendario-viewport{overflow:hidden;touch-action:pan-y;user-select:none;
+    -webkit-user-select:none;position:relative}
   .calendario-slide{will-change:transform;backface-visibility:hidden;-webkit-backface-visibility:hidden}
-  .dias-semana{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:6px}
-  .dias-semana span{text-align:center;font-size:.7rem;font-weight:700;color:var(--suave);
-    text-transform:uppercase;letter-spacing:.5px;padding:4px 0}
+
+  .dias-semana{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:8px;
+    padding:0 2px}
+  .dias-semana span{text-align:center;font-size:.68rem;font-weight:800;color:var(--suave);
+    text-transform:uppercase;letter-spacing:.6px;padding:4px 0}
   .dias-semana span.dom{color:var(--vermelho)}
-  .grade-calendario{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}
-  .dia{aspect-ratio:1;background:#f8fafc;border:1px solid transparent;border-radius:10px;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;
-    cursor:pointer;transition:background .15s;font-weight:600;color:#334155;padding:2px;min-height:44px}
-  .dia:hover{background:#e2e8f0}
-  .dia .num{font-size:.95rem;line-height:1}
-  .dia .qtd{position:absolute;top:3px;right:3px;background:var(--azul);color:#fff;
-    font-size:.62rem;font-weight:700;min-width:16px;height:16px;border-radius:8px;
-    display:flex;align-items:center;justify-content:center;padding:0 4px}
-  .dia.fora-mes{background:transparent;color:#cbd5e1;cursor:default;font-weight:500}
-  .dia.fora-mes:hover{background:transparent}
+
+  .grade-calendario{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;
+    padding:8px;background:linear-gradient(135deg,#f8fafc,#f1f5f9);
+    border-radius:14px;border:1.5px solid #e2e8f0}
+
+  .dia{
+    aspect-ratio:1;
+    background:#fff;
+    border:1.5px solid #e2e8f0;
+    border-radius:11px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;cursor:pointer;
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease, background .15s ease;
+    font-weight:700;color:#334155;
+    padding:2px;min-height:46px;
+    box-shadow:0 1px 2px rgba(15,23,42,.04);
+  }
+  .dia .num{font-size:1rem;line-height:1;font-weight:800;color:inherit}
+  .dia .qtd{
+    position:absolute;top:-5px;right:-5px;
+    background:linear-gradient(135deg,var(--azul),var(--azul-esc));
+    color:#fff;
+    font-size:.6rem;font-weight:800;min-width:18px;height:18px;border-radius:9px;
+    display:flex;align-items:center;justify-content:center;padding:0 5px;
+    border:2px solid #fff;
+    box-shadow:0 2px 4px rgba(37,99,235,.3);
+  }
+  .dia:hover{
+    border-color:var(--azul);
+    background:#fff;
+    transform:translateY(-2px) scale(1.02);
+    box-shadow:0 6px 16px rgba(37,99,235,.18);
+    z-index:2;
+  }
+  .dia:active{transform:translateY(0) scale(.98)}
+
+  .dia.fora-mes{
+    background:transparent;
+    border-color:transparent;
+    box-shadow:none;
+    color:#cbd5e1;
+    cursor:default;
+    font-weight:500;
+  }
+  .dia.fora-mes:hover{background:transparent;transform:none;box-shadow:none;border-color:transparent}
+  .dia.fora-mes .num{font-weight:500;opacity:.5}
   .dia.fora-mes .qtd{display:none}
-  .dia.hoje{border-color:var(--laranja);border-width:2px;color:var(--laranja-esc);background:#fff7ed}
-  .dia.hoje::after{content:'';position:absolute;bottom:4px;left:50%;transform:translateX(-50%);
-    width:5px;height:5px;border-radius:50%;background:var(--laranja)}
-  .dia.dia-atraso{background:var(--vermelho-bg);color:#991b1b}
-  .dia.dia-atraso .qtd{background:var(--vermelho)}
-  .dia.dia-aberto{background:var(--azul-claro);color:#1e40af}
-  .dia.dia-aberto .qtd{background:var(--azul)}
-  .dia.dia-pago{background:var(--verde-claro);color:#166534}
-  .dia.dia-pago .qtd{background:var(--verde)}
-  .dia.dia-outros{background:var(--amarelo-claro);color:#92400e}
-  .dia.dia-outros .qtd{background:var(--amarelo)}
-  .dia.hoje.dia-atraso{border-color:var(--vermelho);background:var(--vermelho-bg)}
-  .dia.hoje.dia-aberto{border-color:var(--azul);background:var(--azul-claro)}
-  .dia.hoje.dia-pago{border-color:var(--verde);background:var(--verde-claro)}
-  .dia.hoje.dia-outros{border-color:var(--amarelo);background:var(--amarelo-claro)}
-  .dia.domingo,.dia.dia-feriado{color:var(--vermelho) !important;font-weight:800}
-  .dia.domingo .num,.dia.dia-feriado .num{color:var(--vermelho)}
+
+  /* Hoje */
+  .dia.hoje{
+    border-color:var(--laranja);
+    border-width:2.5px;
+    background:linear-gradient(135deg,#fff7ed,#ffedd5);
+    color:var(--laranja-esc);
+    box-shadow:0 4px 12px rgba(249,115,22,.2);
+  }
+  .dia.hoje .num{color:var(--laranja-esc);font-weight:900}
+  .dia.hoje::after{
+    content:'';
+    position:absolute;bottom:5px;left:50%;transform:translateX(-50%);
+    width:6px;height:6px;border-radius:50%;
+    background:var(--laranja);
+    box-shadow:0 0 6px rgba(249,115,22,.6);
+  }
+
+  /* Status */
+  .dia.dia-pago{
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    border-color:#86efac;
+    color:#166534;
+  }
+  .dia.dia-pago .qtd{background:linear-gradient(135deg,var(--verde),#15803d);
+    box-shadow:0 2px 4px rgba(22,163,74,.3)}
+  .dia.dia-pago:hover{border-color:var(--verde);box-shadow:0 6px 16px rgba(22,163,74,.18)}
+
+  .dia.dia-aberto{
+    background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+    border-color:#bae6fd;
+    color:#1e40af;
+  }
+  .dia.dia-aberto:hover{border-color:var(--azul);box-shadow:0 6px 16px rgba(37,99,235,.18)}
+
+  .dia.dia-atraso{
+    background:linear-gradient(135deg,#fef2f2,#fee2e2);
+    border-color:#fca5a5;
+    color:#991b1b;
+  }
+  .dia.dia-atraso .qtd{background:linear-gradient(135deg,var(--vermelho),#b91c1c);
+    box-shadow:0 2px 4px rgba(220,38,38,.3)}
+  .dia.dia-atraso:hover{border-color:var(--vermelho);box-shadow:0 6px 16px rgba(220,38,38,.2)}
+
+  .dia.dia-outros{
+    background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    border-color:#fcd34d;
+    color:#92400e;
+  }
+  .dia.dia-outros .qtd{background:linear-gradient(135deg,var(--amarelo),#b45309);
+    box-shadow:0 2px 4px rgba(217,119,6,.3)}
+  .dia.dia-outros:hover{border-color:var(--amarelo);box-shadow:0 6px 16px rgba(217,119,6,.2)}
+
+  /* Domingo */
+  .dia.domingo{color:var(--vermelho) !important}
+  .dia.domingo .num{color:var(--vermelho);font-weight:800}
+  .dia.domingo.dia-pago{color:#166534 !important}
+  .dia.domingo.dia-pago .num{color:#166534}
+  .dia.domingo.dia-aberto{color:#1e40af !important}
+  .dia.domingo.dia-aberto .num{color:#1e40af}
+
+  /* Feriado */
+  .dia.dia-feriado{
+    border-color:#fca5a5 !important;
+    border-width:2px !important;
+  }
+  .dia.dia-feriado .num{color:var(--vermelho);font-weight:900}
+  .dia.dia-feriado:not(.dia-pago):not(.dia-aberto):not(.dia-atraso):not(.dia-outros){
+    background:linear-gradient(135deg,#fef2f2,#fee2e2);
+    color:#991b1b;
+  }
+
+  /* Hoje + status mantém destaque laranja */
+  .dia.hoje.dia-atraso{border-color:var(--laranja);background:linear-gradient(135deg,#fff7ed,#fed7aa)}
+  .dia.hoje.dia-pago{border-color:var(--laranja);background:linear-gradient(135deg,#f0fdf4,#fed7aa)}
+  .dia.hoje.dia-aberto{border-color:var(--laranja);background:linear-gradient(135deg,#f0f9ff,#fed7aa)}
+  .dia.hoje.dia-outros{border-color:var(--laranja);background:linear-gradient(135deg,#fffbeb,#fed7aa)}
+  .dia.hoje.domingo .num,.dia.hoje.dia-feriado .num{color:var(--laranja-esc) !important}
+
   .legenda{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;padding-top:14px;
     border-top:1px solid var(--linha);font-size:.78rem;color:var(--suave)}
   .legenda span{display:flex;align-items:center;gap:6px}
-  .legenda i{width:12px;height:12px;border-radius:4px;display:inline-block}
-  .feriados-mes{margin-top:12px;padding-top:12px;border-top:1px dashed var(--linha);font-size:.82rem}
+  .legenda i{width:14px;height:14px;border-radius:5px;display:inline-block;
+    border:1.5px solid transparent}
+  .legenda i.l-pago{background:var(--verde-claro);border-color:#86efac}
+  .legenda i.l-aberto{background:var(--azul-claro);border-color:#bae6fd}
+  .legenda i.l-atraso{background:var(--vermelho-bg);border-color:#fca5a5}
+  .legenda i.l-outros{background:var(--amarelo-claro);border-color:#fcd34d}
+  .legenda i.l-feriado{background:#fef2f2;border-color:#fca5a5;border-width:2px}
+
+  .feriados-mes{margin-top:14px;padding-top:12px;
+    border-top:1px dashed var(--linha);font-size:.82rem}
   .feriados-mes .titulo{font-size:.68rem;font-weight:800;text-transform:uppercase;
     letter-spacing:.6px;color:var(--verde-forte);margin-bottom:8px;display:flex;align-items:center;gap:6px}
   .feriados-mes ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:5px}
-  .feriados-mes li{display:flex;gap:10px;align-items:baseline;color:var(--verde-forte);font-weight:700;line-height:1.3}
-  .feriados-mes li .data-f{font-variant-numeric:tabular-nums;min-width:48px;flex-shrink:0;font-size:.8rem;
-    background:var(--verde-bg);color:var(--verde-forte);padding:1px 8px;border-radius:6px;text-align:center}
+  .feriados-mes li{display:flex;gap:10px;align-items:baseline;color:var(--verde-forte);
+    font-weight:700;line-height:1.3}
+  .feriados-mes li .data-f{font-variant-numeric:tabular-nums;min-width:48px;flex-shrink:0;
+    font-size:.8rem;background:var(--verde-bg);color:var(--verde-forte);
+    padding:1px 8px;border-radius:6px;text-align:center}
   .feriados-mes li .nome-f{font-weight:600;color:var(--verde-forte)}
   .feriados-mes .nenhum{color:var(--verde-forte);opacity:.7;font-style:italic;font-size:.8rem}
   .dica-swipe{text-align:center;font-size:.75rem;color:var(--suave);margin-top:10px;font-style:italic}
+
   .vazio{text-align:center;color:var(--suave);padding:34px 10px;font-size:.95rem;background:#fff;
     border:1px dashed var(--linha);border-radius:var(--raio)}
   .item-venc{background:#fff;border:1px solid var(--linha);border-left:5px solid var(--azul);
@@ -318,8 +439,6 @@
   .btn-neutro:hover{background:#e2e8f0}
   .btn-perigo{background:var(--vermelho-bg);color:#b91c1c}
   .btn-perigo:hover{background:#fecaca}
-  .btn-sucesso{background:var(--verde-bg);color:#15803d}
-  .btn-sucesso:hover{background:#bbf7d0}
   .btn:disabled{opacity:.5;cursor:not-allowed}
   .acoes-iniciais{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
   .acoes-iniciais .btn{flex:1;min-width:200px;justify-content:center}
@@ -328,12 +447,8 @@
   .bloco-acoes h3{margin:0 0 4px;font-size:1rem;display:flex;align-items:center;gap:8px}
   .bloco-acoes p.desc{margin:0 0 14px;font-size:.82rem;color:var(--suave)}
   .bloco-acoes .acoes{display:flex;gap:10px;flex-wrap:wrap}
-
-  /* ============ TELA DE CONFIGURAÇÕES ============ */
-  .config-status-cartao{
-    border-radius:var(--raio);padding:16px 18px;margin-bottom:16px;
-    display:flex;gap:14px;align-items:center;border:2px solid var(--linha);background:#fff;
-  }
+  .config-status-cartao{border-radius:var(--raio);padding:16px 18px;margin-bottom:16px;
+    display:flex;gap:14px;align-items:center;border:2px solid var(--linha);background:#fff}
   .config-status-cartao.ok{border-color:#86efac;background:var(--verde-claro)}
   .config-status-cartao.erro{border-color:#fca5a5;background:var(--vermelho-bg)}
   .config-status-cartao.aviso{border-color:#fcd34d;background:var(--amarelo-bg)}
@@ -343,27 +458,27 @@
   .config-status-cartao.ok b{color:#15803d}
   .config-status-cartao.erro b{color:#b91c1c}
   .config-status-cartao.aviso b{color:#92400e}
-
-  .config-ajuda{
-    background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+  .config-ajuda{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
     border:1px solid #bae6fd;border-radius:10px;
-    padding:14px 16px;font-size:.82rem;color:#075985;margin-top:14px;line-height:1.55;
-  }
+    padding:14px 16px;font-size:.82rem;color:#075985;margin-top:14px;line-height:1.55}
   .config-ajuda b{color:#0c4a6e}
   .config-ajuda ol{margin:6px 0 0;padding-left:20px}
   .config-ajuda ol li{margin:4px 0}
-  .config-ajuda code{
-    background:#fff;border:1px solid #bae6fd;border-radius:5px;
+  .config-ajuda code{background:#fff;border:1px solid #bae6fd;border-radius:5px;
     padding:1px 6px;font-family:ui-monospace,monospace;font-size:.78rem;
-    color:#0369a1;font-weight:600;
-  }
-  .config-perigo{
-    background:linear-gradient(135deg,#fef2f2,#fee2e2);
+    color:#0369a1;font-weight:600}
+  .config-perigo{background:linear-gradient(135deg,#fef2f2,#fee2e2);
     border:1px solid #fecaca;border-radius:10px;
-    padding:14px 16px;font-size:.82rem;color:#991b1b;margin-top:14px;line-height:1.55;
-  }
+    padding:14px 16px;font-size:.82rem;color:#991b1b;margin-top:14px;line-height:1.55}
   .config-perigo b{color:#7f1d1d}
-
+  .diag-resultado{background:#f8fafc;border:1px solid var(--linha);border-radius:10px;
+    padding:14px 16px;margin-top:14px;font-size:.82rem;
+    font-family:ui-monospace,monospace;color:#334155;
+    white-space:pre-wrap;word-break:break-word;line-height:1.6;max-height:340px;overflow-y:auto}
+  .diag-resultado b{font-family:system-ui;color:#1e293b}
+  .diag-resultado .ok{color:#15803d;font-weight:700;font-family:system-ui}
+  .diag-resultado .erro{color:#b91c1c;font-weight:700;font-family:system-ui}
+  .diag-resultado .aviso{color:#92400e;font-weight:700;font-family:system-ui}
   details.divida{background:#fff;border:1px solid var(--linha);border-radius:var(--raio);
     margin-bottom:12px;overflow:hidden}
   details.divida.indefinida{border-color:#d8b4fe;border-width:2px}
@@ -444,9 +559,11 @@
   .opcao-escopo.cancelar:hover{background:#fef2f2;border-color:#fca5a5}
   .opcao-escopo.cancelar .info b{color:#b91c1c}
   @media (max-width:520px){
-    .dia{min-height:38px}
-    .dia .num{font-size:.85rem}
-    .dia .qtd{font-size:.58rem;min-width:14px;height:14px}
+    .dia{min-height:40px;border-radius:9px}
+    .dia .num{font-size:.88rem}
+    .dia .qtd{font-size:.56rem;min-width:15px;height:15px;top:-4px;right:-4px}
+    .grade-calendario{gap:4px;padding:6px}
+    .dias-semana{gap:4px}
     header.topo h1{font-size:1rem}
     .status-sync{font-size:.63rem;padding:4px 8px}
     .btn-gh{width:32px;height:32px;font-size:.9rem}
@@ -479,7 +596,7 @@
 
 <div class="area">
 
-  <!-- ================= TELA: CALENDÁRIO ================= -->
+  <!-- ================= CALENDÁRIO ================= -->
   <section class="tela" id="tela-calendario">
     <div class="busca-cartao">
       <span class="busca-icone">🔍</span>
@@ -504,10 +621,11 @@
           </div>
         </div>
         <div class="legenda">
-          <span><i style="background:var(--verde-bg);border:1px solid #86efac"></i> Pago</span>
-          <span><i style="background:var(--azul-claro);border:1px solid #bfdbfe"></i> Em aberto</span>
-          <span><i style="background:var(--vermelho-bg);border:1px solid #fca5a5"></i> Em atraso</span>
-          <span><i style="background:var(--amarelo-claro);border:1px solid #fcd34d"></i> Outros</span>
+          <span><i class="l-pago"></i> Pago</span>
+          <span><i class="l-aberto"></i> Em aberto</span>
+          <span><i class="l-atraso"></i> Em atraso</span>
+          <span><i class="l-outros"></i> Outros</span>
+          <span><i class="l-feriado"></i> Feriado</span>
         </div>
         <div class="feriados-mes" id="feriadosMes"></div>
         <p class="dica-swipe">👆 Deslize para o lado para mudar de mês</p>
@@ -523,14 +641,14 @@
     </div>
   </section>
 
-  <!-- ================= TELA: DIA ================= -->
+  <!-- ================= DIA ================= -->
   <section class="tela escondido" id="tela-dia">
     <button class="btn-voltar" id="voltarCalendario">Voltar ao calendário</button>
     <h2 class="titulo-tela" id="tituloDia"></h2>
     <div id="listaDia"></div>
   </section>
 
-  <!-- ================= TELA: NOVA / EDITAR DÍVIDA ================= -->
+  <!-- ================= NOVA / EDITAR DÍVIDA ================= -->
   <section class="tela escondido" id="tela-nova">
     <button class="btn-voltar" id="cancelarNova">Voltar ao calendário</button>
     <h2 class="titulo-tela" id="tituloFormulario">➕ Incluir nova dívida</h2>
@@ -634,14 +752,14 @@
     </form>
   </section>
 
-  <!-- ================= TELA: TODAS AS DÍVIDAS ================= -->
+  <!-- ================= TODAS AS DÍVIDAS ================= -->
   <section class="tela escondido" id="tela-todas">
     <button class="btn-voltar" id="voltarCalendario2">Voltar ao calendário</button>
     <h2 class="titulo-tela">📋 Todas as dívidas</h2>
     <div id="listaTodas"></div>
   </section>
 
-  <!-- ================= TELA: RESUMO ================= -->
+  <!-- ================= RESUMO ================= -->
   <section class="tela escondido" id="tela-resumo">
     <button class="btn-voltar" id="voltarCalendario3">Voltar ao calendário</button>
     <h2 class="titulo-tela">📊 Resumo e dados</h2>
@@ -695,7 +813,7 @@
     </div>
   </section>
 
-  <!-- ================= TELA: CONFIGURAÇÕES ================= -->
+  <!-- ================= CONFIGURAÇÕES ================= -->
   <section class="tela escondido" id="tela-config">
     <button class="btn-voltar" id="voltarCalendario4">Voltar ao calendário</button>
     <h2 class="titulo-tela">⚙️ Configurações</h2>
@@ -736,9 +854,12 @@
 
       <div class="acoes-form">
         <button type="button" class="btn btn-neutro" id="btnTestarConexao">🔍 Testar conexão</button>
+        <button type="button" class="btn btn-neutro" id="btnDiagnostico">🔬 Diagnóstico completo</button>
         <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar configurações</button>
-        <button type="button" class="btn btn-perigo" id="btnRemoverConfig">🗑 Remover configuração</button>
+        <button type="button" class="btn btn-perigo" id="btnRemoverConfig">🗑 Remover</button>
       </div>
+
+      <div id="diagResultado" class="diag-resultado escondido"></div>
     </div>
 
     <div class="config-ajuda">
@@ -747,10 +868,11 @@
         <li>Acesse <code>github.com/settings/tokens?type=beta</code></li>
         <li>Clique em <b>Generate new token</b></li>
         <li>Dê um nome (ex.: <i>Pagamentos</i>) e escolha a expiração</li>
-        <li>Em <b>Repository access</b>, marque <i>Only select repositories</i> e escolha o repositório</li>
+        <li>Em <b>Repository access</b>, marque <i>Only select repositories</i> e escolha o repositório <b>pagamentos</b></li>
         <li>Em <b>Permissions → Repository permissions → Contents</b>, escolha <b>Read and write</b></li>
         <li>Clique em <b>Generate token</b> e cole no campo acima</li>
       </ol>
+      <p style="margin:10px 0 0"><b>💡 Dica:</b> crie também o arquivo <code>dados/dividas.json</code> no repositório, com o conteúdo exato <code>[]</code> (abre e fecha colchetes, sem mais nada). Isso evita o erro de "arquivo não encontrado" na primeira execução.</p>
     </div>
 
     <div class="config-perigo">
@@ -980,7 +1102,7 @@ function atualizarListaCredores(){
 function vencimentosNoDia(iso){ let t=0; dividas.forEach(d=>d.parcelas.forEach(p=>{ if(p.vencimento===iso) t++; })); return t; }
 
 /* =========================================================
-   GITHUB — UM ÚNICO TOKEN READ/WRITE
+   GITHUB — TOKEN ÚNICO READ/WRITE
    ========================================================= */
 let ghConfig = { owner:'', repo:'pagamentos', branch:'main', path:'dados/dividas.json', token:'', autoSync:true };
 let syncTimer = null;
@@ -992,9 +1114,7 @@ function carregarConfigGH(){
 function salvarConfigGH(){
   try{ localStorage.setItem(GH_KEY, JSON.stringify(ghConfig)); }catch(e){}
 }
-function ghConfigurado(){
-  return !!(ghConfig.owner && ghConfig.repo && ghConfig.path && ghConfig.token);
-}
+function ghConfigurado(){ return !!(ghConfig.owner && ghConfig.repo && ghConfig.path && ghConfig.token); }
 
 function setStatusSync(txt, tipo){
   const el = document.getElementById('statusSync'); if(!el) return;
@@ -1017,71 +1137,117 @@ function b64DecodeUTF8(b64){
   return new TextDecoder('utf-8').decode(bytes);
 }
 
-/* ---------- LEITURA autenticada (funciona em repositório privado) ---------- */
+function headersGitHub(){
+  return {
+    'Authorization': `Bearer ${ghConfig.token}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+}
+function urlApiGitHub(){ 
+  return `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`;
+}
+
+/* ---------- LEITURA autenticada ---------- */
 async function carregarDoGitHub(){
-  if(!ghConfigurado()) return null;
+  if(!ghConfigurado()) return { status:'config-ausente' };
   try{
     setStatusSync('☁️ Carregando...', 'carregando');
-    const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}?ref=${encodeURIComponent(ghConfig.branch)}`;
-    const resp = await fetch(apiUrl, {
-      headers: {
-        'Authorization': `Bearer ${ghConfig.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      },
+    const resp = await fetch(urlApiGitHub() + `?ref=${encodeURIComponent(ghConfig.branch)}`, {
+      headers: headersGitHub(),
       cache: 'no-store'
     });
 
     if(resp.status === 404){
+      console.info('[GitHub] Arquivo ainda não existe no repositório:', ghConfig.path);
       setStatusSync('☁️ Sem arquivo remoto', 'aviso');
-      return null;
+      return { status:'sem-arquivo' };
     }
     if(resp.status === 401){
+      const erro = await resp.json().catch(()=>({}));
+      console.error('[GitHub] 401 Unauthorized:', erro.message);
       setStatusSync('⚠️ Token inválido', 'erro');
-      return null;
+      return { status:'token-invalido', mensagem: erro.message };
+    }
+    if(resp.status === 403){
+      const erro = await resp.json().catch(()=>({}));
+      console.error('[GitHub] 403 Forbidden:', erro.message);
+      setStatusSync('⚠️ Sem permissão', 'erro');
+      return { status:'sem-permissao', mensagem: erro.message };
     }
     if(!resp.ok){
       const erro = await resp.json().catch(()=>({}));
       throw new Error(erro.message || 'HTTP '+resp.status);
     }
-    const info = await resp.json();
-    if(!info.content) throw new Error('Resposta sem conteúdo');
 
-    const texto = b64DecodeUTF8(info.content);
-    const dados = JSON.parse(texto || '[]');
-    if(!Array.isArray(dados)) throw new Error('Formato inválido');
+    const info = await resp.json();
+    if(!info.content){
+      console.warn('[GitHub] Resposta sem content');
+      return { status:'sem-conteudo' };
+    }
+
+    let texto = b64DecodeUTF8(info.content);
+    // Remove BOM, espaços nas pontas e caracteres invisíveis
+    texto = texto.replace(/^\uFEFF/, '').replace(/[\u0000-\u001F\u007F]+/g, c => c === '\n' || c === '\r' ? c : '').trim();
+
+    if(!texto){
+      console.info('[GitHub] Arquivo vazio — tratando como lista vazia');
+      setStatusSync('✅ Carregado', 'ok');
+      return { status:'ok', dados:[] };
+    }
+
+    let dados;
+    try{
+      dados = JSON.parse(texto);
+    }catch(errParse){
+      console.error('[GitHub] JSON inválido. Conteúdo recebido (primeiros 300 caracteres):', texto.slice(0,300));
+      setStatusSync('⚠️ JSON inválido', 'erro');
+      return { status:'json-invalido', conteudo: texto.slice(0,300) };
+    }
+
+    if(!Array.isArray(dados)){
+      console.warn('[GitHub] JSON não é um array:', typeof dados);
+      setStatusSync('⚠️ Formato inesperado', 'erro');
+      return { status:'formato-invalido', dados };
+    }
 
     setStatusSync('✅ Carregado', 'ok');
-    return dados;
+    return { status:'ok', dados };
   }catch(e){
-    console.error('Erro ao carregar do GitHub:', e);
+    console.error('[GitHub] Erro de carregamento:', e);
     setStatusSync('⚠️ Erro ao carregar', 'erro');
-    return null;
+    return { status:'erro', mensagem: e.message || String(e) };
   }
 }
 
-/* ---------- ESCRITA autenticada (mesmo token) ---------- */
+/* ---------- ESCRITA autenticada ---------- */
 async function salvarNoGitHub(){
   if(!ghConfigurado()) return false;
   if(syncing) return false;
   syncing = true;
   try{
     setStatusSync('☁️ Salvando...', 'salvando');
-    const apiUrl = `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${ghConfig.path}`;
 
-    // Pega SHA atual (se existir)
+    // Pega SHA atual
     let sha = null;
-    const getResp = await fetch(apiUrl + `?ref=${encodeURIComponent(ghConfig.branch)}`, {
-      headers: {
-        'Authorization': `Bearer ${ghConfig.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
+    const getResp = await fetch(urlApiGitHub() + `?ref=${encodeURIComponent(ghConfig.branch)}`, {
+      headers: headersGitHub()
     });
     if(getResp.ok){
       const info = await getResp.json();
       sha = info.sha;
-    } else if(getResp.status !== 404){
+    } else if(getResp.status === 404){
+      // Arquivo ainda não existe — vai ser criado
+      sha = null;
+    } else if(getResp.status === 401){
+      const erro = await getResp.json().catch(()=>({}));
+      setStatusSync('⚠️ Token inválido', 'erro');
+      throw new Error('Token inválido ou expirado: ' + (erro.message||''));
+    } else if(getResp.status === 403){
+      const erro = await getResp.json().catch(()=>({}));
+      setStatusSync('⚠️ Sem permissão', 'erro');
+      throw new Error('Sem permissão para escrever. Verifique se o token tem "Contents: Read and write": ' + (erro.message||''));
+    } else {
       const erro = await getResp.json().catch(()=>({}));
       throw new Error(erro.message || 'HTTP '+getResp.status);
     }
@@ -1094,27 +1260,25 @@ async function salvarNoGitHub(){
     };
     if(sha) body.sha = sha;
 
-    const putResp = await fetch(apiUrl, {
+    const putResp = await fetch(urlApiGitHub(), {
       method:'PUT',
-      headers: {
-        'Authorization': `Bearer ${ghConfig.token}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28',
-        'Content-Type': 'application/json'
-      },
+      headers: { ...headersGitHub(), 'Content-Type': 'application/json' },
       body: JSON.stringify(body)
     });
 
     if(!putResp.ok){
-      const erro = await putResp.json().catch(()=>({}));
-      throw new Error(erro.message || 'HTTP '+putResp.status);
+      const erroTexto = await putResp.text();
+      let erroMsg = `HTTP ${putResp.status}`;
+      try{ const ej = JSON.parse(erroTexto); erroMsg = ej.message || erroMsg; }catch(_){}
+      console.error('[GitHub] Erro no PUT:', putResp.status, erroTexto);
+      throw new Error(erroMsg);
     }
 
     const hora = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
     setStatusSync(`✅ Salvo ${hora}`, 'ok');
     return true;
   }catch(e){
-    console.error('Erro ao salvar no GitHub:', e);
+    console.error('[GitHub] Erro ao salvar:', e && e.message ? e.message : e);
     setStatusSync('⚠️ Erro ao salvar', 'erro');
     return false;
   }finally{
@@ -1824,7 +1988,7 @@ listaTodas.addEventListener('toggle',(e)=>{ const c=e.target.closest('details[da
   const d=dividas.find(x=>x.id===c.dataset.cartaoDivida); if(d){ d.aberto=c.open; salvar(); } },true);
 
 /* =========================================================
-   RESUMO E DADOS
+   RESUMO
    ========================================================= */
 document.getElementById('btnAbrirResumo').addEventListener('click',()=>{ manutencaoContinuas(); atualizarPainelGeral(); mostrarTela('resumo'); });
 document.getElementById('voltarCalendario3').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
@@ -1853,7 +2017,7 @@ filtroDataInicio.addEventListener('change',()=>{ filtroResumo.dataInicio=filtroD
 filtroDataFim.addEventListener('change',()=>{ filtroResumo.dataFim=filtroDataFim.value; ativarPersonalizado(); atualizarPainelGeral(); });
 
 /* =========================================================
-   TELA DE CONFIGURAÇÕES
+   CONFIGURAÇÕES
    ========================================================= */
 const campoGHOwner=document.getElementById('ghOwner');
 const campoGHRepo=document.getElementById('ghRepo');
@@ -1901,7 +2065,6 @@ document.getElementById('btnSalvarConfig').addEventListener('click',()=>{
   const tk=campoGHToken.value.trim();
   if(!ow){ alert('Preencha o usuário/organização do GitHub.'); campoGHOwner.focus(); return; }
   if(!tk){ alert('Preencha o token de acesso pessoal.'); campoGHToken.focus(); return; }
-
   ghConfig.owner=ow; ghConfig.repo=rp; ghConfig.branch=br;
   ghConfig.path=pt; ghConfig.token=tk; ghConfig.autoSync=campoGHAutoSync.checked;
   salvarConfigGH();
@@ -1915,9 +2078,10 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
   const ow=campoGHOwner.value.trim();
   const rp=campoGHRepo.value.trim();
   const tk=campoGHToken.value.trim();
+  const br=campoGHBranch.value.trim()||'main';
+  const pt=campoGHPATH.value.trim()||'dados/dividas.json';
   if(!ow||!rp||!tk){ alert('Preencha usuário, repositório e token para testar.'); return; }
-  const btn=document.getElementById('btnTestarConexao');
-  const txtAntigo=btn.textContent;
+  const btn=document.getElementById('btnTestarConexao'); const txtAntigo=btn.textContent;
   btn.textContent='⏳ Testando...'; btn.disabled=true;
   try{
     const r=await fetch(`https://api.github.com/repos/${ow}/${rp}`,{
@@ -1925,17 +2089,98 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
     });
     if(r.ok){
       const info=await r.json();
-      alert(`✅ Conectado com sucesso!\n\nRepositório: ${info.full_name}\nPrivado: ${info.private?'sim':'não'}\nPermissões de push: ${info.permissions?.push?'sim':'não'}`);
-    } else if(r.status===401){
-      alert('❌ Token inválido ou expirado.');
-    } else if(r.status===404){
-      alert('❌ Repositório não encontrado, ou o token não tem acesso a ele.');
-    } else {
-      const er=await r.json().catch(()=>({}));
-      alert('❌ '+ (er.message||'Erro HTTP '+r.status));
-    }
+      const temWrite = info.permissions?.push === true;
+      let msg = `✅ Conectado ao repositório "${info.full_name}".\nPrivado: ${info.private?'sim':'não'}\nPermissão de escrita: ${temWrite?'sim':'NÃO (verifique o token)'}`;
+      // Testa se o arquivo existe
+      const rArq = await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pt}?ref=${br}`, {
+        headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json'}
+      });
+      if(rArq.status===200){ msg += `\n\n📄 Arquivo ${pt} existe.`; }
+      else if(rArq.status===404){ msg += `\n\n📄 Arquivo ${pt} ainda não existe — será criado no primeiro save.`; }
+      else { msg += `\n\n⚠️ Erro ao verificar arquivo (HTTP ${rArq.status}).`; }
+      alert(msg);
+    } else if(r.status===401){ alert('❌ Token inválido ou expirado.'); }
+    else if(r.status===404){ alert('❌ Repositório não encontrado, ou o token não tem acesso a ele.'); }
+    else { const er=await r.json().catch(()=>({})); alert('❌ '+(er.message||'Erro HTTP '+r.status)); }
   }catch(e){ alert('❌ Erro de rede: '+e.message); }
   btn.textContent=txtAntigo; btn.disabled=false;
+});
+
+document.getElementById('btnDiagnostico').addEventListener('click',async()=>{
+  const ow=campoGHOwner.value.trim();
+  const rp=campoGHRepo.value.trim();
+  const br=campoGHBranch.value.trim()||'main';
+  const pt=campoGHPATH.value.trim()||'dados/dividas.json';
+  const tk=campoGHToken.value.trim();
+  const out=document.getElementById('diagResultado');
+  out.classList.remove('escondido');
+  out.innerHTML='⏳ Rodando diagnóstico...\n';
+  const linhas=[];
+  const p=(t)=>linhas.push(t);
+
+  p(`<b>📋 Configuração atual</b>`);
+  p(`• Usuário: ${ow||'(vazio)'}`);
+  p(`• Repositório: ${rp||'(vazio)'}`);
+  p(`• Branch: ${br}`);
+  p(`• Arquivo: ${pt}`);
+  p(`• Token: ${tk ? 'presente ('+tk.length+' caracteres, começa com "'+tk.slice(0,10)+'...")' : '(vazio)'}`);
+  p('');
+
+  if(!ow||!rp||!tk){
+    p(`<span class="erro">❌ Preencha usuário, repositório e token antes de rodar o diagnóstico.</span>`);
+    out.innerHTML=linhas.join('\n');
+    return;
+  }
+
+  p(`<b>1️⃣ Verificando acesso ao repositório...</b>`);
+  try{
+    const r=await fetch(`https://api.github.com/repos/${ow}/${rp}`,{
+      headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
+    });
+    if(r.ok){
+      const info=await r.json();
+      p(`<span class="ok">✅ Repositório acessível: ${info.full_name}</span>`);
+      p(`• Privado: ${info.private?'sim':'não'}`);
+      p(`• Permissão de push: ${info.permissions?.push?'<span class="ok">sim</span>':'<span class="erro">NÃO — o token precisa de "Contents: Read and write"</span>'}`);
+    } else if(r.status===401){ p(`<span class="erro">❌ 401 — Token inválido ou expirado.</span>`); }
+    else if(r.status===404){ p(`<span class="erro">❌ 404 — Repositório não encontrado ou o token não tem acesso a ele.</span>`); }
+    else { p(`<span class="erro">❌ HTTP ${r.status}</span>`); }
+  }catch(e){ p(`<span class="erro">❌ Erro de rede: ${e.message}</span>`); }
+  p('');
+
+  p(`<b>2️⃣ Verificando o arquivo ${pt}...</b>`);
+  try{
+    const r=await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pt}?ref=${br}`,{
+      headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
+    });
+    if(r.status===200){
+      const info=await r.json();
+      const texto = b64DecodeUTF8(info.content || '');
+      p(`<span class="ok">✅ Arquivo existe (tamanho: ${info.size} bytes)</span>`);
+      p(`• SHA: ${info.sha}`);
+      if(texto.trim()===''){
+        p(`• Conteúdo: <span class="aviso">arquivo vazio — tratado como []</span>`);
+      } else {
+        try{
+          const j=JSON.parse(texto.replace(/^\uFEFF/,'').trim());
+          if(Array.isArray(j)) p(`• Conteúdo: <span class="ok">JSON válido (${j.length} dívidas)</span>`);
+          else p(`• Conteúdo: <span class="aviso">JSON válido, mas não é array</span>`);
+        }catch(err){
+          p(`• Conteúdo: <span class="erro">JSON inválido</span>`);
+          p(`• Primeiros 200 caracteres: <code>${escapar(texto.slice(0,200))}</code>`);
+        }
+      }
+    } else if(r.status===404){
+      p(`<span class="aviso">⚠️ Arquivo ainda não existe. Será criado no primeiro save.</span>`);
+    } else if(r.status===401){ p(`<span class="erro">❌ 401 — Token inválido.</span>`); }
+    else { p(`<span class="erro">❌ HTTP ${r.status}</span>`); }
+  }catch(e){ p(`<span class="erro">❌ Erro: ${e.message}</span>`); }
+  p('');
+
+  p(`<b>3️⃣ Teste de escrita (leitura do SHA)...</b>`);
+  p(`<span style="color:#64748b">• A escrita real será feita quando você clicar em "Salvar configurações" ou fizer uma alteração.</span>`);
+
+  out.innerHTML=linhas.join('\n');
 });
 
 document.getElementById('btnRemoverConfig').addEventListener('click',()=>{
@@ -1954,14 +2199,25 @@ document.getElementById('btnSyncAgora').addEventListener('click',async()=>{
   if(!ghConfigurado()){ alert('Configure o GitHub primeiro.'); abrirConfig(); return; }
   const ok=await salvarNoGitHub();
   if(ok) alert('✅ Enviado para o GitHub.');
-  else alert('⚠️ Não foi possível enviar. Verifique o status.');
+  else alert('⚠️ Não foi possível enviar. Abra o console do navegador para ver o erro detalhado.');
 });
 document.getElementById('btnBaixarRemoto').addEventListener('click',async()=>{
   if(!ghConfigurado()){ alert('Configure o GitHub primeiro.'); abrirConfig(); return; }
   const r=await carregarDoGitHub();
-  if(!Array.isArray(r)){ alert('Não foi possível baixar (arquivo não encontrado, token inválido ou erro de rede).'); return; }
-  if(!confirm(`Baixar ${r.length} dívida(s) do GitHub? Isso substituirá os dados atuais.`)) return;
-  dividas=r; normalizarDividas(); salvarLocal(); manutencaoContinuas();
+  if(r.status==='sem-arquivo'){
+    alert('O arquivo ainda não existe no repositório. Nada para baixar.');
+    return;
+  }
+  if(r.status==='json-invalido'){
+    alert('⚠️ O arquivo no GitHub contém JSON inválido.\n\nAbra o arquivo no GitHub e apague todo o conteúdo, deixando apenas [].');
+    return;
+  }
+  if(r.status!=='ok' || !Array.isArray(r.dados)){
+    alert('⚠️ Não foi possível baixar os dados.\n\nUse o botão "Diagnóstico completo" na tela de configurações para ver o que está acontecendo.');
+    return;
+  }
+  if(!confirm(`Baixar ${r.dados.length} dívida(s) do GitHub? Isso substituirá os dados atuais.`)) return;
+  dividas=r.dados; normalizarDividas(); salvarLocal(); manutencaoContinuas();
   atualizarListaCredores(); renderCalendario(); atualizarPainelGeral();
   if(estado.tela==='todas') renderTodas();
   alert('✅ Dados baixados do GitHub.');
@@ -2036,16 +2292,22 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
 
   if(ghConfigurado()){
     setStatusSync('☁️ Carregando...','carregando');
-    const remoto = await carregarDoGitHub();
+    const res = await carregarDoGitHub();
 
-    if(Array.isArray(remoto) && remoto.length > 0){
-      dividas = remoto;
-      normalizarDividas();
-      salvarLocal();
-    } else if(Array.isArray(remoto) && remoto.length === 0){
-      if(dividas.length > 0) agendarSyncGH();
-    } else if(remoto === null && dividas.length > 0){
+    if(res.status === 'ok' && Array.isArray(res.dados)){
+      if(res.dados.length > 0){
+        dividas = res.dados;
+        normalizarDividas();
+        salvarLocal();
+      } else if(dividas.length > 0){
+        // Repo vazio mas local tem dados: envia
+        agendarSyncGH();
+      }
+    } else if(res.status === 'sem-arquivo' && dividas.length > 0){
       agendarSyncGH();
+    } else if(res.status === 'json-invalido'){
+      console.warn('[GitHub] O arquivo remoto tem JSON inválido. Corrija manualmente no GitHub.');
+      // Mantém os dados locais para não perder nada
     }
   } else {
     setStatusSync('☁️ Offline','');
@@ -2063,7 +2325,6 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
   if(vencimentosNoDia(hj) > 0) setTimeout(()=>abrirDia(hj), 120);
 })();
 
-/* Sincroniza ao trocar de aba / fechar */
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState === 'hidden'){
     if(ghConfigurado() && ghConfig.autoSync){
@@ -2073,7 +2334,6 @@ document.addEventListener('visibilitychange',()=>{
   }
 });
 
-/* Service worker (PWA) */
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('sw.js').catch(err=>console.warn('SW:',err));
