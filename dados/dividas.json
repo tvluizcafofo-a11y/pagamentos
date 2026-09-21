@@ -3067,6 +3067,34 @@
     ]
   },
   {
+    "id": "mublgdm158q3wy",
+    "credor": "Cemig",
+    "descricao": "Trste",
+    "valorTotal": 28,
+    "valorParcela": 28,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-09-22",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-09-22",
+    "ultimoVencimento": "2026-09-22",
+    "criadoEm": "2026-09-21T18:44:04.201Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mublgdm1qidfxb",
+        "numero": 1,
+        "valor": 280,
+        "vencimento": "2026-09-22",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
+  },
+  {
     "id": "mubpjumicrk7vp",
     "credor": "Origo",
     "descricao": "luz",
