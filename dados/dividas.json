@@ -1629,7 +1629,7 @@
     "credor": "Unimed",
     "descricao": "Plano de Saúde",
     "valorTotal": 0,
-    "valorParcela": 1700,
+    "valorParcela": 1579.58,
     "modo": "continua",
     "periodicidade": "mensal",
     "diaEspecifico": "10",
@@ -1653,7 +1653,7 @@
       {
         "id": "mu9o0xn9mcxvhh",
         "numero": 2,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2026-10-10",
         "link": "",
         "status": "em_aberto",
@@ -1662,7 +1662,7 @@
       {
         "id": "mu9o0xn9jz4g9d",
         "numero": 3,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2026-11-10",
         "link": "",
         "status": "em_aberto",
@@ -1671,7 +1671,7 @@
       {
         "id": "mu9o0xn9la1j68",
         "numero": 4,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2026-12-10",
         "link": "",
         "status": "em_aberto",
@@ -1680,7 +1680,7 @@
       {
         "id": "mu9o0xn9k2hzow",
         "numero": 5,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-01-10",
         "link": "",
         "status": "em_aberto",
@@ -1689,7 +1689,7 @@
       {
         "id": "mu9o0xn972478s",
         "numero": 6,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-02-10",
         "link": "",
         "status": "em_aberto",
@@ -1698,7 +1698,7 @@
       {
         "id": "mu9o0xn9o1bpsc",
         "numero": 7,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-03-10",
         "link": "",
         "status": "em_aberto",
@@ -1707,7 +1707,7 @@
       {
         "id": "mu9o0xn9fz974h",
         "numero": 8,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-04-10",
         "link": "",
         "status": "em_aberto",
@@ -1716,7 +1716,7 @@
       {
         "id": "mu9o0xn9g2ffq0",
         "numero": 9,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-05-10",
         "link": "",
         "status": "em_aberto",
@@ -1725,7 +1725,7 @@
       {
         "id": "mu9o0xn9caxwc8",
         "numero": 10,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-06-10",
         "link": "",
         "status": "em_aberto",
@@ -1734,7 +1734,7 @@
       {
         "id": "mu9o0xn98t9dys",
         "numero": 11,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-07-10",
         "link": "",
         "status": "em_aberto",
@@ -1743,7 +1743,7 @@
       {
         "id": "mu9o0xn9iaoz5b",
         "numero": 12,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-08-10",
         "link": "",
         "status": "em_aberto",
@@ -1752,7 +1752,7 @@
       {
         "id": "mu9o0xn95rbxdw",
         "numero": 13,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-09-10",
         "link": "",
         "status": "em_aberto",
@@ -1761,7 +1761,7 @@
       {
         "id": "mu9o0xn997inte",
         "numero": 14,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-10-10",
         "link": "",
         "status": "em_aberto",
@@ -1770,7 +1770,7 @@
       {
         "id": "mu9o0xn9gtur7m",
         "numero": 15,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-11-10",
         "link": "",
         "status": "em_aberto",
@@ -1779,7 +1779,7 @@
       {
         "id": "mu9o0xn92x0bmq",
         "numero": 16,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2027-12-10",
         "link": "",
         "status": "em_aberto",
@@ -1788,7 +1788,7 @@
       {
         "id": "mu9o0xn9t647k5",
         "numero": 17,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-01-10",
         "link": "",
         "status": "em_aberto",
@@ -1797,7 +1797,7 @@
       {
         "id": "mu9o0xn92edsdz",
         "numero": 18,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-02-10",
         "link": "",
         "status": "em_aberto",
@@ -1806,7 +1806,7 @@
       {
         "id": "mu9o0xn9igqys0",
         "numero": 19,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-03-10",
         "link": "",
         "status": "em_aberto",
@@ -1815,7 +1815,7 @@
       {
         "id": "mu9o0xn91eolbm",
         "numero": 20,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-04-10",
         "link": "",
         "status": "em_aberto",
@@ -1824,7 +1824,7 @@
       {
         "id": "mu9o0xn90jfxo8",
         "numero": 21,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-05-10",
         "link": "",
         "status": "em_aberto",
@@ -1833,7 +1833,7 @@
       {
         "id": "mu9o0xn9nyxg20",
         "numero": 22,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-06-10",
         "link": "",
         "status": "em_aberto",
@@ -1842,7 +1842,7 @@
       {
         "id": "mu9o0xn9zp28qx",
         "numero": 23,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-07-10",
         "link": "",
         "status": "em_aberto",
@@ -1851,7 +1851,7 @@
       {
         "id": "mu9o0xn9v8mi4z",
         "numero": 24,
-        "valor": 1700,
+        "valor": 1579.58,
         "vencimento": "2028-08-10",
         "link": "",
         "status": "em_aberto",
