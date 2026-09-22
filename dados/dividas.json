@@ -926,7 +926,7 @@
   {
     "id": "mu9nnscu88h5cv",
     "credor": "Vivo",
-    "descricao": "Telefones Deb. BB 98812-9977",
+    "descricao": "Vivo Fibra Deb. Aut.",
     "valorTotal": 0,
     "valorParcela": 119.9,
     "modo": "continua",
@@ -947,8 +947,7 @@
         "vencimento": "2026-09-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu6vmloj",
@@ -957,8 +956,7 @@
         "vencimento": "2026-10-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuhueck5",
@@ -967,8 +965,7 @@
         "vencimento": "2026-11-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuptqxue",
@@ -977,8 +974,7 @@
         "vencimento": "2026-12-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuzgeats",
@@ -987,8 +983,7 @@
         "vencimento": "2027-01-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu9xa5ag",
@@ -997,8 +992,7 @@
         "vencimento": "2027-02-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscug3i1fk",
@@ -1007,8 +1001,7 @@
         "vencimento": "2027-03-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu4wkt6v",
@@ -1017,8 +1010,7 @@
         "vencimento": "2027-04-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscucy8jko",
@@ -1027,8 +1019,7 @@
         "vencimento": "2027-05-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscukcbhxa",
@@ -1037,8 +1028,7 @@
         "vencimento": "2027-06-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuip3ogx",
@@ -1047,8 +1037,7 @@
         "vencimento": "2027-07-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscukdydtc",
@@ -1057,8 +1046,7 @@
         "vencimento": "2027-08-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu10jtxk",
@@ -1067,8 +1055,7 @@
         "vencimento": "2027-09-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnsculor89g",
@@ -1077,8 +1064,7 @@
         "vencimento": "2027-10-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu3fj0ak",
@@ -1087,8 +1073,7 @@
         "vencimento": "2027-11-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuig1x4k",
@@ -1097,8 +1082,7 @@
         "vencimento": "2027-12-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscut91xp8",
@@ -1107,8 +1091,7 @@
         "vencimento": "2028-01-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuvbzf3g",
@@ -1117,8 +1100,7 @@
         "vencimento": "2028-02-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscu5zfrk2",
@@ -1127,8 +1109,7 @@
         "vencimento": "2028-03-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuzwtz4s",
@@ -1137,8 +1118,7 @@
         "vencimento": "2028-04-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscum8rcrw",
@@ -1147,8 +1127,7 @@
         "vencimento": "2028-05-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscut15sgt",
@@ -1157,8 +1136,7 @@
         "vencimento": "2028-06-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscunrgb4i",
@@ -1167,8 +1145,7 @@
         "vencimento": "2028-07-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       },
       {
         "id": "mu9nnscuhblgsr",
@@ -1177,8 +1154,7 @@
         "vencimento": "2028-08-25",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Vivo Fibra"
+        "comprovante": null
       }
     ]
   },
