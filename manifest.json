@@ -1,40 +1,72 @@
 {
   "name": "Sistema de Pagamentos",
   "short_name": "Pagamentos",
-  "description": "Controle de dívidas, parcelas, boletos e comprovantes. Sincroniza automaticamente com GitHub.",
+  "description": "Controle de dívidas, parcelas, boletos e comprovantes com sincronização automática no GitHub.",
+  "id": "/pagamentos/",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait",
-  "background_color": "#f1f5f9",
+  "background_color": "#eef2f7",
   "theme_color": "#2563eb",
   "lang": "pt-BR",
   "dir": "ltr",
   "categories": ["finance", "productivity", "utilities"],
   "icons": [
     {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
       "src": "icons/icon.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any"
-    },
+    }
+  ],
+  "screenshots": [
     {
-      "src": "icons/icon-maskable.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
+      "src": "icons/screenshot-mobile.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Calendário de vencimentos"
     }
   ],
   "shortcuts": [
     {
       "name": "Nova dívida",
       "short_name": "Nova",
-      "url": "./index.html#nova"
-    },
-    {
-      "name": "Resumo",
-      "short_name": "Resumo",
-      "url": "./index.html#resumo"
+      "description": "Cadastrar uma nova dívida",
+      "url": "./index.html#nova",
+      "icons": [
+        {
+          "src": "icons/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
