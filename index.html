@@ -31,7 +31,7 @@
   button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
   /* ================================================================
-     CABEÇALHO DO TOPO — com faixa laranja inferior e sombra reforçada
+     CABEÇALHO DO TOPO
      ================================================================ */
   header.topo{
     background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 55%,#2563eb 100%);
@@ -72,7 +72,7 @@
   .escondido{display:none !important}
 
   /* ================================================================
-     BOTÃO VOLTAR — ainda mais destacado
+     BOTÃO VOLTAR
      ================================================================ */
   .btn-voltar{display:inline-flex;align-items:center;gap:10px;
     background:linear-gradient(135deg,#f97316,#ea580c);
@@ -87,7 +87,7 @@
     display:flex;align-items:center;justify-content:center}
 
   /* ================================================================
-     TÍTULOS DE TELA — barra lateral colorida + tamanho maior
+     TÍTULOS DE TELA
      ================================================================ */
   h2.titulo-tela{
     margin:0 0 16px;font-size:1.5rem;font-weight:900;
@@ -117,7 +117,7 @@
   .banner-hoje small{color:#78350f;font-size:.78rem;font-weight:600}
 
   /* ================================================================
-     PAINEL DE INDICADORES — cartões com borda colorida e números grandes
+     PAINEL DE INDICADORES
      ================================================================ */
   .painel{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:16px}
   .indicador{
@@ -142,7 +142,7 @@
   .indicador.roxo strong{color:var(--roxo)}
 
   /* ================================================================
-     FILTRO DE PERÍODO — cabeçalho mais forte e botões destacados
+     FILTRO DE PERÍODO
      ================================================================ */
   .filtro-periodo{background:#fff;border:2px solid var(--linha);border-radius:var(--raio);
     padding:14px;margin-bottom:14px;box-shadow:0 2px 8px rgba(15,23,42,.06)}
@@ -173,7 +173,7 @@
     box-shadow:0 2px 6px rgba(37,99,235,.15)}
 
   /* ================================================================
-     BARRA DE BUSCA — maior e mais destacada
+     BARRA DE BUSCA
      ================================================================ */
   .busca-cartao{
     background:#fff;
@@ -228,7 +228,7 @@
   .resultado-busca .st-tag.s-outros{background:var(--amarelo-bg);color:#92400e}
 
   /* ================================================================
-     CALENDÁRIO — bordas grossas e mês em destaque
+     CALENDÁRIO
      ================================================================ */
   .calendario-cartao{
     width:100%;max-width:100%;box-sizing:border-box;overflow:hidden;
@@ -399,6 +399,13 @@
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .item-resumo .texto-credencial small{display:block;color:var(--suave);font-size:.74rem;font-weight:500;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item-resumo .texto-credencial .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
+  .item-resumo .texto-credencial .mini-tags .tag-ico{font-size:.82rem;line-height:1;
+    padding:1px 5px;border-radius:6px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+  .item-resumo .texto-credencial .mini-tags .tag-ico.link{background:var(--info-bg);
+    color:#0369a1;border:1px solid #bae6fd}
+  .item-resumo .texto-credencial .mini-tags .tag-ico.comp{background:var(--verde-bg);
+    color:#15803d;border:1px solid #86efac}
   .item-resumo .valor-area{display:flex;align-items:center;gap:8px;flex-shrink:0}
   .item-resumo .valor-parcela{font-size:1.1rem;font-weight:900;color:var(--azul);
     white-space:nowrap;letter-spacing:-.3px}
@@ -478,7 +485,6 @@
   .form-cartao{background:#fff;border:2px solid var(--linha);border-radius:var(--raio);
     padding:16px;width:100%;box-shadow:0 2px 8px rgba(15,23,42,.06)}
 
-  /* Bloco de campos principais */
   .bloco-fixo{
     background:linear-gradient(135deg,#eff6ff,#dbeafe);
     border:2px solid #bfdbfe;
@@ -535,7 +541,7 @@
     padding:4px 10px;color:#92400e;font-size:.74rem;font-weight:700}
 
   /* ================================================================
-     BOTÕES PRINCIPAIS — mais destacados
+     BOTÕES PRINCIPAIS
      ================================================================ */
   .acoes-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;padding-top:16px;
     border-top:2px dashed var(--linha)}
@@ -693,6 +699,38 @@
   .btn-modal.sucesso{background:linear-gradient(135deg,var(--verde),#15803d);color:#fff;
     box-shadow:0 3px 10px rgba(22,163,74,.3)}
 
+  /* ================================================================
+     MODAL DE COMPROVANTE — traz para frente com z-index máximo
+     ================================================================ */
+  #modalComprovante{z-index:1000000;background:rgba(15,23,42,.92);
+    align-items:center;justify-content:center;padding:0;flex-direction:column}
+  .comp-caixa{width:100%;height:100%;display:flex;flex-direction:column;
+    background:#0f172a;overflow:hidden;position:relative}
+  .comp-topo{background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;
+    box-shadow:0 3px 12px rgba(0,0,0,.4);flex-shrink:0;position:relative;z-index:2}
+  .comp-topo .nome-arquivo{flex:1;min-width:0;font-size:.86rem;font-weight:700;
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    text-shadow:0 1px 2px rgba(0,0,0,.25)}
+  .comp-topo .acoes{display:flex;gap:6px;flex-shrink:0}
+  .comp-btn{width:38px;height:38px;border-radius:10px;background:rgba(255,255,255,.22);
+    border:2px solid rgba(255,255,255,.4);color:#fff;font-size:1rem;
+    display:flex;align-items:center;justify-content:center;transition:.15s;
+    box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .comp-btn:hover{background:rgba(255,255,255,.35);transform:translateY(-1px)}
+  .comp-btn.fechar{background:rgba(220,38,38,.75);border-color:rgba(252,165,165,.85)}
+  .comp-btn.fechar:hover{background:rgba(220,38,38,.95)}
+  .comp-corpo{flex:1;min-height:0;overflow:auto;position:relative;background:#0f172a;
+    display:flex;align-items:center;justify-content:center;padding:8px;
+    -webkit-overflow-scrolling:touch}
+  .comp-corpo img{max-width:100%;max-height:100%;object-fit:contain;display:block;
+    background:#fff;border-radius:6px;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+  .comp-corpo iframe{width:100%;height:100%;border:none;background:#fff;border-radius:6px;
+    box-shadow:0 6px 24px rgba(0,0,0,.5);min-height:calc(100vh - 130px)}
+  .comp-rodape{background:#0f172a;color:#94a3b8;padding:8px 14px;text-align:center;
+    font-size:.72rem;font-weight:600;flex-shrink:0;border-top:1px solid #1e293b;
+    position:relative;z-index:2}
+
   #textoEscopo{background:#f8fafc;border-left:5px solid var(--azul);border-radius:8px;
     padding:12px 14px;font-size:.86rem;color:var(--texto);line-height:1.6;margin:12px 0 4px;
     font-weight:500}
@@ -738,6 +776,8 @@
     .item-resumo .texto-credencial b{font-size:.88rem}
     .item-resumo .valor-parcela{font-size:1rem}
     .acoes-iniciais .btn{min-width:130px;font-size:.8rem;padding:11px 14px}
+    .comp-topo .nome-arquivo{font-size:.78rem}
+    .comp-btn{width:34px;height:34px;font-size:.9rem}
   }
   @media (max-width:380px){
     .area{padding:10px}
@@ -979,10 +1019,7 @@
       </label>
       <div class="acoes-form">
         <button type="button" class="btn btn-neutro" id="btnTestarConexao">🔍 Testar</button>
-        <button type="button" class="btn btn-neutro" id="btnTestarSalvar">💾 Testar salvamento</button>
-        <button type="button" class="btn btn-neutro" id="btnDiagnostico">🔬 Diagnóstico</button>
         <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar</button>
-        <button type="button" class="btn btn-perigo" id="btnRemoverConfig">🗑 Remover</button>
       </div>
       <div id="diagResultado" class="diag-resultado escondido"></div>
     </div>
@@ -1038,6 +1075,25 @@
   </div>
 </div>
 
+<!-- ================================================================
+     MODAL DE VISUALIZAÇÃO DE COMPROVANTE
+     Sempre na frente de tudo (z-index 1000000)
+     ================================================================ -->
+<div class="modal-fundo escondido" id="modalComprovante">
+  <div class="comp-caixa">
+    <div class="comp-topo">
+      <span class="nome-arquivo" id="compNomeArquivo">Comprovante</span>
+      <div class="acoes">
+        <button type="button" class="comp-btn" id="compAbrirAba" title="Abrir em nova aba">↗</button>
+        <button type="button" class="comp-btn" id="compBaixar" title="Baixar arquivo">⬇</button>
+        <button type="button" class="comp-btn fechar" id="compFechar" title="Fechar">✕</button>
+      </div>
+    </div>
+    <div class="comp-corpo" id="compCorpo"></div>
+    <div class="comp-rodape">Toque em ✕ para fechar · ↗ abre em nova aba</div>
+  </div>
+</div>
+
 <script>
 /* =========================================================
    SISTEMA DE PAGAMENTOS
@@ -1076,6 +1132,11 @@ function urlSegura(url){ const v=String(url||'').trim(); if(!v) return ''; retur
 function nomeMes(mes){ return ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][mes]; }
 function nomeDiaSemana(d){ return ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'][d]; }
 function normalizar(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+function comprovantesIguais(a,b){
+  const va = a ? (a.dados||'') : '';
+  const vb = b ? (b.dados||'') : '';
+  return va === vb;
+}
 
 function carregarFiltroResumo(){
   try{
@@ -1606,6 +1667,11 @@ function perguntarEscopo(d,p,mud){
     if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} → <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
     if(mud.link!==undefined){ const a=p.link||'(vazio)', n=mud.link||'(vazio)';
       l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
+    if(mud.comprovante!==undefined){
+      const tinha = p.comprovante ? p.comprovante.nome : 'sem comprovante';
+      const tem = mud.comprovante ? mud.comprovante.nome : 'removido';
+      l.push(`<div class="linha-mudanca"><span class="campo-nome">Comprovante</span><span class="valor-mudanca">${escapar(tinha)} → <b>${escapar(tem)}</b></span></div>`);
+    }
     document.getElementById('textoEscopo').innerHTML =
       `Parcela <b>${p.numero} de ${d.parcelas.length}</b> de <b>${escapar(d.credor)}</b>.<br><br>Alterações:<div style="margin-top:8px">${l.join('')}</div><br>Aplicar a:`;
     abrirModal('modalEscopo');
@@ -1637,6 +1703,8 @@ function aplicarMudancas(d,p,mud,esc){
     else { const delta=diasEntre(p.vencimento,mud.vencimento); const out=af.filter(x=>x.id!==p.id);
       p.vencimento=mud.vencimento; out.forEach(x=>{x.vencimento=somarDias(x.vencimento,delta);}); }
   }
+  /* Comprovante: sempre só na parcela selecionada */
+  if(mud.comprovante!==undefined){ p.comprovante=mud.comprovante; }
 }
 
 function abrirDia(iso){
@@ -1655,10 +1723,23 @@ function itensDoDia(iso){ const it=[]; dividas.forEach(dv=>dv.parcelas.forEach(p
   it.sort((x,y)=>x.divida.credor.localeCompare(y.divida.credor,'pt-BR')); return it; }
 function recarregarListaDia(){ if(!estado.diaSelecionado) return; renderListaDia(itensDoDia(estado.diaSelecionado)); }
 function opcoesStatus(sel){ return Object.entries(ROTULOS_STATUS).map(([v,r])=>`<option value="${v}"${v===sel?' selected':''}>${r}</option>`).join(''); }
-function comprovanteHTML(p){ const t=!!p.comprovante;
-  return `<small><b>Comprovante:</b></small>${t?`<button type="button" class="btn-mini verde" data-acao="verComprovante">👁 Ver</button><button type="button" class="btn-mini vermelho" data-acao="removerComprovante">✕</button>`:''}<label class="btn-mini upload">${t?'↻ Trocar':'📎 Anexar'}<input type="file" accept="image/*,application/pdf" data-campo="comprovante" hidden></label>`; }
+
+/* comprovanteHTML agora usa o rascunho quando existir */
+function comprovanteHTML(p, dr){
+  const comp = dr && ('comprovante' in dr) ? dr.comprovante : p.comprovante;
+  const t = !!comp;
+  const marcado = dr && ('comprovante' in dr) && !comprovantesIguais(dr.comprovante, p.comprovante);
+  return `<small><b>Comprovante:</b>${marcado?' <span style="color:var(--laranja-esc)">●</span>':''}</small>${t?`<button type="button" class="btn-mini verde" data-acao="verComprovante">👁 Ver</button><button type="button" class="btn-mini vermelho" data-acao="removerComprovante">✕</button>`:''}<label class="btn-mini upload">${t?'↻ Trocar':'📎 Anexar'}<input type="file" accept="image/*,application/pdf" data-campo="comprovante" hidden></label>`;
+}
 function iconeStatus(s,c){ if(c) return '♾️'; if(s==='pago') return '✔'; if(s==='em_atraso') return '⚠'; if(s==='outros') return '◆'; return '●'; }
-function criarRascunho(d,p){ return { credor:p.credorOverride||d.credor, descricao:p.descricaoOverride||d.descricao, valor:p.valor, vencimento:p.vencimento, status:p.status, link:p.link }; }
+function criarRascunho(d,p){
+  return {
+    credor:p.credorOverride||d.credor,
+    descricao:p.descricaoOverride||d.descricao,
+    valor:p.valor, vencimento:p.vencimento, status:p.status, link:p.link,
+    comprovante:p.comprovante ? {nome:p.comprovante.nome, tipo:p.comprovante.tipo, dados:p.comprovante.dados} : null
+  };
+}
 function calcularMudancas(d,p,dr){
   const ca=p.credorOverride||d.credor, da=p.descricaoOverride||d.descricao; const m={};
   if(String(dr.credor).trim()!==String(ca).trim()) m.credor=String(dr.credor).trim();
@@ -1667,9 +1748,22 @@ function calcularMudancas(d,p,dr){
   if(String(dr.vencimento)!==String(p.vencimento)) m.vencimento=dr.vencimento;
   if(String(dr.status)!==String(p.status)) m.status=dr.status;
   if(String(dr.link||'').trim()!==String(p.link||'').trim()) m.link=String(dr.link||'').trim();
+  if('comprovante' in dr && !comprovantesIguais(dr.comprovante, p.comprovante)){
+    m.comprovante = dr.comprovante ? {nome:dr.comprovante.nome, tipo:dr.comprovante.tipo, dados:dr.comprovante.dados} : null;
+  }
   return m;
 }
 function rascunhoTemMudancas(d,p,dr){ if(!dr) return false; return Object.keys(calcularMudancas(d,p,dr)).length>0; }
+
+/* Gera as mini-tags de link e comprovante exibidas no banner */
+function miniTagsHTML(p, dr){
+  const lk = dr ? dr.link : p.link;
+  const comp = dr && ('comprovante' in dr) ? dr.comprovante : p.comprovante;
+  let out = '';
+  if(lk && String(lk).trim()) out += `<span class="tag-ico link" title="Possui link anexado">🔗 link</span>`;
+  if(comp) out += `<span class="tag-ico comp" title="Possui comprovante anexado">💰 pago</span>`;
+  return out ? `<div class="mini-tags">${out}</div>` : '';
+}
 
 function itemVencimentoHTML(d,p){
   const total=d.parcelas.length; const per=descricaoPeriodicidadeCurta(d); const cont=!!d.continuada;
@@ -1686,7 +1780,12 @@ function itemVencimentoHTML(d,p){
     <div class="item-resumo" data-acao="toggleDetalhes">
       <div class="info-esq">
         <div class="icone-tipo">${iconeStatus(st,cont)}</div>
-        <div class="texto-credencial"><b>${escapar(cr)}${ov?' ✎':''}</b><small>${escapar(de)}</small><span class="selo-status s-${st}">${rt}</span></div>
+        <div class="texto-credencial">
+          <b>${escapar(cr)}${ov?' ✎':''}</b>
+          <small>${escapar(de)}</small>
+          <span class="selo-status s-${st}">${rt}</span>
+          ${miniTagsHTML(p, dr)}
+        </div>
       </div>
       <div class="valor-area"><div class="valor-parcela">${formatarMoeda(vl)}</div><div class="seta">▾</div></div>
     </div>
@@ -1703,7 +1802,7 @@ function itemVencimentoHTML(d,p){
             <button type="button" class="btn-mini azul ${tl?'':'escondido'}" data-acao="abrirLink">🔗</button></div>
         </label>
       </div>
-      <div class="comprovante-linha">${comprovanteHTML(p)}</div>
+      <div class="comprovante-linha">${comprovanteHTML(p, dr)}</div>
       <div class="acoes-detalhes">
         <button type="button" class="btn-mini cinza grande" data-acao="cancelarEdicao">✕ Cancelar</button>
         <button type="button" class="btn-mini salvar grande" data-acao="salvarEdicao" ${tem?'':'disabled'}>💾 Salvar</button>
@@ -1742,6 +1841,19 @@ function atualizarEstadoEdicao(bl,d,p){
     const li=bl.querySelector('[data-campo="link"]'); const bl2=bl.querySelector('[data-acao="abrirLink"]');
     if(bl2&&li) bl2.classList.toggle('escondido',!li.value.trim());
     const cb=bl.querySelector('[data-campo="status"]'); if(cb) cb.className='combo st-'+dr.status;
+    /* Atualiza a área de comprovante para refletir o rascunho */
+    const cl=bl.querySelector('.comprovante-linha'); if(cl) cl.innerHTML=comprovanteHTML(p, dr);
+    /* Atualiza as mini-tags de link e comprovante */
+    const txtEl=bl.querySelector('.texto-credencial');
+    if(txtEl){
+      const oldTags=txtEl.querySelector('.mini-tags');
+      if(oldTags) oldTags.remove();
+      const novas=miniTagsHTML(p, dr);
+      if(novas){
+        const wrap=document.createElement('div'); wrap.innerHTML=novas;
+        txtEl.appendChild(wrap.firstChild);
+      }
+    }
   }
 }
 const listaDia=document.getElementById('listaDia');
@@ -1769,20 +1881,23 @@ listaDia.addEventListener('click',(e)=>{
     delete estado.rascunhos[p.id]; estado.expandidos.delete(p.id); recarregarListaDia(); return;
   }
   if(ac==='abrirLink'){ const inp=bl.querySelector('[data-campo="link"]'); const u=urlSegura(inp?inp.value:p.link); if(u) window.open(u,'_blank','noopener'); return; }
-  if(ac==='verComprovante'&&p.comprovante){ abrirComprovante(p.comprovante); return; }
-  if(ac==='removerComprovante'){ if(!confirm('Remover o comprovante?')) return; p.comprovante=null; salvar(); bl.querySelector('.comprovante-linha').innerHTML=comprovanteHTML(p); return; }
-});
-listaDia.addEventListener('change',async(e)=>{
-  const al=e.target; const bl=al.closest('[data-parcela]'); if(!bl) return;
-  const d=dividas.find(x=>x.id===bl.dataset.divida); const p=d&&d.parcelas.find(x=>x.id===bl.dataset.parcela); if(!p) return;
-  const cp=al.dataset.campo;
-  if(cp==='comprovante'){
-    const arq=al.files&&al.files[0]; if(!arq) return;
-    if(arq.size>2*1024*1024){ alert('Máx 2 MB.'); al.value=''; return; }
-    try{ const dados=await lerArquivo(arq); p.comprovante={nome:arq.name,tipo:arq.type,dados}; salvar(); bl.querySelector('.comprovante-linha').innerHTML=comprovanteHTML(p); }
-    catch(err){ console.error(err); alert('Erro ao ler arquivo.'); }
+  if(ac==='verComprovante'){
+    const dr=estado.rascunhos[p.id];
+    const comp = dr && ('comprovante' in dr) ? dr.comprovante : p.comprovante;
+    if(comp) abrirComprovante(comp);
     return;
   }
+  if(ac==='removerComprovante'){
+    if(!confirm('Remover o comprovante?')) return;
+    if(!estado.rascunhos[p.id]) estado.rascunhos[p.id]=criarRascunho(d,p);
+    estado.rascunhos[p.id].comprovante = null;
+    atualizarEstadoEdicao(bl,d,p);
+    return;
+  }
+});
+/* ============ Handlers de edição: input (instantâneo) + change (fallback) ============ */
+function tratarMudancaCampo(al, bl, d, p){
+  const cp=al.dataset.campo;
   if(!estado.rascunhos[p.id]) estado.rascunhos[p.id]=criarRascunho(d,p);
   const dr=estado.rascunhos[p.id];
   if(cp==='credor') dr.credor=al.value;
@@ -1792,6 +1907,32 @@ listaDia.addEventListener('change',async(e)=>{
   else if(cp==='status') dr.status=al.value;
   else if(cp==='link') dr.link=al.value;
   atualizarEstadoEdicao(bl,d,p);
+}
+listaDia.addEventListener('input',(e)=>{
+  const al=e.target; if(!al.dataset || !al.dataset.campo) return;
+  if(al.dataset.campo==='comprovante') return;
+  const bl=al.closest('[data-parcela]'); if(!bl) return;
+  const d=dividas.find(x=>x.id===bl.dataset.divida); const p=d&&d.parcelas.find(x=>x.id===bl.dataset.parcela); if(!p) return;
+  tratarMudancaCampo(al, bl, d, p);
+});
+listaDia.addEventListener('change',async(e)=>{
+  const al=e.target; const bl=al.closest('[data-parcela]'); if(!bl) return;
+  const d=dividas.find(x=>x.id===bl.dataset.divida); const p=d&&d.parcelas.find(x=>x.id===bl.dataset.parcela); if(!p) return;
+  const cp=al.dataset.campo;
+  if(cp==='comprovante'){
+    const arq=al.files&&al.files[0]; if(!arq) return;
+    if(arq.size>2*1024*1024){ alert('Máx 2 MB.'); al.value=''; return; }
+    try{
+      const dados=await lerArquivo(arq);
+      if(!estado.rascunhos[p.id]) estado.rascunhos[p.id]=criarRascunho(d,p);
+      estado.rascunhos[p.id].comprovante = { nome:arq.name, tipo:arq.type, dados };
+      atualizarEstadoEdicao(bl,d,p);
+      al.value='';
+    }catch(err){ console.error(err); alert('Erro ao ler arquivo.'); }
+    return;
+  }
+  /* Já tratado no input, mas mantemos para selects/date que só disparam change */
+  tratarMudancaCampo(al, bl, d, p);
 });
 document.getElementById('voltarCalendario').addEventListener('click',()=>{
   if(temRascunhosPendentes()){
@@ -2154,178 +2295,6 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
   btn.textContent=ta; btn.disabled=false;
 });
 
-document.getElementById('btnTestarSalvar').addEventListener('click',async()=>{
-  const ow=campoGHOwner.value.trim(); const rp=campoGHRepo.value.trim();
-  const tk=campoGHToken.value.trim(); const br=campoGHBranch.value.trim()||'main';
-  const pt=campoGHPATH.value.trim()||'dados/dividas.json';
-  if(!ow||!rp||!tk){ alert('Preencha usuário, repositório e token.'); return; }
-  const btn=document.getElementById('btnTestarSalvar'); const ta=btn.textContent;
-  btn.textContent='⏳ Testando PUT...'; btn.disabled=true;
-  const out=document.getElementById('diagResultado');
-  out.classList.remove('escondido');
-  const L=[]; const p=(t)=>L.push(t);
-  p(`<b>🧪 Teste de escrita (PUT)</b>`);
-  p(`Repositório: ${ow}/${rp}`);
-  p(`Branch: ${br}`);
-  p(`Arquivo: ${pt}`);
-  p('');
-
-  try{
-    const api = `https://api.github.com/repos/${ow}/${rp}/contents/${pt}`;
-
-    p(`<b>1)</b> GET para obter SHA atual...`);
-    const getR = await fetch(api + `?ref=${encodeURIComponent(br)}`, {
-      headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
-    });
-    let sha = null;
-    if(getR.ok){
-      const j = await getR.json();
-      sha = j.sha;
-      p(`<span class="ok">   ✅ Arquivo encontrado. SHA: ${sha}</span>`);
-    } else if(getR.status===404){
-      p(`<span class="aviso">   ⚠️ Arquivo não existe. PUT vai criar.</span>`);
-    } else {
-      p(`<span class="erro">   ❌ GET falhou: HTTP ${getR.status}</span>`);
-      const t = await getR.text();
-      p(`   Resposta: ${escapar(t.slice(0,300))}`);
-    }
-    p('');
-
-    p(`<b>2)</b> PUT com conteúdo mínimo...`);
-    const testContent = JSON.stringify([{_test:true, ts:new Date().toISOString(), autor:'auto'}]);
-    const body = {
-      message: `Teste automático — ${new Date().toLocaleString('pt-BR')}`,
-      content: b64EncodeUTF8(testContent),
-      branch: br
-    };
-    if(sha) body.sha = sha;
-
-    const putR = await fetch(api, {
-      method:'PUT',
-      headers:{
-        'Authorization':`Bearer ${tk}`,
-        'Accept':'application/vnd.github+json',
-        'X-GitHub-Api-Version':'2022-11-28',
-        'Content-Type':'application/json'
-      },
-      body: JSON.stringify(body)
-    });
-
-    if(putR.ok){
-      const j = await putR.json();
-      p(`<span class="ok">   ✅ PUT funcionou!</span>`);
-      p(`   Commit: ${j.commit?.sha || '—'}`);
-      p(`   URL: ${j.content?.html_url || '—'}`);
-      p('');
-      p(`<span class="ok"><b>🎉 A escrita está funcionando!</b></span>`);
-      p(`Se o salvamento normal ainda falhar, o problema é o TAMANHO do JSON.`);
-      p(`Tamanho atual dos dados: ${formatarBytes(new Blob([JSON.stringify(dividas)]).size)}`);
-      out.innerHTML = L.join('\n');
-      alert('✅ Teste de escrita passou!\n\nO salvamento normal deve funcionar.');
-    } else {
-      const txt = await putR.text();
-      let msgErro = '';
-      try { msgErro = JSON.parse(txt).message || txt; } catch(_) { msgErro = txt; }
-      p(`<span class="erro">   ❌ PUT falhou: HTTP ${putR.status}</span>`);
-      p(`   Mensagem: ${escapar(msgErro)}`);
-      p('');
-      p(`<b>Diagnóstico provável:</b>`);
-      if(putR.status===401) p(`<span class="erro">Token inválido.</span>`);
-      else if(putR.status===403) p(`<span class="erro">Token SEM permissão "Contents: Read and write".</span>`);
-      else if(putR.status===404) p(`<span class="erro">Repositório/arquivo não encontrado.</span>`);
-      else if(putR.status===409) p(`<span class="erro">Conflito — SHA desatualizado.</span>`);
-      else if(putR.status===422) p(`<span class="erro">Dados inválidos. Pode ser arquivo muito grande.</span>`);
-      else p(`<span class="erro">Erro ${putR.status}.</span>`);
-      p('');
-      p(`<b>Resposta completa do GitHub:</b>`);
-      p(escapar(txt.slice(0,600)));
-      out.innerHTML = L.join('\n');
-      alert(`❌ Teste de escrita falhou (HTTP ${putR.status}).\n\n${msgErro}`);
-    }
-  }catch(e){
-    p(`<span class="erro">❌ Erro de rede: ${e.message}</span>`);
-    out.innerHTML = L.join('\n');
-    alert('❌ Erro de rede: ' + e.message);
-  }
-  btn.textContent=ta; btn.disabled=false;
-});
-
-document.getElementById('btnDiagnostico').addEventListener('click',async()=>{
-  const ow=campoGHOwner.value.trim(); const rp=campoGHRepo.value.trim();
-  const br=campoGHBranch.value.trim()||'main'; const pt=campoGHPATH.value.trim()||'dados/dividas.json';
-  const tk=campoGHToken.value.trim();
-  const out=document.getElementById('diagResultado');
-  out.classList.remove('escondido');
-  out.innerHTML='⏳ Rodando...\n';
-  const L=[]; const p=(t)=>L.push(t);
-
-  p(`<b>📋 Configuração</b>`);
-  p(`• Usuário: ${ow||'(vazio)'}`);
-  p(`• Repositório: ${rp||'(vazio)'}`);
-  p(`• Branch: ${br}`);
-  p(`• Arquivo: ${pt}`);
-  p(`• Token: ${tk ? tk.length+' chars' : '(vazio)'}`);
-  p('');
-  if(!ow||!rp||!tk){ p(`<span class="erro">❌ Preencha tudo.</span>`); out.innerHTML=L.join('\n'); return; }
-
-  p(`<b>1️⃣ Acesso ao repositório</b>`);
-  try{
-    const r=await fetch(`https://api.github.com/repos/${ow}/${rp}`,{
-      headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}
-    });
-    if(r.ok){
-      const info=await r.json();
-      p(`<span class="ok">✅ ${info.full_name}</span>`);
-      p(`• Privado: ${info.private?'sim':'não'}`);
-      p(`• Push: ${info.permissions?.push?'<span class="ok">SIM</span>':'<span class="erro">NÃO</span>'}`);
-    } else if(r.status===401){ p(`<span class="erro">❌ 401 — Token inválido.</span>`); }
-    else if(r.status===404){ p(`<span class="erro">❌ 404 — Repositório não encontrado.</span>`); }
-    else { p(`<span class="erro">❌ HTTP ${r.status}</span>`); }
-  }catch(e){ p(`<span class="erro">❌ Rede: ${e.message}</span>`); }
-  p('');
-
-  p(`<b>2️⃣ Arquivo ${pt}</b>`);
-  try{
-    const r=await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pt}?ref=${br}`,{
-      headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json'}
-    });
-    if(r.status===200){
-      const info=await r.json();
-      const texto=b64DecodeUTF8(info.content||'');
-      p(`<span class="ok">✅ Existe (${info.size} bytes)</span>`);
-      if(texto.trim()===''){ p(`• Vazio — tratado como []`); }
-      else {
-        try{ const j=JSON.parse(texto.replace(/^\uFEFF/,'').trim());
-          if(Array.isArray(j)) p(`<span class="ok">• JSON válido — ${j.length} dívidas</span>`);
-          else p(`<span class="aviso">• JSON válido mas não array</span>`);
-        }catch(err){ p(`<span class="erro">• JSON inválido</span>`); }
-      }
-    } else if(r.status===404){ p(`<span class="aviso">⚠️ Ainda não existe.</span>`); }
-    else { p(`<span class="erro">❌ HTTP ${r.status}</span>`); }
-  }catch(e){ p(`<span class="erro">❌ ${e.message}</span>`); }
-  p('');
-
-  p(`<b>3️⃣ Tamanho dos dados locais</b>`);
-  try{
-    const t=JSON.stringify(dividas,null,2);
-    const b=new Blob([t]).size;
-    p(`• Dívidas: ${dividas.length}`);
-    p(`• Parcelas: ${dividas.reduce((s,d)=>s+d.parcelas.length,0)}`);
-    p(`• Comprovantes: ${dividas.reduce((s,d)=>s+d.parcelas.filter(p=>p.comprovante).length,0)}`);
-    p(`• Tamanho: ${formatarBytes(b)}`);
-    if(b>LIMITE_GITHUB_BYTES) p(`<span class="erro">❌ Acima do limite! Remova comprovantes.</span>`);
-    else p(`<span class="ok">✅ Dentro do limite.</span>`);
-  }catch(e){ p(`<span class="erro">❌ ${e.message}</span>`); }
-
-  out.innerHTML=L.join('\n');
-});
-
-document.getElementById('btnRemoverConfig').addEventListener('click',()=>{
-  if(!confirm('Remover config do GitHub?')) return;
-  ghConfig={owner:'',repo:'pagamentos',branch:'main',path:'dados/dividas.json',token:'',autoSync:true};
-  salvarConfigGH(); setStatusSync('☁️ Offline',''); atualizarConfigUI();
-});
-
 document.getElementById('btnSyncAgora').addEventListener('click',async()=>{
   if(!ghConfigurado()){ alert('Configure primeiro.'); abrirConfig(); return; }
   const ok=await salvarNoGitHub();
@@ -2343,12 +2312,93 @@ document.getElementById('btnBaixarRemoto').addEventListener('click',async()=>{
 });
 
 function lerArquivo(a){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(a); }); }
-function abrirComprovante(c){ try{
-  const [mt,b64]=c.dados.split(','); const mime=(mt.match(/data:(.*?);/)||[, 'application/octet-stream'])[1];
-  const bin=atob(b64); const by=new Uint8Array(bin.length); for(let i=0;i<bin.length;i++) by[i]=bin.charCodeAt(i);
-  const u=URL.createObjectURL(new Blob([by],{type:mime})); window.open(u,'_blank','noopener');
-  setTimeout(()=>URL.revokeObjectURL(u),60000);
-}catch(e){ console.error(e); alert('Não foi possível abrir.'); } }
+
+/* =========================================================
+   MODAL DE COMPROVANTE — exibição inline sempre à frente
+   ========================================================= */
+let compBlobUrl = null;
+let compDados = null;
+
+function limparCompBlob(){
+  if(compBlobUrl){ try{ URL.revokeObjectURL(compBlobUrl); }catch(_){} compBlobUrl = null; }
+}
+function dadosParaBlobUrl(dados){
+  const [mt, b64] = String(dados).split(',');
+  const mime = (mt.match(/data:(.*?);/) || [, 'application/octet-stream'])[1];
+  const bin = atob(b64);
+  const by = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) by[i] = bin.charCodeAt(i);
+  const blob = new Blob([by], { type: mime });
+  return { url: URL.createObjectURL(blob), mime, blob };
+}
+function abrirComprovante(c){
+  if(!c || !c.dados){ alert('Comprovante indisponível.'); return; }
+  compDados = c;
+  limparCompBlob();
+  let info;
+  try{ info = dadosParaBlobUrl(c.dados); }
+  catch(e){ console.error(e); alert('Não foi possível abrir o comprovante.'); return; }
+  compBlobUrl = info.url;
+
+  document.getElementById('compNomeArquivo').textContent = c.nome || 'Comprovante';
+
+  const corpo = document.getElementById('compCorpo');
+  corpo.innerHTML = '';
+
+  if(info.mime.startsWith('image/')){
+    const img = document.createElement('img');
+    img.src = info.url;
+    img.alt = c.nome || 'Comprovante';
+    corpo.appendChild(img);
+  } else if(info.mime === 'application/pdf'){
+    const iframe = document.createElement('iframe');
+    iframe.src = info.url;
+    iframe.title = c.nome || 'Comprovante';
+    corpo.appendChild(iframe);
+  } else {
+    corpo.innerHTML = `<div style="color:#cbd5e1;text-align:center;padding:20px;font-size:.9rem">
+      Pré-visualização indisponível para este tipo de arquivo.<br><br>
+      Use o botão ⬇ para baixar ou ↗ para abrir em nova aba.
+    </div>`;
+  }
+
+  abrirModal('modalComprovante');
+}
+function fecharComprovante(){
+  fecharModal('modalComprovante');
+  document.getElementById('compCorpo').innerHTML = '';
+  limparCompBlob();
+  compDados = null;
+}
+document.getElementById('compFechar').addEventListener('click',fecharComprovante);
+document.getElementById('compAbrirAba').addEventListener('click',()=>{
+  if(compBlobUrl) window.open(compBlobUrl, '_blank', 'noopener');
+});
+document.getElementById('compBaixar').addEventListener('click',()=>{
+  if(!compDados) return;
+  try{
+    const [mt, b64] = String(compDados.dados).split(',');
+    const mime = (mt.match(/data:(.*?);/) || [, 'application/octet-stream'])[1];
+    const bin = atob(b64);
+    const by = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) by[i] = bin.charCodeAt(i);
+    const blob = new Blob([by], { type: mime });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = compDados.nome || 'comprovante';
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+  }catch(e){ console.error(e); alert('Erro ao baixar.'); }
+});
+document.getElementById('modalComprovante').addEventListener('click',(e)=>{
+  if(e.target.id === 'modalComprovante') fecharComprovante();
+});
+document.addEventListener('keydown',(e)=>{
+  if(e.key === 'Escape' && !document.getElementById('modalComprovante').classList.contains('escondido')){
+    fecharComprovante();
+  }
+});
+
 function atualizarAtrasos(sil=false){
   const hj=hojeIso(); let a=0;
   dividas.forEach(d=>d.parcelas.forEach(p=>{ if(p.status==='em_aberto'&&p.vencimento&&p.vencimento<hj){ p.status='em_atraso'; a++; } }));
