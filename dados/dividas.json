@@ -1864,7 +1864,7 @@
     "credor": "Vivo",
     "descricao": "Internet Fibra",
     "valorTotal": 0,
-    "valorParcela": 120,
+    "valorParcela": 130.99,
     "modo": "continua",
     "periodicidade": "mensal",
     "diaEspecifico": "10",
@@ -1889,7 +1889,7 @@
       {
         "id": "mu9o44rfqrvoe4",
         "numero": 2,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2026-10-10",
         "link": "",
         "status": "em_aberto",
@@ -1899,7 +1899,7 @@
       {
         "id": "mu9o44rf70fahy",
         "numero": 3,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2026-11-10",
         "link": "",
         "status": "em_aberto",
@@ -1909,7 +1909,7 @@
       {
         "id": "mu9o44rfsablsy",
         "numero": 4,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2026-12-10",
         "link": "",
         "status": "em_aberto",
@@ -1919,7 +1919,7 @@
       {
         "id": "mu9o44rff120k3",
         "numero": 5,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-01-10",
         "link": "",
         "status": "em_aberto",
@@ -1929,7 +1929,7 @@
       {
         "id": "mu9o44rf5vo80v",
         "numero": 6,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-02-10",
         "link": "",
         "status": "em_aberto",
@@ -1939,7 +1939,7 @@
       {
         "id": "mu9o44rf7onmlw",
         "numero": 7,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-03-10",
         "link": "",
         "status": "em_aberto",
@@ -1949,7 +1949,7 @@
       {
         "id": "mu9o44rfdokxs1",
         "numero": 8,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-04-10",
         "link": "",
         "status": "em_aberto",
@@ -1959,7 +1959,7 @@
       {
         "id": "mu9o44rf3v9wq5",
         "numero": 9,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-05-10",
         "link": "",
         "status": "em_aberto",
@@ -1969,7 +1969,7 @@
       {
         "id": "mu9o44rf10nuiu",
         "numero": 10,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-06-10",
         "link": "",
         "status": "em_aberto",
@@ -1979,7 +1979,7 @@
       {
         "id": "mu9o44rf781vec",
         "numero": 11,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-07-10",
         "link": "",
         "status": "em_aberto",
@@ -1989,7 +1989,7 @@
       {
         "id": "mu9o44rfrtcgd0",
         "numero": 12,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-08-10",
         "link": "",
         "status": "em_aberto",
@@ -1999,7 +1999,7 @@
       {
         "id": "mu9o44rfxzd90d",
         "numero": 13,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-09-10",
         "link": "",
         "status": "em_aberto",
@@ -2009,7 +2009,7 @@
       {
         "id": "mu9o44rfguh3kk",
         "numero": 14,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-10-10",
         "link": "",
         "status": "em_aberto",
@@ -2019,7 +2019,7 @@
       {
         "id": "mu9o44rfdn4zum",
         "numero": 15,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-11-10",
         "link": "",
         "status": "em_aberto",
@@ -2029,7 +2029,7 @@
       {
         "id": "mu9o44rfdt7ywl",
         "numero": 16,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2027-12-10",
         "link": "",
         "status": "em_aberto",
@@ -2039,7 +2039,7 @@
       {
         "id": "mu9o44rfth6yma",
         "numero": 17,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-01-10",
         "link": "",
         "status": "em_aberto",
@@ -2049,7 +2049,7 @@
       {
         "id": "mu9o44rfy8mmyv",
         "numero": 18,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-02-10",
         "link": "",
         "status": "em_aberto",
@@ -2059,7 +2059,7 @@
       {
         "id": "mu9o44rfcs174f",
         "numero": 19,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-03-10",
         "link": "",
         "status": "em_aberto",
@@ -2069,7 +2069,7 @@
       {
         "id": "mu9o44rfdgvy82",
         "numero": 20,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-04-10",
         "link": "",
         "status": "em_aberto",
@@ -2079,7 +2079,7 @@
       {
         "id": "mu9o44rfm9q5vz",
         "numero": 21,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-05-10",
         "link": "",
         "status": "em_aberto",
@@ -2089,7 +2089,7 @@
       {
         "id": "mu9o44rfzvuohf",
         "numero": 22,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-06-10",
         "link": "",
         "status": "em_aberto",
@@ -2099,7 +2099,7 @@
       {
         "id": "mu9o44rfgsatj6",
         "numero": 23,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-07-10",
         "link": "",
         "status": "em_aberto",
@@ -2109,7 +2109,7 @@
       {
         "id": "mu9o44rfq8m0mw",
         "numero": 24,
-        "valor": 120,
+        "valor": 130.99,
         "vencimento": "2028-08-10",
         "link": "",
         "status": "em_aberto",
