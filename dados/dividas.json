@@ -3148,7 +3148,7 @@
         "numero": 1,
         "valor": 275,
         "vencimento": "2026-09-20",
-        "link": "",
+        "link": "Nao foi pago",
         "status": "outros",
         "comprovante": null,
         "descricaoOverride": "Condomínio mensal (Não foi pago)"
