@@ -3150,7 +3150,8 @@
         "vencimento": "2026-09-20",
         "link": "",
         "status": "outros",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "Condomínio mensal (Não foi pago)"
       },
       {
         "id": "mue5kdl4aaj04k",
