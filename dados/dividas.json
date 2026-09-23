@@ -3125,5 +3125,240 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "mue5kdl4jgamxo",
+    "credor": "Domínio Administração",
+    "descricao": "Condomínio mensal",
+    "valorTotal": 0,
+    "valorParcela": 275,
+    "modo": "continua",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": true,
+    "ancora": "2026-09-20",
+    "qtdParcelas": 24,
+    "primeiroVencimento": "2026-09-20",
+    "ultimoVencimento": "2028-08-20",
+    "criadoEm": "2026-09-23T13:42:35.464Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mue5kdl4d1q7hn",
+        "numero": 1,
+        "valor": 275,
+        "vencimento": "2026-09-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4aaj04k",
+        "numero": 2,
+        "valor": 275,
+        "vencimento": "2026-10-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4jfec06",
+        "numero": 3,
+        "valor": 275,
+        "vencimento": "2026-11-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4l2232k",
+        "numero": 4,
+        "valor": 275,
+        "vencimento": "2026-12-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4f153b6",
+        "numero": 5,
+        "valor": 275,
+        "vencimento": "2027-01-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl407mnea",
+        "numero": 6,
+        "valor": 275,
+        "vencimento": "2027-02-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl413rcfx",
+        "numero": 7,
+        "valor": 275,
+        "vencimento": "2027-03-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4qgxrpv",
+        "numero": 8,
+        "valor": 275,
+        "vencimento": "2027-04-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4kvrtxm",
+        "numero": 9,
+        "valor": 275,
+        "vencimento": "2027-05-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4qwjr4n",
+        "numero": 10,
+        "valor": 275,
+        "vencimento": "2027-06-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4fwr3sm",
+        "numero": 11,
+        "valor": 275,
+        "vencimento": "2027-07-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl42bmvec",
+        "numero": 12,
+        "valor": 275,
+        "vencimento": "2027-08-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4twy0iq",
+        "numero": 13,
+        "valor": 275,
+        "vencimento": "2027-09-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4hvelev",
+        "numero": 14,
+        "valor": 275,
+        "vencimento": "2027-10-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl42gyd0r",
+        "numero": 15,
+        "valor": 275,
+        "vencimento": "2027-11-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4piebgr",
+        "numero": 16,
+        "valor": 275,
+        "vencimento": "2027-12-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4lxdk04",
+        "numero": 17,
+        "valor": 275,
+        "vencimento": "2028-01-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4yxrwxj",
+        "numero": 18,
+        "valor": 275,
+        "vencimento": "2028-02-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4m2n3br",
+        "numero": 19,
+        "valor": 275,
+        "vencimento": "2028-03-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4m23zmi",
+        "numero": 20,
+        "valor": 275,
+        "vencimento": "2028-04-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4cmrarx",
+        "numero": 21,
+        "valor": 275,
+        "vencimento": "2028-05-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4zfac71",
+        "numero": 22,
+        "valor": 275,
+        "vencimento": "2028-06-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl4dwr6jo",
+        "numero": 23,
+        "valor": 275,
+        "vencimento": "2028-07-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mue5kdl40eefrb",
+        "numero": 24,
+        "valor": 275,
+        "vencimento": "2028-08-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
