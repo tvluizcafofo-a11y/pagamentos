@@ -2859,7 +2859,11 @@
         "vencimento": "2026-09-18",
         "link": "",
         "status": "pago",
-        "comprovante": null
+        "comprovante": {
+          "nome": "IMG-20260925-WA0013.jpg",
+          "tipo": "image/jpeg",
+          "arquivo": "dados/comprovantes/muh295hkxi8co5.jpg"
+        }
       },
       {
         "id": "mu9oox4eugrr7i",
