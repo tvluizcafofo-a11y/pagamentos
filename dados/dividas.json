@@ -943,10 +943,10 @@
       {
         "id": "mu9nnscugsxtzy",
         "numero": 1,
-        "valor": 119.9,
+        "valor": 107.01,
         "vencimento": "2026-09-25",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null
       },
       {
