@@ -997,6 +997,14 @@
       </ol>
       <p style="margin-top:12px"><b>📁 Comprovantes:</b> as imagens são salvas separadamente em <code>dados/comprovantes/</code> para manter o JSON leve.</p>
     </div>
+
+    <div class="bloco-acoes" style="margin-top:14px">
+      <h3>📄 Documentação</h3>
+      <p class="desc">Consulte o manual completo do sistema em PDF.</p>
+      <div class="acoes">
+        <button type="button" class="btn btn-primario" id="btnVerDocumentacao">📖 Abrir documentação</button>
+      </div>
+    </div>
   </section>
 
 </div>
@@ -1061,7 +1069,7 @@
 const CHAVE = 'sistemaPagamentos.v2';
 const GH_KEY = 'sistemaPagamentos.github';
 const FILTRO_KEY = 'sistemaPagamentos.filtroResumo';
-const OCULTO_KEY = 'sistemaPagamentos.ocultarHoje'; // localStorage (guarda a data ISO em que foi marcado)
+const OCULTO_KEY = 'sistemaPagamentos.ocultarHoje';
 const PARCELAS_INICIAIS_CONTINUA = 24;
 const PARCELAS_MIN_FUTURAS = 12;
 const LIMITE_GITHUB_BYTES = 900 * 1024;
@@ -1110,10 +1118,6 @@ function extensaoDoMime(mime){
   return sub ? sub.replace(/[^a-z0-9]/gi,'') : 'bin';
 }
 
-/* =========================================================
-   FLAG "OCULTAR HOJE" — guarda a DATA em que foi marcado.
-   Só oculta se a data salva for HOJE. No dia seguinte, volta ao normal.
-   ========================================================= */
 function getDataOcultarHoje(){
   try{ return localStorage.getItem(OCULTO_KEY) || null; }
   catch(e){ return null; }
@@ -1124,7 +1128,6 @@ function setDataOcultarHoje(iso){
     else localStorage.removeItem(OCULTO_KEY);
   }catch(e){}
 }
-/* Verdadeiro somente se o usuário marcou "não mostrar hoje" NA DATA DE HOJE */
 function estaOcultandoHoje(){
   return getDataOcultarHoje() === hojeIso();
 }
@@ -2010,7 +2013,6 @@ const listaDia=document.getElementById('listaDia');
 listaDia.addEventListener('click',(e)=>{
   const b=e.target.closest('[data-acao]'); if(!b) return; const ac=b.dataset.acao;
 
-  /* Botão "Mostrar mesmo assim" (quando oculto) */
   if(ac==='mostrarHoje'){
     setDataOcultarHoje(null);
     recarregarListaDia();
@@ -2053,8 +2055,6 @@ listaDia.addEventListener('click',(e)=>{
     return;
   }
 });
-/* Checkbox "não mostrar hoje" — guarda a DATA de hoje em localStorage.
-   Ao marcar, salva hojeIso(). Ao desmarcar, limpa. Só esconde se a data salva for HOJE. */
 listaDia.addEventListener('change',(e)=>{
   if(e.target && e.target.id === 'checkNaoMostrarHoje'){
     setDataOcultarHoje(e.target.checked ? hojeIso() : null);
@@ -2479,6 +2479,22 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
   btn.textContent=ta; btn.disabled=false;
 });
 
+/* Abre a documentação em PDF (nova aba / visualizador nativo) */
+document.getElementById('btnVerDocumentacao').addEventListener('click', ()=>{
+  const url = 'documentacao.pdf';
+  const win = window.open(url, '_blank', 'noopener');
+  if(!win || win.closed || typeof win.closed === 'undefined'){
+    const a = document.createElement('a');
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.download = 'documentacao.pdf';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{ document.body.removeChild(a); }, 1500);
+  }
+});
+
 document.getElementById('btnSyncAgora').addEventListener('click',async()=>{
   if(!ghConfigurado()){ alert('Configure primeiro.'); abrirConfig(); return; }
   const ok=await salvarNoGitHub();
@@ -2594,39 +2610,65 @@ function tituloCompartilhamento(){
 function textoCompartilhamento(){
   return 'Segue o comprovante de pagamento.';
 }
+function comprovanteParaFile(){
+  if(!compDados || !compDados.dados) return null;
+  try{
+    const [mt, b64] = String(compDados.dados).split(',');
+    const mime = (mt.match(/data:(.*?);/) || [, 'application/octet-stream'])[1];
+    const bin = atob(b64);
+    const by = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) by[i] = bin.charCodeAt(i);
+    const blob = new Blob([by], { type: mime });
+    const nome = compDados.nome || ('comprovante.' + extensaoDoMime(mime));
+    return new File([blob], nome, { type: mime });
+  }catch(e){
+    console.error('[Compartilhar] Erro ao montar File:', e);
+    return null;
+  }
+}
 document.getElementById('compCompartilhar').addEventListener('click',async()=>{
   if(!compDados){ alert('Nenhum comprovante aberto.'); return; }
-  const antigo = document.getElementById('compMenuCompart');
-  if(antigo){ antigo.remove(); return; }
+
+  if(!compDados.dados && compArquivoRepo){
+    setStatusSync('☁️ Baixando comprovante...', 'carregando');
+    const dl = await downloadComprovanteGitHub(compArquivoRepo);
+    if(!dl){ alert('Não foi possível carregar o comprovante para compartilhar.'); return; }
+    compDados = { ...compDados, dados: dl };
+  }
+
+  const file = comprovanteParaFile();
+  if(!file){ alert('Comprovante sem dados para compartilhar.'); return; }
 
   try{
-    if(navigator.share && compBlobUrl){
-      const blob = compDados.dados ? (await (await fetch(compBlobUrl)).blob()) : null;
-      const nome = compDados.nome || 'comprovante';
-      if(blob && navigator.canShare){
-        const file = new File([blob], nome, { type: blob.type || 'application/octet-stream' });
-        if(navigator.canShare({ files: [file] })){
-          await navigator.share({ files: [file], title: tituloCompartilhamento(), text: textoCompartilhamento() });
-          return;
-        }
-      }
-      await navigator.share({ title: tituloCompartilhamento(), text: textoCompartilhamento(), url: compBlobUrl });
+    if(navigator.share && navigator.canShare && navigator.canShare({ files: [file] })){
+      await navigator.share({
+        files: [file],
+        title: tituloCompartilhamento(),
+        text: textoCompartilhamento()
+      });
       return;
+    }
+    if(navigator.share){
+      try{
+        await navigator.share({ files: [file], title: tituloCompartilhamento(), text: textoCompartilhamento() });
+        return;
+      }catch(_){ }
     }
   }catch(err){
     if(err && err.name === 'AbortError') return;
     console.warn('[Compartilhar] Web Share API falhou:', err);
   }
 
+  const antigo = document.getElementById('compMenuCompart');
+  if(antigo){ antigo.remove(); return; }
+
   const menu = document.createElement('div');
   menu.className = 'comp-menu-compart';
   menu.id = 'compMenuCompart';
-  const link = compBlobUrl || (compArquivoRepo ? urlRawArquivo(compArquivoRepo) : '');
-  const texto = encodeURIComponent(`${textoCompartilhamento()}\n${link}`);
   menu.innerHTML = `
     <button type="button" data-rede="whatsapp"><span class="icone">🟢</span> WhatsApp</button>
-    <button type="button" data-rede="email"><span class="icone">✉️</span> E-mail</button>
-    <button type="button" data-rede="copiar"><span class="icone">🔗</span> Copiar link</button>
+    <button type="button" data-rede="email"><span class="icone">✉️</span> E-mail (anexa)</button>
+    <button type="button" data-rede="baixar"><span class="icone">⬇</span> Baixar arquivo</button>
     <button type="button" data-rede="fechar"><span class="icone">✕</span> Cancelar</button>
   `;
   document.querySelector('.comp-caixa').appendChild(menu);
@@ -2634,13 +2676,37 @@ document.getElementById('compCompartilhar').addEventListener('click',async()=>{
   menu.addEventListener('click',async(e)=>{
     const b = e.target.closest('[data-rede]'); if(!b) return;
     const rede = b.dataset.rede;
+
     if(rede === 'whatsapp'){
-      window.open(`https://wa.me/?text=${texto}`, '_blank', 'noopener');
+      try{
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url; a.download = file.name;
+        document.body.appendChild(a); a.click();
+        setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+      }catch(_){}
+      setTimeout(()=>{
+        window.open('https://wa.me/?text=' + encodeURIComponent(textoCompartilhamento()), '_blank', 'noopener');
+      }, 400);
     } else if(rede === 'email'){
-      window.location.href = `mailto:?subject=${encodeURIComponent(tituloCompartilhamento())}&body=${texto}`;
-    } else if(rede === 'copiar'){
-      try{ await navigator.clipboard.writeText(link); alert('Link copiado!'); }
-      catch(_){ alert('Não foi possível copiar.'); }
+      try{
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url; a.download = file.name;
+        document.body.appendChild(a); a.click();
+        setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+      }catch(_){}
+      setTimeout(()=>{
+        window.location.href = `mailto:?subject=${encodeURIComponent(tituloCompartilhamento())}&body=${encodeURIComponent(textoCompartilhamento() + '\n\n(Anexe o arquivo que foi baixado.)')}`;
+      }, 400);
+    } else if(rede === 'baixar'){
+      try{
+        const url = URL.createObjectURL(file);
+        const a = document.createElement('a');
+        a.href = url; a.download = file.name;
+        document.body.appendChild(a); a.click();
+        setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+      }catch(_){ alert('Não foi possível baixar.'); }
     }
     menu.remove();
   });
@@ -2724,9 +2790,6 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
   atualizarListaCredores(); renderCalendario(); atualizarAtrasos(true);
 
   const hj = hojeIso();
-  /* Só abre a tela de hoje automaticamente se:
-     - há vencimentos hoje
-     - E o usuário NÃO marcou "não mostrar hoje" NA DATA DE HOJE */
   if(vencimentosNoDia(hj) > 0 && !estaOcultandoHoje()){
     setTimeout(()=>abrirDia(hj), 120);
   }
