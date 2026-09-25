@@ -1417,7 +1417,11 @@
         "vencimento": "2026-09-07",
         "link": "",
         "status": "pago",
-        "comprovante": null
+        "comprovante": {
+          "nome": "Comprovante_25-09-2026_134445.png",
+          "tipo": "image/png",
+          "arquivo": "dados/comprovantes/muh6z3gvmsd2kf.png"
+        }
       },
       {
         "id": "mu9ny94a1sk3u8",
