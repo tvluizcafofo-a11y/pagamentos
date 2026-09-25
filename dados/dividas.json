@@ -3474,5 +3474,33 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "mugvjn1otkl0bh",
+    "credor": "Copasa",
+    "descricao": "Água Cisplatina (Total - R$ 397,97)",
+    "valorTotal": 0,
+    "valorParcela": 132.69,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-09-15",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-09-15",
+    "ultimoVencimento": "2026-09-15",
+    "criadoEm": "2026-09-25T11:25:23.436Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mugvjn1ov4j758",
+        "numero": 1,
+        "valor": 132.69,
+        "vencimento": "2026-09-15",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
