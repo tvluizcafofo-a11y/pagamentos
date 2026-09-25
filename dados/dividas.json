@@ -1887,7 +1887,11 @@
         "vencimento": "2026-09-10",
         "link": "",
         "status": "pago",
-        "comprovante": null,
+        "comprovante": {
+          "nome": "Comprovante_25-09-2026_132958.png",
+          "tipo": "image/png",
+          "arquivo": "dados/comprovantes/muh6lq8rmm8b4u.png"
+        },
         "descricaoOverride": "Vivo Celular"
       },
       {
