@@ -2481,14 +2481,14 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
 
 /* Abre a documentação em PDF (nova aba / visualizador nativo) */
 document.getElementById('btnVerDocumentacao').addEventListener('click', ()=>{
-  const url = 'documentacao.pdf';
+  const url = 'documentacao.PDF';
   const win = window.open(url, '_blank', 'noopener');
   if(!win || win.closed || typeof win.closed === 'undefined'){
     const a = document.createElement('a');
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.download = 'documentacao.pdf';
+    a.download = 'documentacao.PDF';
     document.body.appendChild(a);
     a.click();
     setTimeout(()=>{ document.body.removeChild(a); }, 1500);
