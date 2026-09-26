@@ -29,11 +29,9 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muixf8bho1faen",
           "nome": "IPTU-ANHANGAI - 15-09-2026.jpeg",
           "tipo": "image/jpeg",
-          "ext": "jpg",
-          "enviado": true
+          "arquivo": "dados/comprovantes/muh07kq4uvgtbp.jpg"
         }
       },
       {
@@ -2184,11 +2182,9 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muixjhg1dt6n04",
           "nome": "Origo-10.09.26.jpeg",
           "tipo": "image/jpeg",
-          "ext": "jpg",
-          "enviado": true
+          "arquivo": "dados/comprovantes/muh07msqwxvcsn.jpg"
         }
       },
       {
@@ -2425,11 +2421,9 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muixgxqc03bso1",
           "nome": "CartaoXP-15.09.26.jpeg",
           "tipo": "image/jpeg",
-          "ext": "jpg",
-          "enviado": true
+          "arquivo": "dados/comprovantes/muh07ogbzsjl6u.jpg"
         }
       },
       {
