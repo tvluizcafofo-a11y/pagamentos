@@ -2421,9 +2421,11 @@
         "link": "",
         "status": "pago",
         "comprovante": {
+          "id": "muixgxqc03bso1",
           "nome": "CartaoXP-15.09.26.jpeg",
           "tipo": "image/jpeg",
-          "arquivo": "dados/comprovantes/muh07ogbzsjl6u.jpg"
+          "ext": "jpg",
+          "enviado": true
         }
       },
       {
