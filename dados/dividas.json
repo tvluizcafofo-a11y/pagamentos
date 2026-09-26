@@ -10,7 +10,7 @@
     "primeiroVencimento": "2026-08-15",
     "ultimoVencimento": "2026-12-15",
     "criadoEm": "2026-09-19T13:53:45.440Z",
-    "aberto": true,
+    "aberto": false,
     "parcelas": [
       {
         "id": "mu8g7bvjj3scd3",
@@ -2183,13 +2183,7 @@
         "vencimento": "2026-09-10",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "id": "muixjhg1dt6n04",
-          "nome": "Origo-10.09.26.jpeg",
-          "tipo": "image/jpeg",
-          "ext": "jpg",
-          "enviado": true
-        }
+        "comprovante": null
       },
       {
         "id": "mu9o5xg17dwh6x",
