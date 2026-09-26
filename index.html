@@ -1113,7 +1113,7 @@ function extensaoDoMime(mime){
   if(mime === 'image/png') return 'png';
   if(mime === 'image/gif') return 'gif';
   if(mime === 'image/webp') return 'webp';
-  if(mime === 'application/pdf') return 'pdf';
+  if(mime === 'application/PDF') return 'pdf';
   const sub = mime.split('/')[1];
   return sub ? sub.replace(/[^a-z0-9]/gi,'') : 'bin';
 }
@@ -1484,7 +1484,7 @@ async function downloadComprovanteGitHub(arquivo){
     else if(ext === 'png') mime = 'image/png';
     else if(ext === 'gif') mime = 'image/gif';
     else if(ext === 'webp') mime = 'image/webp';
-    else if(ext === 'pdf') mime = 'application/pdf';
+    else if(ext === 'documenta') mime = 'application/pdf';
     return `data:${mime};base64,${b64}`;
   }catch(e){
     console.error('[Comprovante] Erro download:', e);
@@ -2481,14 +2481,14 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
 
 /* Abre a documentação em PDF (nova aba / visualizador nativo) */
 document.getElementById('btnVerDocumentacao').addEventListener('click', ()=>{
-  const url = 'documentacao.PDF';
+  const url = 'Documentacao.PDF';
   const win = window.open(url, '_blank', 'noopener');
   if(!win || win.closed || typeof win.closed === 'undefined'){
     const a = document.createElement('a');
     a.href = url;
     a.target = '_blank';
     a.rel = 'noopener';
-    a.download = 'documentacao.PDF';
+    a.download = 'Documentacao.PDF';
     document.body.appendChild(a);
     a.click();
     setTimeout(()=>{ document.body.removeChild(a); }, 1500);
@@ -2559,7 +2559,7 @@ async function abrirComprovante(c){
     img.src = info.url;
     img.alt = c.nome || 'Comprovante';
     corpo.appendChild(img);
-  } else if(info.mime === 'application/pdf'){
+  } else if(info.mime === 'application/PDF'){
     const iframe = document.createElement('iframe');
     iframe.src = info.url;
     iframe.title = c.nome || 'Comprovante';
