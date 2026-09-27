@@ -434,12 +434,14 @@
   .selo-status.s-outros{background:var(--amarelo-bg);color:#92400e;border:1px solid #fcd34d}
   .item-detalhes{padding:14px;background:#fdfdfd;overflow:hidden}
   .item-detalhes .linha-info{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px;
-    font-size:.78rem;color:var(--suave);font-weight:600}
-  .item-detalhes .linha-info b{color:var(--texto);font-weight:900}
+    font-size:.82rem;color:#334155;font-weight:700}
+  .item-detalhes .linha-info b{color:#0f172a;font-weight:900}
   .item-detalhes .controles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-  .item-detalhes .controles label{display:flex;flex-direction:column;gap:5px;font-size:.7rem;
-    font-weight:800;color:var(--suave);text-transform:uppercase;letter-spacing:.5px}
-  .item-detalhes .controles label b{color:var(--texto);font-weight:900}
+  .item-detalhes .controles label{display:flex;flex-direction:column;gap:5px;font-size:.78rem;
+    font-weight:900;color:#0f172a;text-transform:uppercase;letter-spacing:.4px}
+  .item-detalhes .controles label b{color:#0f172a;font-weight:900}
+  .item-detalhes .controles label input,
+  .item-detalhes .controles label select{font-weight:500;font-size:.88rem}
   .item-detalhes .controles .largura-total{grid-column:1 / -1}
   .acoes-detalhes{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;padding-top:12px;
     border-top:2px dashed var(--linha);flex-wrap:wrap}
@@ -497,7 +499,7 @@
     margin-bottom:14px;
     box-shadow:0 2px 8px rgba(37,99,235,.08)}
   .bloco-fixo .titulo-bloco{
-    font-size:.72rem;font-weight:900;text-transform:uppercase;
+    font-size:.78rem;font-weight:900;text-transform:uppercase;
     letter-spacing:.8px;color:var(--azul-profundo);
     margin-bottom:10px;display:flex;align-items:center;gap:8px}
   .bloco-fixo .titulo-bloco::before{
@@ -505,10 +507,11 @@
   .bloco-fixo .grade-form{gap:12px}
 
   fieldset{border:2px dashed var(--linha);border-radius:12px;padding:14px;margin:16px 0 0}
-  legend{font-size:.78rem;font-weight:900;color:var(--suave);text-transform:uppercase;
+  legend{font-size:.82rem;font-weight:900;color:#334155;text-transform:uppercase;
     letter-spacing:.8px;padding:0 10px;background:#fff}
   .grade-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-  .campo{display:flex;flex-direction:column;gap:5px;font-size:.78rem;font-weight:800;color:#334155}
+  .campo{display:flex;flex-direction:column;gap:5px;font-size:.85rem;font-weight:900;
+    color:#0f172a;letter-spacing:.2px}
   .campo input,.campo select{font-weight:500;color:var(--texto);font-size:.9rem}
   .campo .dica{font-weight:500;color:var(--suave);font-size:.7rem;margin-top:2px}
 
@@ -959,7 +962,7 @@
       <label class="campo" style="margin-top:14px">Token pessoal *
         <input type="password" id="ghToken" placeholder="github_pat_..." autocomplete="off" spellcheck="false">
       </label>
-      <label class="campo" style="flex-direction:row;align-items:center;gap:8px;font-weight:700;margin-top:14px">
+      <label class="campo" style="flex-direction:row;align-items:center;gap:8px;font-weight:900;margin-top:14px">
         <input type="checkbox" id="ghAutoSync" checked style="width:auto"> Sincronizar automaticamente
       </label>
       <div class="acoes-form">
@@ -1607,6 +1610,17 @@ window.addEventListener('popstate', () => {
   }
 });
 
+/* =========================================================
+   ROLAGEM INTELIGENTE
+   ========================================================= */
+function rolarParaElemento(el){
+  if(!el) return;
+  const header = document.querySelector('header.topo');
+  const offset = (header ? header.offsetHeight : 0) + 10;
+  const top = el.getBoundingClientRect().top + window.scrollY - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+
 function temRascunhosPendentes(){ return Object.keys(estado.rascunhos).length>0; }
 
 function calcularPeriodoAtivo(){
@@ -1738,6 +1752,11 @@ document.getElementById('painelGeral').addEventListener('click', (e) => {
   indicadorAtivo = (indicadorAtivo === filtro) ? null : filtro;
   atualizarSelecaoIndicador();
   renderDetalheIndicador();
+  /* Rola para que a lista de resultados apareça começando do topo */
+  const det = document.getElementById('detalheIndicador');
+  if(det && !det.classList.contains('escondido')){
+    requestAnimationFrame(() => rolarParaElemento(det));
+  }
 });
 
 document.getElementById('detalheIndicador').addEventListener('click', (e) => {
@@ -2194,7 +2213,11 @@ async function salvarEdicaoParcela(d,p){
 }
 function atualizarEstadoEdicao(bl,d,p){
   const dr=estado.rascunhos[p.id]; const tem=dr?rascunhoTemMudancas(d,p,dr):false;
-  const bs=bl.querySelector('[data-acao="salvarEdicao"]'); if(bs){ if(tem) bs.removeAttribute('disabled'); else bs.setAttribute('disabled',''); }
+  const bs=bl.querySelector('[data-acao="salvarEdicao"]');
+  if(bs){
+    if(tem) bs.removeAttribute('disabled');
+    else bs.setAttribute('disabled','');
+  }
   if(dr){
     bl.className=`item-venc st-${dr.status}` + (d.continuada?' indefinida':'') + (estado.expandidos.has(p.id)?' aberto':'');
     const ve=bl.querySelector('.valor-parcela'); if(ve) ve.textContent=formatarMoeda(dr.valor);
@@ -2590,6 +2613,13 @@ document.querySelectorAll('.btn-periodo').forEach(btn=>{
     }
     salvarFiltroResumo();
     atualizarPainelGeral();
+    /* Se houver um indicador ativo, rola para que a lista apareça desde o topo */
+    if(indicadorAtivo){
+      const det = document.getElementById('detalheIndicador');
+      if(det && !det.classList.contains('escondido')){
+        requestAnimationFrame(() => rolarParaElemento(det));
+      }
+    }
   });
 });
 const filtroDataInicio=document.getElementById('filtroDataInicio');
@@ -2608,12 +2638,24 @@ filtroDataInicio.addEventListener('change',()=>{
   ativarPersonalizado();
   salvarFiltroResumo();
   atualizarPainelGeral();
+  if(indicadorAtivo){
+    const det = document.getElementById('detalheIndicador');
+    if(det && !det.classList.contains('escondido')){
+      requestAnimationFrame(() => rolarParaElemento(det));
+    }
+  }
 });
 filtroDataFim.addEventListener('change',()=>{
   filtroResumo.dataFim = filtroDataFim.value;
   ativarPersonalizado();
   salvarFiltroResumo();
   atualizarPainelGeral();
+  if(indicadorAtivo){
+    const det = document.getElementById('detalheIndicador');
+    if(det && !det.classList.contains('escondido')){
+      requestAnimationFrame(() => rolarParaElemento(det));
+    }
+  }
 });
 
 const campoGHOwner=document.getElementById('ghOwner');
@@ -2830,6 +2872,3 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
-
-
-
