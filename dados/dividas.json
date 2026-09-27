@@ -3726,5 +3726,240 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "muk1qdityfohl8",
+    "credor": "Secretaria de Estado da Fazenda",
+    "descricao": "Taxa Licenciamento Jeep",
+    "valorTotal": 0,
+    "valorParcela": 40,
+    "modo": "continua",
+    "periodicidade": "anual",
+    "diaEspecifico": "",
+    "continuada": true,
+    "ancora": "2027-03-31",
+    "qtdParcelas": 24,
+    "primeiroVencimento": "2027-03-31",
+    "ultimoVencimento": "2050-03-31",
+    "criadoEm": "2026-09-27T16:41:53.909Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muk1qdisvp2kby",
+        "numero": 1,
+        "valor": 40,
+        "vencimento": "2027-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdiska8ja6",
+        "numero": 2,
+        "valor": 40,
+        "vencimento": "2028-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdispaqd30",
+        "numero": 3,
+        "valor": 40,
+        "vencimento": "2029-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisih1s1d",
+        "numero": 4,
+        "valor": 40,
+        "vencimento": "2030-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisn7ze2v",
+        "numero": 5,
+        "valor": 40,
+        "vencimento": "2031-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisbkpfec",
+        "numero": 6,
+        "valor": 40,
+        "vencimento": "2032-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdis6cmz8x",
+        "numero": 7,
+        "valor": 40,
+        "vencimento": "2033-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisan3zkp",
+        "numero": 8,
+        "valor": 40,
+        "vencimento": "2034-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdis245h91",
+        "numero": 9,
+        "valor": 40,
+        "vencimento": "2035-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdiswmwea8",
+        "numero": 10,
+        "valor": 40,
+        "vencimento": "2036-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdis5tw8nq",
+        "numero": 11,
+        "valor": 40,
+        "vencimento": "2037-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisr0ebqu",
+        "numero": 12,
+        "valor": 40,
+        "vencimento": "2038-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdisul05h4",
+        "numero": 13,
+        "valor": 40,
+        "vencimento": "2039-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdis0f8tmx",
+        "numero": 14,
+        "valor": 40,
+        "vencimento": "2040-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditfyjlkl",
+        "numero": 15,
+        "valor": 40,
+        "vencimento": "2041-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditknc8p8",
+        "numero": 16,
+        "valor": 40,
+        "vencimento": "2042-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditco7vy5",
+        "numero": 17,
+        "valor": 40,
+        "vencimento": "2043-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditarvwfs",
+        "numero": 18,
+        "valor": 40,
+        "vencimento": "2044-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditamnoft",
+        "numero": 19,
+        "valor": 40,
+        "vencimento": "2045-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdit9pdr7f",
+        "numero": 20,
+        "valor": 40,
+        "vencimento": "2046-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditgo7hjy",
+        "numero": 21,
+        "valor": 40,
+        "vencimento": "2047-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditqycnlv",
+        "numero": 22,
+        "valor": 40,
+        "vencimento": "2048-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qdit7vhn8u",
+        "numero": 23,
+        "valor": 40,
+        "vencimento": "2049-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muk1qditdsnpfp",
+        "numero": 24,
+        "valor": 40,
+        "vencimento": "2050-03-31",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
