@@ -3116,34 +3116,6 @@
     ]
   },
   {
-    "id": "mu9pxec4q5byns",
-    "credor": "Secretaria de Estado da Fazenda",
-    "descricao": "Taxa Licenciamento Fusca",
-    "valorTotal": 40,
-    "valorParcela": 40,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2027-03-31",
-    "qtdParcelas": 1,
-    "primeiroVencimento": "2027-03-31",
-    "ultimoVencimento": "2027-03-31",
-    "criadoEm": "2026-09-20T11:13:44.404Z",
-    "aberto": true,
-    "parcelas": [
-      {
-        "id": "mu9pxec45ibkmt",
-        "numero": 1,
-        "valor": 40,
-        "vencimento": "2027-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
     "id": "mue5kdl4jgamxo",
     "credor": "Domínio Administração",
     "descricao": "Condomínio mensal",
