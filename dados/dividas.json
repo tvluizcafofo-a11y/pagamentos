@@ -3144,34 +3144,6 @@
     ]
   },
   {
-    "id": "mu9pyx8whhvcip",
-    "credor": "Secretaria de Estado da Fazenda",
-    "descricao": "Taxa Licenciamento Jeep",
-    "valorTotal": 40,
-    "valorParcela": 40,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2027-03-31",
-    "qtdParcelas": 1,
-    "primeiroVencimento": "2027-03-31",
-    "ultimoVencimento": "2027-03-31",
-    "criadoEm": "2026-09-20T11:14:55.568Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "mu9pyx8wa917h9",
-        "numero": 1,
-        "valor": 40,
-        "vencimento": "2027-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
     "id": "mue5kdl4jgamxo",
     "credor": "Domínio Administração",
     "descricao": "Condomínio mensal",
