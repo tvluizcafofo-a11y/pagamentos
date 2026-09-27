@@ -443,6 +443,7 @@
   .item-detalhes .controles .largura-total{grid-column:1 / -1}
   .acoes-detalhes{display:flex;justify-content:flex-end;gap:8px;margin-top:12px;padding-top:12px;
     border-top:2px dashed var(--linha);flex-wrap:wrap}
+  .acoes-detalhes .btn-excluir{margin-right:auto}
 
   input,select,textarea{font:inherit;color:var(--texto);background:#fff;border:2px solid var(--linha);
     border-radius:8px;padding:9px 11px;outline:none;transition:.15s;width:100%;max-width:100%;min-width:0}
@@ -716,6 +717,9 @@
   .opcao-escopo.cancelar:hover{background:#fef2f2;border-color:#fca5a5;
     box-shadow:0 6px 16px rgba(220,38,38,.15)}
   .opcao-escopo.cancelar .info b{color:#b91c1c}
+  .opcao-escopo.perigo{background:#fff;border-color:#fee2e2}
+  .opcao-escopo.perigo:hover{background:#fef2f2;border-color:#fca5a5;
+    box-shadow:0 6px 16px rgba(220,38,38,.15)}
 
   @media (max-width:520px){
     header.topo h1{font-size:1.05rem}
@@ -998,20 +1002,20 @@
 
 <div class="modal-fundo escondido" id="modalEscopo">
   <div class="modal-caixa">
-    <h3><span class="emoji">🎯</span> Onde aplicar as alterações?</h3>
+    <h3><span class="emoji" id="modalEscopoEmoji">🎯</span> <span id="modalEscopoTitulo">Onde aplicar as alterações?</span></h3>
     <div id="textoEscopo"></div>
     <div class="opcoes-escopo">
       <button type="button" class="opcao-escopo" data-escopo="apenas">
-        <span class="icone">📌</span><div class="info"><b>Somente esta parcela</b><small>Altera apenas a parcela selecionada</small></div>
+        <span class="icone">📌</span><div class="info"><b id="escopoApenasTitulo">Somente esta parcela</b><small id="escopoApenasSub">Altera apenas a parcela selecionada</small></div>
       </button>
       <button type="button" class="opcao-escopo" data-escopo="futuras">
-        <span class="icone">➡️</span><div class="info"><b>Esta e as futuras</b><small>Altera esta e todas as posteriores</small></div>
+        <span class="icone">➡️</span><div class="info"><b id="escopoFuturasTitulo">Esta e as futuras</b><small id="escopoFuturasSub">Altera esta e todas as posteriores</small></div>
       </button>
       <button type="button" class="opcao-escopo" data-escopo="todas">
-        <span class="icone">🔁</span><div class="info"><b>Todas as parcelas</b><small>Altera todas as parcelas desta dívida</small></div>
+        <span class="icone">🔁</span><div class="info"><b id="escopoTodasTitulo">Todas as parcelas</b><small id="escopoTodasSub">Altera todas as parcelas desta dívida</small></div>
       </button>
       <button type="button" class="opcao-escopo cancelar" data-escopo="cancelar">
-        <span class="icone">✕</span><div class="info"><b>Voltar à edição</b><small>Fecha sem aplicar nada</small></div>
+        <span class="icone">✕</span><div class="info"><b id="escopoCancelarTitulo">Voltar à edição</b><small id="escopoCancelarSub">Fecha sem aplicar nada</small></div>
       </button>
     </div>
   </div>
@@ -1034,6 +1038,7 @@ let dividas = [];
 let editandoId = null;
 const filtroResumo = { periodo:'tudo', dataInicio:'', dataFim:'' };
 let indicadorAtivo = null;
+let skipNextPop = false;
 
 const ROTULOS_STATUS = { em_aberto:'Em aberto', pago:'Pago', em_atraso:'Em atraso', outros:'Outros' };
 const ROTULOS_INDICADOR = {
@@ -1553,13 +1558,55 @@ function agendarSyncGH(){
 }
 
 const estado = { tela:'calendario', mesRef:new Date(), diaSelecionado:null, expandidos:new Set(), rascunhos:{}, animando:false };
-function mostrarTela(nome){
+
+/* =========================================================
+   NAVEGAÇÃO ENTRE TELAS + BOTÃO VOLTAR DO ANDROID
+   ========================================================= */
+function trocarTelaInterno(nome){
   ['calendario','dia','nova','todas','resumo','config'].forEach(t=>{
     document.getElementById('tela-'+t).classList.toggle('escondido', t!==nome);
   });
   estado.tela = nome;
   window.scrollTo({ top:0, behavior:'smooth' });
 }
+
+function mostrarTela(nome){
+  const antiga = estado.tela;
+  trocarTelaInterno(nome);
+  if(nome === antiga) return;
+
+  if(nome !== 'calendario' && antiga === 'calendario'){
+    history.pushState({ tela: nome }, '');
+  } else if(nome === 'calendario' && antiga !== 'calendario'){
+    if(history.state && history.state.tela){
+      skipNextPop = true;
+      history.back();
+    }
+  } else if(nome !== 'calendario' && antiga !== 'calendario'){
+    history.replaceState({ tela: nome }, '');
+  }
+}
+
+function executarVoltarTela(tela){
+  switch(tela){
+    case 'dia': document.getElementById('voltarCalendario').click(); break;
+    case 'nova': document.getElementById('cancelarNova').click(); break;
+    case 'todas': document.getElementById('voltarCalendario2').click(); break;
+    case 'resumo': document.getElementById('voltarCalendario3').click(); break;
+    case 'config': document.getElementById('voltarCalendario4').click(); break;
+  }
+}
+
+window.addEventListener('popstate', () => {
+  if(skipNextPop){ skipNextPop = false; return; }
+  if(estado.tela === 'calendario') return;
+  const antes = estado.tela;
+  executarVoltarTela(antes);
+  if(estado.tela === antes){
+    history.pushState({ tela: antes }, '');
+  }
+});
+
 function temRascunhosPendentes(){ return Object.keys(estado.rascunhos).length>0; }
 
 function calcularPeriodoAtivo(){
@@ -1881,25 +1928,70 @@ resultadosBusca.addEventListener('click',(e)=>{
 let resolverEscopo=null;
 function abrirModal(id){ const m=document.getElementById(id); if(!m) return; m.classList.remove('escondido'); m.style.display='flex'; }
 function fecharModal(id){ const m=document.getElementById(id); if(!m) return; m.classList.add('escondido'); m.style.display=''; }
-function perguntarEscopo(d,p,mud){
-  return new Promise(res=>{
-    resolverEscopo=res; const l=[];
-    if(mud.credor!==undefined){ const a=p.credorOverride||d.credor;
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Credor</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.credor)}</b></span></div>`); }
-    if(mud.descricao!==undefined){ const a=p.descricaoOverride||d.descricao;
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Descrição</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.descricao)}</b></span></div>`); }
-    if(mud.valor!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Valor</span><span class="valor-mudanca">${formatarMoeda(p.valor)} → <b>${formatarMoeda(mud.valor)}</b></span></div>`);
-    if(mud.vencimento!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Vencimento</span><span class="valor-mudanca">${formatarDataBR(p.vencimento)} → <b>${formatarDataBR(mud.vencimento)}</b></span></div>`);
-    if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} → <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
-    if(mud.link!==undefined){ const a=p.link||'(vazio)', n=mud.link||'(vazio)';
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
-    if(mud.comprovante!==undefined){
-      const tinha = p.comprovante ? p.comprovante.nome : 'sem comprovante';
-      const tem = mud.comprovante ? mud.comprovante.nome : 'removido';
-      l.push(`<div class="linha-mudanca"><span class="campo-nome">Comprovante</span><span class="valor-mudanca">${escapar(tinha)} → <b>${escapar(tem)}</b></span></div>`);
+
+function configurarOpcoesEscopo(modo){
+  const mapa = {
+    aplicar: {
+      emoji:'🎯', titulo:'Onde aplicar as alterações?',
+      botoes: {
+        apenas:{t:'Somente esta parcela', s:'Altera apenas a parcela selecionada'},
+        futuras:{t:'Esta e as futuras', s:'Altera esta e todas as posteriores'},
+        todas:{t:'Todas as parcelas', s:'Altera todas as parcelas desta dívida'},
+        cancelar:{t:'Voltar à edição', s:'Fecha sem aplicar nada'}
+      }
+    },
+    excluir: {
+      emoji:'🗑', titulo:'O que excluir?',
+      botoes: {
+        apenas:{t:'Somente esta parcela', s:'Exclui apenas a parcela selecionada'},
+        futuras:{t:'Esta e as futuras', s:'Exclui esta e todas as posteriores'},
+        todas:{t:'Todas as parcelas', s:'Exclui todas as parcelas desta dívida'},
+        cancelar:{t:'Voltar à edição', s:'Fecha sem excluir nada'}
+      }
     }
-    document.getElementById('textoEscopo').innerHTML =
-      `Parcela <b>${p.numero} de ${d.parcelas.length}</b> de <b>${escapar(d.credor)}</b>.<br><br>Alterações:<div style="margin-top:8px">${l.join('')}</div><br>Aplicar a:`;
+  };
+  const cfg = mapa[modo] || mapa.aplicar;
+  document.getElementById('modalEscopoEmoji').textContent = cfg.emoji;
+  document.getElementById('modalEscopoTitulo').textContent = cfg.titulo;
+  document.getElementById('escopoApenasTitulo').textContent = cfg.botoes.apenas.t;
+  document.getElementById('escopoApenasSub').textContent = cfg.botoes.apenas.s;
+  document.getElementById('escopoFuturasTitulo').textContent = cfg.botoes.futuras.t;
+  document.getElementById('escopoFuturasSub').textContent = cfg.botoes.futuras.s;
+  document.getElementById('escopoTodasTitulo').textContent = cfg.botoes.todas.t;
+  document.getElementById('escopoTodasSub').textContent = cfg.botoes.todas.s;
+  document.getElementById('escopoCancelarTitulo').textContent = cfg.botoes.cancelar.t;
+  document.getElementById('escopoCancelarSub').textContent = cfg.botoes.cancelar.s;
+}
+
+function perguntarEscopo(d, p, mud, opts){
+  opts = opts || {};
+  const modo = opts.modo || 'aplicar';
+  return new Promise(res=>{
+    resolverEscopo = res;
+    configurarOpcoesEscopo(modo);
+    const l = [];
+    if(modo === 'excluir'){
+      l.push(`<div class="linha-mudanca"><span class="campo-nome">Ação</span><span class="valor-mudanca"><b>Excluir</b> — escolha o alcance abaixo</span></div>`);
+      document.getElementById('textoEscopo').innerHTML =
+        `Parcela <b>${p.numero} de ${d.parcelas.length}</b> de <b>${escapar(d.credor)}</b>.<br><br><div style="margin-top:8px">${l.join('')}</div><br>Escolha o que excluir:`;
+    } else {
+      if(mud.credor!==undefined){ const a=p.credorOverride||d.credor;
+        l.push(`<div class="linha-mudanca"><span class="campo-nome">Credor</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.credor)}</b></span></div>`); }
+      if(mud.descricao!==undefined){ const a=p.descricaoOverride||d.descricao;
+        l.push(`<div class="linha-mudanca"><span class="campo-nome">Descrição</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(mud.descricao)}</b></span></div>`); }
+      if(mud.valor!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Valor</span><span class="valor-mudanca">${formatarMoeda(p.valor)} → <b>${formatarMoeda(mud.valor)}</b></span></div>`);
+      if(mud.vencimento!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Vencimento</span><span class="valor-mudanca">${formatarDataBR(p.vencimento)} → <b>${formatarDataBR(mud.vencimento)}</b></span></div>`);
+      if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} → <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
+      if(mud.link!==undefined){ const a=p.link||'(vazio)', n=mud.link||'(vazio)';
+        l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
+      if(mud.comprovante!==undefined){
+        const tinha = p.comprovante ? p.comprovante.nome : 'sem comprovante';
+        const tem = mud.comprovante ? mud.comprovante.nome : 'removido';
+        l.push(`<div class="linha-mudanca"><span class="campo-nome">Comprovante</span><span class="valor-mudanca">${escapar(tinha)} → <b>${escapar(tem)}</b></span></div>`);
+      }
+      document.getElementById('textoEscopo').innerHTML =
+        `Parcela <b>${p.numero} de ${d.parcelas.length}</b> de <b>${escapar(d.credor)}</b>.<br><br>Alterações:<div style="margin-top:8px">${l.join('')}</div><br>Aplicar a:`;
+    }
     abrirModal('modalEscopo');
   });
 }
@@ -1936,6 +2028,46 @@ function aplicarMudancas(d,p,mud,esc){
       removerComprovanteLocal(antigo.id);
     }
   }
+}
+
+/* =========================================================
+   EXCLUSÃO COM ESCOPO
+   ========================================================= */
+async function excluirParcela(d, p){
+  const esc = await perguntarEscopo(d, p, {}, { modo:'excluir' });
+  if(esc === 'cancelar') return;
+
+  if(esc === 'todas'){
+    d.parcelas.forEach(x => { if(x.comprovante && x.comprovante.id) removerComprovanteLocal(x.comprovante.id); });
+    dividas = dividas.filter(x => x.id !== d.id);
+  } else if(esc === 'futuras'){
+    const futuras = d.parcelas.filter(x => x.numero >= p.numero);
+    futuras.forEach(x => { if(x.comprovante && x.comprovante.id) removerComprovanteLocal(x.comprovante.id); });
+    d.parcelas = d.parcelas.filter(x => x.numero < p.numero);
+    if(d.parcelas.length === 0){
+      dividas = dividas.filter(x => x.id !== d.id);
+    } else {
+      d.qtdParcelas = d.parcelas.length;
+      d.ultimoVencimento = d.parcelas[d.parcelas.length - 1].vencimento;
+    }
+  } else {
+    if(p.comprovante && p.comprovante.id) removerComprovanteLocal(p.comprovante.id);
+    d.parcelas = d.parcelas.filter(x => x.id !== p.id);
+    d.parcelas.forEach((x, i) => { x.numero = i + 1; });
+    if(d.parcelas.length === 0){
+      dividas = dividas.filter(x => x.id !== d.id);
+    } else {
+      d.qtdParcelas = d.parcelas.length;
+      d.ultimoVencimento = d.parcelas[d.parcelas.length - 1].vencimento;
+    }
+  }
+
+  delete estado.rascunhos[p.id];
+  estado.expandidos.delete(p.id);
+  salvar();
+  atualizarListaCredores();
+  renderCalendario();
+  recarregarListaDia();
 }
 
 function abrirDia(iso){
@@ -2033,6 +2165,7 @@ function itemVencimentoHTML(d,p){
       </div>
       <div class="comprovante-linha">${comprovanteHTML(p, dr)}</div>
       <div class="acoes-detalhes">
+        <button type="button" class="btn-mini vermelho grande btn-excluir" data-acao="excluirParcela">🗑 Excluir</button>
         <button type="button" class="btn-mini cinza grande" data-acao="cancelarEdicao">✕ Cancelar</button>
         <button type="button" class="btn-mini salvar grande" data-acao="salvarEdicao" ${tem?'':'disabled'}>💾 Salvar</button>
       </div>
@@ -2102,6 +2235,7 @@ listaDia.addEventListener('click',(e)=>{
   e.preventDefault(); const bl=b.closest('[data-parcela]'); if(!bl) return;
   const d=dividas.find(x=>x.id===bl.dataset.divida); const p=d&&d.parcelas.find(x=>x.id===bl.dataset.parcela); if(!p) return;
   if(ac==='salvarEdicao'){ salvarEdicaoParcela(d,p); return; }
+  if(ac==='excluirParcela'){ excluirParcela(d,p); return; }
   if(ac==='cancelarEdicao'){
     const dr=estado.rascunhos[p.id]; const tm=dr?rascunhoTemMudancas(d,p,dr):false;
     if(tm){ if(!confirm('Descartar as alterações?')) return; }
@@ -2696,3 +2830,6 @@ if('serviceWorker' in navigator){
 </script>
 </body>
 </html>
+
+
+
