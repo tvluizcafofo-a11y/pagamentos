@@ -414,7 +414,13 @@
         "vencimento": "2026-09-30",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": {
+          "id": "munabgz2pu2gtp",
+          "nome": "CRA-PARCELA - 11-20.pdf",
+          "tipo": "application/pdf",
+          "ext": "pdf",
+          "enviado": true
+        }
       },
       {
         "id": "mu8igk1utuo5k7",
