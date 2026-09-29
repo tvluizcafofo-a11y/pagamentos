@@ -412,7 +412,7 @@
         "numero": 1,
         "valor": 244.12,
         "vencimento": "2026-09-30",
-        "link": "https://spwsistemas.cramg.org.br:5443/spw/ConsultaCadastral/TelaImprimeGuia.aspx",
+        "link": "spwsistemas.cramg.org.br_5443_spw_ConsultaCadastral_TelaImprimeGuia.aspx.pdf",
         "status": "em_aberto",
         "comprovante": null
       },
