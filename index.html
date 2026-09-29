@@ -415,6 +415,8 @@
     padding:1px 5px;border-radius:6px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
   .item-resumo .texto-credencial .mini-tags .tag-ico.link{background:var(--info-bg);
     color:#0369a1;border:1px solid #bae6fd}
+  .item-resumo .texto-credencial .mini-tags .tag-ico.pix{background:#ede9fe;
+    color:#5b21b6;border:1px solid #c4b5fd}
   .item-resumo .texto-credencial .mini-tags .tag-ico.comp{background:var(--verde-bg);
     color:#15803d;border:1px solid #86efac}
   .item-resumo .valor-area{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -462,6 +464,7 @@
     border:1.5px solid transparent;font-weight:800;white-space:nowrap;
     display:inline-flex;align-items:center;gap:5px;transition:.15s}
   .btn-mini:hover{background:#cbd5e1;transform:translateY(-1px)}
+  .btn-mini:disabled{opacity:.85;cursor:default}
   .btn-mini.azul{background:var(--azul);color:#fff}
   .btn-mini.azul:hover{background:var(--azul-esc);box-shadow:0 3px 8px rgba(37,99,235,.3)}
   .btn-mini.verde{background:var(--verde-bg);color:#15803d;border-color:#86efac}
@@ -1157,6 +1160,7 @@ function somarDias(iso,n){ const dt=isoParaData(iso); dt.setDate(dt.getDate()+n)
 function diasEntre(a,b){ return Math.round((isoParaData(b)-isoParaData(a))/(86400000)); }
 function mesesEntre(a,b){ const A=isoParaData(a),B=isoParaData(b); return (B.getFullYear()-A.getFullYear())*12+(B.getMonth()-A.getMonth())+1; }
 function urlSegura(url){ const v=String(url||'').trim(); if(!v) return ''; return /^https?:\/\//i.test(v)?v:'https://'+v; }
+function ehUrlLink(valor){ return /^https?:\/\//i.test(String(valor||'').trim()); }
 function nomeMes(mes){ return ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][mes]; }
 function nomeDiaSemana(d){ return ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'][d]; }
 function normalizar(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
@@ -1164,6 +1168,42 @@ function comprovantesIguais(a,b){
   const idA = a ? (a.id || null) : null;
   const idB = b ? (b.id || null) : null;
   return idA === idB;
+}
+
+/* ---------- Copiar para a área de transferência ---------- */
+async function copiarTexto(txt){
+  if(!txt) return false;
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(txt);
+      return true;
+    }
+    throw new Error('clipboard indisponível');
+  }catch(e){
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = txt;
+      ta.setAttribute('readonly','');
+      ta.style.position = 'fixed';
+      ta.style.top = '0';
+      ta.style.left = '0';
+      ta.style.opacity = '0';
+      ta.style.pointerEvents = 'none';
+      document.body.appendChild(ta);
+      ta.focus();
+      ta.select();
+      ta.setSelectionRange(0, ta.value.length);
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }catch(err){ return false; }
+  }
+}
+function feedbackBotao(btn, original, sucesso){
+  if(!btn) return;
+  btn.textContent = sucesso ? '✅' : '❌';
+  btn.disabled = true;
+  setTimeout(()=>{ btn.textContent = original; btn.disabled = false; }, 1500);
 }
 
 function carregarFiltroResumo(){
@@ -1752,7 +1792,6 @@ document.getElementById('painelGeral').addEventListener('click', (e) => {
   indicadorAtivo = (indicadorAtivo === filtro) ? null : filtro;
   atualizarSelecaoIndicador();
   renderDetalheIndicador();
-  /* Rola para que a lista de resultados apareça começando do topo */
   const det = document.getElementById('detalheIndicador');
   if(det && !det.classList.contains('escondido')){
     requestAnimationFrame(() => rolarParaElemento(det));
@@ -2002,7 +2041,7 @@ function perguntarEscopo(d, p, mud, opts){
       if(mud.vencimento!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Vencimento</span><span class="valor-mudanca">${formatarDataBR(p.vencimento)} → <b>${formatarDataBR(mud.vencimento)}</b></span></div>`);
       if(mud.status!==undefined) l.push(`<div class="linha-mudanca"><span class="campo-nome">Status</span><span class="valor-mudanca">${ROTULOS_STATUS[p.status]} → <b>${ROTULOS_STATUS[mud.status]}</b></span></div>`);
       if(mud.link!==undefined){ const a=p.link||'(vazio)', n=mud.link||'(vazio)';
-        l.push(`<div class="linha-mudanca"><span class="campo-nome">Link</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
+        l.push(`<div class="linha-mudanca"><span class="campo-nome">Link/Pix</span><span class="valor-mudanca">${escapar(a)} → <b>${escapar(n)}</b></span></div>`); }
       if(mud.comprovante!==undefined){
         const tinha = p.comprovante ? p.comprovante.nome : 'sem comprovante';
         const tem = mud.comprovante ? mud.comprovante.nome : 'removido';
@@ -2140,7 +2179,14 @@ function miniTagsHTML(p, dr){
   const lk = dr ? dr.link : p.link;
   const comp = dr && ('comprovante' in dr) ? dr.comprovante : p.comprovante;
   let out = '';
-  if(lk && String(lk).trim()) out += `<span class="tag-ico link" title="Possui link anexado">🔗 link</span>`;
+  if(lk && String(lk).trim()){
+    const v = String(lk).trim();
+    if(ehUrlLink(v)){
+      out += `<span class="tag-ico link" title="Possui link anexado">🔗 link</span>`;
+    } else {
+      out += `<span class="tag-ico pix" title="Possui código Pix">📋 Pix</span>`;
+    }
+  }
   if(comp) out += `<span class="tag-ico comp" title="Possui comprovante anexado">💰 pago</span>`;
   return out ? `<div class="mini-tags">${out}</div>` : '';
 }
@@ -2153,7 +2199,7 @@ function itemVencimentoHTML(d,p){
   const vl=dr?dr.valor:p.valor; const vc=dr?dr.vencimento:p.vencimento;
   const st=dr?dr.status:p.status; const lk=dr?dr.link:p.link;
   const np=cont?`Parcela ${p.numero} · contínua`:`Parcela ${p.numero}/${total}`;
-  const rt=ROTULOS_STATUS[st]||st; const tl=!!lk; const ov=!!(p.credorOverride||p.descricaoOverride);
+  const rt=ROTULOS_STATUS[st]||st; const tl=!!String(lk||'').trim(); const ov=!!(p.credorOverride||p.descricaoOverride);
   const tem=rascunhoTemMudancas(d,p,dr);
   return `
   <div class="item-venc st-${st}${cont?' indefinida':''}${aber?' aberto':''}" data-divida="${d.id}" data-parcela="${p.id}">
@@ -2177,9 +2223,12 @@ function itemVencimentoHTML(d,p){
         <label><b>Valor (R$)</b><input type="number" step="0.01" min="0" data-campo="valor" value="${Number(vl).toFixed(2)}"></label>
         <label><b>Vencimento</b><input type="date" data-campo="vencimento" value="${vc}"></label>
         <label><b>Status</b><select class="combo st-${st}" data-campo="status">${opcoesStatus(st)}</select></label>
-        <label class="largura-total"><b>Link</b>
-          <div class="linha-link"><input type="text" data-campo="link" placeholder="https://" value="${escapar(lk)}">
-            <button type="button" class="btn-mini azul ${tl?'':'escondido'}" data-acao="abrirLink">🔗</button></div>
+        <label class="largura-total"><b>Link / Pix</b>
+          <div class="linha-link">
+            <input type="text" data-campo="link" placeholder="https:// ou código Pix (copia e cola)" value="${escapar(lk)}">
+            <button type="button" class="btn-mini verde ${tl?'':'escondido'}" data-acao="copiarLink" title="Copiar link/Pix">📋</button>
+            <button type="button" class="btn-mini azul ${tl?'':'escondido'}" data-acao="abrirLink" title="Abrir link">🔗</button>
+          </div>
         </label>
       </div>
       <div class="comprovante-linha">${comprovanteHTML(p, dr)}</div>
@@ -2223,8 +2272,13 @@ function atualizarEstadoEdicao(bl,d,p){
     const ve=bl.querySelector('.valor-parcela'); if(ve) ve.textContent=formatarMoeda(dr.valor);
     const se=bl.querySelector('.selo-status'); if(se){ se.className='selo-status s-'+dr.status; se.textContent=ROTULOS_STATUS[dr.status]||dr.status; }
     const ic=bl.querySelector('.icone-tipo'); if(ic) ic.textContent=iconeStatus(dr.status,d.continuada);
-    const li=bl.querySelector('[data-campo="link"]'); const bl2=bl.querySelector('[data-acao="abrirLink"]');
-    if(bl2&&li) bl2.classList.toggle('escondido',!li.value.trim());
+    const li=bl.querySelector('[data-campo="link"]');
+    if(li){
+      const temLink = !!li.value.trim();
+      bl.querySelectorAll('[data-acao="abrirLink"],[data-acao="copiarLink"]').forEach(b=>{
+        b.classList.toggle('escondido', !temLink);
+      });
+    }
     const cb=bl.querySelector('[data-campo="status"]'); if(cb) cb.className='combo st-'+dr.status;
     const cl=bl.querySelector('.comprovante-linha'); if(cl) cl.innerHTML=comprovanteHTML(p, dr);
     const txtEl=bl.querySelector('.texto-credencial');
@@ -2240,7 +2294,7 @@ function atualizarEstadoEdicao(bl,d,p){
   }
 }
 const listaDia=document.getElementById('listaDia');
-listaDia.addEventListener('click',(e)=>{
+listaDia.addEventListener('click', async (e)=>{
   const b=e.target.closest('[data-acao]'); if(!b) return; const ac=b.dataset.acao;
   if(ac==='toggleDetalhes'){
     e.preventDefault(); const bl=b.closest('[data-parcela]'); if(!bl) return;
@@ -2264,7 +2318,21 @@ listaDia.addEventListener('click',(e)=>{
     if(tm){ if(!confirm('Descartar as alterações?')) return; }
     delete estado.rascunhos[p.id]; estado.expandidos.delete(p.id); recarregarListaDia(); return;
   }
-  if(ac==='abrirLink'){ const inp=bl.querySelector('[data-campo="link"]'); const u=urlSegura(inp?inp.value:p.link); if(u) window.open(u,'_blank','noopener'); return; }
+  if(ac==='copiarLink'){
+    const inp = bl.querySelector('[data-campo="link"]');
+    const v = (inp ? inp.value : p.link || '').trim();
+    if(!v) return;
+    const ok = await copiarTexto(v);
+    feedbackBotao(b, '📋', ok);
+    return;
+  }
+  if(ac==='abrirLink'){
+    const inp=bl.querySelector('[data-campo="link"]');
+    const v=(inp?inp.value:p.link||'').trim();
+    const u=urlSegura(v);
+    if(u) window.open(u,'_blank','noopener');
+    return;
+  }
   if(ac==='verComprovante'){
     const dr=estado.rascunhos[p.id];
     const comp = dr && ('comprovante' in dr) ? dr.comprovante : p.comprovante;
@@ -2499,8 +2567,13 @@ function montarDividaCompletaHTML(d){
       <td class="col-num">${p.numero}</td>
       <td><b>Valor:</b> <input type="number" step="0.01" min="0" data-campo="valor" value="${Number(p.valor).toFixed(2)}"></td>
       <td><b>Vencimento:</b> <input type="date" data-campo="vencimento" value="${p.vencimento}"></td>
-      <td><b>Link:</b> <div class="linha-link"><input type="text" data-campo="link" placeholder="https://" value="${escapar(p.link)}">
-        <button type="button" class="btn-mini azul ${p.link?'':'escondido'}" data-acao="abrirLink">🔗</button></div></td>
+      <td><b>Link/Pix:</b>
+        <div class="linha-link">
+          <input type="text" data-campo="link" placeholder="https:// ou Pix" value="${escapar(p.link)}">
+          <button type="button" class="btn-mini verde ${p.link?'':'escondido'}" data-acao="copiarLink" title="Copiar">📋</button>
+          <button type="button" class="btn-mini azul ${p.link?'':'escondido'}" data-acao="abrirLink" title="Abrir">🔗</button>
+        </div>
+      </td>
       <td><b>Status:</b> <select class="combo st-${p.status}" data-campo="status">${opcoesStatus(p.status)}</select></td>
       <td><div class="comprovante-linha" style="border:none;margin:0;padding:0">${comprovanteHTML(p)}</div></td>
     </tr>`).join('');
@@ -2512,7 +2585,7 @@ function montarDividaCompletaHTML(d){
     </div>
       <div class="resumo-divida">${resumoDividaHTML(d)}</div></summary>
     <div class="tabela-area"><table>
-      <thead><tr><th>#</th><th>Valor</th><th>Vencimento</th><th>Link</th><th>Status</th><th>Comprovante</th></tr></thead>
+      <thead><tr><th>#</th><th>Valor</th><th>Vencimento</th><th>Link/Pix</th><th>Status</th><th>Comprovante</th></tr></thead>
       <tbody>${linhas}</tbody></table></div>
     <div class="rodape-divida">
       <button type="button" class="btn-acao-divida editar" data-acao="editarDivida">✏️ Editar dívida</button>
@@ -2550,20 +2623,33 @@ listaTodas.addEventListener('change',async(e)=>{
     catch(err){ console.error(err); alert('Erro.'); }
     return;
   }
-  if(['valor','vencimento','status','link'].includes(cp)){
+  if(cp==='link'){
+    const novo = String(al.value).trim();
+    if(novo === String(p.link||'').trim()){
+      /* Atualiza visibilidade dos botões mesmo sem mudança real */
+      ln.querySelectorAll('[data-acao="abrirLink"],[data-acao="copiarLink"]').forEach(b=>{
+        b.classList.toggle('escondido', !novo);
+      });
+      return;
+    }
+    const md = { link: novo };
+    const esc=await perguntarEscopo(d,p,md);
+    if(esc==='cancelar'){ al.value = p.link || ''; return; }
+    aplicarMudancas(d,p,md,esc); salvar(); renderCalendario(); renderTodas(); return;
+  }
+  if(['valor','vencimento','status'].includes(cp)){
     if(cp==='status') al.className='combo st-'+al.value;
     const md={};
     if(cp==='valor') md.valor=arredondar2(parseFloat(al.value)||0);
     else if(cp==='vencimento') md.vencimento=al.value;
     else if(cp==='status') md.status=al.value;
-    else if(cp==='link') md.link=String(al.value).trim();
     if(String(md[cp])===String(p[cp])) return;
     const esc=await perguntarEscopo(d,p,md);
     if(esc==='cancelar'){ if(cp==='status') al.className='combo st-'+p.status; al.value=cp==='valor'?Number(p.valor).toFixed(2):p[cp]; return; }
     aplicarMudancas(d,p,md,esc); salvar(); renderCalendario(); renderTodas(); return;
   }
 });
-listaTodas.addEventListener('click',(e)=>{
+listaTodas.addEventListener('click', async (e)=>{
   const b=e.target.closest('[data-acao]'); if(!b) return; e.preventDefault(); const ac=b.dataset.acao;
   if(ac==='editarDivida'){ const c=b.closest('details[data-cartao-divida]'); abrirEdicaoDivida(c.dataset.cartaoDivida); return; }
   if(ac==='excluirDivida'){ const c=b.closest('details[data-cartao-divida]'); const d=dividas.find(x=>x.id===c.dataset.cartaoDivida); if(!d) return;
@@ -2573,7 +2659,21 @@ listaTodas.addEventListener('click',(e)=>{
     dividas=dividas.filter(x=>x.id!==d.id); salvar(); atualizarListaCredores(); renderTodas(); renderCalendario(); return; }
   const ln=b.closest('tr[data-parcela]'); if(!ln) return;
   const d=dividas.find(x=>x.id===ln.dataset.divida); const p=d&&d.parcelas.find(x=>x.id===ln.dataset.parcela); if(!p) return;
-  if(ac==='abrirLink'){ const i=ln.querySelector('[data-campo="link"]'); const u=urlSegura(i?i.value:p.link); if(u) window.open(u,'_blank','noopener'); return; }
+  if(ac==='copiarLink'){
+    const i = ln.querySelector('[data-campo="link"]');
+    const v = (i ? i.value : p.link || '').trim();
+    if(!v) return;
+    const ok = await copiarTexto(v);
+    feedbackBotao(b, '📋', ok);
+    return;
+  }
+  if(ac==='abrirLink'){
+    const i=ln.querySelector('[data-campo="link"]');
+    const v=(i?i.value:p.link||'').trim();
+    const u=urlSegura(v);
+    if(u) window.open(u,'_blank','noopener');
+    return;
+  }
   if(ac==='verComprovante'&&p.comprovante){ abrirComprovante(p.comprovante); return; }
   if(ac==='removerComprovante'){ if(!confirm('Remover?')) return;
     const antigo = p.comprovante;
@@ -2613,7 +2713,6 @@ document.querySelectorAll('.btn-periodo').forEach(btn=>{
     }
     salvarFiltroResumo();
     atualizarPainelGeral();
-    /* Se houver um indicador ativo, rola para que a lista apareça desde o topo */
     if(indicadorAtivo){
       const det = document.getElementById('detalheIndicador');
       if(det && !det.classList.contains('escondido')){
@@ -2860,7 +2959,7 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
 document.addEventListener('visibilitychange',()=>{
   if(document.visibilityState === 'hidden'){
     if(ghConfigurado() && ghConfig.autoSync){
-      if(syncTimer){ clearTimeout(syncTimer); syncTimer=null; }
+      if(syncTimer){ clearTimeout(syncTimer); syncTimer = null; }
       salvarNoGitHub({silencioso:true});
     }
   }
