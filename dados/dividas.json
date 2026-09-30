@@ -3421,5 +3421,222 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "muolonqf0pqy6a",
+    "credor": "Domínio Administração",
+    "descricao": "Renegociação de divida",
+    "valorTotal": 0,
+    "valorParcela": 355.5,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-18",
+    "qtdParcelas": 22,
+    "primeiroVencimento": "2026-10-18",
+    "ultimoVencimento": "2028-07-18",
+    "criadoEm": "2026-09-30T21:11:30.855Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muolonqekrici5",
+        "numero": 1,
+        "valor": 355.5,
+        "vencimento": "2026-10-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqe9a3bon",
+        "numero": 2,
+        "valor": 355.5,
+        "vencimento": "2026-11-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqef9e9l2",
+        "numero": 3,
+        "valor": 355.5,
+        "vencimento": "2026-12-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqei2jz23",
+        "numero": 4,
+        "valor": 355.5,
+        "vencimento": "2027-01-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqehrgquv",
+        "numero": 5,
+        "valor": 355.5,
+        "vencimento": "2027-02-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqee1o14p",
+        "numero": 6,
+        "valor": 355.5,
+        "vencimento": "2027-03-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqeo5ivqq",
+        "numero": 7,
+        "valor": 355.5,
+        "vencimento": "2027-04-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqe8m8sua",
+        "numero": 8,
+        "valor": 355.5,
+        "vencimento": "2027-05-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqee8jnus",
+        "numero": 9,
+        "valor": 355.5,
+        "vencimento": "2027-06-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqeedbwd6",
+        "numero": 10,
+        "valor": 355.5,
+        "vencimento": "2027-07-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfsgboj4",
+        "numero": 11,
+        "valor": 355.5,
+        "vencimento": "2027-08-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfzw4v8n",
+        "numero": 12,
+        "valor": 355.5,
+        "vencimento": "2027-09-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfz1cr5t",
+        "numero": 13,
+        "valor": 355.5,
+        "vencimento": "2027-10-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfj55rz5",
+        "numero": 14,
+        "valor": 355.5,
+        "vencimento": "2027-11-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfj8vokc",
+        "numero": 15,
+        "valor": 355.5,
+        "vencimento": "2027-12-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfzu21bf",
+        "numero": 16,
+        "valor": 355.5,
+        "vencimento": "2028-01-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfn018od",
+        "numero": 17,
+        "valor": 355.5,
+        "vencimento": "2028-02-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfutf2rd",
+        "numero": 18,
+        "valor": 355.5,
+        "vencimento": "2028-03-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfjmm2ya",
+        "numero": 19,
+        "valor": 355.5,
+        "vencimento": "2028-04-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqf9hb513",
+        "numero": 20,
+        "valor": 355.5,
+        "vencimento": "2028-05-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfc88d6e",
+        "numero": 21,
+        "valor": 355.5,
+        "vencimento": "2028-06-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muolonqfr3lp1q",
+        "numero": 22,
+        "valor": 355.5,
+        "vencimento": "2028-07-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
