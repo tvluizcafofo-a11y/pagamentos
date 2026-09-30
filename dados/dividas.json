@@ -413,7 +413,7 @@
         "valor": 244.12,
         "vencimento": "2026-09-30",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "munjcmum9b3w5j",
           "nome": "Comprovante_30-09-2026_001714.png.png",
