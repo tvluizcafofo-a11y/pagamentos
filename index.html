@@ -104,6 +104,15 @@
   .banner-hoje b{display:block;font-size:.95rem;color:#92400e;margin-bottom:3px;font-weight:800}
   .banner-hoje small{color:#78350f;font-size:.78rem;font-weight:600}
 
+  .check-ocultar-hoje{display:flex;justify-content:center;margin:-6px 0 14px}
+  .check-ocultar-hoje label{display:flex;align-items:center;gap:8px;
+    font-size:.78rem;font-weight:700;color:var(--suave);cursor:pointer;
+    background:#fff;border:2px solid var(--linha);border-radius:99px;
+    padding:7px 14px;transition:.15s;user-select:none}
+  .check-ocultar-hoje label:hover{border-color:var(--azul);color:var(--azul-esc)}
+  .check-ocultar-hoje input{width:18px;height:18px;accent-color:var(--azul);
+    cursor:pointer;margin:0;flex-shrink:0}
+
   .painel{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:16px}
   .indicador{
     background:#fff;
@@ -693,6 +702,16 @@
   .btn-modal.neutro:hover{background:#e2e8f0}
   .btn-modal.sucesso{background:linear-gradient(135deg,var(--verde),#15803d);color:#fff;
     box-shadow:0 3px 10px rgba(22,163,74,.3)}
+  .btn-modal.whats{background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;
+    box-shadow:0 3px 10px rgba(37,211,102,.35)}
+  .btn-modal.whats:hover{box-shadow:0 5px 14px rgba(37,211,102,.5)}
+
+  #comprovantePreview{margin:6px 0 12px;text-align:center;max-height:60vh;overflow:auto;
+    background:#f8fafc;border:2px dashed var(--linha);border-radius:12px;padding:10px}
+  #comprovantePreview img{max-width:100%;max-height:56vh;border-radius:10px;
+    border:2px solid var(--linha);display:inline-block}
+  #comprovantePreview embed{width:100%;height:56vh;border-radius:10px;
+    border:2px solid var(--linha)}
 
   #textoEscopo{background:#f8fafc;border-left:5px solid var(--azul);border-radius:8px;
     padding:12px 14px;font-size:.86rem;color:var(--texto);line-height:1.6;margin:12px 0 4px;
@@ -992,6 +1011,21 @@
 
 <datalist id="listaCredores"></datalist>
 
+<div class="modal-fundo escondido" id="modalComprovante">
+  <div class="modal-caixa">
+    <h3><span class="emoji">🧾</span> Comprovante</h3>
+    <div id="comprovantePreview"></div>
+    <div id="comprovanteInfo" style="font-size:.76rem;color:var(--suave);font-weight:600;text-align:center;margin-bottom:8px"></div>
+    <div class="modal-acoes" style="justify-content:center">
+      <button type="button" class="btn-modal primario" id="btnCompartilharComp">📤 Compartilhar</button>
+      <button type="button" class="btn-modal whats" id="btnWhatsComp">💬 WhatsApp</button>
+      <button type="button" class="btn-modal neutro" id="btnEmailComp">✉️ E-mail</button>
+      <button type="button" class="btn-modal neutro" id="btnBaixarComp">⬇ Baixar</button>
+      <button type="button" class="btn-modal neutro" id="btnFecharComp">Fechar</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-fundo escondido" id="modalExportacao">
   <div class="modal-caixa">
     <h3><span class="emoji">✅</span> Exportação concluída</h3>
@@ -1035,6 +1069,7 @@ const CHAVE = 'sistemaPagamentos.v2';
 const GH_KEY = 'sistemaPagamentos.github';
 const FILTRO_KEY = 'sistemaPagamentos.filtroResumo';
 const COMP_PREFIX = 'sistemaPagamentos.comprovante.';
+const OCULTAR_HOJE_KEY = 'sistemaPagamentos.ocultarHoje';
 const PARCELAS_INICIAIS_CONTINUA = 24;
 const PARCELAS_MIN_FUTURAS = 12;
 const LIMITE_GITHUB_BYTES = 900 * 1024;
@@ -2247,6 +2282,8 @@ function renderListaDia(itens){
     const np=itens.filter(i=>{ const s=estado.rascunhos[i.parcela.id]?.status||i.parcela.status; return s==='em_aberto'||s==='em_atraso'; }).length;
     const tot=itens.reduce((s,i)=>{ const v=estado.rascunhos[i.parcela.id]?.valor??i.parcela.valor; return s+Number(v||0); },0);
     h+=`<div class="banner-hoje"><span class="emoji">🔔</span><div class="texto"><b>${itens.length} vencimento(s) hoje!</b><small>${np>0?`${np} em aberto · Total: ${formatarMoeda(tot)}`:'Todos pagos 🎉'}</small></div></div>`;
+    const oculto = localStorage.getItem(OCULTAR_HOJE_KEY) === hojeIso();
+    h+=`<div class="check-ocultar-hoje"><label for="checkNaoMostrarHoje"><input type="checkbox" id="checkNaoMostrarHoje" ${oculto?'checked':''}> Não abrir esta tela automaticamente hoje</label></div>`;
   }
   if(!itens.length) h+=`<div class="vazio">Nenhum vencimento. 🎉</div>`;
   else h+=itens.map(i=>itemVencimentoHTML(i.divida,i.parcela)).join('');
@@ -2393,6 +2430,13 @@ listaDia.addEventListener('change',async(e)=>{
     return;
   }
   tratarMudancaCampo(al, bl, d, p);
+});
+/* Listener do checkbox "não abrir automaticamente hoje" */
+listaDia.addEventListener('change',(e)=>{
+  if(e.target && e.target.id === 'checkNaoMostrarHoje'){
+    if(e.target.checked) localStorage.setItem(OCULTAR_HOJE_KEY, hojeIso());
+    else localStorage.removeItem(OCULTAR_HOJE_KEY);
+  }
 });
 document.getElementById('voltarCalendario').addEventListener('click',()=>{
   if(temRascunhosPendentes()){
@@ -2841,6 +2885,88 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
 });
 
 function lerArquivo(a){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(a); }); }
+
+/* =========================================================
+   COMPROVANTE — visualizar / compartilhar imagem
+   ========================================================= */
+let comprovanteAtual = null;
+let comprovanteDadosAtual = null;
+
+function dataUrlParaFile(dataUrl, nome, tipo){
+  const partes = String(dataUrl).split(',');
+  const mt = partes[0] || '';
+  const b64 = partes[1] || '';
+  const mime = tipo || (mt.match(/data:(.*?);/) || [, 'application/octet-stream'])[1];
+  const bin = atob(b64);
+  const by = new Uint8Array(bin.length);
+  for(let i = 0; i < bin.length; i++) by[i] = bin.charCodeAt(i);
+  let base = (nome && String(nome)) || 'comprovante';
+  base = base.replace(/\.[^.]+$/, '') || 'comprovante';
+  const fname = base + '.' + extDoMime(mime);
+  return new File([by], fname, { type: mime });
+}
+
+function baixarArquivoLocal(file){
+  try{
+    const url = URL.createObjectURL(file);
+    const a = document.createElement('a');
+    a.href = url; a.download = file.name; a.style.display = 'none';
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{ document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+  }catch(e){ console.error(e); }
+}
+
+async function compartilharComprovante(canal){
+  if(!comprovanteAtual || !comprovanteDadosAtual){
+    alert('Comprovante não carregado.');
+    return;
+  }
+  const c = comprovanteAtual;
+  let file;
+  try{ file = dataUrlParaFile(comprovanteDadosAtual, c.nome, c.tipo); }
+  catch(e){ console.error(e); alert('Não foi possível preparar o comprovante para compartilhar.'); return; }
+
+  const titulo = 'Comprovante de pagamento';
+  const texto = 'Segue o comprovante de pagamento.';
+  const podeArquivo = !!(navigator.canShare && navigator.canShare({ files: [file] }));
+
+  const tentarShare = async (comArquivo)=>{
+    if(!navigator.share) return false;
+    try{
+      if(comArquivo){
+        await navigator.share({ files:[file], title:titulo, text:texto });
+      } else {
+        await navigator.share({ title:titulo, text:texto });
+      }
+      return true;
+    }catch(err){
+      if(err && err.name === 'AbortError') return true;
+      console.warn('[Share] falhou:', err);
+      return false;
+    }
+  };
+
+  if(canal === 'whatsapp'){
+    if(podeArquivo && await tentarShare(true)) return;
+    baixarArquivoLocal(file);
+    const url = 'https://wa.me/?text=' + encodeURIComponent(texto + ' (a imagem do comprovante foi baixada para o dispositivo — anexe-a na conversa)');
+    window.open(url, '_blank', 'noopener');
+    return;
+  }
+  if(canal === 'email'){
+    if(podeArquivo && await tentarShare(true)) return;
+    baixarArquivoLocal(file);
+    const corpo = texto + '\n\n(A imagem do comprovante foi baixada para o dispositivo — anexe-a antes de enviar.)';
+    window.location.href = `mailto:?subject=${encodeURIComponent(titulo)}&body=${encodeURIComponent(corpo)}`;
+    return;
+  }
+  // genérico
+  if(podeArquivo && await tentarShare(true)) return;
+  if(await tentarShare(false)) return;
+  baixarArquivoLocal(file);
+  alert('O compartilhamento direto não está disponível neste navegador.\nA imagem foi baixada para o dispositivo — anexe-a no app desejado.');
+}
+
 async function abrirComprovante(c){
   if(!c) return;
   let dados = lerComprovanteLocal(c.id);
@@ -2858,16 +2984,50 @@ async function abrirComprovante(c){
     alert('Comprovante não disponível localmente e não foi possível baixar do GitHub.\n\nVerifique a conexão e a configuração.');
     return;
   }
-  try{
-    const [mt,b64]=dados.split(',');
-    const mime=(mt.match(/data:(.*?);/)||[, c.tipo || 'application/octet-stream'])[1];
-    const bin=atob(b64); const by=new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) by[i]=bin.charCodeAt(i);
-    const u=URL.createObjectURL(new Blob([by],{type:mime}));
-    window.open(u,'_blank','noopener');
-    setTimeout(()=>URL.revokeObjectURL(u),60000);
-  }catch(e){ console.error(e); alert('Não foi possível abrir.'); }
+  comprovanteAtual = c;
+  comprovanteDadosAtual = dados;
+  const prev = document.getElementById('comprovantePreview');
+  const info = document.getElementById('comprovanteInfo');
+  const mime = c.tipo || 'application/octet-stream';
+  if(mime.indexOf('image/') === 0){
+    prev.innerHTML = `<img src="${dados}" alt="Comprovante">`;
+  } else if(mime === 'application/pdf'){
+    prev.innerHTML = `<embed src="${dados}" type="application/pdf">`;
+  } else {
+    prev.innerHTML = `<p style="font-size:.86rem;color:var(--suave);margin:6px 0">Pré-visualização indisponível para este formato (${escapar(mime)}).<br>Use os botões para compartilhar ou baixar.</p>`;
+  }
+  if(info){
+    const partes = [];
+    if(c.nome) partes.push(escapar(c.nome));
+    if(c.tipo) partes.push(escapar(c.tipo));
+    info.innerHTML = partes.join(' · ');
+  }
+  abrirModal('modalComprovante');
 }
+
+document.getElementById('btnFecharComp').addEventListener('click',()=>{
+  fecharModal('modalComprovante');
+  comprovanteAtual = null;
+  comprovanteDadosAtual = null;
+});
+document.getElementById('modalComprovante').addEventListener('click',(e)=>{
+  if(e.target.id === 'modalComprovante'){
+    fecharModal('modalComprovante');
+    comprovanteAtual = null;
+    comprovanteDadosAtual = null;
+  }
+});
+document.getElementById('btnCompartilharComp').addEventListener('click',()=>compartilharComprovante('geral'));
+document.getElementById('btnWhatsComp').addEventListener('click',()=>compartilharComprovante('whatsapp'));
+document.getElementById('btnEmailComp').addEventListener('click',()=>compartilharComprovante('email'));
+document.getElementById('btnBaixarComp').addEventListener('click',()=>{
+  if(!comprovanteAtual || !comprovanteDadosAtual) return;
+  try{
+    const f = dataUrlParaFile(comprovanteDadosAtual, comprovanteAtual.nome, comprovanteAtual.tipo);
+    baixarArquivoLocal(f);
+  }catch(e){ console.error(e); alert('Erro ao baixar o comprovante.'); }
+});
+
 function atualizarAtrasos(sil=false){
   const hj=hojeIso(); let a=0;
   dividas.forEach(d=>d.parcelas.forEach(p=>{ if(p.status==='em_aberto'&&p.vencimento&&p.vencimento<hj){ p.status='em_atraso'; a++; } }));
@@ -2953,7 +3113,8 @@ document.getElementById('arquivoImportar').addEventListener('change',async(ev)=>
   atualizarListaCredores(); renderCalendario(); atualizarAtrasos(true);
 
   const hj = hojeIso();
-  if(vencimentosNoDia(hj) > 0) setTimeout(()=>abrirDia(hj), 120);
+  const ocultarHoje = localStorage.getItem(OCULTAR_HOJE_KEY) === hj;
+  if(!ocultarHoje && vencimentosNoDia(hj) > 0) setTimeout(()=>abrirDia(hj), 120);
 })();
 
 document.addEventListener('visibilitychange',()=>{
