@@ -29,7 +29,7 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muixf8bho1faen",
+          "id": "muo0onxt5m1v8d",
           "nome": "IPTU-ANHANGAI - 15-09-2026.jpeg",
           "tipo": "image/jpeg",
           "ext": "jpg",
@@ -80,7 +80,7 @@
     "primeiroVencimento": "2026-09-30",
     "ultimoVencimento": "2029-06-30",
     "criadoEm": "2026-09-19T14:29:56.352Z",
-    "aberto": true,
+    "aberto": false,
     "parcelas": [
       {
         "id": "mu8hhuyosxyh9a",
@@ -89,13 +89,7 @@
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=C6E7C6F9AD33F07DFDBD57FC8E1ADB9B",
         "status": "pago",
-        "comprovante": {
-          "id": "munzkuh35qxnyl",
-          "nome": "Comprovante_30-09-2026_075105.png.png",
-          "tipo": "image/png",
-          "ext": "png",
-          "enviado": true
-        }
+        "comprovante": null
       },
       {
         "id": "mu8hhuyo2oodsy",
@@ -420,13 +414,7 @@
         "vencimento": "2026-09-30",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "id": "munjcmum9b3w5j",
-          "nome": "Comprovante_30-09-2026_001714.png.png",
-          "tipo": "image/png",
-          "ext": "png",
-          "enviado": true
-        }
+        "comprovante": null
       },
       {
         "id": "mu8igk1utuo5k7",
@@ -535,13 +523,7 @@
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=FE24DF21CD6C2CF40961F2A30AE55907",
         "status": "pago",
-        "comprovante": {
-          "id": "munk7c04128e7r",
-          "nome": "Comprovante_30-09-2026_003937.png.png",
-          "tipo": "image/png",
-          "ext": "png",
-          "enviado": true
-        }
+        "comprovante": null
       },
       {
         "id": "mu8j480rsl0onp",
@@ -963,15 +945,11 @@
       {
         "id": "mu9nnscugsxtzy",
         "numero": 1,
-        "valor": 107.01,
+        "valor": 119.9,
         "vencimento": "2026-09-25",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "nome": "Comprovante_25-09-2026_134933.png",
-          "tipo": "image/png",
-          "arquivo": "dados/comprovantes/muh769yrr68s7z.png"
-        }
+        "comprovante": null
       },
       {
         "id": "mu9nnscu6vmloj",
@@ -1204,246 +1182,216 @@
         "numero": 1,
         "valor": 70,
         "vencimento": "2026-09-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "pago",
-        "comprovante": {
-          "id": "munjkra0l7snqw",
-          "nome": "Comprovante_30-09-2026_002345.png.png",
-          "tipo": "image/png",
-          "ext": "png",
-          "enviado": true
-        },
-        "descricaoOverride": "Tarifa Manutenção Conta (copiar/colar)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tjrdfa0",
         "numero": 2,
         "valor": 70,
         "vencimento": "2026-10-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tolp4mz",
         "numero": 3,
         "valor": 70,
         "vencimento": "2026-11-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tx4tzmu",
         "numero": 4,
         "valor": 70,
         "vencimento": "2026-12-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tap4uu4",
         "numero": 5,
         "valor": 70,
         "vencimento": "2027-01-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tsdlsg4",
         "numero": 6,
         "valor": 70,
         "vencimento": "2027-02-28",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tqir334",
         "numero": 7,
         "valor": 70,
         "vencimento": "2027-03-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tdtrl07",
         "numero": 8,
         "valor": 70,
         "vencimento": "2027-04-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3t5rg1ux",
         "numero": 9,
         "valor": 70,
         "vencimento": "2027-05-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tt8v5hc",
         "numero": 10,
         "valor": 70,
         "vencimento": "2027-06-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3ti76d2p",
         "numero": 11,
         "valor": 70,
         "vencimento": "2027-07-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tah1i63",
         "numero": 12,
         "valor": 70,
         "vencimento": "2027-08-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3t6dguve",
         "numero": 13,
         "valor": 70,
         "vencimento": "2027-09-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tr6d0ar",
         "numero": 14,
         "valor": 70,
         "vencimento": "2027-10-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tt4aueo",
         "numero": 15,
         "valor": 70,
         "vencimento": "2027-11-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3t1jipx1",
         "numero": 16,
         "valor": 70,
         "vencimento": "2027-12-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tvugrbj",
         "numero": 17,
         "valor": 70,
         "vencimento": "2028-01-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3ta2hnnm",
         "numero": 18,
         "valor": 70,
         "vencimento": "2028-02-29",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tw5cuqy",
         "numero": 19,
         "valor": 70,
         "vencimento": "2028-03-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tnfkgad",
         "numero": 20,
         "valor": 70,
         "vencimento": "2028-04-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3txebz78",
         "numero": 21,
         "valor": 70,
         "vencimento": "2028-05-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3tffo2mn",
         "numero": 22,
         "valor": 70,
         "vencimento": "2028-06-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3t4ufphb",
         "numero": 23,
         "valor": 70,
         "vencimento": "2028-07-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       },
       {
         "id": "mu9nux3to0upzg",
         "numero": 24,
         "valor": 70,
         "vencimento": "2028-08-30",
-        "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
+        "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Tarifa Manutenção Conta (copia/cola)"
+        "comprovante": null
       }
     ]
   },
@@ -1471,11 +1419,7 @@
         "vencimento": "2026-09-07",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "nome": "Comprovante_25-09-2026_134445.png",
-          "tipo": "image/png",
-          "arquivo": "dados/comprovantes/muh6z3gvmsd2kf.png"
-        }
+        "comprovante": null
       },
       {
         "id": "mu9ny94a1sk3u8",
@@ -1701,7 +1645,7 @@
     "primeiroVencimento": "2026-09-10",
     "ultimoVencimento": "2028-08-10",
     "criadoEm": "2026-09-20T10:20:30.165Z",
-    "aberto": false,
+    "aberto": true,
     "parcelas": [
       {
         "id": "mu9o0xn986da9p",
@@ -1719,8 +1663,7 @@
         "vencimento": "2026-10-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9jz4g9d",
@@ -1729,8 +1672,7 @@
         "vencimento": "2026-11-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9la1j68",
@@ -1739,8 +1681,7 @@
         "vencimento": "2026-12-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9k2hzow",
@@ -1749,8 +1690,7 @@
         "vencimento": "2027-01-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn972478s",
@@ -1759,8 +1699,7 @@
         "vencimento": "2027-02-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9o1bpsc",
@@ -1769,8 +1708,7 @@
         "vencimento": "2027-03-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9fz974h",
@@ -1779,8 +1717,7 @@
         "vencimento": "2027-04-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9g2ffq0",
@@ -1789,8 +1726,7 @@
         "vencimento": "2027-05-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9caxwc8",
@@ -1799,8 +1735,7 @@
         "vencimento": "2027-06-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn98t9dys",
@@ -1809,8 +1744,7 @@
         "vencimento": "2027-07-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9iaoz5b",
@@ -1819,8 +1753,7 @@
         "vencimento": "2027-08-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn95rbxdw",
@@ -1829,8 +1762,7 @@
         "vencimento": "2027-09-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn997inte",
@@ -1839,8 +1771,7 @@
         "vencimento": "2027-10-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9gtur7m",
@@ -1849,8 +1780,7 @@
         "vencimento": "2027-11-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn92x0bmq",
@@ -1859,8 +1789,7 @@
         "vencimento": "2027-12-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9t647k5",
@@ -1869,8 +1798,7 @@
         "vencimento": "2028-01-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn92edsdz",
@@ -1879,8 +1807,7 @@
         "vencimento": "2028-02-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9igqys0",
@@ -1889,8 +1816,7 @@
         "vencimento": "2028-03-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn91eolbm",
@@ -1899,8 +1825,7 @@
         "vencimento": "2028-04-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn90jfxo8",
@@ -1909,8 +1834,7 @@
         "vencimento": "2028-05-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9nyxg20",
@@ -1919,8 +1843,7 @@
         "vencimento": "2028-06-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9zp28qx",
@@ -1929,8 +1852,7 @@
         "vencimento": "2028-07-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       },
       {
         "id": "mu9o0xn9v8mi4z",
@@ -1939,8 +1861,7 @@
         "vencimento": "2028-08-10",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "Plano de Saúde - Deb. Aut."
+        "comprovante": null
       }
     ]
   },
@@ -1968,11 +1889,7 @@
         "vencimento": "2026-09-10",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "nome": "Comprovante_25-09-2026_132958.png",
-          "tipo": "image/png",
-          "arquivo": "dados/comprovantes/muh6lq8rmm8b4u.png"
-        },
+        "comprovante": null,
         "descricaoOverride": "Vivo Celular"
       },
       {
@@ -1983,7 +1900,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf70fahy",
@@ -1993,7 +1910,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfsablsy",
@@ -2003,7 +1920,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rff120k3",
@@ -2013,7 +1930,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf5vo80v",
@@ -2023,7 +1940,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf7onmlw",
@@ -2033,7 +1950,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfdokxs1",
@@ -2043,7 +1960,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf3v9wq5",
@@ -2053,7 +1970,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf10nuiu",
@@ -2063,7 +1980,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rf781vec",
@@ -2073,7 +1990,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfrtcgd0",
@@ -2083,7 +2000,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfxzd90d",
@@ -2093,7 +2010,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfguh3kk",
@@ -2103,7 +2020,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfdn4zum",
@@ -2113,7 +2030,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfdt7ywl",
@@ -2123,7 +2040,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfth6yma",
@@ -2133,7 +2050,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfy8mmyv",
@@ -2143,7 +2060,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfcs174f",
@@ -2153,7 +2070,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfdgvy82",
@@ -2163,7 +2080,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfm9q5vz",
@@ -2173,7 +2090,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfzvuohf",
@@ -2183,7 +2100,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfgsatj6",
@@ -2193,7 +2110,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       },
       {
         "id": "mu9o44rfq8m0mw",
@@ -2203,7 +2120,7 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "descricaoOverride": "Vivo Celular - Deb. Aut."
+        "descricaoOverride": "Vivo Celular"
       }
     ]
   },
@@ -2232,7 +2149,7 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muiye16qchel9u",
+          "id": "muo0onxuehod5s",
           "nome": "Origo-10.09.26.jpeg",
           "tipo": "image/jpeg",
           "ext": "jpg",
@@ -2473,7 +2390,7 @@
         "link": "",
         "status": "pago",
         "comprovante": {
-          "id": "muixgxqc03bso1",
+          "id": "muo0onxuok7swx",
           "nome": "CartaoXP-15.09.26.jpeg",
           "tipo": "image/jpeg",
           "ext": "jpg",
@@ -2483,7 +2400,7 @@
       {
         "id": "mu9ocgvjtn8egf",
         "numero": 2,
-        "valor": 5500,
+        "valor": 3000,
         "vencimento": "2026-10-15",
         "link": "",
         "status": "em_aberto",
@@ -2948,11 +2865,7 @@
         "vencimento": "2026-09-18",
         "link": "",
         "status": "pago",
-        "comprovante": {
-          "nome": "IMG-20260925-WA0013.jpg",
-          "tipo": "image/jpeg",
-          "arquivo": "dados/comprovantes/muh295hkxi8co5.jpg"
-        }
+        "comprovante": null
       },
       {
         "id": "mu9oox4eugrr7i",
@@ -3164,883 +3077,55 @@
     ]
   },
   {
-    "id": "mue5kdl4jgamxo",
-    "credor": "Domínio Administração",
-    "descricao": "Condomínio mensal",
-    "valorTotal": 0,
-    "valorParcela": 275,
-    "modo": "continua",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": true,
-    "ancora": "2026-09-20",
-    "qtdParcelas": 24,
-    "primeiroVencimento": "2026-09-20",
-    "ultimoVencimento": "2028-08-20",
-    "criadoEm": "2026-09-23T13:42:35.464Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "mue5kdl4d1q7hn",
-        "numero": 1,
-        "valor": 275,
-        "vencimento": "2026-09-20",
-        "link": "Nao foi pago",
-        "status": "outros",
-        "comprovante": null,
-        "descricaoOverride": "Condomínio mensal (Não foi pago)"
-      },
-      {
-        "id": "mue5kdl4aaj04k",
-        "numero": 2,
-        "valor": 275,
-        "vencimento": "2026-10-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4jfec06",
-        "numero": 3,
-        "valor": 275,
-        "vencimento": "2026-11-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4l2232k",
-        "numero": 4,
-        "valor": 275,
-        "vencimento": "2026-12-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4f153b6",
-        "numero": 5,
-        "valor": 275,
-        "vencimento": "2027-01-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl407mnea",
-        "numero": 6,
-        "valor": 275,
-        "vencimento": "2027-02-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl413rcfx",
-        "numero": 7,
-        "valor": 275,
-        "vencimento": "2027-03-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4qgxrpv",
-        "numero": 8,
-        "valor": 275,
-        "vencimento": "2027-04-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4kvrtxm",
-        "numero": 9,
-        "valor": 275,
-        "vencimento": "2027-05-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4qwjr4n",
-        "numero": 10,
-        "valor": 275,
-        "vencimento": "2027-06-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4fwr3sm",
-        "numero": 11,
-        "valor": 275,
-        "vencimento": "2027-07-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl42bmvec",
-        "numero": 12,
-        "valor": 275,
-        "vencimento": "2027-08-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4twy0iq",
-        "numero": 13,
-        "valor": 275,
-        "vencimento": "2027-09-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4hvelev",
-        "numero": 14,
-        "valor": 275,
-        "vencimento": "2027-10-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl42gyd0r",
-        "numero": 15,
-        "valor": 275,
-        "vencimento": "2027-11-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4piebgr",
-        "numero": 16,
-        "valor": 275,
-        "vencimento": "2027-12-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4lxdk04",
-        "numero": 17,
-        "valor": 275,
-        "vencimento": "2028-01-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4yxrwxj",
-        "numero": 18,
-        "valor": 275,
-        "vencimento": "2028-02-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4m2n3br",
-        "numero": 19,
-        "valor": 275,
-        "vencimento": "2028-03-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4m23zmi",
-        "numero": 20,
-        "valor": 275,
-        "vencimento": "2028-04-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4cmrarx",
-        "numero": 21,
-        "valor": 275,
-        "vencimento": "2028-05-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4zfac71",
-        "numero": 22,
-        "valor": 275,
-        "vencimento": "2028-06-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl4dwr6jo",
-        "numero": 23,
-        "valor": 275,
-        "vencimento": "2028-07-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mue5kdl40eefrb",
-        "numero": 24,
-        "valor": 275,
-        "vencimento": "2028-08-20",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
-    "id": "muefupqovmko8l",
-    "credor": "Geisa",
-    "descricao": "Caixinha MP - Aimorés",
-    "valorTotal": 0,
-    "valorParcela": 300,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2026-11-25",
-    "qtdParcelas": 10,
-    "primeiroVencimento": "2026-11-25",
-    "ultimoVencimento": "2027-08-25",
-    "criadoEm": "2026-09-23T18:30:33.936Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "muefupqnulznqn",
-        "numero": 1,
-        "valor": 300,
-        "vencimento": "2026-11-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqo0slgo1",
-        "numero": 2,
-        "valor": 300,
-        "vencimento": "2026-12-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqobfhdta",
-        "numero": 3,
-        "valor": 300,
-        "vencimento": "2027-01-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqomn052m",
-        "numero": 4,
-        "valor": 300,
-        "vencimento": "2027-02-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqo8qpphq",
-        "numero": 5,
-        "valor": 300,
-        "vencimento": "2027-03-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqoazhwjz",
-        "numero": 6,
-        "valor": 300,
-        "vencimento": "2027-04-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqo3ufc42",
-        "numero": 7,
-        "valor": 300,
-        "vencimento": "2027-05-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqo2p0cbk",
-        "numero": 8,
-        "valor": 300,
-        "vencimento": "2027-06-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqotscqvb",
-        "numero": 9,
-        "valor": 300,
-        "vencimento": "2027-07-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muefupqovcl47i",
-        "numero": 10,
-        "valor": 300,
-        "vencimento": "2027-08-25",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
-    "id": "mugvjn1otkl0bh",
-    "credor": "Copasa",
-    "descricao": "Água Cisplatina (Total - R$ 397,97)",
-    "valorTotal": 0,
-    "valorParcela": 132.69,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2026-09-15",
-    "qtdParcelas": 1,
-    "primeiroVencimento": "2026-09-15",
-    "ultimoVencimento": "2026-09-15",
-    "criadoEm": "2026-09-25T11:25:23.436Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "mugvjn1ov4j758",
-        "numero": 1,
-        "valor": 132.69,
-        "vencimento": "2026-09-15",
-        "link": "",
-        "status": "pago",
-        "comprovante": {
-          "nome": "Comprovante_25-09-2026_080844.png.png",
-          "tipo": "image/png",
-          "arquivo": "dados/comprovantes/muh07q9n76e8l8.png"
-        }
-      }
-    ]
-  },
-  {
-    "id": "mujz4pmcvqrskq",
+    "id": "mu9pxec4q5byns",
     "credor": "Secretaria de Estado da Fazenda",
     "descricao": "Taxa Licenciamento Fusca",
-    "valorTotal": 0,
+    "valorTotal": 40,
     "valorParcela": 40,
-    "modo": "continua",
-    "periodicidade": "anual",
-    "diaEspecifico": "",
-    "continuada": true,
-    "ancora": "2027-03-31",
-    "qtdParcelas": 24,
-    "primeiroVencimento": "2027-03-31",
-    "ultimoVencimento": "2050-03-31",
-    "criadoEm": "2026-09-27T15:29:03.924Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "mujz4pm9sq1prr",
-        "numero": 1,
-        "valor": 40,
-        "vencimento": "2027-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pm9h6402q",
-        "numero": 2,
-        "valor": 40,
-        "vencimento": "2028-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmabnxsm5",
-        "numero": 3,
-        "valor": 40,
-        "vencimento": "2029-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmafka4u1",
-        "numero": 4,
-        "valor": 40,
-        "vencimento": "2030-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pma4qbbdk",
-        "numero": 5,
-        "valor": 40,
-        "vencimento": "2031-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmabf8y5n",
-        "numero": 6,
-        "valor": 40,
-        "vencimento": "2032-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmactupqk",
-        "numero": 7,
-        "valor": 40,
-        "vencimento": "2033-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmaqczlwi",
-        "numero": 8,
-        "valor": 40,
-        "vencimento": "2034-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmariwmgp",
-        "numero": 9,
-        "valor": 40,
-        "vencimento": "2035-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmak5ndam",
-        "numero": 10,
-        "valor": 40,
-        "vencimento": "2036-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmabvrkp3",
-        "numero": 11,
-        "valor": 40,
-        "vencimento": "2037-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pma0htjtg",
-        "numero": 12,
-        "valor": 40,
-        "vencimento": "2038-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmabpbg98",
-        "numero": 13,
-        "valor": 40,
-        "vencimento": "2039-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmbw55664",
-        "numero": 14,
-        "valor": 40,
-        "vencimento": "2040-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmb43s8r5",
-        "numero": 15,
-        "valor": 40,
-        "vencimento": "2041-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmc67vp7w",
-        "numero": 16,
-        "valor": 40,
-        "vencimento": "2042-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcvh8g9n",
-        "numero": 17,
-        "valor": 40,
-        "vencimento": "2043-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcoe931g",
-        "numero": 18,
-        "valor": 40,
-        "vencimento": "2044-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmchi8eub",
-        "numero": 19,
-        "valor": 40,
-        "vencimento": "2045-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcbdswis",
-        "numero": 20,
-        "valor": 40,
-        "vencimento": "2046-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcd7zugr",
-        "numero": 21,
-        "valor": 40,
-        "vencimento": "2047-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcswe34e",
-        "numero": 22,
-        "valor": 40,
-        "vencimento": "2048-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcml24pm",
-        "numero": 23,
-        "valor": 40,
-        "vencimento": "2049-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mujz4pmcirngef",
-        "numero": 24,
-        "valor": 40,
-        "vencimento": "2050-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
-    "id": "muk1qdityfohl8",
-    "credor": "Secretaria de Estado da Fazenda",
-    "descricao": "Taxa Licenciamento Jeep",
-    "valorTotal": 0,
-    "valorParcela": 40,
-    "modo": "continua",
-    "periodicidade": "anual",
-    "diaEspecifico": "",
-    "continuada": true,
-    "ancora": "2027-03-31",
-    "qtdParcelas": 24,
-    "primeiroVencimento": "2027-03-31",
-    "ultimoVencimento": "2050-03-31",
-    "criadoEm": "2026-09-27T16:41:53.909Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "muk1qdisvp2kby",
-        "numero": 1,
-        "valor": 40,
-        "vencimento": "2027-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdiska8ja6",
-        "numero": 2,
-        "valor": 40,
-        "vencimento": "2028-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdispaqd30",
-        "numero": 3,
-        "valor": 40,
-        "vencimento": "2029-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisih1s1d",
-        "numero": 4,
-        "valor": 40,
-        "vencimento": "2030-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisn7ze2v",
-        "numero": 5,
-        "valor": 40,
-        "vencimento": "2031-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisbkpfec",
-        "numero": 6,
-        "valor": 40,
-        "vencimento": "2032-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdis6cmz8x",
-        "numero": 7,
-        "valor": 40,
-        "vencimento": "2033-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisan3zkp",
-        "numero": 8,
-        "valor": 40,
-        "vencimento": "2034-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdis245h91",
-        "numero": 9,
-        "valor": 40,
-        "vencimento": "2035-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdiswmwea8",
-        "numero": 10,
-        "valor": 40,
-        "vencimento": "2036-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdis5tw8nq",
-        "numero": 11,
-        "valor": 40,
-        "vencimento": "2037-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisr0ebqu",
-        "numero": 12,
-        "valor": 40,
-        "vencimento": "2038-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdisul05h4",
-        "numero": 13,
-        "valor": 40,
-        "vencimento": "2039-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdis0f8tmx",
-        "numero": 14,
-        "valor": 40,
-        "vencimento": "2040-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditfyjlkl",
-        "numero": 15,
-        "valor": 40,
-        "vencimento": "2041-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditknc8p8",
-        "numero": 16,
-        "valor": 40,
-        "vencimento": "2042-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditco7vy5",
-        "numero": 17,
-        "valor": 40,
-        "vencimento": "2043-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditarvwfs",
-        "numero": 18,
-        "valor": 40,
-        "vencimento": "2044-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditamnoft",
-        "numero": 19,
-        "valor": 40,
-        "vencimento": "2045-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdit9pdr7f",
-        "numero": 20,
-        "valor": 40,
-        "vencimento": "2046-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditgo7hjy",
-        "numero": 21,
-        "valor": 40,
-        "vencimento": "2047-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditqycnlv",
-        "numero": 22,
-        "valor": 40,
-        "vencimento": "2048-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qdit7vhn8u",
-        "numero": 23,
-        "valor": 40,
-        "vencimento": "2049-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "muk1qditdsnpfp",
-        "numero": 24,
-        "valor": 40,
-        "vencimento": "2050-03-31",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
-  },
-  {
-    "id": "munz6pce4p96pp",
-    "credor": "Ministério da Fazenda",
-    "descricao": "IRPF Débito Automático",
-    "valorTotal": 0,
-    "valorParcela": 146.45,
     "modo": "parcelas",
     "periodicidade": "mensal",
     "diaEspecifico": "",
     "continuada": false,
-    "ancora": "2026-09-30",
-    "qtdParcelas": 2,
-    "primeiroVencimento": "2026-09-30",
-    "ultimoVencimento": "2026-10-30",
-    "criadoEm": "2026-09-30T10:41:41.582Z",
+    "ancora": "2027-03-31",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2027-03-31",
+    "ultimoVencimento": "2027-03-31",
+    "criadoEm": "2026-09-20T11:13:44.404Z",
     "aberto": false,
     "parcelas": [
       {
-        "id": "munz6pceeaq2oe",
+        "id": "mu9pxec45ibkmt",
         "numero": 1,
-        "valor": 146.45,
-        "vencimento": "2026-09-30",
+        "valor": 40,
+        "vencimento": "2027-03-31",
         "link": "",
-        "status": "pago",
+        "status": "em_aberto",
         "comprovante": null
-      },
+      }
+    ]
+  },
+  {
+    "id": "mu9pyx8whhvcip",
+    "credor": "Secretaria de Estado da Fazenda",
+    "descricao": "Taxa Licenciamento Jeep",
+    "valorTotal": 40,
+    "valorParcela": 40,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2027-03-31",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2027-03-31",
+    "ultimoVencimento": "2027-03-31",
+    "criadoEm": "2026-09-20T11:14:55.568Z",
+    "aberto": false,
+    "parcelas": [
       {
-        "id": "munz6pce1hh65g",
-        "numero": 2,
-        "valor": 146.45,
-        "vencimento": "2026-10-30",
+        "id": "mu9pyx8wa917h9",
+        "numero": 1,
+        "valor": 40,
+        "vencimento": "2027-03-31",
         "link": "",
         "status": "em_aberto",
         "comprovante": null
