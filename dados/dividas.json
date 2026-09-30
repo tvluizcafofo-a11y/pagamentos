@@ -529,7 +529,13 @@
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=FE24DF21CD6C2CF40961F2A30AE55907",
         "status": "pago",
-        "comprovante": null
+        "comprovante": {
+          "id": "muo1ls0tc7y7hp",
+          "nome": "Comprovante_30-09-2026_003937.png.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        }
       },
       {
         "id": "mu8j480rsl0onp",
