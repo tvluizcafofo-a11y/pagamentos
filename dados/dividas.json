@@ -88,8 +88,14 @@
         "valor": 523.76,
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=C6E7C6F9AD33F07DFDBD57FC8E1ADB9B",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "munzkuh35qxnyl",
+          "nome": "Comprovante_30-09-2026_075105.png.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        }
       },
       {
         "id": "mu8hhuyo2oodsy",
