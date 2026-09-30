@@ -3186,5 +3186,240 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "muo2ajfz7vzw5b",
+    "credor": "Domínio Administração",
+    "descricao": "Condominio",
+    "valorTotal": 0,
+    "valorParcela": 275,
+    "modo": "continua",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": true,
+    "ancora": "2026-10-20",
+    "qtdParcelas": 24,
+    "primeiroVencimento": "2026-10-20",
+    "ultimoVencimento": "2028-09-20",
+    "criadoEm": "2026-09-30T12:08:39.407Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muo2ajfyh0kjzf",
+        "numero": 1,
+        "valor": 275,
+        "vencimento": "2026-10-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfy0tls19",
+        "numero": 2,
+        "valor": 275,
+        "vencimento": "2026-11-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfyfxzr5b",
+        "numero": 3,
+        "valor": 275,
+        "vencimento": "2026-12-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfyha8i1u",
+        "numero": 4,
+        "valor": 275,
+        "vencimento": "2027-01-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfyf0jtaj",
+        "numero": 5,
+        "valor": 275,
+        "vencimento": "2027-02-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfydjqa27",
+        "numero": 6,
+        "valor": 275,
+        "vencimento": "2027-03-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfz6lcv3h",
+        "numero": 7,
+        "valor": 275,
+        "vencimento": "2027-04-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzaaz1cu",
+        "numero": 8,
+        "valor": 275,
+        "vencimento": "2027-05-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfztqf8jm",
+        "numero": 9,
+        "valor": 275,
+        "vencimento": "2027-06-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfz2qbp6e",
+        "numero": 10,
+        "valor": 275,
+        "vencimento": "2027-07-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzvxitd6",
+        "numero": 11,
+        "valor": 275,
+        "vencimento": "2027-08-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzkz2o2t",
+        "numero": 12,
+        "valor": 275,
+        "vencimento": "2027-09-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfz29d56w",
+        "numero": 13,
+        "valor": 275,
+        "vencimento": "2027-10-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfza3don7",
+        "numero": 14,
+        "valor": 275,
+        "vencimento": "2027-11-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzjxzvjp",
+        "numero": 15,
+        "valor": 275,
+        "vencimento": "2027-12-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzofrmzk",
+        "numero": 16,
+        "valor": 275,
+        "vencimento": "2028-01-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfza2ujrv",
+        "numero": 17,
+        "valor": 275,
+        "vencimento": "2028-02-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzml14p6",
+        "numero": 18,
+        "valor": 275,
+        "vencimento": "2028-03-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzai2m7a",
+        "numero": 19,
+        "valor": 275,
+        "vencimento": "2028-04-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzfzl324",
+        "numero": 20,
+        "valor": 275,
+        "vencimento": "2028-05-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfz7j6rkw",
+        "numero": 21,
+        "valor": 275,
+        "vencimento": "2028-06-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfz29d66n",
+        "numero": 22,
+        "valor": 275,
+        "vencimento": "2028-07-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzpsxjga",
+        "numero": 23,
+        "valor": 275,
+        "vencimento": "2028-08-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo2ajfzwhotlv",
+        "numero": 24,
+        "valor": 275,
+        "vencimento": "2028-09-20",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
