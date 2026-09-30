@@ -4003,5 +4003,42 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "munz6pce4p96pp",
+    "credor": "Ministério da Fazenda",
+    "descricao": "IRPF Débito Automático",
+    "valorTotal": 0,
+    "valorParcela": 146.45,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-09-30",
+    "qtdParcelas": 2,
+    "primeiroVencimento": "2026-09-30",
+    "ultimoVencimento": "2026-10-30",
+    "criadoEm": "2026-09-30T10:41:41.582Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "munz6pceeaq2oe",
+        "numero": 1,
+        "valor": 146.45,
+        "vencimento": "2026-09-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "munz6pce1hh65g",
+        "numero": 2,
+        "valor": 146.45,
+        "vencimento": "2026-10-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
