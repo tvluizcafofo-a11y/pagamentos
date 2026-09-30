@@ -3149,5 +3149,42 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "muo1wjpknarq86",
+    "credor": "Ministério da Fazenda",
+    "descricao": "IRP 2025",
+    "valorTotal": 0,
+    "valorParcela": 146.45,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-09-30",
+    "qtdParcelas": 2,
+    "primeiroVencimento": "2026-09-30",
+    "ultimoVencimento": "2026-10-30",
+    "criadoEm": "2026-09-30T11:57:46.568Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muo1wjpjzh5949",
+        "numero": 1,
+        "valor": 146.45,
+        "vencimento": "2026-09-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "muo1wjpjzhn1rl",
+        "numero": 2,
+        "valor": 146.45,
+        "vencimento": "2026-10-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
