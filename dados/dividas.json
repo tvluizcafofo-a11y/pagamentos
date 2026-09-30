@@ -1199,7 +1199,7 @@
         "valor": 70,
         "vencimento": "2026-09-30",
         "link": "00020101021126690014br.gov.bcb.pix0120Luizmart33@gmail.com0223TARIFA MANUTENCAO CONTA520400005303986540570.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304D4C6",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "munjkra0l7snqw",
           "nome": "Comprovante_30-09-2026_002345.png.png",
