@@ -113,13 +113,16 @@
   .check-ocultar-hoje input{width:18px;height:18px;accent-color:var(--azul);
     cursor:pointer;margin:0;flex-shrink:0}
 
-  /* ==== mini-tags (indicadores link/Pix/comprovante) — base global ==== */
+  /* ==== mini-tags (indicadores link/Pix-Boleto/comprovante) — base global ==== */
   .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
   .mini-tags .tag-ico{font-size:.72rem;line-height:1;padding:1px 6px;border-radius:6px;
     font-weight:800;display:inline-flex;align-items:center;gap:3px;
     border:1px solid transparent}
-  .mini-tags .tag-ico.link{background:var(--info-bg);color:#0369a1;border-color:#bae6fd}
+  /* Link web (http/https) — VERDE CLARO para identificação rápida */
+  .mini-tags .tag-ico.link{background:#bbf7d0;color:#14532d;border-color:#4ade80}
+  /* Pix / Boleto (código copia-e-cola) — roxo */
   .mini-tags .tag-ico.pix{background:#ede9fe;color:#5b21b6;border-color:#c4b5fd}
+  /* Comprovante anexado — verde pálido */
   .mini-tags .tag-ico.comp{background:var(--verde-bg);color:#15803d;border-color:#86efac}
 
   .painel{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:16px}
@@ -433,10 +436,13 @@
   .item-resumo .texto-credencial .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
   .item-resumo .texto-credencial .mini-tags .tag-ico{font-size:.82rem;line-height:1;
     padding:1px 5px;border-radius:6px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
-  .item-resumo .texto-credencial .mini-tags .tag-ico.link{background:var(--info-bg);
-    color:#0369a1;border:1px solid #bae6fd}
+  /* Link web — VERDE CLARO (idem global) */
+  .item-resumo .texto-credencial .mini-tags .tag-ico.link{background:#bbf7d0;
+    color:#14532d;border:1px solid #4ade80}
+  /* Pix / Boleto — roxo */
   .item-resumo .texto-credencial .mini-tags .tag-ico.pix{background:#ede9fe;
     color:#5b21b6;border:1px solid #c4b5fd}
+  /* Comprovante — verde pálido */
   .item-resumo .texto-credencial .mini-tags .tag-ico.comp{background:var(--verde-bg);
     color:#15803d;border:1px solid #86efac}
   .item-resumo .valor-area{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -2230,9 +2236,9 @@ function miniTagsHTML(p, dr){
   if(lk && String(lk).trim()){
     const v = String(lk).trim();
     if(ehUrlLink(v)){
-      out += `<span class="tag-ico link" title="Possui link anexado">🔗 link</span>`;
+      out += `<span class="tag-ico link" title="Possui link (URL) anexado">🔗 link</span>`;
     } else {
-      out += `<span class="tag-ico pix" title="Possui código Pix">📋 Pix</span>`;
+      out += `<span class="tag-ico pix" title="Possui código Pix ou boleto (copia e cola)">📋 Pix/Boleto</span>`;
     }
   }
   if(comp) out += `<span class="tag-ico comp" title="Possui comprovante anexado">💰 pago</span>`;
@@ -2271,10 +2277,10 @@ function itemVencimentoHTML(d,p){
         <label><b>Valor (R$)</b><input type="number" step="0.01" min="0" data-campo="valor" value="${Number(vl).toFixed(2)}"></label>
         <label><b>Vencimento</b><input type="date" data-campo="vencimento" value="${vc}"></label>
         <label><b>Status</b><select class="combo st-${st}" data-campo="status">${opcoesStatus(st)}</select></label>
-        <label class="largura-total"><b>Link / Pix</b>
+        <label class="largura-total"><b>Link / Pix / Boleto</b>
           <div class="linha-link">
-            <input type="text" data-campo="link" placeholder="https:// ou código Pix (copia e cola)" value="${escapar(lk)}">
-            <button type="button" class="btn-mini verde ${tl?'':'escondido'}" data-acao="copiarLink" title="Copiar link/Pix">📋</button>
+            <input type="text" data-campo="link" placeholder="https:// , código Pix ou boleto (copia e cola)" value="${escapar(lk)}">
+            <button type="button" class="btn-mini verde ${tl?'':'escondido'}" data-acao="copiarLink" title="Copiar link/Pix/Boleto">📋</button>
             <button type="button" class="btn-mini azul ${tl?'':'escondido'}" data-acao="abrirLink" title="Abrir link">🔗</button>
           </div>
         </label>
@@ -2624,9 +2630,9 @@ function montarDividaCompletaHTML(d){
       <td class="col-num">${p.numero}${miniTagsHTML(p)}</td>
       <td><b>Valor:</b> <input type="number" step="0.01" min="0" data-campo="valor" value="${Number(p.valor).toFixed(2)}"></td>
       <td><b>Vencimento:</b> <input type="date" data-campo="vencimento" value="${p.vencimento}"></td>
-      <td><b>Link/Pix:</b>
+      <td><b>Link/Pix/Boleto:</b>
         <div class="linha-link">
-          <input type="text" data-campo="link" placeholder="https:// ou Pix" value="${escapar(p.link)}">
+          <input type="text" data-campo="link" placeholder="https:// , Pix ou boleto" value="${escapar(p.link)}">
           <button type="button" class="btn-mini verde ${p.link?'':'escondido'}" data-acao="copiarLink" title="Copiar">📋</button>
           <button type="button" class="btn-mini azul ${p.link?'':'escondido'}" data-acao="abrirLink" title="Abrir">🔗</button>
         </div>
@@ -2642,7 +2648,7 @@ function montarDividaCompletaHTML(d){
     </div>
       <div class="resumo-divida">${resumoDividaHTML(d)}</div></summary>
     <div class="tabela-area"><table>
-      <thead><tr><th>#</th><th>Valor</th><th>Vencimento</th><th>Link/Pix</th><th>Status</th><th>Comprovante</th></tr></thead>
+      <thead><tr><th>#</th><th>Valor</th><th>Vencimento</th><th>Link/Pix/Boleto</th><th>Status</th><th>Comprovante</th></tr></thead>
       <tbody>${linhas}</tbody></table></div>
     <div class="rodape-divida">
       <button type="button" class="btn-acao-divida editar" data-acao="editarDivida">✏️ Editar dívida</button>
