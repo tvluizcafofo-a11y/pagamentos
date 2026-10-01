@@ -765,6 +765,64 @@
   .opcao-escopo.perigo:hover{background:#fef2f2;border-color:#fca5a5;
     box-shadow:0 6px 16px rgba(220,38,38,.15)}
 
+  /* =========================================================
+     NAVEGAÇÃO POR DIA (botões + swipe)
+     ========================================================= */
+  .nav-dia{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:16px;
+  }
+  .nav-dia h2.titulo-tela{
+    margin:0;
+    flex:1;
+    min-width:0;
+    text-align:center;
+    justify-content:center;
+    font-size:1.15rem;
+    padding-left:0;
+    flex-wrap:wrap;
+  }
+  .nav-dia h2.titulo-tela::before{ display:none; }
+
+  .nav-dia-btn{
+    flex:0 0 auto;
+    width:46px;
+    height:46px;
+    border-radius:12px;
+    background:linear-gradient(135deg,#dbeafe,#bfdbfe);
+    border:2px solid #93c5fd;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:1.6rem;
+    font-weight:900;
+    color:#1e40af;
+    transition:.15s;
+    box-shadow:0 2px 6px rgba(37,99,235,.15);
+    line-height:1;
+    padding-bottom:3px;
+  }
+  .nav-dia-btn:hover{
+    background:linear-gradient(135deg,#bfdbfe,#93c5fd);
+    border-color:#60a5fa;
+    transform:translateY(-2px);
+  }
+  .nav-dia-btn:active{ transform:scale(.95); }
+
+  /* Animação de entrada da lista ao trocar de dia */
+  @keyframes diaSlideInRight{
+    from{opacity:0; transform:translateX(40px)}
+    to{opacity:1; transform:translateX(0)}
+  }
+  @keyframes diaSlideInLeft{
+    from{opacity:0; transform:translateX(-40px)}
+    to{opacity:1; transform:translateX(0)}
+  }
+  #listaDia.lista-dia-anim-next{ animation:diaSlideInRight .25s ease-out; }
+  #listaDia.lista-dia-anim-prev{ animation:diaSlideInLeft .25s ease-out; }
+
   @media (max-width:520px){
     header.topo h1{font-size:1.05rem}
     .calendario-cabecalho h3{font-size:1.6rem}
@@ -780,6 +838,9 @@
     .item-resumo .texto-credencial b{font-size:.88rem}
     .item-resumo .valor-parcela{font-size:1rem}
     .acoes-iniciais .btn{min-width:130px;font-size:.8rem;padding:11px 14px}
+    .nav-dia{ gap:8px; }
+    .nav-dia h2.titulo-tela{ font-size:1rem; }
+    .nav-dia-btn{ width:42px; height:42px; font-size:1.4rem; }
   }
   @media (max-width:380px){
     .area{padding:10px}
@@ -792,6 +853,8 @@
     .dia .qtd{font-size:.46rem;min-width:11px;height:11px}
     header.topo h1{font-size:.95rem}
     h2.titulo-tela{font-size:1.15rem}
+    .nav-dia h2.titulo-tela{ font-size:.92rem; }
+    .nav-dia-btn{ width:38px; height:38px; font-size:1.25rem; border-radius:10px; }
   }
 </style>
 </head>
@@ -858,7 +921,13 @@
 
   <section class="tela escondido" id="tela-dia">
     <button class="btn-voltar" id="voltarCalendario">Voltar</button>
-    <h2 class="titulo-tela" id="tituloDia"></h2>
+    <div class="nav-dia">
+      <button type="button" class="nav-dia-btn" id="diaAnterior"
+              title="Dia anterior" aria-label="Dia anterior">‹</button>
+      <h2 class="titulo-tela" id="tituloDia"></h2>
+      <button type="button" class="nav-dia-btn" id="diaProximo"
+              title="Próximo dia" aria-label="Próximo dia">›</button>
+    </div>
     <div id="listaDia"></div>
   </section>
 
@@ -2194,6 +2263,111 @@ function abrirDia(iso){
   document.getElementById('tituloDia').innerHTML=`${nomeDiaSemana(dt.getDay())}, ${d} de ${nomeMes(m-1)} de ${a}` + (hj?' <span class="badge-hoje">hoje</span>':'');
   renderListaDia(itensDoDia(iso)); mostrarTela('dia');
 }
+
+/* =========================================================
+   NAVEGAÇÃO ENTRE DIAS (botões + swipe no mobile)
+   ========================================================= */
+let bloqueiaClickDia = false;
+
+function navegarDia(delta){
+  const atual = estado.diaSelecionado || hojeIso();
+  const antes = estado.diaSelecionado;
+  const dt = isoParaData(atual);
+  dt.setDate(dt.getDate() + delta);
+  const novoIso = dataParaIso(dt);
+
+  // abrirDia já cuida do confirm() de rascunhos pendentes.
+  abrirDia(novoIso);
+
+  // Só prossegue se realmente navegou (usuário não cancelou o confirm)
+  if(estado.diaSelecionado === novoIso && novoIso !== antes){
+    estado.expandidos.clear();
+    estado.mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
+
+    // Animação de entrada
+    const ld = document.getElementById('listaDia');
+    if(ld){
+      ld.classList.remove('lista-dia-anim-next','lista-dia-anim-prev');
+      void ld.offsetWidth;
+      ld.classList.add(delta > 0 ? 'lista-dia-anim-next' : 'lista-dia-anim-prev');
+    }
+  }
+}
+
+document.getElementById('diaAnterior').addEventListener('click', () => navegarDia(-1));
+document.getElementById('diaProximo').addEventListener('click', () => navegarDia(1));
+
+/* ---- Swipe lateral na tela do dia (mobile) ---- */
+const telaDiaEl = document.getElementById('tela-dia');
+const swipeDiaState = {
+  startX:0, startY:0, deltaX:0, deltaY:0,
+  ativo:false, bloqueado:false
+};
+
+telaDiaEl.addEventListener('touchstart', (e) => {
+  const t = e.target;
+  // Não interceptar gestos iniciados em controles interativos
+  if(t.closest('input, select, textarea, button, a')){
+    swipeDiaState.bloqueado = true;
+    return;
+  }
+  swipeDiaState.bloqueado = false;
+  const touch = e.touches[0];
+  swipeDiaState.startX = touch.clientX;
+  swipeDiaState.startY = touch.clientY;
+  swipeDiaState.deltaX = 0;
+  swipeDiaState.deltaY = 0;
+  swipeDiaState.ativo = false;
+}, { passive:true });
+
+telaDiaEl.addEventListener('touchmove', (e) => {
+  if(swipeDiaState.bloqueado) return;
+  const touch = e.touches[0];
+  const dx = touch.clientX - swipeDiaState.startX;
+  const dy = touch.clientY - swipeDiaState.startY;
+
+  if(!swipeDiaState.ativo){
+    // Só ativa se for claramente horizontal (evita conflito com scroll)
+    if(Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy) * 1.5){
+      swipeDiaState.ativo = true;
+    } else {
+      return;
+    }
+  }
+  swipeDiaState.deltaX = dx;
+  swipeDiaState.deltaY = dy;
+}, { passive:true });
+
+telaDiaEl.addEventListener('touchend', () => {
+  if(swipeDiaState.bloqueado){
+    swipeDiaState.bloqueado = false;
+    swipeDiaState.ativo = false;
+    return;
+  }
+  if(!swipeDiaState.ativo) return;
+
+  const dx = swipeDiaState.deltaX;
+  swipeDiaState.ativo = false;
+  swipeDiaState.deltaX = 0;
+  swipeDiaState.deltaY = 0;
+
+  if(Math.abs(dx) > 60){
+    bloqueiaClickDia = true;
+    setTimeout(() => { bloqueiaClickDia = false; }, 350);
+    // Swipe para a esquerda → próximo dia ; direita → dia anterior
+    if(dx < 0) navegarDia(1);
+    else navegarDia(-1);
+  }
+}, { passive:true });
+
+// Bloqueia o clique que o navegador dispara após o swipe (evita expandir item)
+telaDiaEl.addEventListener('click', (e) => {
+  if(bloqueiaClickDia){
+    e.preventDefault();
+    e.stopPropagation();
+  }
+}, true);
+
 function itensDoDia(iso){ const it=[]; dividas.forEach(dv=>dv.parcelas.forEach(p=>{ if(p.vencimento===iso) it.push({divida:dv,parcela:p}); }));
   it.sort((x,y)=>x.divida.credor.localeCompare(y.divida.credor,'pt-BR')); return it; }
 function recarregarListaDia(){ if(!estado.diaSelecionado) return; renderListaDia(itensDoDia(estado.diaSelecionado)); }
