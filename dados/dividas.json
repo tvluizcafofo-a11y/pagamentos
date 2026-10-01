@@ -2948,7 +2948,8 @@
         "vencimento": "2026-10-30",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "IRPF 2025"
       }
     ]
   },
