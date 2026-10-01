@@ -3665,7 +3665,13 @@
         "vencimento": "2026-10-01",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": {
+          "id": "mupv7gl1xomvv3",
+          "nome": "documento.pdf",
+          "tipo": "application/pdf",
+          "ext": "pdf",
+          "enviado": true
+        }
       }
     ]
   }
