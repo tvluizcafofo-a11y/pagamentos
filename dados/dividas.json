@@ -719,7 +719,8 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "credorOverride": "Geisa"
+        "credorOverride": "Geisa",
+        "descricaoOverride": "Semanada Geisa (descontar 48 reais)"
       },
       {
         "id": "mu8n9k1wlc7ctd",
