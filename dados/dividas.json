@@ -3664,7 +3664,7 @@
         "valor": 80,
         "vencimento": "2026-10-01",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "mupv7gl1xomvv3",
           "nome": "documento.pdf",
