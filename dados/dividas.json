@@ -718,7 +718,13 @@
         "vencimento": "2026-10-02",
         "link": "00020101021126360014br.gov.bcb.pix0114+55319833356905204000053039865406200.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304FB61",
         "status": "pago",
-        "comprovante": null,
+        "comprovante": {
+          "id": "muqxx5vc4zkd6o",
+          "nome": "Comprovante_02-10-2026_092429.png.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        },
         "credorOverride": "Geisa",
         "descricaoOverride": "Semanada Geisa (descontar 48 reais)"
       },
