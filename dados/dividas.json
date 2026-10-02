@@ -3706,7 +3706,13 @@
         "vencimento": "2026-10-02",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null,
+        "comprovante": {
+          "id": "muriw2h1n3gpwh",
+          "nome": "Comprovante_02-10-2026_191537.png.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        },
         "credorOverride": "Dinho Chaveiro"
       }
     ]
