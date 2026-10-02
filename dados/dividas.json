@@ -3706,7 +3706,8 @@
         "vencimento": "2026-10-02",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "credorOverride": "Dinho Chaveiro"
       }
     ]
   }
