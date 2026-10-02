@@ -118,11 +118,8 @@
   .mini-tags .tag-ico{font-size:.72rem;line-height:1;padding:1px 6px;border-radius:6px;
     font-weight:800;display:inline-flex;align-items:center;gap:3px;
     border:1px solid transparent}
-  /* Link web (http/https) — VERDE CLARO para identificação rápida */
   .mini-tags .tag-ico.link{background:#bbf7d0;color:#14532d;border-color:#4ade80}
-  /* Pix / Boleto (código copia-e-cola) — roxo */
   .mini-tags .tag-ico.pix{background:#ede9fe;color:#5b21b6;border-color:#c4b5fd}
-  /* Comprovante anexado — verde pálido */
   .mini-tags .tag-ico.comp{background:var(--verde-bg);color:#15803d;border-color:#86efac}
 
   .painel{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-bottom:16px}
@@ -436,13 +433,10 @@
   .item-resumo .texto-credencial .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
   .item-resumo .texto-credencial .mini-tags .tag-ico{font-size:.82rem;line-height:1;
     padding:1px 5px;border-radius:6px;font-weight:700;display:inline-flex;align-items:center;gap:3px}
-  /* Link web — VERDE CLARO (idem global) */
   .item-resumo .texto-credencial .mini-tags .tag-ico.link{background:#bbf7d0;
     color:#14532d;border:1px solid #4ade80}
-  /* Pix / Boleto — roxo */
   .item-resumo .texto-credencial .mini-tags .tag-ico.pix{background:#ede9fe;
     color:#5b21b6;border:1px solid #c4b5fd}
-  /* Comprovante — verde pálido */
   .item-resumo .texto-credencial .mini-tags .tag-ico.comp{background:var(--verde-bg);
     color:#15803d;border:1px solid #86efac}
   .item-resumo .valor-area{display:flex;align-items:center;gap:8px;flex-shrink:0}
@@ -811,7 +805,6 @@
   }
   .nav-dia-btn:active{ transform:scale(.95); }
 
-  /* Animação de entrada da lista ao trocar de dia */
   @keyframes diaSlideInRight{
     from{opacity:0; transform:translateX(40px)}
     to{opacity:1; transform:translateX(0)}
@@ -822,6 +815,354 @@
   }
   #listaDia.lista-dia-anim-next{ animation:diaSlideInRight .25s ease-out; }
   #listaDia.lista-dia-anim-prev{ animation:diaSlideInLeft .25s ease-out; }
+
+  /* =========================================================
+     AJUDA — documentação integrada
+     ========================================================= */
+  .ajuda-cartao{
+    background:#fff;
+    border:2px solid var(--linha);
+    border-radius:var(--raio);
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:0 2px 8px rgba(15,23,42,.06);
+  }
+  .ajuda-intro{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #bfdbfe;
+    border-left:6px solid var(--azul);
+    border-radius:var(--raio);
+    padding:14px 16px;
+    margin-bottom:16px;
+    font-size:.88rem;
+    line-height:1.65;
+    color:#1e3a8a;
+    font-weight:500;
+  }
+  .ajuda-intro b{color:var(--azul-profundo);font-weight:900}
+  .ajuda-indice{
+    background:#fff;
+    border:2px solid var(--linha);
+    border-radius:var(--raio);
+    padding:14px 16px;
+    margin-bottom:16px;
+    box-shadow:0 2px 8px rgba(15,23,42,.06);
+  }
+  .ajuda-indice h3{
+    margin:0 0 12px;
+    font-size:.95rem;
+    font-weight:900;
+    color:#1e293b;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .ajuda-indice h3::before{
+    content:'';width:8px;height:8px;border-radius:50%;
+    background:var(--azul);box-shadow:0 0 0 4px var(--azul-claro);
+  }
+  .ajuda-indice ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+    display:grid;
+    gap:6px;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  }
+  .ajuda-indice a{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border-radius:8px;
+    background:#f8fafc;
+    color:var(--texto);
+    text-decoration:none;
+    font-weight:600;
+    font-size:.84rem;
+    transition:.15s;
+    border:1.5px solid #e2e8f0;
+  }
+  .ajuda-indice a:hover{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-color:#93c5fd;
+    color:var(--azul-esc);
+    transform:translateX(3px);
+  }
+  .ajuda-indice a .num{
+    background:var(--azul);
+    color:#fff;
+    font-size:.7rem;
+    font-weight:900;
+    min-width:22px;
+    height:22px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+  }
+  details.ajuda-secao{
+    background:#fff;
+    border:2px solid var(--linha);
+    border-radius:var(--raio);
+    margin-bottom:12px;
+    overflow:hidden;
+    box-shadow:0 2px 6px rgba(15,23,42,.06);
+    scroll-margin-top:90px;
+  }
+  details.ajuda-secao[open]{
+    border-color:#93c5fd;
+    box-shadow:0 4px 16px rgba(37,99,235,.12);
+  }
+  details.ajuda-secao>summary{
+    list-style:none;
+    cursor:pointer;
+    padding:14px 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#f8fafc;
+    transition:.15s;
+    font-weight:900;
+    font-size:.95rem;
+    color:#0f172a;
+  }
+  details.ajuda-secao>summary:hover{background:#f1f5f9}
+  details.ajuda-secao[open]>summary{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-bottom:2px dashed var(--linha);
+    color:var(--azul-profundo);
+  }
+  details.ajuda-secao>summary::-webkit-details-marker{display:none}
+  details.ajuda-secao>summary::after{
+    content:'▾';
+    font-size:1rem;
+    font-weight:900;
+    color:var(--suave);
+    transition:.2s;
+    margin-left:auto;
+  }
+  details.ajuda-secao[open]>summary::after{
+    content:'▴';
+    color:var(--azul);
+  }
+  details.ajuda-secao>summary .emoji-secao{
+    font-size:1.3rem;
+    line-height:1;
+    flex-shrink:0;
+    width:36px;
+    height:36px;
+    border-radius:10px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 1px 3px rgba(15,23,42,.1);
+  }
+  .ajuda-conteudo{
+    padding:16px;
+    font-size:.86rem;
+    line-height:1.7;
+    color:#334155;
+  }
+  .ajuda-conteudo p{margin:0 0 12px}
+  .ajuda-conteudo p:last-child{margin-bottom:0}
+  .ajuda-conteudo b{color:#0f172a;font-weight:900}
+  .ajuda-conteudo code{
+    background:#f1f5f9;
+    border:1px solid #e2e8f0;
+    border-radius:5px;
+    padding:2px 7px;
+    font-family:ui-monospace,monospace;
+    font-size:.78rem;
+    color:#0369a1;
+    font-weight:700;
+    word-break:break-word;
+  }
+  .ajuda-conteudo ol,.ajuda-conteudo ul{margin:10px 0;padding-left:22px}
+  .ajuda-conteudo li{margin:6px 0}
+  .ajuda-conteudo h4{
+    margin:18px 0 8px;
+    font-size:.86rem;
+    font-weight:900;
+    color:var(--azul-profundo);
+    text-transform:uppercase;
+    letter-spacing:.6px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .ajuda-conteudo h4:first-child{margin-top:0}
+  .ajuda-passo{
+    background:linear-gradient(135deg,#f8fafc,#f1f5f9);
+    border:2px solid var(--linha);
+    border-left:5px solid var(--azul);
+    border-radius:10px;
+    padding:12px 14px;
+    margin:10px 0;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+  }
+  .ajuda-passo .num-passo{
+    background:linear-gradient(135deg,var(--azul),var(--azul-esc));
+    color:#fff;
+    font-size:.8rem;
+    font-weight:900;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    box-shadow:0 2px 6px rgba(37,99,235,.35);
+  }
+  .ajuda-passo .texto-passo{flex:1;min-width:0}
+  .ajuda-passo .texto-passo b{display:block;font-size:.88rem;font-weight:900;color:var(--texto);margin-bottom:3px}
+  .ajuda-passo .texto-passo small{display:block;color:var(--suave);font-size:.78rem;font-weight:500;line-height:1.5}
+  .ajuda-dica{
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7);
+    border:2px solid #86efac;
+    border-left:5px solid var(--verde);
+    border-radius:10px;
+    padding:11px 14px;
+    margin:12px 0;
+    font-size:.82rem;
+    color:#14532d;
+    font-weight:600;
+    line-height:1.6;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .ajuda-dica::before{
+    content:'💡';
+    font-size:1.1rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .ajuda-dica b{color:#15803d;font-weight:900}
+  .ajuda-aviso{
+    background:linear-gradient(135deg,#fffbeb,#fef3c7);
+    border:2px solid #fcd34d;
+    border-left:5px solid var(--amarelo);
+    border-radius:10px;
+    padding:11px 14px;
+    margin:12px 0;
+    font-size:.82rem;
+    color:#78350f;
+    font-weight:600;
+    line-height:1.6;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .ajuda-aviso::before{
+    content:'⚠️';
+    font-size:1.1rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .ajuda-aviso b{color:#92400e;font-weight:900}
+  .ajuda-perigo{
+    background:linear-gradient(135deg,#fef2f2,#fee2e2);
+    border:2px solid #fca5a5;
+    border-left:5px solid var(--vermelho);
+    border-radius:10px;
+    padding:11px 14px;
+    margin:12px 0;
+    font-size:.82rem;
+    color:#7f1d1d;
+    font-weight:600;
+    line-height:1.6;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .ajuda-perigo::before{
+    content:'🛑';
+    font-size:1.1rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .ajuda-perigo b{color:#b91c1c;font-weight:900}
+  .ajuda-info{
+    background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+    border:2px solid #bae6fd;
+    border-left:5px solid var(--info);
+    border-radius:10px;
+    padding:11px 14px;
+    margin:12px 0;
+    font-size:.82rem;
+    color:#075985;
+    font-weight:600;
+    line-height:1.6;
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+  }
+  .ajuda-info::before{
+    content:'ℹ️';
+    font-size:1.1rem;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .ajuda-info b{color:#0c4a6e;font-weight:900}
+  .ajuda-legenda-cores{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:12px 0;
+  }
+  .ajuda-cor{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:.78rem;
+    font-weight:700;
+    background:#f8fafc;
+    border:1.5px solid var(--linha);
+    border-radius:8px;
+    padding:6px 12px;
+  }
+  .ajuda-cor i{
+    width:14px;
+    height:14px;
+    border-radius:4px;
+    display:inline-block;
+    border:2px solid transparent;
+  }
+  .ajuda-tabela{
+    width:100%;
+    border-collapse:collapse;
+    font-size:.8rem;
+    margin:12px 0;
+    border:2px solid var(--linha);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  .ajuda-tabela th{
+    background:#f1f5f9;
+    text-align:left;
+    padding:9px 12px;
+    font-size:.7rem;
+    text-transform:uppercase;
+    letter-spacing:.5px;
+    font-weight:900;
+    color:var(--suave);
+    border-bottom:2px solid var(--linha);
+  }
+  .ajuda-tabela td{
+    padding:9px 12px;
+    border-bottom:1px solid #f1f5f9;
+    vertical-align:top;
+    color:#334155;
+  }
+  .ajuda-tabela tr:last-child td{border-bottom:none}
+  .ajuda-tabela td b{color:var(--texto);font-weight:900}
+  .ajuda-tabela code{font-size:.72rem}
 
   @media (max-width:520px){
     header.topo h1{font-size:1.05rem}
@@ -841,6 +1182,12 @@
     .nav-dia{ gap:8px; }
     .nav-dia h2.titulo-tela{ font-size:1rem; }
     .nav-dia-btn{ width:42px; height:42px; font-size:1.4rem; }
+    .ajuda-indice ul{grid-template-columns:1fr}
+    .ajuda-conteudo{padding:14px;font-size:.82rem}
+    details.ajuda-secao>summary{font-size:.88rem;padding:12px 14px}
+    details.ajuda-secao>summary .emoji-secao{width:32px;height:32px;font-size:1.1rem}
+    .ajuda-tabela{font-size:.74rem}
+    .ajuda-tabela th,.ajuda-tabela td{padding:7px 9px}
   }
   @media (max-width:380px){
     .area{padding:10px}
@@ -916,6 +1263,7 @@
       <button class="btn btn-primario" id="btnNovaDivida">➕ Nova dívida</button>
       <button class="btn btn-neutro" id="btnVerTodas">📋 Ver todas</button>
       <button class="btn btn-neutro" id="btnAbrirResumo">📊 Resumo</button>
+      <button class="btn btn-neutro" id="btnAbrirAjuda">❓ Ajuda</button>
     </div>
   </section>
 
@@ -1048,6 +1396,823 @@
         <input type="file" id="arquivoImportar" accept="application/json" hidden>
       </div>
     </div>
+  </section>
+
+  <!-- =========================================================
+       TELA DE AJUDA
+       ========================================================= -->
+  <section class="tela escondido" id="tela-ajuda">
+    <button class="btn-voltar" id="voltarCalendario5">Voltar</button>
+    <h2 class="titulo-tela">❓ Ajuda e Documentação</h2>
+
+    <div class="ajuda-intro">
+      <b>Bem-vindo ao Sistema de Pagamentos!</b><br>
+      Este app foi feito para você <b>controlar dívidas parceladas</b> — empréstimos, IPTU, mensalidades,
+      aluguéis, faturas, boletos. Você cadastra credores e parcelas, visualiza tudo num <b>calendário</b>,
+      marca pagamentos, anexa <b>comprovantes</b>, cola <b>links/Pix/boletos</b> e pode
+      <b>sincronizar com o GitHub</b> para não perder nada. Use o índice abaixo ou role a página.
+    </div>
+
+    <div class="ajuda-indice">
+      <h3>📑 Índice</h3>
+      <ul>
+        <li><a href="#ajuda-1"><span class="num">1</span> Visão geral do app</a></li>
+        <li><a href="#ajuda-2"><span class="num">2</span> Cadastrar a 1ª dívida</a></li>
+        <li><a href="#ajuda-3"><span class="num">3</span> Tipos de parcelamento</a></li>
+        <li><a href="#ajuda-4"><span class="num">4</span> Dívida contínua (∞)</a></li>
+        <li><a href="#ajuda-5"><span class="num">5</span> Periodicidade</a></li>
+        <li><a href="#ajuda-6"><span class="num">6</span> Calendário</a></li>
+        <li><a href="#ajuda-7"><span class="num">7</span> Navegar entre dias</a></li>
+        <li><a href="#ajuda-8"><span class="num">8</span> Editar parcela</a></li>
+        <li><a href="#ajuda-9"><span class="num">9</span> Escopo de alterações</a></li>
+        <li><a href="#ajuda-10"><span class="num">10</span> Status de pagamento</a></li>
+        <li><a href="#ajuda-11"><span class="num">11</span> Link / Pix / Boleto</a></li>
+        <li><a href="#ajuda-12"><span class="num">12</span> Comprovantes</a></li>
+        <li><a href="#ajuda-13"><span class="num">13</span> Busca</a></li>
+        <li><a href="#ajuda-14"><span class="num">14</span> Resumo e filtros</a></li>
+        <li><a href="#ajuda-15"><span class="num">15</span> Editar em lote</a></li>
+        <li><a href="#ajuda-16"><span class="num">16</span> Feriados e atrasos</a></li>
+        <li><a href="#ajuda-17"><span class="num">17</span> Backup local</a></li>
+        <li><a href="#ajuda-18"><span class="num">18</span> Sincronizar GitHub</a></li>
+        <li><a href="#ajuda-19"><span class="num">19</span> Instalar como app</a></li>
+        <li><a href="#ajuda-20"><span class="num">20</span> Perguntas frequentes</a></li>
+      </ul>
+    </div>
+
+    <!-- ============ 1. VISÃO GERAL ============ -->
+    <details class="ajuda-secao" id="ajuda-1">
+      <summary><span class="emoji-secao">🧭</span> 1. Visão geral do app</summary>
+      <div class="ajuda-conteudo">
+        <p>O <b>Sistema de Pagamentos</b> organiza suas dívidas parceladas em um único lugar. A ideia é simples:</p>
+        <ul>
+          <li>Você cria uma <b>dívida</b> (ex: "Empréstimo Banco XYZ") com várias <b>parcelas</b>.</li>
+          <li>Cada parcela tem <b>valor</b>, <b>vencimento</b> e <b>status</b> (em aberto, pago, em atraso, outros).</li>
+          <li>O app mostra tudo em um <b>calendário</b> — cores indicam o que está pago, aberto ou atrasado.</li>
+          <li>Você pode anexar <b>comprovantes</b>, guardar <b>links de boleto</b> ou <b>códigos Pix</b>.</li>
+          <li>Opcionalmente, tudo pode ser <b>sincronizado com o GitHub</b> para backup na nuvem.</li>
+        </ul>
+
+        <h4>O que este app NÃO é</h4>
+        <p>Este app <b>não é um banco</b>, não faz pagamentos, não abre contas e não se conecta a instituições financeiras. Ele é um <b>organizador pessoal</b> — você registra manualmente o que paga e o que deve. Pense nele como uma "agenda de dívidas inteligente".</p>
+
+        <div class="ajuda-info">
+          <b>Tudo fica no seu dispositivo.</b> Os dados são salvos no <code>localStorage</code> do navegador.
+          Se quiser backup na nuvem, configure a sincronização com GitHub (seção 18).
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 2. CADASTRAR 1ª DÍVIDA ============ -->
+    <details class="ajuda-secao" id="ajuda-2">
+      <summary><span class="emoji-secao">➕</span> 2. Cadastrar a primeira dívida</summary>
+      <div class="ajuda-conteudo">
+        <p>Na tela inicial, toque em <b>➕ Nova dívida</b>. Você verá um formulário dividido em 3 blocos:</p>
+
+        <h4>Bloco 1 — Dados principais</h4>
+        <div class="ajuda-passo">
+          <span class="num-passo">1</span>
+          <div class="texto-passo">
+            <b>Identificação do credor</b>
+            <small>Quem você deve. Ex: "Banco XYZ", "Prefeitura", "João". O campo tem autocompletar — se já usou o nome antes, ele sugere.</small>
+          </div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">2</span>
+          <div class="texto-passo">
+            <b>Descrição da dívida</b>
+            <small>O que é. Ex: "Empréstimo pessoal", "IPTU 2025", "Fatura cartão".</small>
+          </div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">3</span>
+          <div class="texto-passo">
+            <b>Valor total (opcional)</b>
+            <small>Só para referência. Ex: R$ 5.000,00. Não afeta cálculos.</small>
+          </div>
+        </div>
+
+        <h4>Bloco 2 — Condições do parcelamento</h4>
+        <div class="ajuda-passo">
+          <span class="num-passo">4</span>
+          <div class="texto-passo">
+            <b>Valor da parcela</b>
+            <small>Quanto você paga em cada vencimento. Ex: 450,00.</small>
+          </div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">5</span>
+          <div class="texto-passo">
+            <b>1º vencimento</b>
+            <small>Data da primeira parcela. Já vem com a data de hoje.</small>
+          </div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">6</span>
+          <div class="texto-passo">
+            <b>Modo de cálculo</b>
+            <small><b>Quantidade</b> (ex: 12 parcelas) ou <b>Data última</b> (ex: até dez/2026). O app calcula automaticamente.</small>
+          </div>
+        </div>
+
+        <h4>Bloco 3 — Periodicidade</h4>
+        <div class="ajuda-passo">
+          <span class="num-passo">7</span>
+          <div class="texto-passo">
+            <b>Mensal / Semanal / Quinzenal / Anual</b>
+            <small>Escolha o intervalo. Se quiser um dia específico (ex: todo dia 5), selecione no campo abaixo. Veja a seção 5.</small>
+          </div>
+        </div>
+
+        <h4>Conferir e salvar</h4>
+        <p>O app mostra uma <b>prévia</b> ("X parcelas mensais de R$ Y — 1º: ... — Último: ..."). Confira e toque em <b>💾 Salvar</b>.</p>
+
+        <div class="ajuda-dica">
+          O credor digitado entra no <b>autocompletar</b> da próxima vez. Use sempre o mesmo nome para agrupar dívidas do mesmo credor.
+        </div>
+        <div class="ajuda-aviso">
+          <b>Máximo de 360 parcelas</b> por dívida (30 anos). Para prazos maiores ou recorrentes, use a <b>Dívida contínua</b> (seção 4).
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 3. TIPOS DE PARCELAMENTO ============ -->
+    <details class="ajuda-secao" id="ajuda-3">
+      <summary><span class="emoji-secao">🔢</span> 3. Tipos de parcelamento</summary>
+      <div class="ajuda-conteudo">
+        <p>Ao criar uma dívida você tem dois modos para definir o número de parcelas:</p>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Modo</th><th>Quando usar</th><th>Exemplo</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><b>Quantidade de parcelas</b></td>
+              <td>Você já sabe "vou pagar em 12x"</td>
+              <td>12 parcelas de R$ 450 → <code>12</code> no campo Quantidade</td>
+            </tr>
+            <tr>
+              <td><b>Data da última parcela</b></td>
+              <td>Você sabe até quando paga (ex: quitar até dez/2026)</td>
+              <td>1º venc: 05/02/2026 · última: 05/12/2026 → <code>11</code> parcelas</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>A <b>prévia</b> na parte inferior do formulário sempre mostra quantas parcelas serão geradas e o valor total.</p>
+        <div class="ajuda-info">
+          Se você mudar o <b>modo</b> ou qualquer <b>data</b>, a prévia recalcula na hora. Sempre confira antes de salvar.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 4. DÍVIDA CONTÍNUA ============ -->
+    <details class="ajuda-secao" id="ajuda-4">
+      <summary><span class="emoji-secao">♾️</span> 4. Dívida contínua (∞)</summary>
+      <div class="ajuda-conteudo">
+        <p>Use a <b>Dívida contínua</b> para contas recorrentes que nunca "terminam": aluguel, mensalidade, assinatura, pensão.</p>
+        <p>Ao marcar a caixa <b>♾️ Dívida contínua</b>:</p>
+        <ul>
+          <li>O app gera automaticamente <b>24 parcelas iniciais</b>.</li>
+          <li>Sempre que você abre o app, ele verifica: se houver menos de <b>12 parcelas futuras</b>, gera mais automaticamente.</li>
+          <li>O campo "modo de cálculo" é escondido (não se aplica).</li>
+          <li>O selo <code>♾️ contínua</code> aparece na listagem e no calendário.</li>
+        </ul>
+
+        <h4>Diferenças em relação a uma dívida normal</h4>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Aspecto</th><th>Dívida normal</th><th>Dívida contínua</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Nº de parcelas</td><td>Fixo</td><td>Cresce automaticamente</td></tr>
+            <tr><td>Última parcela</td><td>Definida</td><td>Sempre há futuras</td></tr>
+            <tr><td>Edição</td><td>Pode excluir todas</td><td>Nunca acaba sozinha</td></tr>
+            <tr><td>Resumo</td><td><code>8/12 pagas</code></td><td><code>8 pagas · ∞</code></td></tr>
+          </tbody>
+        </table>
+
+        <div class="ajuda-dica">
+          Para <b>encerrar</b> uma dívida contínua, entre em "📋 Ver todas", localize a dívida e toque em <b>🗑 Excluir dívida</b>. Isso remove todas as parcelas (pagas e futuras) — use com cuidado.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 5. PERIODICIDADE ============ -->
+    <details class="ajuda-secao" id="ajuda-5">
+      <summary><span class="emoji-secao">🔁</span> 5. Periodicidade e dia específico</summary>
+      <div class="ajuda-conteudo">
+        <p>Define de quanto em quanto tempo as parcelas vencem:</p>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Periodicidade</th><th>Intervalo</th><th>Dia específico</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Mensal</b></td><td>1 mês</td><td>Dia do mês (1–31)</td></tr>
+            <tr><td><b>Semanal</b></td><td>7 dias</td><td>Dia da semana</td></tr>
+            <tr><td><b>Quinzenal</b></td><td>14 dias</td><td>Dia da semana</td></tr>
+            <tr><td><b>Anual</b></td><td>1 ano</td><td>Mesmo dia do ano</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Dia específico</h4>
+        <ul>
+          <li><b>Mensal:</b> escolha "Dia 5" → todas as parcelas caem no dia 5. Se o dia não existir no mês (ex: 31 em fevereiro), o app usa o último dia.</li>
+          <li><b>Semanal/Quinzenal:</b> escolha "Segunda" → todas as parcelas caem às segundas.</li>
+          <li><b>Deixe em branco:</b> o app usa o mesmo dia do 1º vencimento.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          Se o 1º vencimento é <b>15/03</b> e você escolhe "Dia 5", o app ajusta a base para <b>05/04</b> — sempre a próxima data válida, nunca anterior ao 1º vencimento.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 6. CALENDÁRIO ============ -->
+    <details class="ajuda-secao" id="ajuda-6">
+      <summary><span class="emoji-secao">📅</span> 6. Calendário</summary>
+      <div class="ajuda-conteudo">
+        <p>É a tela inicial. Cada quadradinho é um dia do mês, colorido conforme o status das parcelas:</p>
+        <div class="ajuda-legenda-cores">
+          <span class="ajuda-cor"><i style="background:#f0f9ff;border-color:#bae6fd"></i> Em aberto (azul)</span>
+          <span class="ajuda-cor"><i style="background:#f0fdf4;border-color:#86efac"></i> Pago (verde)</span>
+          <span class="ajuda-cor"><i style="background:#fef2f2;border-color:#fca5a5"></i> Em atraso (vermelho)</span>
+          <span class="ajuda-cor"><i style="background:#fffbeb;border-color:#fcd34d"></i> Outros (amarelo)</span>
+          <span class="ajuda-cor"><i style="background:#fff7ed;border:2px solid #f97316"></i> Hoje (laranja)</span>
+        </div>
+        <p>O número no canto superior direito do dia mostra <b>quantas parcelas vencem ali</b>.</p>
+
+        <h4>Navegar entre meses</h4>
+        <ul>
+          <li>Toque em <b>‹</b> ou <b>›</b> no topo do calendário.</li>
+          <li>No celular, <b>deslize o dedo para os lados</b>.</li>
+        </ul>
+
+        <h4>Ver as parcelas do dia</h4>
+        <p>Toque em qualquer dia (que não seja "fora do mês") para abrir a tela do dia com a lista de vencimentos.</p>
+
+        <h4>Rodapé do calendário</h4>
+        <ul>
+          <li><b>Legenda de cores</b> — sempre visível.</li>
+          <li><b>Feriados do mês</b> — lista os feriados nacionais que caem no mês exibido.</li>
+          <li><b>Dica "Deslize para mudar de mês"</b> — lembrete para gestos.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          Domingos aparecem com o <b>número em vermelho</b>, e feriados têm a <b>borda vermelha</b>.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 7. NAVEGAR ENTRE DIAS ============ -->
+    <details class="ajuda-secao" id="ajuda-7">
+      <summary><span class="emoji-secao">↔️</span> 7. Navegar entre dias (novo)</summary>
+      <div class="ajuda-conteudo">
+        <p>Dentro da tela de vencimentos de um dia, você pode <b>avançar ou voltar um dia</b> sem retornar ao calendário:</p>
+
+        <h4>Por botões</h4>
+        <ul>
+          <li>Botão <b>‹</b> à esquerda do título → <b>dia anterior</b>.</li>
+          <li>Botão <b>›</b> à direita do título → <b>próximo dia</b>.</li>
+        </ul>
+
+        <h4>Por gesto (celular)</h4>
+        <ul>
+          <li><b>Deslizar para a esquerda</b> → próximo dia.</li>
+          <li><b>Deslizar para a direita</b> → dia anterior.</li>
+        </ul>
+
+        <h4>Comportamento importante</h4>
+        <ul>
+          <li>Se você tiver <b>edições não salvas</b> (rascunhos), o app pergunta se deseja descartar antes de trocar de dia.</li>
+          <li>O <b>mês de referência</b> do calendário é atualizado junto — ao voltar, você cai no mês correto.</li>
+          <li>Gestos iniciados <b>em campos de formulário, botões ou links</b> são ignorados (não interferem na digitação).</li>
+          <li>O gesto precisa ser <b>claramente horizontal</b> (mais largo do que alto) para não conflitar com a rolagem da página.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          Combinação prática: navegue pelos dias com um <b>toque nos botões</b> quando estiver revisando rapidamente, e use o <b>swipe</b> quando estiver no celular com a mão ocupada.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 8. EDITAR PARCELA ============ -->
+    <details class="ajuda-secao" id="ajuda-8">
+      <summary><span class="emoji-secao">✏️</span> 8. Editar uma parcela</summary>
+      <div class="ajuda-conteudo">
+        <p>Na tela do dia, cada parcela aparece como um cartão. Toque no cartão para <b>expandir</b> os detalhes. Você poderá alterar:</p>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Campo</th><th>O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Credor</b></td><td>Nome do credor. Se alterar apenas nesta parcela, aplica-se um "override" local.</td></tr>
+            <tr><td><b>Descrição</b></td><td>Texto descritivo.</td></tr>
+            <tr><td><b>Valor (R$)</b></td><td>Valor da parcela.</td></tr>
+            <tr><td><b>Vencimento</b></td><td>Data.</td></tr>
+            <tr><td><b>Status</b></td><td>Em aberto / Pago / Em atraso / Outros.</td></tr>
+            <tr><td><b>Link/Pix/Boleto</b></td><td>URL ou código copia-e-cola (veja seção 11).</td></tr>
+            <tr><td><b>Comprovante</b></td><td>Anexar/ver/trocar/remover (veja seção 12).</td></tr>
+          </tbody>
+        </table>
+
+        <p>Depois de alterar, toque em <b>💾 Salvar</b>. O app pergunta <b>até onde aplicar</b> (veja seção 9).</p>
+
+        <h4>Outros botões no cartão</h4>
+        <ul>
+          <li><b>🗑 Excluir</b> — remove a parcela (também pergunta o escopo).</li>
+          <li><b>✕ Cancelar</b> — descarta as alterações do rascunho.</li>
+          <li><b>📋</b> (verde) — copia o link/Pix/boleto.</li>
+          <li><b>🔗</b> (azul) — abre o link no navegador.</li>
+          <li><b>👁 Ver</b> — visualiza o comprovante anexado.</li>
+          <li><b>↻ Trocar</b> / <b>📎 Anexar</b> — adiciona/troca comprovante.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          O selo <b>✎</b> ao lado do credor indica que aquela parcela tem <b>override</b> (valor diferente do padrão da dívida).
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 9. ESCOPO ============ -->
+    <details class="ajuda-secao" id="ajuda-9">
+      <summary><span class="emoji-secao">🎯</span> 9. Escopo de alterações</summary>
+      <div class="ajuda-conteudo">
+        <p>Ao salvar ou excluir uma parcela, o app pergunta <b>até onde aplicar</b>. Isso evita ter que editar 12 parcelas uma a uma.</p>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Opção</th><th>O que faz</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>📌 Somente esta parcela</b></td><td>Altera apenas a parcela selecionada. As outras ficam intactas.</td></tr>
+            <tr><td><b>➡️ Esta e as futuras</b></td><td>Altera a selecionada e todas as posteriores (com número maior).</td></tr>
+            <tr><td><b>🔁 Todas as parcelas</b></td><td>Altera todas as parcelas da dívida (inclui as passadas).</td></tr>
+            <tr><td><b>✕ Voltar à edição</b></td><td>Fecha o modal sem aplicar nada.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Como o valor/vencimento se propaga</h4>
+        <ul>
+          <li><b>Valor:</b> o valor informado é aplicado igualmente a todas as afetadas.</li>
+          <li><b>Vencimento:</b> o app calcula a <b>diferença de dias</b> entre o vencimento antigo e o novo, e empurra as demais pela mesma diferença. Ex: você move de 05/03 para 10/03 (+5 dias) — todas as futuras ganham +5 dias.</li>
+          <li><b>Credor/Descrição:</b> em "todas", altera o cabeçalho da dívida; em "apenas/futuras", cria override local na parcela.</li>
+        </ul>
+
+        <div class="ajuda-aviso">
+          A opção <b>todas</b> sobrescreve até parcelas já pagas. Use com atenção — normalmente você quer <b>"esta e as futuras"</b>.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 10. STATUS ============ -->
+    <details class="ajuda-secao" id="ajuda-10">
+      <summary><span class="emoji-secao">🏷️</span> 10. Status de pagamento</summary>
+      <div class="ajuda-conteudo">
+        <p>Cada parcela tem um dos 4 status:</p>
+        <table class="ajuda-tabela">
+          <thead>
+            <tr><th>Status</th><th>Cor</th><th>Quando usar</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><b>Em aberto</b></td><td>Azul</td><td>Ainda não venceu ou está aguardando pagamento.</td></tr>
+            <tr><td><b>Pago</b></td><td>Verde</td><td>Você já pagou. Idealmente, anexe o comprovante.</td></tr>
+            <tr><td><b>Em atraso</b></td><td>Vermelho</td><td>Passou do vencimento e continua em aberto. <b>Automático</b>: o app marca sozinho ao abrir.</td></tr>
+            <tr><td><b>Outros</b></td><td>Amarelo</td><td>Casos especiais: negociado, renegociado, suspenso, etc.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Atualização automática de atrasos</h4>
+        <p>Sempre que o app abre (ou quando você volta para o calendário), ele verifica todas as parcelas em aberto com vencimento &lt; hoje e as marca como <b>em atraso</b>. Se você mudar manualmente para outro status, ele respeita.</p>
+
+        <div class="ajuda-dica">
+          Para marcar como pago rapidamente: toque na parcela → selecione <b>Pago</b> → <b>💾 Salvar</b> → escolha "somente esta parcela". Anexe o comprovante em seguida.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 11. LINK / PIX / BOLETO ============ -->
+    <details class="ajuda-secao" id="ajuda-11">
+      <summary><span class="emoji-secao">🔗</span> 11. Link, Pix e Boleto</summary>
+      <div class="ajuda-conteudo">
+        <p>Cada parcela tem um campo <b>Link / Pix / Boleto</b>. Ele aceita dois tipos de conteúdo:</p>
+
+        <h4>URL (link web)</h4>
+        <p>Comece com <code>http://</code> ou <code>https://</code>. O app mostra a tag verde <b>🔗 link</b> e habilita o botão azul <b>🔗</b> para abrir no navegador.</p>
+
+        <h4>Código Pix / Boleto (copia-e-cola)</h4>
+        <p>Cole o código (geralmente uma sequência longa começando com números ou "00020126..."). O app mostra a tag roxa <b>📋 Pix/Boleto</b> e habilita o botão verde <b>📋</b> para copiar.</p>
+
+        <h4>Como usar</h4>
+        <ol>
+          <li>Expanda a parcela.</li>
+          <li>Cole o link ou código no campo.</li>
+          <li>Toque em <b>💾 Salvar</b> e escolha o escopo.</li>
+          <li>Depois, use <b>📋</b> ou <b>🔗</b> direto no cartão, sem precisar expandir.</li>
+        </ol>
+
+        <div class="ajuda-dica">
+          Se você colar um link sem <code>https://</code>, o app adiciona automaticamente ao abrir. Mas a detecção da tag verde só funciona se começar com <code>http</code>.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 12. COMPROVANTES ============ -->
+    <details class="ajuda-secao" id="ajuda-12">
+      <summary><span class="emoji-secao">🧾</span> 12. Comprovantes</summary>
+      <div class="ajuda-conteudo">
+        <p>Cada parcela pode ter <b>um comprovante</b> anexado — foto ou PDF.</p>
+
+        <h4>Formatos e tamanho</h4>
+        <ul>
+          <li>Imagens: JPG, PNG, GIF, WebP, HEIC, BMP, SVG.</li>
+          <li>PDF.</li>
+          <li>Tamanho máximo: <b>2 MB</b>.</li>
+        </ul>
+
+        <h4>Anexar</h4>
+        <ol>
+          <li>Expanda a parcela.</li>
+          <li>Toque em <b>📎 Anexar</b>.</li>
+          <li>Escolha o arquivo no dispositivo.</li>
+          <li>Toque em <b>💾 Salvar</b> e confirme o escopo.</li>
+        </ol>
+
+        <h4>O que dá para fazer com o comprovante</h4>
+        <table class="ajuda-tabela">
+          <thead><tr><th>Botão</th><th>Ação</th></tr></thead>
+          <tbody>
+            <tr><td><b>👁 Ver</b></td><td>Abre o modal com a pré-visualização.</td></tr>
+            <tr><td><b>↻ Trocar</b></td><td>Substitui por outro arquivo.</td></tr>
+            <tr><td><b>✕</b></td><td>Remove o comprovante.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Modal de comprovante — botões</h4>
+        <ul>
+          <li><b>📤 Compartilhar</b> — usa a API nativa de compartilhamento do dispositivo (Android/iOS).</li>
+          <li><b>💬 WhatsApp</b> — tenta compartilhar direto; se não suportar, baixa o arquivo e abre o WhatsApp Web.</li>
+          <li><b>✉️ E-mail</b> — mesma lógica, com <code>mailto:</code>.</li>
+          <li><b>⬇ Baixar</b> — salva o arquivo localmente.</li>
+        </ul>
+
+        <h4>Onde o comprovante fica armazenado</h4>
+        <ul>
+          <li><b>Local:</b> no <code>localStorage</code> do navegador, com prefixo <code>sistemaPagamentos.comprovante.</code>.</li>
+          <li><b>Nuvem (opcional):</b> se o GitHub estiver configurado, o comprovante é enviado para <code>dados/comprovantes/</code> no repositório, e pode ser rebaixado em outro dispositivo.</li>
+        </ul>
+
+        <div class="ajuda-aviso">
+          Se o <b>armazenamento local</b> estiver cheio, o app recusa novos anexos com aviso. Remova comprovantes antigos antes de continuar.
+        </div>
+
+        <div class="ajuda-info">
+          O <b>backup em JSON</b> (seção 17) exporta apenas os <b>metadados</b> do comprovante — não o arquivo em si. O arquivo real fica no localStorage e, se configurado, no GitHub.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 13. BUSCA ============ -->
+    <details class="ajuda-secao" id="ajuda-13">
+      <summary><span class="emoji-secao">🔍</span> 13. Busca</summary>
+      <div class="ajuda-conteudo">
+        <p>No topo da tela inicial há um campo de busca. Digite qualquer coisa e os resultados aparecem em tempo real.</p>
+
+        <h4>O que pode ser buscado</h4>
+        <ul>
+          <li>Credor</li>
+          <li>Descrição</li>
+          <li>Valor (ex: <code>450</code> ou <code>R$ 450,00</code>)</li>
+          <li>Data (ex: <code>2025-03</code> ou <code>05/03/2025</code>)</li>
+          <li>Status ("pago", "aberto", "atraso")</li>
+          <li>Número da parcela ("parcela 3", "3/12")</li>
+          <li>Conteúdo do campo link/Pix</li>
+        </ul>
+
+        <h4>Atalhos</h4>
+        <ul>
+          <li><b>✕</b> (botão cinza) — limpa o campo.</li>
+          <li><b>Esc</b> — limpa e volta ao calendário.</li>
+          <li>Toque em um resultado — abre o dia e expande a parcela automaticamente.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          A busca ignora <b>acentos e maiúsculas</b>. "IPTU" e "iptu" retornam o mesmo resultado.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 14. RESUMO E FILTROS ============ -->
+    <details class="ajuda-secao" id="ajuda-14">
+      <summary><span class="emoji-secao">📊</span> 14. Resumo e filtros</summary>
+      <div class="ajuda-conteudo">
+        <p>Toque em <b>📊 Resumo</b> na tela inicial. Aqui você vê os totais agregados com filtros de período.</p>
+
+        <h4>Filtros de período</h4>
+        <ul>
+          <li><b>Tudo</b> — todas as parcelas.</li>
+          <li><b>Este mês</b> — do dia 1º ao último dia do mês atual.</li>
+          <li><b>Mês passado</b> — idem, mês anterior.</li>
+          <li><b>Últ. 30d</b> — últimos 30 dias corridos.</li>
+          <li><b>Próx. 30d</b> — próximos 30 dias.</li>
+          <li><b>Este ano</b> — 01/jan a 31/dez.</li>
+          <li><b>Personalizado</b> — você escolhe "De" e "Até".</li>
+        </ul>
+
+        <h4>Indicadores clicáveis</h4>
+        <p>Os cartões de resumo mostram:</p>
+        <ul>
+          <li><b>Previsto</b> — soma total das parcelas no período.</li>
+          <li><b>Pago</b> — soma das pagas.</li>
+          <li><b>Aberto</b> — soma das em aberto.</li>
+          <li><b>Atraso</b> — soma das em atraso.</li>
+          <li><b>Outros</b> — soma das marcadas como "outros".</li>
+          <li><b>Parcelas</b> — quantidade total.</li>
+          <li><b>Pagas</b> — quantidade paga.</li>
+          <li><b>Dívidas</b> — quantas dívidas distintas têm parcelas no período.</li>
+        </ul>
+        <p>Toque em qualquer cartão (com <b>▾</b>) para ver a lista detalhada abaixo. Toque de novo para fechar.</p>
+
+        <div class="ajuda-dica">
+          O filtro escolhido é <b>salvo</b> entre sessões — quando você reabrir o app, ele lembra o último período.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 15. EDITAR EM LOTE ============ -->
+    <details class="ajuda-secao" id="ajuda-15">
+      <summary><span class="emoji-secao">🧰</span> 15. Editar em lote ("Ver todas")</summary>
+      <div class="ajuda-conteudo">
+        <p>Toque em <b>📋 Ver todas</b> na tela inicial. Aqui você vê todas as dívidas em formato de acordeão (clique para expandir).</p>
+
+        <h4>O que dá para fazer aqui</h4>
+        <ul>
+          <li><b>Editar campos direto na tabela:</b> valor, vencimento, link, status — em qualquer parcela.</li>
+          <li>Ao alterar, o app pergunta o <b>escopo</b> (seção 9).</li>
+          <li><b>✏️ Editar dívida</b> — abre o formulário de edição (cabeçalho + ajustes em lote).</li>
+          <li><b>🗑 Excluir dívida</b> — remove a dívida inteira com todas as parcelas.</li>
+        </ul>
+
+        <h4>Formulário de edição de dívida</h4>
+        <p>Você pode alterar:</p>
+        <ul>
+          <li><b>Credor, descrição e valor total</b> — cabeçalho.</li>
+          <li><b>Novo valor (R$)</b> — aplica só às parcelas <b>em aberto ou em atraso</b> (não mexe nas pagas).</li>
+          <li><b>Adicionar parcelas</b> — gera N novas parcelas seguindo a periodicidade, a partir da última.</li>
+        </ul>
+
+        <div class="ajuda-aviso">
+          Na edição em lote <b>não</b> há opção de "escopo" — o novo valor vale para todas as não pagas. Para controle fino, edite parcela por parcela na tela do dia.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 16. FERIADOS E ATRASOS ============ -->
+    <details class="ajuda-secao" id="ajuda-16">
+      <summary><span class="emoji-secao">🎉</span> 16. Feriados e atrasos automáticos</summary>
+      <div class="ajuda-conteudo">
+        <h4>Feriados</h4>
+        <p>O app destaca automaticamente feriados nacionais:</p>
+        <ul>
+          <li>Confraternização Universal (01/01)</li>
+          <li>Tiradentes (21/04)</li>
+          <li>Dia do Trabalho (01/05)</li>
+          <li>Independência (07/09)</li>
+          <li>Nossa Senhora Aparecida (12/10)</li>
+          <li>Finados (02/11)</li>
+          <li>Proclamação da República (15/11)</li>
+          <li>Consciência Negra (20/11)</li>
+          <li>Natal (25/12)</li>
+          <li>Móveis: Carnaval, Sexta-feira Santa, Corpus Christi (calculados a partir da Páscoa).</li>
+        </ul>
+        <p>No calendário, dias de feriado têm <b>borda vermelha</b> e o número em vermelho. Abaixo do calendário há a <b>lista de feriados do mês</b> exibido.</p>
+
+        <h4>Atrasos automáticos</h4>
+        <p>Sempre que o app é aberto ou você volta ao calendário, ele verifica:</p>
+        <ul>
+          <li>Parcelas com status <b>em aberto</b> e vencimento &lt; hoje → viram <b>em atraso</b>.</li>
+          <li>Parcelas já pagas ou marcadas como "outros" não são alteradas.</li>
+        </ul>
+      </div>
+    </details>
+
+    <!-- ============ 17. BACKUP ============ -->
+    <details class="ajuda-secao" id="ajuda-17">
+      <summary><span class="emoji-secao">💾</span> 17. Backup local (JSON)</summary>
+      <div class="ajuda-conteudo">
+        <p>Na tela <b>📊 Resumo</b>, no bloco "Backup local".</p>
+
+        <h4>Exportar</h4>
+        <ol>
+          <li>Toque em <b>⬇ Exportar</b>.</li>
+          <li>O app baixa automaticamente um arquivo <code>pagamentos-AAAA-MM-DD.json</code>.</li>
+          <li>Um modal mostra o conteúdo bruto do JSON.</li>
+        </ol>
+        <p>Botões do modal:</p>
+        <ul>
+          <li><b>📋 Copiar</b> — copia o JSON para a área de transferência.</li>
+          <li><b>⬇ Baixar</b> — baixa novamente, se precisar.</li>
+          <li><b>Fechar</b> — fecha o modal.</li>
+        </ul>
+
+        <h4>Importar</h4>
+        <ol>
+          <li>Toque em <b>⬆ Importar</b>.</li>
+          <li>Escolha um JSON exportado anteriormente.</li>
+          <li>O app avisa se vai <b>substituir</b> os dados atuais.</li>
+        </ol>
+
+        <div class="ajuda-perigo">
+          <b>Atenção:</b> a importação <b>substitui todos os dados atuais</b>. Faça um backup antes se estiver em dúvida.
+        </div>
+
+        <div class="ajuda-aviso">
+          O backup <b>não inclui os arquivos dos comprovantes</b> — apenas os metadados (nome, tipo, id). Os arquivos ficam no <code>localStorage</code> deste dispositivo e, se configurado, no GitHub.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 18. GITHUB ============ -->
+    <details class="ajuda-secao" id="ajuda-18">
+      <summary><span class="emoji-secao">☁️</span> 18. Sincronizar com GitHub</summary>
+      <div class="ajuda-conteudo">
+        <p>Toque em <b>⚙️</b> no topo. Aqui você configura a nuvem — todo o JSON de dívidas é versionado num repositório do GitHub.</p>
+
+        <h4>Pré-requisitos</h4>
+        <ul>
+          <li>Uma conta no GitHub.</li>
+          <li>Um repositório (pode ser privado). Sugestão: <code>pagamentos</code>.</li>
+          <li>Um <b>token pessoal</b> com permissão de leitura e escrita no conteúdo.</li>
+        </ul>
+
+        <h4>Criar o token</h4>
+        <ol>
+          <li>Acesse <code>github.com/settings/tokens?type=beta</code></li>
+          <li>Generate new token → dê um nome (ex: "Sistema Pagamentos").</li>
+          <li>Em <b>Repository access</b>, escolha <b>Only select repositories</b> → marque o repositório <code>pagamentos</code>.</li>
+          <li>Em <b>Permissions</b> → <b>Contents</b> → <b>Read and write</b>.</li>
+          <li>Generate token → copie o valor (só aparece uma vez).</li>
+        </ol>
+
+        <h4>Configurar no app</h4>
+        <div class="ajuda-passo">
+          <span class="num-passo">1</span>
+          <div class="texto-passo"><b>Usuário GitHub</b><small>Seu login do GitHub (ex: <code>joaosilva</code>).</small></div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">2</span>
+          <div class="texto-passo"><b>Repositório</b><small>Nome do repo (padrão: <code>pagamentos</code>).</small></div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">3</span>
+          <div class="texto-passo"><b>Branch</b><small>Geralmente <code>main</code>.</small></div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">4</span>
+          <div class="texto-passo"><b>Arquivo</b><small>Caminho do JSON (padrão: <code>dados/dividas.json</code>).</small></div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">5</span>
+          <div class="texto-passo"><b>Token pessoal</b><small>Cole o token gerado acima.</small></div>
+        </div>
+        <div class="ajuda-passo">
+          <span class="num-passo">6</span>
+          <div class="texto-passo"><b>Auto-sync</b><small>Deixe marcado para salvar automaticamente 2,5s após cada alteração.</small></div>
+        </div>
+
+        <h4>Testar antes de salvar</h4>
+        <p>Toque em <b>🔍 Testar</b>. O app verifica:</p>
+        <ul>
+          <li>Se o repositório existe e é acessível.</li>
+          <li>Se o token tem permissão de push.</li>
+          <li>Se o arquivo <code>dados/dividas.json</code> já existe.</li>
+          <li>Se a pasta <code>dados/comprovantes/</code> existe.</li>
+        </ul>
+
+        <h4>Salvar e sincronizar</h4>
+        <p>Toque em <b>💾 Salvar</b>. A partir daí:</p>
+        <ul>
+          <li>O status no topo mostra <b>☁️ Salvando...</b> e depois <b>✅ Salvo HH:MM</b>.</li>
+          <li>Comprovantes são enviados para <code>dados/comprovantes/</code>.</li>
+          <li>O JSON de dívidas é commitado com mensagem <em>"Atualização automática — data/hora"</em>.</li>
+        </ul>
+
+        <h4>Indicadores de status no topo</h4>
+        <table class="ajuda-tabela">
+          <thead><tr><th>Texto</th><th>Significado</th></tr></thead>
+          <tbody>
+            <tr><td><b>☁️ Offline</b></td><td>Não configurado (ou sem conexão).</td></tr>
+            <tr><td><b>☁️ Carregando...</b></td><td>Buscando dados do GitHub.</td></tr>
+            <tr><td><b>☁️ Salvando...</b></td><td>Enviando dados.</td></tr>
+            <tr><td><b>✅ Salvo HH:MM</b></td><td>Tudo certo.</td></tr>
+            <tr><td><b>⚠️ Token inválido</b></td><td>Token expirado ou sem permissão.</td></tr>
+            <tr><td><b>⚠️ Sem permissão</b></td><td>Falta "Contents: Read and write".</td></tr>
+            <tr><td><b>⚠️ Erro ao salvar</b></td><td>Verifique conexão/credenciais.</td></tr>
+          </tbody>
+        </table>
+
+        <h4>Como funciona em vários dispositivos</h4>
+        <ul>
+          <li>Você configura o <b>mesmo token</b> nos dois aparelhos.</li>
+          <li>O app <b>sempre baixa</b> do GitHub ao abrir — quem salvar por último "vence".</li>
+          <li>Para evitar conflito, evite editar os dois ao mesmo tempo sem sincronizar.</li>
+        </ul>
+
+        <div class="ajuda-perigo">
+          <b>Nunca</b> compartilhe o token. Ele dá acesso de escrita ao repositório. Se vazar, revogue em <code>github.com/settings/tokens</code> e gere outro.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 19. INSTALAR COMO APP ============ -->
+    <details class="ajuda-secao" id="ajuda-19">
+      <summary><span class="emoji-secao">📱</span> 19. Instalar como app (PWA)</summary>
+      <div class="ajuda-conteudo">
+        <p>O Sistema de Pagamentos é um <b>PWA</b> (Progressive Web App). Pode ser instalado na tela inicial do celular como um app nativo.</p>
+
+        <h4>Android (Chrome / Edge)</h4>
+        <ol>
+          <li>Abra o app no navegador.</li>
+          <li>Toque no menu <b>⋮</b> (três pontos).</li>
+          <li>Escolha <b>Instalar app</b> ou <b>Adicionar à tela inicial</b>.</li>
+          <li>Confirme.</li>
+        </ol>
+
+        <h4>iPhone (Safari)</h4>
+        <ol>
+          <li>Abra no Safari.</li>
+          <li>Toque no ícone de <b>compartilhar</b> (quadrado com seta).</li>
+          <li>Escolha <b>Adicionar à Tela de Início</b>.</li>
+          <li>Dê um nome e confirme.</li>
+        </ol>
+
+        <h4>Vantagens</h4>
+        <ul>
+          <li>Ícone próprio na tela inicial.</li>
+          <li>Abre em tela cheia, sem barra do navegador.</li>
+          <li>Funciona offline (para dados locais).</li>
+          <li>Sincroniza com GitHub quando há conexão.</li>
+        </ul>
+
+        <div class="ajuda-dica">
+          O app registra um <b>service worker</b> (<code>sw.js</code>) para permitir uso offline. Se não existir, o app funciona normalmente, apenas sem cache.
+        </div>
+      </div>
+    </details>
+
+    <!-- ============ 20. FAQ ============ -->
+    <details class="ajuda-secao" id="ajuda-20">
+      <summary><span class="emoji-secao">❓</span> 20. Perguntas frequentes</summary>
+      <div class="ajuda-conteudo">
+        <h4>Meus dados vão para algum servidor?</h4>
+        <p>Só se você configurar o GitHub. Sem isso, tudo fica no <code>localStorage</code> do seu navegador — <b>nada sai do dispositivo</b>.</p>
+
+        <h4>Perdi tudo ao trocar de celular. Como recuperar?</h4>
+        <p>Se você tinha GitHub configurado, basta reconectar com o mesmo token no novo aparelho. Os dados baixam automaticamente. <b>Comprovantes</b> também são baixados sob demanda ao tocar em "👁 Ver".</p>
+
+        <h4>Anexei um comprovante e agora não consigo mais ver. Por quê?</h4>
+        <p>Provavelmente o comprovante só existe no dispositivo antigo. Configure o GitHub e reenvie. Ou reimporte um backup que contenha o comprovante.</p>
+
+        <h4>Como faço para marcar várias parcelas como pagas de uma vez?</h4>
+        <p>Não há ação em massa direta para "pago". Edite uma parcela por vez. Se for uma dívida inteira, edite em <b>Ver todas</b> e use o campo Status com escopo "todas".</p>
+
+        <h4>Posso usar sem internet?</h4>
+        <p>Sim, totalmente. Só o GitHub precisa de conexão para sincronizar.</p>
+
+        <h4>O app calcula juros ou correção?</h4>
+        <p>Não. Você informa o valor exato de cada parcela. Para valores variáveis, edite individualmente.</p>
+
+        <h4>Como excluir uma parcela específica sem afetar as outras?</h4>
+        <p>Expanda a parcela → <b>🗑 Excluir</b> → escolha <b>"Somente esta parcela"</b>. As demais são renumeradas automaticamente.</p>
+
+        <h4>O que significa o "♾️" em algumas dívidas?</h4>
+        <p>É uma <b>dívida contínua</b>. Gera parcelas automaticamente para sempre (aluguel, mensalidade). Veja seção 4.</p>
+
+        <h4>Como vejo o histórico de uma dívida já paga?</h4>
+        <p>Vá em <b>📋 Ver todas</b>, expanda a dívida e confira a tabela. Parcelas pagas aparecem em <b>verde</b> com o comprovante anexado (se houver). No <b>📊 Resumo</b>, use o filtro "Tudo" para ver totais históricos.</p>
+
+        <h4>Apaguei sem querer. Dá para desfazer?</h4>
+        <p>Não há "desfazer". Mas se o GitHub estiver configurado, vá em <code>github.com/&lt;usuário&gt;/&lt;repo&gt;/commits</code> e restaure uma versão anterior do <code>dados/dividas.json</code>. Depois, no app, force um "Carregar do GitHub" (basta recarregar a página).</p>
+
+        <h4>Posso usar em dois celulares ao mesmo tempo?</h4>
+        <p>Sim, desde que ambos usem o <b>mesmo token/repositório</b>. Evite editar simultaneamente — o último a salvar sobrescreve. Uma boa prática é sempre abrir o app antes de editar (ele baixa do GitHub automaticamente).</p>
+
+        <h4>O botão "Voltar" do Android funciona?</h4>
+        <p>Sim. O app usa <code>history.pushState</code> para que o botão volte à tela anterior (calendário) em vez de sair do app.</p>
+
+        <h4>Como apago tudo e começo de novo?</h4>
+        <ol>
+          <li>Exporte um backup (por segurança).</li>
+          <li>Vá em <b>📋 Ver todas</b> e exclua cada dívida.</li>
+          <li>Ou, no navegador, limpe os dados do site.</li>
+        </ol>
+        <p>Se o GitHub estiver configurado, o próximo save sobrescreve o arquivo remoto com a lista vazia.</p>
+
+        <h4>O app pede para "escolher o escopo" toda vez. Não tem como desativar?</h4>
+        <p>Não. É uma salvaguarda para evitar alterações acidentais em todas as parcelas. Mas o modal é rápido — um toque resolve.</p>
+
+        <h4>Tem como exportar para Excel/CSV?</h4>
+        <p>Nativamente não. Mas você pode exportar o JSON, abrir em qualquer ferramenta (Google Sheets, Excel com Power Query) e converter. Ou usar o próprio GitHub para visualizar o JSON.</p>
+      </div>
+    </details>
+
   </section>
 
   <section class="tela escondido" id="tela-config">
@@ -1293,7 +2458,6 @@ function comprovantesIguais(a,b){
   return idA === idB;
 }
 
-/* ---------- Copiar para a área de transferência ---------- */
 async function copiarTexto(txt){
   if(!txt) return false;
   try{
@@ -1729,7 +2893,7 @@ const estado = { tela:'calendario', mesRef:new Date(), diaSelecionado:null, expa
    NAVEGAÇÃO ENTRE TELAS + BOTÃO VOLTAR DO ANDROID
    ========================================================= */
 function trocarTelaInterno(nome){
-  ['calendario','dia','nova','todas','resumo','config'].forEach(t=>{
+  ['calendario','dia','nova','todas','resumo','config','ajuda'].forEach(t=>{
     document.getElementById('tela-'+t).classList.toggle('escondido', t!==nome);
   });
   estado.tela = nome;
@@ -1760,6 +2924,7 @@ function executarVoltarTela(tela){
     case 'todas': document.getElementById('voltarCalendario2').click(); break;
     case 'resumo': document.getElementById('voltarCalendario3').click(); break;
     case 'config': document.getElementById('voltarCalendario4').click(); break;
+    case 'ajuda': document.getElementById('voltarCalendario5').click(); break;
   }
 }
 
@@ -1773,9 +2938,6 @@ window.addEventListener('popstate', () => {
   }
 });
 
-/* =========================================================
-   ROLAGEM INTELIGENTE
-   ========================================================= */
 function rolarParaElemento(el){
   if(!el) return;
   const header = document.querySelector('header.topo');
@@ -1816,9 +2978,6 @@ function parcelaNoPeriodo(v,ini,fim){
   return true;
 }
 
-/* =========================================================
-   PAINEL DE INDICADORES + DETALHE CLICÁVEL
-   ========================================================= */
 function obterParcelasIndicador(tipo){
   const {inicio, fim} = calcularPeriodoAtivo();
   const lista = [];
@@ -2211,9 +3370,6 @@ function aplicarMudancas(d,p,mud,esc){
   }
 }
 
-/* =========================================================
-   EXCLUSÃO COM ESCOPO
-   ========================================================= */
 async function excluirParcela(d, p){
   const esc = await perguntarEscopo(d, p, {}, { modo:'excluir' });
   if(esc === 'cancelar') return;
@@ -2264,9 +3420,6 @@ function abrirDia(iso){
   renderListaDia(itensDoDia(iso)); mostrarTela('dia');
 }
 
-/* =========================================================
-   NAVEGAÇÃO ENTRE DIAS (botões + swipe no mobile)
-   ========================================================= */
 let bloqueiaClickDia = false;
 
 function navegarDia(delta){
@@ -2276,15 +3429,12 @@ function navegarDia(delta){
   dt.setDate(dt.getDate() + delta);
   const novoIso = dataParaIso(dt);
 
-  // abrirDia já cuida do confirm() de rascunhos pendentes.
   abrirDia(novoIso);
 
-  // Só prossegue se realmente navegou (usuário não cancelou o confirm)
   if(estado.diaSelecionado === novoIso && novoIso !== antes){
     estado.expandidos.clear();
     estado.mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
 
-    // Animação de entrada
     const ld = document.getElementById('listaDia');
     if(ld){
       ld.classList.remove('lista-dia-anim-next','lista-dia-anim-prev');
@@ -2297,7 +3447,6 @@ function navegarDia(delta){
 document.getElementById('diaAnterior').addEventListener('click', () => navegarDia(-1));
 document.getElementById('diaProximo').addEventListener('click', () => navegarDia(1));
 
-/* ---- Swipe lateral na tela do dia (mobile) ---- */
 const telaDiaEl = document.getElementById('tela-dia');
 const swipeDiaState = {
   startX:0, startY:0, deltaX:0, deltaY:0,
@@ -2306,7 +3455,6 @@ const swipeDiaState = {
 
 telaDiaEl.addEventListener('touchstart', (e) => {
   const t = e.target;
-  // Não interceptar gestos iniciados em controles interativos
   if(t.closest('input, select, textarea, button, a')){
     swipeDiaState.bloqueado = true;
     return;
@@ -2327,7 +3475,6 @@ telaDiaEl.addEventListener('touchmove', (e) => {
   const dy = touch.clientY - swipeDiaState.startY;
 
   if(!swipeDiaState.ativo){
-    // Só ativa se for claramente horizontal (evita conflito com scroll)
     if(Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy) * 1.5){
       swipeDiaState.ativo = true;
     } else {
@@ -2354,13 +3501,11 @@ telaDiaEl.addEventListener('touchend', () => {
   if(Math.abs(dx) > 60){
     bloqueiaClickDia = true;
     setTimeout(() => { bloqueiaClickDia = false; }, 350);
-    // Swipe para a esquerda → próximo dia ; direita → dia anterior
     if(dx < 0) navegarDia(1);
     else navegarDia(-1);
   }
 }, { passive:true });
 
-// Bloqueia o clique que o navegador dispara após o swipe (evita expandir item)
 telaDiaEl.addEventListener('click', (e) => {
   if(bloqueiaClickDia){
     e.preventDefault();
@@ -2624,7 +3769,6 @@ listaDia.addEventListener('change',async(e)=>{
   }
   tratarMudancaCampo(al, bl, d, p);
 });
-/* Listener do checkbox "não abrir automaticamente hoje" */
 listaDia.addEventListener('change',(e)=>{
   if(e.target && e.target.id === 'checkNaoMostrarHoje'){
     if(e.target.checked) localStorage.setItem(OCULTAR_HOJE_KEY, hojeIso());
@@ -2933,6 +4077,29 @@ document.getElementById('btnAbrirResumo').addEventListener('click',()=>{
 });
 document.getElementById('voltarCalendario3').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
 
+/* ---- Ajuda ---- */
+document.getElementById('btnAbrirAjuda').addEventListener('click',()=>{ mostrarTela('ajuda'); });
+document.getElementById('voltarCalendario5').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
+/* Âncoras do índice dentro da tela de ajuda — fecha as outras seções abertas */
+document.getElementById('tela-ajuda').addEventListener('click',(e)=>{
+  const a = e.target.closest('.ajuda-indice a');
+  if(!a) return;
+  e.preventDefault();
+  const id = a.getAttribute('href').slice(1);
+  const alvo = document.getElementById(id);
+  if(!alvo) return;
+  document.querySelectorAll('#tela-ajuda details.ajuda-secao').forEach(d=>{
+    if(d !== alvo) d.open = false;
+  });
+  alvo.open = true;
+  setTimeout(()=>{
+    const header = document.querySelector('header.topo');
+    const offset = (header ? header.offsetHeight : 0) + 12;
+    const top = alvo.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
+  }, 60);
+});
+
 document.querySelectorAll('.btn-periodo').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.btn-periodo').forEach(b=>b.classList.remove('ativo'));
@@ -3083,9 +4250,6 @@ document.getElementById('btnTestarConexao').addEventListener('click',async()=>{
 
 function lerArquivo(a){ return new Promise((res,rej)=>{ const r=new FileReader(); r.onload=()=>res(r.result); r.onerror=rej; r.readAsDataURL(a); }); }
 
-/* =========================================================
-   COMPROVANTE — visualizar / compartilhar imagem
-   ========================================================= */
 let comprovanteAtual = null;
 let comprovanteDadosAtual = null;
 
@@ -3157,7 +4321,6 @@ async function compartilharComprovante(canal){
     window.location.href = `mailto:?subject=${encodeURIComponent(titulo)}&body=${encodeURIComponent(corpo)}`;
     return;
   }
-  // genérico
   if(podeArquivo && await tentarShare(true)) return;
   if(await tentarShare(false)) return;
   baixarArquivoLocal(file);
