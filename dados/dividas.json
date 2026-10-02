@@ -3705,7 +3705,7 @@
         "valor": 10,
         "vencimento": "2026-10-02",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "muriw2h1n3gpwh",
           "nome": "Comprovante_02-10-2026_191537.png.png",
