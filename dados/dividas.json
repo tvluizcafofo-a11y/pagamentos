@@ -3681,5 +3681,33 @@
         }
       }
     ]
+  },
+  {
+    "id": "muriev8je8wtzc",
+    "credor": "Dinheiro Chaveiro",
+    "descricao": "Chave sala de casa",
+    "valorTotal": 0,
+    "valorParcela": 10,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-02",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-10-02",
+    "ultimoVencimento": "2026-10-02",
+    "criadoEm": "2026-10-02T22:03:13.699Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muriev8j6qxl0f",
+        "numero": 1,
+        "valor": 10,
+        "vencimento": "2026-10-02",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
