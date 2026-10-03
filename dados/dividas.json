@@ -43,7 +43,8 @@
         "vencimento": "2026-10-15",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=8D269BDE729614C58670D2B796048F25",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
       },
       {
         "id": "mu8g7bvk7sx1wj",
@@ -52,7 +53,8 @@
         "vencimento": "2026-11-15",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
       },
       {
         "id": "mu8g7bvkd0tuf4",
@@ -61,7 +63,8 @@
         "vencimento": "2026-12-15",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
       }
     ],
     "periodicidade": "mensal",
