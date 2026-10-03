@@ -17,7 +17,7 @@
         "numero": 1,
         "valor": 465.82,
         "vencimento": "2026-08-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=3EB8D9D91028C993034D71A2A69EAD5A",
         "status": "pago",
         "comprovante": null
       },
@@ -26,7 +26,7 @@
         "numero": 2,
         "valor": 465.82,
         "vencimento": "2026-09-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=3EB8D9D91028C993034D71A2A69EAD5A",
         "status": "pago",
         "comprovante": {
           "id": "muo0onxt5m1v8d",
@@ -41,30 +41,27 @@
         "numero": 3,
         "valor": 465.82,
         "vencimento": "2026-10-15",
-        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=8D269BDE729614C58670D2B796048F25",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=3EB8D9D91028C993034D71A2A69EAD5A",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
+        "comprovante": null
       },
       {
         "id": "mu8g7bvk7sx1wj",
         "numero": 4,
         "valor": 465.82,
         "vencimento": "2026-11-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=3EB8D9D91028C993034D71A2A69EAD5A",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
+        "comprovante": null
       },
       {
         "id": "mu8g7bvkd0tuf4",
         "numero": 5,
         "valor": 465.82,
         "vencimento": "2026-12-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=3EB8D9D91028C993034D71A2A69EAD5A",
         "status": "em_aberto",
-        "comprovante": null,
-        "descricaoOverride": "IPTU ANHANGAI 2026 I.Cad. 257044 001A0017"
+        "comprovante": null
       }
     ],
     "periodicidade": "mensal",
