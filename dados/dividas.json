@@ -3740,7 +3740,7 @@
         "valor": 52,
         "vencimento": "2026-10-03",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "mut2nd6feo1rjo",
           "nome": "pizza geisa",
