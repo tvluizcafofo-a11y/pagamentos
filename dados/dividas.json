@@ -3716,5 +3716,33 @@
         "credorOverride": "Dinho Chaveiro"
       }
     ]
+  },
+  {
+    "id": "mut2lyua5gtmme",
+    "credor": "Geisa",
+    "descricao": "Compra pizza",
+    "valorTotal": 0,
+    "valorParcela": 52,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-03",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-10-03",
+    "ultimoVencimento": "2026-10-03",
+    "criadoEm": "2026-10-04T00:16:23.458Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mut2lyualnkeqe",
+        "numero": 1,
+        "valor": 52,
+        "vencimento": "2026-10-03",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
