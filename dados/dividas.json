@@ -50,7 +50,7 @@
         "numero": 4,
         "valor": 465.82,
         "vencimento": "2026-11-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=8D269BDE729614C58670D2B796048F25",
         "status": "em_aberto",
         "comprovante": null
       },
@@ -59,7 +59,7 @@
         "numero": 5,
         "valor": 465.82,
         "vencimento": "2026-12-15",
-        "link": "",
+        "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=8D269BDE729614C58670D2B796048F25",
         "status": "em_aberto",
         "comprovante": null
       }
