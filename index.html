@@ -840,68 +840,6 @@
     font-weight:500;
   }
   .ajuda-intro b{color:var(--azul-profundo);font-weight:900}
-  .ajuda-indice{
-    background:#fff;
-    border:2px solid var(--linha);
-    border-radius:var(--raio);
-    padding:14px 16px;
-    margin-bottom:16px;
-    box-shadow:0 2px 8px rgba(15,23,42,.06);
-  }
-  .ajuda-indice h3{
-    margin:0 0 12px;
-    font-size:.95rem;
-    font-weight:900;
-    color:#1e293b;
-    display:flex;
-    align-items:center;
-    gap:10px;
-  }
-  .ajuda-indice h3::before{
-    content:'';width:8px;height:8px;border-radius:50%;
-    background:var(--azul);box-shadow:0 0 0 4px var(--azul-claro);
-  }
-  .ajuda-indice ul{
-    list-style:none;
-    padding:0;
-    margin:0;
-    display:grid;
-    gap:6px;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  }
-  .ajuda-indice a{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border-radius:8px;
-    background:#f8fafc;
-    color:var(--texto);
-    text-decoration:none;
-    font-weight:600;
-    font-size:.84rem;
-    transition:.15s;
-    border:1.5px solid #e2e8f0;
-  }
-  .ajuda-indice a:hover{
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
-    border-color:#93c5fd;
-    color:var(--azul-esc);
-    transform:translateX(3px);
-  }
-  .ajuda-indice a .num{
-    background:var(--azul);
-    color:#fff;
-    font-size:.7rem;
-    font-weight:900;
-    min-width:22px;
-    height:22px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-  }
   details.ajuda-secao{
     background:#fff;
     border:2px solid var(--linha);
@@ -1182,7 +1120,6 @@
     .nav-dia{ gap:8px; }
     .nav-dia h2.titulo-tela{ font-size:1rem; }
     .nav-dia-btn{ width:42px; height:42px; font-size:1.4rem; }
-    .ajuda-indice ul{grid-template-columns:1fr}
     .ajuda-conteudo{padding:14px;font-size:.82rem}
     details.ajuda-secao>summary{font-size:.88rem;padding:12px 14px}
     details.ajuda-secao>summary .emoji-secao{width:32px;height:32px;font-size:1.1rem}
@@ -1410,33 +1347,7 @@
       Este app foi feito para você <b>controlar dívidas parceladas</b> — empréstimos, IPTU, mensalidades,
       aluguéis, faturas, boletos. Você cadastra credores e parcelas, visualiza tudo num <b>calendário</b>,
       marca pagamentos, anexa <b>comprovantes</b>, cola <b>links/Pix/boletos</b> e pode
-      <b>sincronizar com o GitHub</b> para não perder nada. Use o índice abaixo ou role a página.
-    </div>
-
-    <div class="ajuda-indice">
-      <h3>📑 Índice</h3>
-      <ul>
-        <li><a href="#ajuda-1"><span class="num">1</span> Visão geral do app</a></li>
-        <li><a href="#ajuda-2"><span class="num">2</span> Cadastrar a 1ª dívida</a></li>
-        <li><a href="#ajuda-3"><span class="num">3</span> Tipos de parcelamento</a></li>
-        <li><a href="#ajuda-4"><span class="num">4</span> Dívida contínua (∞)</a></li>
-        <li><a href="#ajuda-5"><span class="num">5</span> Periodicidade</a></li>
-        <li><a href="#ajuda-6"><span class="num">6</span> Calendário</a></li>
-        <li><a href="#ajuda-7"><span class="num">7</span> Navegar entre dias</a></li>
-        <li><a href="#ajuda-8"><span class="num">8</span> Editar parcela</a></li>
-        <li><a href="#ajuda-9"><span class="num">9</span> Escopo de alterações</a></li>
-        <li><a href="#ajuda-10"><span class="num">10</span> Status de pagamento</a></li>
-        <li><a href="#ajuda-11"><span class="num">11</span> Link / Pix / Boleto</a></li>
-        <li><a href="#ajuda-12"><span class="num">12</span> Comprovantes</a></li>
-        <li><a href="#ajuda-13"><span class="num">13</span> Busca</a></li>
-        <li><a href="#ajuda-14"><span class="num">14</span> Resumo e filtros</a></li>
-        <li><a href="#ajuda-15"><span class="num">15</span> Editar em lote</a></li>
-        <li><a href="#ajuda-16"><span class="num">16</span> Feriados e atrasos</a></li>
-        <li><a href="#ajuda-17"><span class="num">17</span> Backup local</a></li>
-        <li><a href="#ajuda-18"><span class="num">18</span> Sincronizar GitHub</a></li>
-        <li><a href="#ajuda-19"><span class="num">19</span> Instalar como app</a></li>
-        <li><a href="#ajuda-20"><span class="num">20</span> Perguntas frequentes</a></li>
-      </ul>
+      <b>sincronizar com o GitHub</b> para não perder nada. Toque em cada seção abaixo para expandir.
     </div>
 
     <!-- ============ 1. VISÃO GERAL ============ -->
@@ -4080,25 +3991,6 @@ document.getElementById('voltarCalendario3').addEventListener('click',()=>{ rend
 /* ---- Ajuda ---- */
 document.getElementById('btnAbrirAjuda').addEventListener('click',()=>{ mostrarTela('ajuda'); });
 document.getElementById('voltarCalendario5').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
-/* Âncoras do índice dentro da tela de ajuda — fecha as outras seções abertas */
-document.getElementById('tela-ajuda').addEventListener('click',(e)=>{
-  const a = e.target.closest('.ajuda-indice a');
-  if(!a) return;
-  e.preventDefault();
-  const id = a.getAttribute('href').slice(1);
-  const alvo = document.getElementById(id);
-  if(!alvo) return;
-  document.querySelectorAll('#tela-ajuda details.ajuda-secao').forEach(d=>{
-    if(d !== alvo) d.open = false;
-  });
-  alvo.open = true;
-  setTimeout(()=>{
-    const header = document.querySelector('header.topo');
-    const offset = (header ? header.offsetHeight : 0) + 12;
-    const top = alvo.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top: Math.max(0, top), behavior:'smooth' });
-  }, 60);
-});
 
 document.querySelectorAll('.btn-periodo').forEach(btn=>{
   btn.addEventListener('click',()=>{
