@@ -3681,33 +3681,5 @@
         }
       }
     ]
-  },
-  {
-    "id": "muvg1mppc42yvc",
-    "credor": "Cemig",
-    "descricao": "Teste",
-    "valorTotal": 0,
-    "valorParcela": 50,
-    "modo": "parcelas",
-    "periodicidade": "mensal",
-    "diaEspecifico": "",
-    "continuada": false,
-    "ancora": "2026-10-06",
-    "qtdParcelas": 1,
-    "primeiroVencimento": "2026-10-06",
-    "ultimoVencimento": "2026-10-06",
-    "criadoEm": "2026-10-05T16:08:01.597Z",
-    "aberto": false,
-    "parcelas": [
-      {
-        "id": "muvg1mppry9v58",
-        "numero": 1,
-        "valor": 50,
-        "vencimento": "2026-10-06",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      }
-    ]
   }
 ]
