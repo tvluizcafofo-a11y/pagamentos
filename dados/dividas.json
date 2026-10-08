@@ -3693,5 +3693,33 @@
         }
       }
     ]
+  },
+  {
+    "id": "muzyx5kd1i5370",
+    "credor": "Geisa",
+    "descricao": "Almoço Túlio",
+    "valorTotal": 0,
+    "valorParcela": 50,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-08",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-10-08",
+    "ultimoVencimento": "2026-10-08",
+    "criadoEm": "2026-10-08T20:07:30.157Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "muzyx5kd1kscxz",
+        "numero": 1,
+        "valor": 50,
+        "vencimento": "2026-10-08",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
