@@ -3717,8 +3717,14 @@
         "valor": 50,
         "vencimento": "2026-10-08",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "muzyxt8pfaekmk",
+          "nome": "Comprovante_08-10-2026_165926.png.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        }
       }
     ]
   }
