@@ -734,14 +734,8 @@
         "valor": 200,
         "vencimento": "2026-10-09",
         "link": "00020101021126360014br.gov.bcb.pix0114+55319833356905204000053039865406200.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304FB61",
-        "status": "em_aberto",
-        "comprovante": {
-          "id": "muzyoupa6qkzki",
-          "nome": "Comprovante_08-10-2026_165823.png.png",
-          "tipo": "image/png",
-          "ext": "png",
-          "enviado": true
-        },
+        "status": "pago",
+        "comprovante": null,
         "credorOverride": "Geisa"
       },
       {
