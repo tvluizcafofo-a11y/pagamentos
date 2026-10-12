@@ -1699,7 +1699,7 @@
         "valor": 1624.15,
         "vencimento": "2026-10-13",
         "link": "00020101021126420014br.gov.bcb.pix0120Luizmart33@gmail.com52040000530398654071624.155802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304F04A",
-        "status": "pago",
+        "status": "em_aberto",
         "comprovante": {
           "id": "mv5ejbfbfm2jqt",
           "nome": "unimed-10.10.2026.png",
