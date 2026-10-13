@@ -925,7 +925,8 @@
         "link": "00020101021126360014br.gov.bcb.pix0114+55319833356905204000053039865406200.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304FB61",
         "status": "em_aberto",
         "comprovante": null,
-        "credorOverride": "Geisa"
+        "credorOverride": "Geisa",
+        "descricaoOverride": "Semanada Geisa - descontar R$ 69"
       },
       {
         "id": "mu8n9k1wfekyw9",
