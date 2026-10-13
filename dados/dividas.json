@@ -838,7 +838,13 @@
         "vencimento": "2026-12-11",
         "link": "00020101021126360014br.gov.bcb.pix0114+55319833356905204000053039865406200.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***6304FB61",
         "status": "em_aberto",
-        "comprovante": null,
+        "comprovante": {
+          "id": "mv7241l1p0ln3r",
+          "nome": "20261013_160725.heic",
+          "tipo": "image/heic",
+          "ext": "heic",
+          "enviado": true
+        },
         "credorOverride": "Geisa",
         "descricaoOverride": "Semanada Geisa - descontar R$ 69"
       },
