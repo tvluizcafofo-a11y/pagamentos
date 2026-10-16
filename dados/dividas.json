@@ -2687,7 +2687,7 @@
         "valor": 150,
         "vencimento": "2026-10-16",
         "link": "00020101021126470014br.gov.bcb.pix0114+55319889917090207ALUGUEL5204000053039865406150.005802BR5921LUIZ MARTINS DE SOUZA6014BELO HORIZONTE62070503***63049708",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null
       },
       {
