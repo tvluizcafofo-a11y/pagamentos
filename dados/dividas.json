@@ -2876,8 +2876,15 @@
         "valor": 355.5,
         "vencimento": "2026-10-18",
         "link": "",
-        "status": "em_atraso",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mvfpw8rs7p9dwg",
+          "nome": "RenegJequitiba-19-10-2026.webp",
+          "nomeArquivo": "Dominio_Administracao_2026-10-18.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mu9oox4e87m4nb",
