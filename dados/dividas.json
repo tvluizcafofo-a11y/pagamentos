@@ -36,7 +36,7 @@
         "valor": 465.82,
         "vencimento": "2026-10-15",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -82,7 +82,7 @@
         "valor": 523.76,
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=C6E7C6F9AD33F07DFDBD57FC8E1ADB9B",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -407,7 +407,7 @@
         "valor": 244.12,
         "vencimento": "2026-09-30",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -516,7 +516,7 @@
         "valor": 329.62,
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=FE24DF21CD6C2CF40961F2A30AE55907",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -683,7 +683,7 @@
         "valor": 200,
         "vencimento": "2026-09-25",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -692,7 +692,7 @@
         "valor": 200,
         "vencimento": "2026-10-02",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -701,7 +701,7 @@
         "valor": 200,
         "vencimento": "2026-10-09",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -710,7 +710,7 @@
         "valor": 200,
         "vencimento": "2026-10-16",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -918,7 +918,7 @@
         "valor": 119.9,
         "vencimento": "2026-09-25",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -1153,7 +1153,7 @@
         "valor": 70,
         "vencimento": "2026-09-30",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -1397,7 +1397,7 @@
         "valor": 100,
         "vencimento": "2026-10-07",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -1632,7 +1632,7 @@
         "valor": 1700,
         "vencimento": "2026-10-10",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -1867,7 +1867,7 @@
         "valor": 120,
         "vencimento": "2026-10-10",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -2102,7 +2102,7 @@
         "valor": 150,
         "vencimento": "2026-10-10",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -2337,7 +2337,7 @@
         "valor": 3000,
         "vencimento": "2026-10-15",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -2572,7 +2572,7 @@
         "valor": 150,
         "vencimento": "2026-10-16",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -2807,7 +2807,7 @@
         "valor": 355.5,
         "vencimento": "2026-10-18",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       },
       {
@@ -3089,7 +3089,7 @@
         "valor": 28,
         "vencimento": "2026-09-22",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null
       }
     ]
