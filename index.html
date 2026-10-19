@@ -113,7 +113,6 @@
   .check-ocultar-hoje input{width:18px;height:18px;accent-color:var(--azul);
     cursor:pointer;margin:0;flex-shrink:0}
 
-  /* ==== mini-tags (indicadores link/Pix-Boleto/comprovante) — base global ==== */
   .mini-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:3px;align-items:center}
   .mini-tags .tag-ico{font-size:.72rem;line-height:1;padding:1px 6px;border-radius:6px;
     font-weight:800;display:inline-flex;align-items:center;gap:3px;
@@ -759,9 +758,6 @@
   .opcao-escopo.perigo:hover{background:#fef2f2;border-color:#fca5a5;
     box-shadow:0 6px 16px rgba(220,38,38,.15)}
 
-  /* =========================================================
-     NAVEGAÇÃO POR DIA (botões + swipe)
-     ========================================================= */
   .nav-dia{
     display:flex;
     align-items:center;
@@ -816,9 +812,6 @@
   #listaDia.lista-dia-anim-next{ animation:diaSlideInRight .25s ease-out; }
   #listaDia.lista-dia-anim-prev{ animation:diaSlideInLeft .25s ease-out; }
 
-  /* =========================================================
-     AJUDA — documentação integrada
-     ========================================================= */
   .ajuda-cartao{
     background:#fff;
     border:2px solid var(--linha);
@@ -1335,9 +1328,6 @@
     </div>
   </section>
 
-  <!-- =========================================================
-       TELA DE AJUDA
-       ========================================================= -->
   <section class="tela escondido" id="tela-ajuda">
     <button class="btn-voltar" id="voltarCalendario5">Voltar</button>
     <h2 class="titulo-tela">❓ Ajuda e Documentação</h2>
@@ -1350,7 +1340,6 @@
       <b>sincronizar com o GitHub</b> para não perder nada. Toque em cada seção abaixo para expandir.
     </div>
 
-    <!-- ============ 1. VISÃO GERAL ============ -->
     <details class="ajuda-secao" id="ajuda-1">
       <summary><span class="emoji-secao">🧭</span> 1. Visão geral do app</summary>
       <div class="ajuda-conteudo">
@@ -1373,7 +1362,6 @@
       </div>
     </details>
 
-    <!-- ============ 2. CADASTRAR 1ª DÍVIDA ============ -->
     <details class="ajuda-secao" id="ajuda-2">
       <summary><span class="emoji-secao">➕</span> 2. Cadastrar a primeira dívida</summary>
       <div class="ajuda-conteudo">
@@ -1446,7 +1434,6 @@
       </div>
     </details>
 
-    <!-- ============ 3. TIPOS DE PARCELAMENTO ============ -->
     <details class="ajuda-secao" id="ajuda-3">
       <summary><span class="emoji-secao">🔢</span> 3. Tipos de parcelamento</summary>
       <div class="ajuda-conteudo">
@@ -1475,7 +1462,6 @@
       </div>
     </details>
 
-    <!-- ============ 4. DÍVIDA CONTÍNUA ============ -->
     <details class="ajuda-secao" id="ajuda-4">
       <summary><span class="emoji-secao">♾️</span> 4. Dívida contínua (∞)</summary>
       <div class="ajuda-conteudo">
@@ -1507,7 +1493,6 @@
       </div>
     </details>
 
-    <!-- ============ 5. PERIODICIDADE ============ -->
     <details class="ajuda-secao" id="ajuda-5">
       <summary><span class="emoji-secao">🔁</span> 5. Periodicidade e dia específico</summary>
       <div class="ajuda-conteudo">
@@ -1537,7 +1522,6 @@
       </div>
     </details>
 
-    <!-- ============ 6. CALENDÁRIO ============ -->
     <details class="ajuda-secao" id="ajuda-6">
       <summary><span class="emoji-secao">📅</span> 6. Calendário</summary>
       <div class="ajuda-conteudo">
@@ -1573,9 +1557,8 @@
       </div>
     </details>
 
-    <!-- ============ 7. NAVEGAR ENTRE DIAS ============ -->
     <details class="ajuda-secao" id="ajuda-7">
-      <summary><span class="emoji-secao">↔️</span> 7. Navegar entre dias (novo)</summary>
+      <summary><span class="emoji-secao">↔️</span> 7. Navegar entre dias</summary>
       <div class="ajuda-conteudo">
         <p>Dentro da tela de vencimentos de um dia, você pode <b>avançar ou voltar um dia</b> sem retornar ao calendário:</p>
 
@@ -1605,7 +1588,6 @@
       </div>
     </details>
 
-    <!-- ============ 8. EDITAR PARCELA ============ -->
     <details class="ajuda-secao" id="ajuda-8">
       <summary><span class="emoji-secao">✏️</span> 8. Editar uma parcela</summary>
       <div class="ajuda-conteudo">
@@ -1643,7 +1625,6 @@
       </div>
     </details>
 
-    <!-- ============ 9. ESCOPO ============ -->
     <details class="ajuda-secao" id="ajuda-9">
       <summary><span class="emoji-secao">🎯</span> 9. Escopo de alterações</summary>
       <div class="ajuda-conteudo">
@@ -1673,7 +1654,6 @@
       </div>
     </details>
 
-    <!-- ============ 10. STATUS ============ -->
     <details class="ajuda-secao" id="ajuda-10">
       <summary><span class="emoji-secao">🏷️</span> 10. Status de pagamento</summary>
       <div class="ajuda-conteudo">
@@ -1699,7 +1679,6 @@
       </div>
     </details>
 
-    <!-- ============ 11. LINK / PIX / BOLETO ============ -->
     <details class="ajuda-secao" id="ajuda-11">
       <summary><span class="emoji-secao">🔗</span> 11. Link, Pix e Boleto</summary>
       <div class="ajuda-conteudo">
@@ -1725,7 +1704,6 @@
       </div>
     </details>
 
-    <!-- ============ 12. COMPROVANTES ============ -->
     <details class="ajuda-secao" id="ajuda-12">
       <summary><span class="emoji-secao">🧾</span> 12. Comprovantes</summary>
       <div class="ajuda-conteudo">
@@ -1735,8 +1713,23 @@
         <ul>
           <li>Imagens: JPG, PNG, GIF, WebP, HEIC, BMP, SVG.</li>
           <li>PDF.</li>
-          <li>Tamanho máximo: <b>2 MB</b>.</li>
+          <li>Tamanho máximo após a compressão automática: <b>2 MB</b>.</li>
         </ul>
+
+        <div class="ajuda-dica">
+          <b>Compressão automática:</b> toda imagem (JPG, PNG, HEIC) anexada é <b>redimensionada para no máximo 1024 px de largura</b> e <b>convertida para WebP</b> (qualidade ~72%) antes de ser salva. Isso reduz o tamanho em <b>70%–90%</b> — uma foto de 3 MB vira facilmente ~120 KB, sem perder a legibilidade. PDFs, GIFs e SVGs são mantidos como estão.
+        </div>
+
+        <h4>Nomes dos arquivos</h4>
+        <p>Os comprovantes recebem automaticamente o nome no padrão:</p>
+        <p><code>Credor_AAAA-MM-DD.webp</code></p>
+        <p>Exemplos:</p>
+        <ul>
+          <li><code>Banco_XYZ_2025-03-05.webp</code></li>
+          <li><code>Joao_da_Silva_2025-04-10.webp</code></li>
+          <li><code>IPTU_2025-01-15.webp</code></li>
+        </ul>
+        <p>Se já existir um comprovante do <b>mesmo credor</b> na <b>mesma data</b>, o app acrescenta um número: <code>Banco_XYZ_2025-03-05_1.webp</code>, <code>_2</code>, etc.</p>
 
         <h4>Anexar</h4>
         <ol>
@@ -1761,17 +1754,17 @@
           <li><b>📤 Compartilhar</b> — usa a API nativa de compartilhamento do dispositivo (Android/iOS).</li>
           <li><b>💬 WhatsApp</b> — tenta compartilhar direto; se não suportar, baixa o arquivo e abre o WhatsApp Web.</li>
           <li><b>✉️ E-mail</b> — mesma lógica, com <code>mailto:</code>.</li>
-          <li><b>⬇ Baixar</b> — salva o arquivo localmente.</li>
+          <li><b>⬇ Baixar</b> — salva o arquivo localmente (com o nome amigável).</li>
         </ul>
 
         <h4>Onde o comprovante fica armazenado</h4>
         <ul>
           <li><b>Local:</b> no <code>localStorage</code> do navegador, com prefixo <code>sistemaPagamentos.comprovante.</code>.</li>
-          <li><b>Nuvem (opcional):</b> se o GitHub estiver configurado, o comprovante é enviado para <code>dados/comprovantes/</code> no repositório, e pode ser rebaixado em outro dispositivo.</li>
+          <li><b>Nuvem (opcional):</b> se o GitHub estiver configurado, o comprovante é enviado para <code>dados/comprovantes/</code> no repositório com o <b>nome amigável</b> (Credor_AAAA-MM-DD.ext).</li>
         </ul>
 
         <div class="ajuda-aviso">
-          Se o <b>armazenamento local</b> estiver cheio, o app recusa novos anexos com aviso. Remova comprovantes antigos antes de continuar.
+          Se o <b>armazenamento local</b> estiver cheio, o app recusa novos anexos com aviso. Graças à compressão automática, isso deve ser raro — mas se acontecer, remova comprovantes antigos ou aumente o uso do GitHub.
         </div>
 
         <div class="ajuda-info">
@@ -1780,7 +1773,6 @@
       </div>
     </details>
 
-    <!-- ============ 13. BUSCA ============ -->
     <details class="ajuda-secao" id="ajuda-13">
       <summary><span class="emoji-secao">🔍</span> 13. Busca</summary>
       <div class="ajuda-conteudo">
@@ -1810,7 +1802,6 @@
       </div>
     </details>
 
-    <!-- ============ 14. RESUMO E FILTROS ============ -->
     <details class="ajuda-secao" id="ajuda-14">
       <summary><span class="emoji-secao">📊</span> 14. Resumo e filtros</summary>
       <div class="ajuda-conteudo">
@@ -1847,7 +1838,6 @@
       </div>
     </details>
 
-    <!-- ============ 15. EDITAR EM LOTE ============ -->
     <details class="ajuda-secao" id="ajuda-15">
       <summary><span class="emoji-secao">🧰</span> 15. Editar em lote ("Ver todas")</summary>
       <div class="ajuda-conteudo">
@@ -1875,7 +1865,6 @@
       </div>
     </details>
 
-    <!-- ============ 16. FERIADOS E ATRASOS ============ -->
     <details class="ajuda-secao" id="ajuda-16">
       <summary><span class="emoji-secao">🎉</span> 16. Feriados e atrasos automáticos</summary>
       <div class="ajuda-conteudo">
@@ -1904,7 +1893,6 @@
       </div>
     </details>
 
-    <!-- ============ 17. BACKUP ============ -->
     <details class="ajuda-secao" id="ajuda-17">
       <summary><span class="emoji-secao">💾</span> 17. Backup local (JSON)</summary>
       <div class="ajuda-conteudo">
@@ -1940,7 +1928,6 @@
       </div>
     </details>
 
-    <!-- ============ 18. GITHUB ============ -->
     <details class="ajuda-secao" id="ajuda-18">
       <summary><span class="emoji-secao">☁️</span> 18. Sincronizar com GitHub</summary>
       <div class="ajuda-conteudo">
@@ -2032,7 +2019,6 @@
       </div>
     </details>
 
-    <!-- ============ 19. INSTALAR COMO APP ============ -->
     <details class="ajuda-secao" id="ajuda-19">
       <summary><span class="emoji-secao">📱</span> 19. Instalar como app (PWA)</summary>
       <div class="ajuda-conteudo">
@@ -2068,7 +2054,6 @@
       </div>
     </details>
 
-    <!-- ============ 20. FAQ ============ -->
     <details class="ajuda-secao" id="ajuda-20">
       <summary><span class="emoji-secao">❓</span> 20. Perguntas frequentes</summary>
       <div class="ajuda-conteudo">
@@ -2239,6 +2224,11 @@ const PARCELAS_MIN_FUTURAS = 12;
 const LIMITE_GITHUB_BYTES = 900 * 1024;
 const LIMITE_COMPROVANTE_BYTES = 2 * 1024 * 1024;
 
+/* Configurações de compressão automática de imagens */
+const COMPRESSAO_LARGURA_MAX = 1024;    // px de largura máxima
+const COMPRESSAO_QUALIDADE = 0.72;      // 0..1 (72% = boa legibilidade, pouco peso)
+const COMPRESSAO_TAMANHO_MIN = 80*1024; // não comprime imagens já pequenas (< 80 KB)
+
 let dividas = [];
 let editandoId = null;
 const filtroResumo = { periodo:'tudo', dataInicio:'', dataFim:'' };
@@ -2247,12 +2237,8 @@ let skipNextPop = false;
 
 const ROTULOS_STATUS = { em_aberto:'Em aberto', pago:'Pago', em_atraso:'Em atraso', outros:'Outros' };
 const ROTULOS_INDICADOR = {
-  todas:'Todas as parcelas',
-  previsto:'Previsto',
-  pago:'Pago',
-  aberto:'Em aberto',
-  atraso:'Em atraso',
-  outros:'Outros'
+  todas:'Todas as parcelas', previsto:'Previsto', pago:'Pago',
+  aberto:'Em aberto', atraso:'Em atraso', outros:'Outros'
 };
 const DIAS_SEMANA_CURTO = ['D','S','T','Q','Q','S','S'];
 const DIAS_SEMANA_LONGO = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
@@ -2296,6 +2282,98 @@ function extDoMime(mime){
   if(m === 'application/pdf') return 'pdf';
   return 'bin';
 }
+
+/* =========================================================
+   COMPRESSÃO AUTOMÁTICA DE IMAGENS (redimensiona + WebP)
+   ========================================================= */
+async function comprimirImagem(file){
+  if(!file || !file.type || !file.type.startsWith('image/')) return file;
+  if(file.size < COMPRESSAO_TAMANHO_MIN) return file;
+  // GIF animado e SVG são preservados como estão
+  if(file.type === 'image/gif' || file.type === 'image/svg+xml') return file;
+
+  try{
+    let bitmap;
+    try{
+      bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
+    }catch(_){
+      // Fallback (ex: HEIC em navegadores sem suporte direto)
+      const url = URL.createObjectURL(file);
+      try{
+        bitmap = await new Promise((res, rej) => {
+          const img = new Image();
+          img.onload = () => res(img);
+          img.onerror = rej;
+          img.src = url;
+        });
+      } finally {
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+      }
+    }
+    const larguraOrig = bitmap.width || bitmap.naturalWidth || 0;
+    const alturaOrig  = bitmap.height || bitmap.naturalHeight || 0;
+    if(!larguraOrig || !alturaOrig) return file;
+
+    const escala = Math.min(1, COMPRESSAO_LARGURA_MAX / larguraOrig);
+    const largura = Math.round(larguraOrig * escala);
+    const altura  = Math.round(alturaOrig * escala);
+
+    const canvas = document.createElement('canvas');
+    canvas.width = largura;
+    canvas.height = altura;
+    const ctx = canvas.getContext('2d');
+    if(!ctx) return file;
+    ctx.drawImage(bitmap, 0, 0, largura, altura);
+
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', COMPRESSAO_QUALIDADE));
+    if(!blob) return file;
+    if(blob.size >= file.size) return file; // compressão não compensou
+
+    const nomeBase = String(file.name || 'comprovante').replace(/\.[^.]+$/, '');
+    const novo = new File([blob], nomeBase + '.webp', { type: 'image/webp' });
+    console.log(`[Compressão] ${file.name} (${formatarBytes(file.size)}) → ${novo.name} (${formatarBytes(novo.size)})`);
+    return novo;
+  }catch(e){
+    console.warn('[Compressão] Falhou, usando original:', e);
+    return file;
+  }
+}
+
+/* =========================================================
+   NOMENCLATURA AMIGÁVEL DOS COMPROVANTES
+   Padrão: Credor_AAAA-MM-DD.ext  (com _1, _2 em duplicatas)
+   ========================================================= */
+function sanitizarNomeCredor(nome){
+  let s = String(nome || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  s = s.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
+  s = s.replace(/_+/g, '_').replace(/^_+|_+$/g, '');
+  return (s.slice(0, 40)) || 'Credor';
+}
+function coletarBasesComprovantesExistentes(){
+  const bases = new Set();
+  dividas.forEach(d => d.parcelas.forEach(p => {
+    if(p.comprovante && p.comprovante.nomeArquivo){
+      bases.add(String(p.comprovante.nomeArquivo).replace(/\.[^.]+$/, ''));
+    }
+  }));
+  return bases;
+}
+function gerarNomeComprovante(credor, vencimentoISO, ext){
+  const base = sanitizarNomeCredor(credor);
+  const data = vencimentoISO || hojeIso();
+  const prefixo = `${base}_${data}`;
+  const existentes = coletarBasesComprovantesExistentes();
+
+  let nomeBase = prefixo;
+  let contador = 1;
+  while(existemesColide(nomeBase, existentes)){
+    nomeBase = `${prefixo}_${contador}`;
+    contador++;
+  }
+  return `${nomeBase}.${ext}`;
+}
+function existemesColide(nome, set){ return set.has(nome); }
+
 function semDadosComprovante(lista){
   return lista.map(d => {
     if(!Array.isArray(d.parcelas)) return d;
@@ -2322,11 +2400,30 @@ function migrarComprovantes(){
         ext: extDoMime(p.comprovante.tipo),
         enviado: false
       };
+      // Gera nomeArquivo amigável para comprovantes legados que ainda não subiram
+      try{
+        const credor = p.credorOverride || d.credor;
+        p.comprovante.nomeArquivo = gerarNomeComprovante(credor, p.vencimento, p.comprovante.ext);
+      }catch(_){}
       migrou = true;
       if(!ok) console.warn('Não foi possível migrar comprovante', id);
     } else if(p.comprovante && p.comprovante.id){
       if(!p.comprovante.ext) p.comprovante.ext = extDoMime(p.comprovante.tipo);
       if(p.comprovante.enviado === undefined) p.comprovante.enviado = true;
+      if(!p.comprovante.nomeArquivo){
+        // Backfill: se já foi enviado, mantém nome por id (arquivo no GitHub já existe assim).
+        // Se nunca foi enviado, usa nome amigável.
+        if(p.comprovante.enviado === false){
+          try{
+            const credor = p.credorOverride || d.credor;
+            p.comprovante.nomeArquivo = gerarNomeComprovante(credor, p.vencimento, p.comprovante.ext || 'bin');
+          }catch(_){
+            p.comprovante.nomeArquivo = `${p.comprovante.id}.${p.comprovante.ext || 'bin'}`;
+          }
+        } else {
+          p.comprovante.nomeArquivo = `${p.comprovante.id}.${p.comprovante.ext || 'bin'}`;
+        }
+      }
     }
   }));
   return migrou;
@@ -2607,9 +2704,10 @@ function ghPastaDados(){
   const idx = p.lastIndexOf('/');
   return idx >= 0 ? p.slice(0, idx) : '';
 }
-function ghComprovantePath(id, ext){
+/* Caminho no GitHub usa o nome amigável (nomeArquivo); fallback: id.ext */
+function ghComprovantePath(comp){
   const pasta = ghPastaDados();
-  const nome = ext ? `${id}.${ext}` : id;
+  const nome = (comp && comp.nomeArquivo) || (comp && comp.ext ? `${comp.id}.${comp.ext}` : (comp && comp.id) || 'arquivo');
   return pasta ? `${pasta}/comprovantes/${nome}` : `comprovantes/${nome}`;
 }
 function urlApiGitHubPath(path){
@@ -2628,7 +2726,7 @@ async function fetchGH(url, options){
 
 async function uploadComprovante(comp, dataUrl){
   if(!ghConfigurado()) return false;
-  const path = ghComprovantePath(comp.id, comp.ext);
+  const path = ghComprovantePath(comp);
   const url = urlApiGitHubPath(path);
   try{
     const base64 = (dataUrl || '').split(',')[1];
@@ -2655,7 +2753,7 @@ async function uploadComprovante(comp, dataUrl){
 }
 async function baixarComprovanteDoGitHub(comp){
   if(!ghConfigurado()) return null;
-  const path = ghComprovantePath(comp.id, comp.ext);
+  const path = ghComprovantePath(comp);
   const url = urlApiGitHubPath(path) + `?ref=${encodeURIComponent(ghConfig.branch)}`;
   try{
     const r = await fetchGH(url, { cache: 'no-store' });
@@ -2800,9 +2898,6 @@ function agendarSyncGH(){
 
 const estado = { tela:'calendario', mesRef:new Date(), diaSelecionado:null, expandidos:new Set(), rascunhos:{}, animando:false };
 
-/* =========================================================
-   NAVEGAÇÃO ENTRE TELAS + BOTÃO VOLTAR DO ANDROID
-   ========================================================= */
 function trocarTelaInterno(nome){
   ['calendario','dia','nova','todas','resumo','config','ajuda'].forEach(t=>{
     document.getElementById('tela-'+t).classList.toggle('escondido', t!==nome);
@@ -3658,15 +3753,21 @@ listaDia.addEventListener('change',async(e)=>{
   const cp=al.dataset.campo;
   if(cp==='comprovante'){
     const arq=al.files&&al.files[0]; if(!arq) return;
-    if(arq.size>LIMITE_COMPROVANTE_BYTES){
-      alert(`Comprovante muito grande (${formatarBytes(arq.size)}). Máximo ${formatarBytes(LIMITE_COMPROVANTE_BYTES)}.`);
-      al.value=''; return;
-    }
+    const dr=estado.rascunhos[p.id];
+    const credorAtual = dr?.credor || p.credorOverride || d.credor;
+    const vencAtual = dr?.vencimento || p.vencimento;
     try{
-      const dados=await lerArquivo(arq);
+      // Comprime automaticamente (exceto PDF/GIF/SVG/pequenos)
+      const arquivoFinal = await comprimirImagem(arq);
+      if(arquivoFinal.size > LIMITE_COMPROVANTE_BYTES){
+        alert(`Comprovante muito grande (${formatarBytes(arquivoFinal.size)}). Máximo ${formatarBytes(LIMITE_COMPROVANTE_BYTES)} após a compressão.`);
+        al.value=''; return;
+      }
+      const dados=await lerArquivo(arquivoFinal);
       const id=gerarId();
-      const ext=extDoMime(arq.type);
-      const comp = { id, nome:arq.name, tipo:arq.type||'application/octet-stream', ext, enviado:false };
+      const ext=extDoMime(arquivoFinal.type);
+      const nomeArquivo = gerarNomeComprovante(credorAtual, vencAtual, ext);
+      const comp = { id, nome:arquivoFinal.name, nomeArquivo, tipo:arquivoFinal.type||'application/octet-stream', ext, enviado:false };
       if(!salvarComprovanteLocal(id, dados)){
         alert('⚠️ Armazenamento local cheio. Remova comprovantes antigos antes de anexar novos.');
         al.value=''; return;
@@ -3894,20 +3995,24 @@ listaTodas.addEventListener('change',async(e)=>{
   const cp=al.dataset.campo;
   if(cp==='comprovante'){
     const a=al.files&&al.files[0]; if(!a) return;
-    if(a.size>LIMITE_COMPROVANTE_BYTES){
-      alert(`Comprovante muito grande (${formatarBytes(a.size)}). Máximo ${formatarBytes(LIMITE_COMPROVANTE_BYTES)}.`);
-      al.value=''; return;
-    }
+    const credorAtual = p.credorOverride || d.credor;
+    const vencAtual = p.vencimento;
     try{
-      const dd=await lerArquivo(a);
+      const arquivoFinal = await comprimirImagem(a);
+      if(arquivoFinal.size > LIMITE_COMPROVANTE_BYTES){
+        alert(`Comprovante muito grande (${formatarBytes(arquivoFinal.size)}). Máximo ${formatarBytes(LIMITE_COMPROVANTE_BYTES)} após a compressão.`);
+        al.value=''; return;
+      }
+      const dd=await lerArquivo(arquivoFinal);
       const id=gerarId();
-      const ext=extDoMime(a.type);
+      const ext=extDoMime(arquivoFinal.type);
+      const nomeArquivo = gerarNomeComprovante(credorAtual, vencAtual, ext);
       if(!salvarComprovanteLocal(id, dd)){
         alert('⚠️ Armazenamento local cheio.');
         al.value=''; return;
       }
       const antigo = p.comprovante;
-      p.comprovante = { id, nome:a.name, tipo:a.type||'application/octet-stream', ext, enviado:false };
+      p.comprovante = { id, nome:arquivoFinal.name, nomeArquivo, tipo:arquivoFinal.type||'application/octet-stream', ext, enviado:false };
       if(antigo && antigo.id && antigo.id !== id) removerComprovanteLocal(antigo.id);
       salvar();
       const cell = ln.querySelector('.col-num');
@@ -3988,7 +4093,6 @@ document.getElementById('btnAbrirResumo').addEventListener('click',()=>{
 });
 document.getElementById('voltarCalendario3').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
 
-/* ---- Ajuda ---- */
 document.getElementById('btnAbrirAjuda').addEventListener('click',()=>{ mostrarTela('ajuda'); });
 document.getElementById('voltarCalendario5').addEventListener('click',()=>{ renderCalendario(); mostrarTela('calendario'); });
 
@@ -4176,7 +4280,11 @@ async function compartilharComprovante(canal){
   }
   const c = comprovanteAtual;
   let file;
-  try{ file = dataUrlParaFile(comprovanteDadosAtual, c.nome, c.tipo); }
+  try{
+    // Usa o nome amigável (Credor_data) para compartilhar/baixar
+    const nomeParaArquivo = c.nomeArquivo || c.nome;
+    file = dataUrlParaFile(comprovanteDadosAtual, nomeParaArquivo, c.tipo);
+  }
   catch(e){ console.error(e); alert('Não foi possível preparar o comprovante para compartilhar.'); return; }
 
   const titulo = 'Comprovante de pagamento';
@@ -4250,7 +4358,8 @@ async function abrirComprovante(c){
   }
   if(info){
     const partes = [];
-    if(c.nome) partes.push(escapar(c.nome));
+    if(c.nomeArquivo) partes.push(escapar(c.nomeArquivo));
+    else if(c.nome) partes.push(escapar(c.nome));
     if(c.tipo) partes.push(escapar(c.tipo));
     info.innerHTML = partes.join(' · ');
   }
@@ -4275,7 +4384,8 @@ document.getElementById('btnEmailComp').addEventListener('click',()=>compartilha
 document.getElementById('btnBaixarComp').addEventListener('click',()=>{
   if(!comprovanteAtual || !comprovanteDadosAtual) return;
   try{
-    const f = dataUrlParaFile(comprovanteDadosAtual, comprovanteAtual.nome, comprovanteAtual.tipo);
+    const nomeParaArquivo = comprovanteAtual.nomeArquivo || comprovanteAtual.nome;
+    const f = dataUrlParaFile(comprovanteDadosAtual, nomeParaArquivo, comprovanteAtual.tipo);
     baixarArquivoLocal(f);
   }catch(e){ console.error(e); alert('Erro ao baixar o comprovante.'); }
 });
