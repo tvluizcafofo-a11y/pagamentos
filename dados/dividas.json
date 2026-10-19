@@ -707,7 +707,7 @@
         "valor": 200,
         "vencimento": "2026-10-02",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null,
         "credorOverride": "Geisa"
       },
