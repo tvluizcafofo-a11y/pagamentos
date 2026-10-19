@@ -1906,7 +1906,7 @@
         "valor": 130.99,
         "vencimento": "2026-10-10",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null,
         "descricaoOverride": "Vivo Celular"
       },
