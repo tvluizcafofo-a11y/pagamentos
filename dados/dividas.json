@@ -516,7 +516,7 @@
     "credor": "Prefeitura de B.H.",
     "descricao": "IPTU Anhangai PARCELAMENTO: 1425832/2023",
     "valorTotal": 5248.84,
-    "valorParcela": 329.62,
+    "valorParcela": 332.11,
     "modo": "parcelas",
     "qtdParcelas": 16,
     "primeiroVencimento": "2026-09-30",
@@ -536,7 +536,7 @@
       {
         "id": "mu8j480rsl0onp",
         "numero": 2,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2026-10-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=2DB1FB8AE0297C858C65C70126994905",
         "status": "em_aberto",
@@ -545,7 +545,7 @@
       {
         "id": "mu8j480rw6d31k",
         "numero": 3,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2026-11-30",
         "link": "",
         "status": "em_aberto",
@@ -554,7 +554,7 @@
       {
         "id": "mu8j480rjaqrii",
         "numero": 4,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2026-12-30",
         "link": "",
         "status": "em_aberto",
@@ -563,7 +563,7 @@
       {
         "id": "mu8j480rt6c2gy",
         "numero": 5,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-01-30",
         "link": "",
         "status": "em_aberto",
@@ -572,7 +572,7 @@
       {
         "id": "mu8j480r7o12yr",
         "numero": 6,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-02-28",
         "link": "",
         "status": "em_aberto",
@@ -581,7 +581,7 @@
       {
         "id": "mu8j480ry8t2hz",
         "numero": 7,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-03-30",
         "link": "",
         "status": "em_aberto",
@@ -590,7 +590,7 @@
       {
         "id": "mu8j480rereetn",
         "numero": 8,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-04-30",
         "link": "",
         "status": "em_aberto",
@@ -599,7 +599,7 @@
       {
         "id": "mu8j480r5m3iw6",
         "numero": 9,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-05-30",
         "link": "",
         "status": "em_aberto",
@@ -608,7 +608,7 @@
       {
         "id": "mu8j480rxvimat",
         "numero": 10,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-06-30",
         "link": "",
         "status": "em_aberto",
@@ -617,7 +617,7 @@
       {
         "id": "mu8j480ri1ahn7",
         "numero": 11,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-07-30",
         "link": "",
         "status": "em_aberto",
@@ -626,7 +626,7 @@
       {
         "id": "mu8j480r2tup5m",
         "numero": 12,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-08-30",
         "link": "",
         "status": "em_aberto",
@@ -635,7 +635,7 @@
       {
         "id": "mu8j480rmts3yq",
         "numero": 13,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-09-30",
         "link": "",
         "status": "em_aberto",
@@ -644,7 +644,7 @@
       {
         "id": "mu8j480rxfttfn",
         "numero": 14,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-10-30",
         "link": "",
         "status": "em_aberto",
@@ -653,7 +653,7 @@
       {
         "id": "mu8j480rrlnqju",
         "numero": 15,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-11-30",
         "link": "",
         "status": "em_aberto",
@@ -662,7 +662,7 @@
       {
         "id": "mu8j480rjngofq",
         "numero": 16,
-        "valor": 329.62,
+        "valor": 332.11,
         "vencimento": "2027-12-30",
         "link": "",
         "status": "em_aberto",
