@@ -3193,8 +3193,15 @@
         "valor": 275,
         "vencimento": "2026-10-20",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mvgl127ls6fxnz",
+          "nome": "Comprovante_20-10-2026_080752.png.webp",
+          "nomeArquivo": "Dominio_Administracao_2026-10-20.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mvfr8t8ndgpyak",
