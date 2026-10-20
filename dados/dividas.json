@@ -903,7 +903,8 @@
         "link": "",
         "status": "em_aberto",
         "comprovante": null,
-        "credorOverride": "Geisa"
+        "credorOverride": "Geisa",
+        "descricaoOverride": "Semanada Geisa - descontar R$ 61,00"
       },
       {
         "id": "mu8n9k1wfekyw9",
