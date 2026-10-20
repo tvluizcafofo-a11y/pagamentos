@@ -3443,7 +3443,7 @@
         "valor": 300,
         "vencimento": "2026-10-16",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
