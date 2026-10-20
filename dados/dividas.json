@@ -2178,8 +2178,15 @@
         "valor": 77.03,
         "vencimento": "2026-10-20",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mvgl421g0zcbc9",
+          "nome": "Comprovante_20-10-2026_081222.png.webp",
+          "nomeArquivo": "Origo_2026-10-20.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mu9o5xg1a3pvfn",
