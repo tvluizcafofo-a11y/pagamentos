@@ -680,5 +680,162 @@
         "status": "em_aberto"
       }
     ]
+  },
+  {
+    "id": "mvhaligr5gqbhy",
+    "fonte": "Reco Imobiliária",
+    "tipo": "aluguel",
+    "valorBase": 1260,
+    "primeiroVencimento": "2026-11-02",
+    "diaVencimento": "",
+    "infinita": false,
+    "dataFim": "2028-10-02",
+    "criadoEm": "2026-10-20T23:06:27.387Z",
+    "parcelas": [
+      {
+        "id": "mvhaligr6v3mye",
+        "vencimento": "2026-11-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtmpuori",
+        "vencimento": "2026-12-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtdagh7h",
+        "vencimento": "2027-01-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtb6j2st",
+        "vencimento": "2027-02-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtrsuj9w",
+        "vencimento": "2027-03-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtihbd4c",
+        "vencimento": "2027-04-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligtat2jvf",
+        "vencimento": "2027-05-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaliguuq9ozq",
+        "vencimento": "2027-06-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligubavxiu",
+        "vencimento": "2027-07-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligutkg8zg",
+        "vencimento": "2027-08-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaliguy6jpgh",
+        "vencimento": "2027-09-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvuekrhf",
+        "vencimento": "2027-10-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvf9t14f",
+        "vencimento": "2027-11-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligv4fnh1u",
+        "vencimento": "2027-12-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvxkywbm",
+        "vencimento": "2028-01-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligv5w1f2y",
+        "vencimento": "2028-02-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvx5ocmd",
+        "vencimento": "2028-03-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvy7byrz",
+        "vencimento": "2028-04-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvyagc10",
+        "vencimento": "2028-05-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvipkelc",
+        "vencimento": "2028-06-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvmf62z5",
+        "vencimento": "2028-07-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvqqh9r2",
+        "vencimento": "2028-08-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligvkn0xsk",
+        "vencimento": "2028-09-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhaligv3w2nf3",
+        "vencimento": "2028-10-02",
+        "valor": 1260,
+        "status": "em_aberto"
+      }
+    ]
   }
 ]
