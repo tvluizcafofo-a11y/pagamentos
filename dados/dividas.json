@@ -96,7 +96,7 @@
         "valor": 523.76,
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=C6E7C6F9AD33F07DFDBD57FC8E1ADB9B",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
@@ -421,7 +421,7 @@
         "valor": 244.12,
         "vencimento": "2026-09-30",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
@@ -530,7 +530,7 @@
         "valor": 329.62,
         "vencimento": "2026-09-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=FE24DF21CD6C2CF40961F2A30AE55907",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
@@ -956,7 +956,7 @@
         "valor": 119.9,
         "vencimento": "2026-09-25",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
@@ -1191,7 +1191,7 @@
         "valor": 70,
         "vencimento": "2026-09-30",
         "link": "",
-        "status": "em_atraso",
+        "status": "pago",
         "comprovante": null
       },
       {
