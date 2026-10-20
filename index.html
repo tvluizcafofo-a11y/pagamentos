@@ -758,11 +758,14 @@
   .opcao-escopo.perigo:hover{background:#fef2f2;border-color:#fca5a5;
     box-shadow:0 6px 16px rgba(220,38,38,.15)}
 
+  /* =========================================================
+     NAVEGAÇÃO POR DIA + BOTÃO NOVA DÍVIDA
+     ========================================================= */
   .nav-dia{
     display:flex;
     align-items:center;
     gap:10px;
-    margin-bottom:16px;
+    margin-bottom:10px;
   }
   .nav-dia h2.titulo-tela{
     margin:0;
@@ -801,16 +804,19 @@
   }
   .nav-dia-btn:active{ transform:scale(.95); }
 
-  @keyframes diaSlideInRight{
-    from{opacity:0; transform:translateX(40px)}
-    to{opacity:1; transform:translateX(0)}
+  .barra-dia{
+    display:flex;
+    gap:8px;
+    margin-bottom:14px;
   }
-  @keyframes diaSlideInLeft{
-    from{opacity:0; transform:translateX(-40px)}
-    to{opacity:1; transform:translateX(0)}
+  .barra-dia .btn{
+    flex:1;
+    justify-content:center;
+    padding:11px 16px;
+    font-size:.86rem;
   }
-  #listaDia.lista-dia-anim-next{ animation:diaSlideInRight .25s ease-out; }
-  #listaDia.lista-dia-anim-prev{ animation:diaSlideInLeft .25s ease-out; }
+
+  #listaDia{ touch-action: pan-y; will-change: transform, opacity; }
 
   .ajuda-cartao{
     background:#fff;
@@ -1113,6 +1119,7 @@
     .nav-dia{ gap:8px; }
     .nav-dia h2.titulo-tela{ font-size:1rem; }
     .nav-dia-btn{ width:42px; height:42px; font-size:1.4rem; }
+    .barra-dia .btn{ font-size:.82rem; padding:10px 14px; }
     .ajuda-conteudo{padding:14px;font-size:.82rem}
     details.ajuda-secao>summary{font-size:.88rem;padding:12px 14px}
     details.ajuda-secao>summary .emoji-secao{width:32px;height:32px;font-size:1.1rem}
@@ -1132,6 +1139,7 @@
     h2.titulo-tela{font-size:1.15rem}
     .nav-dia h2.titulo-tela{ font-size:.92rem; }
     .nav-dia-btn{ width:38px; height:38px; font-size:1.25rem; border-radius:10px; }
+    .barra-dia .btn{ font-size:.76rem; padding:9px 12px; }
   }
 </style>
 </head>
@@ -1205,6 +1213,9 @@
       <h2 class="titulo-tela" id="tituloDia"></h2>
       <button type="button" class="nav-dia-btn" id="diaProximo"
               title="Próximo dia" aria-label="Próximo dia">›</button>
+    </div>
+    <div class="barra-dia">
+      <button type="button" class="btn btn-primario" id="btnNovaDividaDia">➕ Nova dívida</button>
     </div>
     <div id="listaDia"></div>
   </section>
@@ -1402,7 +1413,7 @@
           <span class="num-passo">5</span>
           <div class="texto-passo">
             <b>1º vencimento</b>
-            <small>Data da primeira parcela. Já vem com a data de hoje.</small>
+            <small>Data da primeira parcela. Já vem com a data de hoje (ou do dia visualizado, se você abrir pela tela do dia).</small>
           </div>
         </div>
         <div class="ajuda-passo">
@@ -1568,22 +1579,27 @@
           <li>Botão <b>›</b> à direita do título → <b>próximo dia</b>.</li>
         </ul>
 
-        <h4>Por gesto (celular)</h4>
+        <h4>Por gesto (celular) — animação suave</h4>
         <ul>
           <li><b>Deslizar para a esquerda</b> → próximo dia.</li>
           <li><b>Deslizar para a direita</b> → dia anterior.</li>
+          <li>A lista <b>acompanha o dedo em tempo real</b> e volta sozinha se você soltar antes do limite.</li>
+          <li>Ao completar o gesto, o conteúdo atual sai deslizando para o lado e o novo dia entra do lado oposto, com transição suave.</li>
         </ul>
+
+        <h4>Botão "Nova dívida" na tela do dia</h4>
+        <p>Logo abaixo do título do dia há um botão <b>➕ Nova dívida</b>. Ele abre o formulário com o <b>1º vencimento já preenchido</b> com a data que você está visualizando — ótimo para cadastrar rapidamente uma conta daquele dia.</p>
 
         <h4>Comportamento importante</h4>
         <ul>
-          <li>Se você tiver <b>edições não salvas</b> (rascunhos), o app pergunta se deseja descartar antes de trocar de dia.</li>
+          <li>Se você tiver <b>edições não salvas</b> (rascunhos com alteração real), o app pergunta se deseja descartar antes de trocar de dia. Se cancelar, a lista <b>volta suavemente</b> à posição original.</li>
           <li>O <b>mês de referência</b> do calendário é atualizado junto — ao voltar, você cai no mês correto.</li>
           <li>Gestos iniciados <b>em campos de formulário, botões ou links</b> são ignorados (não interferem na digitação).</li>
-          <li>O gesto precisa ser <b>claramente horizontal</b> (mais largo do que alto) para não conflitar com a rolagem da página.</li>
+          <li>O gesto precisa ser <b>claramente horizontal</b> (mais largo do que alto) para não conflitar com a rolagem vertical da página.</li>
         </ul>
 
         <div class="ajuda-dica">
-          Combinação prática: navegue pelos dias com um <b>toque nos botões</b> quando estiver revisando rapidamente, e use o <b>swipe</b> quando estiver no celular com a mão ocupada.
+          Combinação prática: no desktop, use os <b>botões ‹ ›</b>; no celular, use o <b>swipe</b> — a lista acompanha o dedo e a troca é instantânea.
         </div>
       </div>
     </details>
@@ -2224,10 +2240,9 @@ const PARCELAS_MIN_FUTURAS = 12;
 const LIMITE_GITHUB_BYTES = 900 * 1024;
 const LIMITE_COMPROVANTE_BYTES = 2 * 1024 * 1024;
 
-/* Configurações de compressão automática de imagens */
-const COMPRESSAO_LARGURA_MAX = 1024;    // px de largura máxima
-const COMPRESSAO_QUALIDADE = 0.72;      // 0..1 (72% = boa legibilidade, pouco peso)
-const COMPRESSAO_TAMANHO_MIN = 80*1024; // não comprime imagens já pequenas (< 80 KB)
+const COMPRESSAO_LARGURA_MAX = 1024;
+const COMPRESSAO_QUALIDADE = 0.72;
+const COMPRESSAO_TAMANHO_MIN = 80*1024;
 
 let dividas = [];
 let editandoId = null;
@@ -2254,7 +2269,7 @@ const formatarDataBR = (iso) => iso ? isoParaData(iso).toLocaleDateString('pt-BR
 const formatarBytes = (n) => n < 1024 ? n + ' B' : (n/1024).toFixed(1) + ' KB';
 
 /* =========================================================
-   COMPROVANTES — armazenamento local (fora do JSON)
+   COMPROVANTES — armazenamento local
    ========================================================= */
 function comprovanteLocalKey(id){ return COMP_PREFIX + id; }
 function salvarComprovanteLocal(id, dataUrl){
@@ -2283,13 +2298,9 @@ function extDoMime(mime){
   return 'bin';
 }
 
-/* =========================================================
-   COMPRESSÃO AUTOMÁTICA DE IMAGENS (redimensiona + WebP)
-   ========================================================= */
 async function comprimirImagem(file){
   if(!file || !file.type || !file.type.startsWith('image/')) return file;
   if(file.size < COMPRESSAO_TAMANHO_MIN) return file;
-  // GIF animado e SVG são preservados como estão
   if(file.type === 'image/gif' || file.type === 'image/svg+xml') return file;
 
   try{
@@ -2297,7 +2308,6 @@ async function comprimirImagem(file){
     try{
       bitmap = await createImageBitmap(file, { imageOrientation: 'from-image' });
     }catch(_){
-      // Fallback (ex: HEIC em navegadores sem suporte direto)
       const url = URL.createObjectURL(file);
       try{
         bitmap = await new Promise((res, rej) => {
@@ -2327,7 +2337,7 @@ async function comprimirImagem(file){
 
     const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/webp', COMPRESSAO_QUALIDADE));
     if(!blob) return file;
-    if(blob.size >= file.size) return file; // compressão não compensou
+    if(blob.size >= file.size) return file;
 
     const nomeBase = String(file.name || 'comprovante').replace(/\.[^.]+$/, '');
     const novo = new File([blob], nomeBase + '.webp', { type: 'image/webp' });
@@ -2339,10 +2349,6 @@ async function comprimirImagem(file){
   }
 }
 
-/* =========================================================
-   NOMENCLATURA AMIGÁVEL DOS COMPROVANTES
-   Padrão: Credor_AAAA-MM-DD.ext  (com _1, _2 em duplicatas)
-   ========================================================= */
 function sanitizarNomeCredor(nome){
   let s = String(nome || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
   s = s.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_-]/g, '');
@@ -2366,13 +2372,12 @@ function gerarNomeComprovante(credor, vencimentoISO, ext){
 
   let nomeBase = prefixo;
   let contador = 1;
-  while(existemesColide(nomeBase, existentes)){
+  while(existentes.has(nomeBase)){
     nomeBase = `${prefixo}_${contador}`;
     contador++;
   }
   return `${nomeBase}.${ext}`;
 }
-function existemesColide(nome, set){ return set.has(nome); }
 
 function semDadosComprovante(lista){
   return lista.map(d => {
@@ -2400,7 +2405,6 @@ function migrarComprovantes(){
         ext: extDoMime(p.comprovante.tipo),
         enviado: false
       };
-      // Gera nomeArquivo amigável para comprovantes legados que ainda não subiram
       try{
         const credor = p.credorOverride || d.credor;
         p.comprovante.nomeArquivo = gerarNomeComprovante(credor, p.vencimento, p.comprovante.ext);
@@ -2411,8 +2415,6 @@ function migrarComprovantes(){
       if(!p.comprovante.ext) p.comprovante.ext = extDoMime(p.comprovante.tipo);
       if(p.comprovante.enviado === undefined) p.comprovante.enviado = true;
       if(!p.comprovante.nomeArquivo){
-        // Backfill: se já foi enviado, mantém nome por id (arquivo no GitHub já existe assim).
-        // Se nunca foi enviado, usa nome amigável.
         if(p.comprovante.enviado === false){
           try{
             const credor = p.credorOverride || d.credor;
@@ -2704,7 +2706,6 @@ function ghPastaDados(){
   const idx = p.lastIndexOf('/');
   return idx >= 0 ? p.slice(0, idx) : '';
 }
-/* Caminho no GitHub usa o nome amigável (nomeArquivo); fallback: id.ext */
 function ghComprovantePath(comp){
   const pasta = ghPastaDados();
   const nome = (comp && comp.nomeArquivo) || (comp && comp.ext ? `${comp.id}.${comp.ext}` : (comp && comp.id) || 'arquivo');
@@ -2738,7 +2739,7 @@ async function uploadComprovante(comp, dataUrl){
     else if(gr.status === 401 || gr.status === 403){ return false; }
     else { return false; }
     const body = {
-      message: `Comprovante ${comp.nome || comp.id}`,
+      message: `Comprovante ${comp.nomeArquivo || comp.nome || comp.id}`,
       content: base64,
       branch: ghConfig.branch
     };
@@ -2953,6 +2954,22 @@ function rolarParaElemento(el){
 }
 
 function temRascunhosPendentes(){ return Object.keys(estado.rascunhos).length>0; }
+function temAlteracoesNaoSalvas(){
+  for(const id in estado.rascunhos){
+    const dr = estado.rascunhos[id];
+    for(const d of dividas){
+      const p = d.parcelas.find(x => x.id === id);
+      if(p && rascunhoTemMudancas(d, p, dr)) return true;
+    }
+  }
+  return false;
+}
+function podeTrocarDia(){
+  if(estado.diaSelecionado && temAlteracoesNaoSalvas()){
+    return confirm('Você tem edições não salvas. Descartar?');
+  }
+  return true;
+}
 
 function calcularPeriodoAtivo(){
   const hj=new Date(); const hjIso=hojeIso(); const p=filtroResumo.periodo;
@@ -3428,40 +3445,77 @@ function abrirDia(iso){
 
 let bloqueiaClickDia = false;
 
-function navegarDia(delta){
+/* =========================================================
+   NAVEGAÇÃO SUAVE ENTRE DIAS
+   ========================================================= */
+function atualizarConteudoDia(delta){
   const atual = estado.diaSelecionado || hojeIso();
-  const antes = estado.diaSelecionado;
   const dt = isoParaData(atual);
   dt.setDate(dt.getDate() + delta);
   const novoIso = dataParaIso(dt);
 
-  abrirDia(novoIso);
+  estado.rascunhos = {};
+  estado.expandidos.clear();
+  estado.diaSelecionado = novoIso;
+  estado.mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
 
-  if(estado.diaSelecionado === novoIso && novoIso !== antes){
-    estado.expandidos.clear();
-    estado.mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
-
-    const ld = document.getElementById('listaDia');
-    if(ld){
-      ld.classList.remove('lista-dia-anim-next','lista-dia-anim-prev');
-      void ld.offsetWidth;
-      ld.classList.add(delta > 0 ? 'lista-dia-anim-next' : 'lista-dia-anim-prev');
-    }
-  }
+  const [a, m, d] = novoIso.split('-').map(Number);
+  const hj = novoIso === hojeIso();
+  document.getElementById('tituloDia').innerHTML =
+    `${nomeDiaSemana(dt.getDay())}, ${d} de ${nomeMes(m-1)} de ${a}` +
+    (hj ? ' <span class="badge-hoje">hoje</span>' : '');
+  renderListaDia(itensDoDia(novoIso));
 }
+
+function animarTrocaDia(delta){
+  if(!podeTrocarDia()) return;
+
+  bloqueiaClickDia = true;
+  setTimeout(() => { bloqueiaClickDia = false; }, 500);
+
+  const listaDia = document.getElementById('listaDia');
+  const largura = Math.max(320, window.innerWidth || 320);
+  const dirSaida = delta > 0 ? -1 : 1;
+
+  listaDia.style.transition = 'transform 0.2s cubic-bezier(0.4, 0, 0.6, 1), opacity 0.2s';
+  listaDia.style.transform = `translateX(${dirSaida * largura * 0.4}px)`;
+  listaDia.style.opacity = '0';
+
+  setTimeout(() => {
+    atualizarConteudoDia(delta);
+
+    listaDia.style.transition = 'none';
+    listaDia.style.transform = `translateX(${-dirSaida * largura * 0.4}px)`;
+    void listaDia.offsetWidth;
+    listaDia.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 0.22s';
+    listaDia.style.transform = 'translateX(0)';
+    listaDia.style.opacity = '1';
+
+    setTimeout(() => {
+      listaDia.style.transition = '';
+      listaDia.style.transform = '';
+      listaDia.style.opacity = '';
+    }, 240);
+  }, 200);
+}
+
+function navegarDia(delta){ animarTrocaDia(delta); }
 
 document.getElementById('diaAnterior').addEventListener('click', () => navegarDia(-1));
 document.getElementById('diaProximo').addEventListener('click', () => navegarDia(1));
+document.getElementById('btnNovaDividaDia').addEventListener('click', () => {
+  abrirNovaDivida(estado.diaSelecionado);
+});
 
 const telaDiaEl = document.getElementById('tela-dia');
 const swipeDiaState = {
   startX:0, startY:0, deltaX:0, deltaY:0,
-  ativo:false, bloqueado:false
+  ativo:false, bloqueado:false, lista:null, largura:0
 };
 
 telaDiaEl.addEventListener('touchstart', (e) => {
   const t = e.target;
-  if(t.closest('input, select, textarea, button, a')){
+  if(t.closest('input, select, textarea, button, a, label')){
     swipeDiaState.bloqueado = true;
     return;
   }
@@ -3481,34 +3535,108 @@ telaDiaEl.addEventListener('touchmove', (e) => {
   const dy = touch.clientY - swipeDiaState.startY;
 
   if(!swipeDiaState.ativo){
-    if(Math.abs(dx) > 18 && Math.abs(dx) > Math.abs(dy) * 1.5){
+    if(Math.abs(dx) > 15 && Math.abs(dx) > Math.abs(dy) * 1.5){
       swipeDiaState.ativo = true;
+      swipeDiaState.lista = document.getElementById('listaDia');
+      swipeDiaState.largura = Math.max(320, window.innerWidth || 320);
+      if(swipeDiaState.lista) swipeDiaState.lista.style.transition = 'none';
     } else {
       return;
     }
   }
+
+  if(e.cancelable) e.preventDefault();
+
   swipeDiaState.deltaX = dx;
   swipeDiaState.deltaY = dy;
-}, { passive:true });
+
+  const lista = swipeDiaState.lista;
+  if(lista){
+    let aplicado = dx;
+    const maxNormal = swipeDiaState.largura * 0.35;
+    if(Math.abs(dx) > maxNormal){
+      const excesso = Math.abs(dx) - maxNormal;
+      aplicado = Math.sign(dx) * (maxNormal + excesso * 0.25);
+    }
+    lista.style.transform = `translateX(${aplicado}px)`;
+    lista.style.opacity = String(1 - Math.min(Math.abs(dx) / (swipeDiaState.largura * 0.8), 0.35));
+  }
+}, { passive:false });
 
 telaDiaEl.addEventListener('touchend', () => {
-  if(swipeDiaState.bloqueado){
-    swipeDiaState.bloqueado = false;
-    swipeDiaState.ativo = false;
-    return;
-  }
-  if(!swipeDiaState.ativo) return;
-
+  const lista = swipeDiaState.lista || document.getElementById('listaDia');
+  const estavaBloqueado = swipeDiaState.bloqueado;
+  const estavaAtivo = swipeDiaState.ativo;
   const dx = swipeDiaState.deltaX;
+  const largura = swipeDiaState.largura || Math.max(320, window.innerWidth || 320);
+
+  swipeDiaState.bloqueado = false;
   swipeDiaState.ativo = false;
   swipeDiaState.deltaX = 0;
   swipeDiaState.deltaY = 0;
+  swipeDiaState.lista = null;
 
-  if(Math.abs(dx) > 60){
+  if(estavaBloqueado) return;
+
+  if(!estavaAtivo){
+    if(lista){
+      lista.style.transition = '';
+      lista.style.transform = '';
+      lista.style.opacity = '';
+    }
+    return;
+  }
+
+  const threshold = Math.min(110, largura * 0.22);
+
+  if(Math.abs(dx) > threshold){
     bloqueiaClickDia = true;
-    setTimeout(() => { bloqueiaClickDia = false; }, 350);
-    if(dx < 0) navegarDia(1);
-    else navegarDia(-1);
+    setTimeout(() => { bloqueiaClickDia = false; }, 450);
+
+    if(!podeTrocarDia()){
+      if(lista){
+        lista.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.6, 1), opacity 0.25s';
+        lista.style.transform = '';
+        lista.style.opacity = '';
+        setTimeout(() => { lista.style.transition = ''; }, 280);
+      }
+      return;
+    }
+
+    const delta = dx < 0 ? 1 : -1;
+    const dirSaida = dx < 0 ? -1 : 1;
+
+    if(lista){
+      lista.style.transition = 'transform 0.18s cubic-bezier(0.4, 0, 0.6, 1), opacity 0.18s';
+      lista.style.transform = `translateX(${dirSaida * largura * 0.5}px)`;
+      lista.style.opacity = '0';
+    }
+
+    setTimeout(() => {
+      atualizarConteudoDia(delta);
+
+      if(lista){
+        lista.style.transition = 'none';
+        lista.style.transform = `translateX(${-dirSaida * largura * 0.4}px)`;
+        void lista.offsetWidth;
+        lista.style.transition = 'transform 0.22s cubic-bezier(0.2, 0.8, 0.4, 1), opacity 0.22s';
+        lista.style.transform = 'translateX(0)';
+        lista.style.opacity = '1';
+
+        setTimeout(() => {
+          lista.style.transition = '';
+          lista.style.transform = '';
+          lista.style.opacity = '';
+        }, 240);
+      }
+    }, 180);
+  } else {
+    if(lista){
+      lista.style.transition = 'transform 0.25s cubic-bezier(0.4, 0, 0.6, 1), opacity 0.25s';
+      lista.style.transform = '';
+      lista.style.opacity = '';
+      setTimeout(() => { lista.style.transition = ''; }, 280);
+    }
   }
 }, { passive:true });
 
@@ -3757,7 +3885,6 @@ listaDia.addEventListener('change',async(e)=>{
     const credorAtual = dr?.credor || p.credorOverride || d.credor;
     const vencAtual = dr?.vencimento || p.vencimento;
     try{
-      // Comprime automaticamente (exceto PDF/GIF/SVG/pequenos)
       const arquivoFinal = await comprimirImagem(arq);
       if(arquivoFinal.size > LIMITE_COMPROVANTE_BYTES){
         alert(`Comprovante muito grande (${formatarBytes(arquivoFinal.size)}). Máximo ${formatarBytes(LIMITE_COMPROVANTE_BYTES)} após a compressão.`);
@@ -3871,11 +3998,15 @@ function limparFormulario(){ formulario.reset();
   campoPrimeiro.value=hojeIso(); campoNovoValor.value=''; campoAdicionar.value=0;
   campoPeriodicidade.value='mensal'; campoDiaMes.value=''; campoDiaSemana.value='';
   campoIndefinida.checked=false; atualizarBlocosPeriodicidade(); alternarContinua(); alternarModo(); }
-function abrirNovaDivida(){ editandoId=null; limparFormulario();
+
+function abrirNovaDivida(dataPrefill){
+  editandoId=null; limparFormulario();
+  if(dataPrefill) campoPrimeiro.value = dataPrefill;
   tituloFormulario.innerHTML='➕ Nova dívida'; btnSalvarForm.innerHTML='💾 Salvar';
   btnExcluirEdicao.classList.add('escondido');
   fieldsetCriacao.classList.remove('escondido'); fieldsetEdicao.classList.add('escondido');
-  setCamposObrigatorios(true); mostrarTela('nova'); setTimeout(()=>campoCredor.focus(),200); }
+  setCamposObrigatorios(true); mostrarTela('nova'); setTimeout(()=>campoCredor.focus(),200);
+}
 function abrirEdicaoDivida(id){ const d=dividas.find(x=>x.id===id); if(!d) return;
   editandoId=id; limparFormulario();
   campoCredor.value=d.credor||''; campoDescricao.value=d.descricao||''; campoValorTotal.value=d.valorTotal||'';
@@ -3896,7 +4027,7 @@ function setCamposObrigatorios(on){ if(on){ campoValorParcela.setAttribute('requ
   else { campoValorParcela.removeAttribute('required'); campoPrimeiro.removeAttribute('required'); } }
 function voltarParaCalendario(){ editandoId=null; renderCalendario(); mostrarTela('calendario'); }
 
-document.getElementById('btnNovaDivida').addEventListener('click',abrirNovaDivida);
+document.getElementById('btnNovaDivida').addEventListener('click',()=>abrirNovaDivida());
 document.getElementById('cancelarNova').addEventListener('click',()=>{ if(confirm('Voltar?')) voltarParaCalendario(); });
 document.getElementById('btnDescartar').addEventListener('click',()=>{ if(confirm('Descartar?')) voltarParaCalendario(); });
 document.getElementById('btnExcluirEdicao').addEventListener('click',()=>{
@@ -4281,7 +4412,6 @@ async function compartilharComprovante(canal){
   const c = comprovanteAtual;
   let file;
   try{
-    // Usa o nome amigável (Credor_data) para compartilhar/baixar
     const nomeParaArquivo = c.nomeArquivo || c.nome;
     file = dataUrlParaFile(comprovanteDadosAtual, nomeParaArquivo, c.tipo);
   }
