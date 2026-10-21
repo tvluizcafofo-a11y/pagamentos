@@ -4,10 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#3b82f6">
-<meta name="color-scheme" content="only light">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
 <title>Fluxo de Caixa</title>
 <style>
   :root{
+    color-scheme: light;
     color-scheme: light only;
     --fundo:#f8fafc;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
     --verde:#16a34a;--verde-esc:#15803d;--verde-bg:#dcfce7;--verde-claro:#f0fdf4;
@@ -25,6 +27,7 @@
     --raio:14px;
   }
   html{
+    color-scheme: light;
     color-scheme: light only;
     forced-color-adjust: none;
     -webkit-text-size-adjust: 100%;
@@ -37,6 +40,19 @@
     -webkit-tap-highlight-color:transparent;
     forced-color-adjust: none}
   button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+  /* FORÇA BRUTA EM TODOS OS CONTROLES (defesa em profundidade) */
+  input, select, textarea{
+    color-scheme: light !important;
+    forced-color-adjust: none !important;
+  }
+  input[type="text"], input[type="number"], input[type="date"],
+  input[type="password"], input[type="search"], input[type="email"],
+  input[type="tel"], input[type="url"], select, textarea{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 
   header.topo{
     background:linear-gradient(135deg,#2563eb 0%,#3b82f6 100%);
@@ -84,27 +100,15 @@
     border-radius:4px}
 
   .btn-ver-fluxo{
-    width:100%;
-    margin-bottom:14px;
+    width:100%;margin-bottom:14px;
     background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
-    color:#fff;
-    padding:14px 20px;
-    border-radius:12px;
-    font-weight:900;
-    font-size:.95rem;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    box-shadow:0 4px 14px rgba(37,99,235,.28);
-    transition:.15s;
-    border:3px solid #fff;
-    letter-spacing:.2px
-  }
-  .btn-ver-fluxo:hover{
-    transform:translateY(-2px);
-    box-shadow:0 8px 22px rgba(37,99,235,.4)
-  }
+    color:#fff;padding:14px 20px;border-radius:12px;
+    font-weight:900;font-size:.95rem;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 4px 14px rgba(37,99,235,.28);transition:.15s;
+    border:3px solid #fff;letter-spacing:.2px}
+  .btn-ver-fluxo:hover{transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(37,99,235,.4)}
   .btn-ver-fluxo:active{transform:translateY(0)}
 
   .nav-mes{display:flex;align-items:center;gap:10px;margin-bottom:14px}
@@ -310,9 +314,7 @@
     transition:.15s;margin-top:10px;width:100%}
   .btn-secundario:hover{background:#e2e8f0}
 
-  /* =========================================================
-     FORMULÁRIO NOVA / EDITAR RECEITA — visual leve
-     ========================================================= */
+  /* ========== FORMULÁRIO ========== */
   .form-cartao{
     background:#ffffff;
     border:1px solid #e2e8f0;
@@ -321,7 +323,6 @@
     box-shadow:0 1px 3px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.05);
     margin-bottom:16px;
   }
-
   .form-intro{
     background:linear-gradient(135deg,#eff6ff,#e0f2fe);
     border:1.5px solid #bae6fd;
@@ -336,40 +337,17 @@
   }
   .form-intro .obrig{color:#dc2626;font-weight:900}
 
-  .grade-form{
-    display:grid;
-    gap:18px;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  }
+  .grade-form{display:grid;gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
 
-  .campo{
-    display:flex;
-    flex-direction:column;
-    gap:7px;
-    font-size:.78rem;
-    font-weight:700;
-    color:#475569;
-    letter-spacing:.2px;
-    margin:0;
-  }
-  .campo-label{
-    display:block;
-    color:#334155;
-    font-size:.74rem;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:.7px;
-    line-height:1.3;
-  }
+  .campo{display:flex;flex-direction:column;gap:7px;font-size:.78rem;
+    font-weight:700;color:#475569;letter-spacing:.2px;margin:0}
+  .campo-label{display:block;color:#334155;font-size:.74rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.7px;line-height:1.3}
   .campo-label .obrig{color:#dc2626;font-weight:900}
   .campo.largura-total{grid-column:1 / -1}
-  .campo .dica{
-    font-weight:500;
-    color:#94a3b8;
-    font-size:.72rem;
-    margin-top:1px;
-    line-height:1.4;
-  }
+  .campo .dica{font-weight:500;color:#94a3b8;font-size:.72rem;margin-top:1px;
+    line-height:1.4}
 
   /* ============== INPUTS: FORÇA VISUAL CLARO ============== */
   .campo input,
@@ -379,7 +357,11 @@
   input[type="date"],
   input[type="password"],
   input[type="search"],
-  select{
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea{
     font:inherit;
     font-weight:500;
     color:#0f172a !important;
@@ -401,23 +383,21 @@
     appearance:none;
     line-height:1.4;
   }
-  .campo input::placeholder{
-    color:#94a3b8;
+  .campo input::placeholder,
+  .campo textarea::placeholder,
+  input::placeholder,
+  textarea::placeholder{
+    color:#94a3b8 !important;
     opacity:1;
-    -webkit-text-fill-color:#94a3b8;
+    -webkit-text-fill-color:#94a3b8 !important;
     font-weight:400;
   }
   .campo input:hover,
-  .campo select:hover{
-    border-color:#94a3b8;
-    background-color:#ffffff !important;
-  }
+  .campo select:hover{border-color:#94a3b8;background-color:#ffffff !important}
   .campo input:focus,
-  .campo select:focus{
-    border-color:#3b82f6;
+  .campo select:focus{border-color:#3b82f6;
     box-shadow:0 0 0 4px rgba(59,130,246,.12);
-    background-color:#ffffff !important;
-  }
+    background-color:#ffffff !important}
   .campo select{
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
     background-repeat:no-repeat !important;
@@ -426,8 +406,7 @@
     padding-right:36px !important;
     cursor:pointer;
   }
-
-  /* Fix autofill (fundo preto em WebView) */
+  /* Autofill */
   .campo input:-webkit-autofill,
   .campo input:-webkit-autofill:hover,
   .campo input:-webkit-autofill:focus,
@@ -437,135 +416,54 @@
     caret-color:#0f172a;
     transition:background-color 5000s ease-in-out 0s;
   }
-
-  /* Ícone do date picker no WebView */
   .campo input[type="date"]::-webkit-calendar-picker-indicator{
-    filter:none;
-    opacity:.65;
-    cursor:pointer;
+    filter:none;opacity:.65;cursor:pointer;
   }
-  .campo input[type="date"]::-webkit-calendar-picker-indicator:hover{
-    opacity:1;
-  }
-  /* Remove spinner feio do number em alguns WebViews */
+  .campo input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1}
   .campo input[type="number"]::-webkit-outer-spin-button,
   .campo input[type="number"]::-webkit-inner-spin-button{
-    -webkit-appearance:none;
-    margin:0;
+    -webkit-appearance:none;margin:0;
   }
   .campo input[type="number"]{-moz-appearance:textfield}
 
-  /* Checkbox "receita infinita" */
   .check-infinita{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    background:#f0f9ff;
-    border:1.5px solid #bae6fd;
-    border-radius:12px;
-    padding:14px 16px;
-    margin-top:4px;
-    cursor:pointer;
-    transition:.15s;
-    grid-column:1 / -1;
-    forced-color-adjust:none;
-  }
-  .check-infinita:hover{
-    border-color:#7dd3fc;
-    background:#eff6ff;
-  }
-  .check-infinita.ativo{
-    background:#dbeafe;
-    border-color:#60a5fa;
-  }
+    display:flex;align-items:flex-start;gap:14px;
+    background:#f0f9ff;border:1.5px solid #bae6fd;
+    border-radius:12px;padding:14px 16px;margin-top:4px;
+    cursor:pointer;transition:.15s;grid-column:1 / -1;
+    forced-color-adjust:none}
+  .check-infinita:hover{border-color:#7dd3fc;background:#eff6ff}
+  .check-infinita.ativo{background:#dbeafe;border-color:#60a5fa}
   .check-infinita input{
-    width:22px !important;
-    height:22px !important;
-    margin:2px 0 0 0 !important;
-    flex-shrink:0;
-    accent-color:#3b82f6;
-    cursor:pointer;
-    color-scheme:light;
-    forced-color-adjust:none;
-  }
+    width:22px !important;height:22px !important;
+    margin:2px 0 0 0 !important;flex-shrink:0;
+    accent-color:#3b82f6;cursor:pointer;
+    color-scheme:light !important;
+    forced-color-adjust:none !important}
   .check-infinita .conteudo{flex:1;min-width:0}
-  .check-infinita b{
-    display:block;
-    font-size:.9rem;
-    font-weight:900;
-    color:#1e40af;
-    margin-bottom:3px;
-  }
-  .check-infinita small{
-    display:block;
-    font-size:.74rem;
-    color:#1e40af;
-    font-weight:600;
-    line-height:1.45;
-    opacity:.85;
-  }
+  .check-infinita b{display:block;font-size:.9rem;font-weight:900;
+    color:#1e40af;margin-bottom:3px}
+  .check-infinita small{display:block;font-size:.74rem;color:#1e40af;
+    font-weight:600;line-height:1.45;opacity:.85}
   .check-infinita.ativo b{color:#1d4ed8}
   .check-infinita.ativo small{color:#1d4ed8}
 
-  /* Botões do form */
-  .acoes-form{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-top:26px;
-    padding-top:20px;
-    border-top:1px solid #e2e8f0;
-  }
-  .btn{
-    padding:12px 20px;
-    border-radius:10px;
-    font-weight:800;
-    font-size:.88rem;
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    transition:.15s;
-    border:2px solid transparent;
-    flex:1;
-    justify-content:center;
-    min-width:0;
-  }
-  .btn-primario{
-    background:linear-gradient(135deg,var(--marca),var(--marca-esc));
-    color:#fff;
-    box-shadow:0 4px 12px rgba(37,99,235,.28);
-  }
-  .btn-primario:hover{
-    box-shadow:0 6px 18px rgba(37,99,235,.4);
-    transform:translateY(-1px);
-  }
-  .btn-neutro{
-    background:#f1f5f9;
-    color:#334155;
-    border-color:#cbd5e1;
-  }
+  .acoes-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;
+    padding-top:20px;border-top:1px solid #e2e8f0}
+  .btn{padding:12px 20px;border-radius:10px;font-weight:800;font-size:.88rem;
+    display:inline-flex;align-items:center;gap:8px;transition:.15s;
+    border:2px solid transparent;flex:1;justify-content:center;min-width:0}
+  .btn-primario{background:linear-gradient(135deg,var(--marca),var(--marca-esc));
+    color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.28)}
+  .btn-primario:hover{box-shadow:0 6px 18px rgba(37,99,235,.4);
+    transform:translateY(-1px)}
+  .btn-neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
   .btn-neutro:hover{background:#e2e8f0}
   .btn-perigo{background:var(--vermelho-bg);color:#b91c1c;border-color:#fca5a5}
   .btn-perigo:hover{background:#fecaca}
   .btn:disabled{opacity:.6;cursor:not-allowed}
 
-  /* Bloco-fixo (usado no form de edição de dívida do pagamentos — mantido por compatibilidade) */
-  .bloco-fixo{
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
-    border:2px solid #bfdbfe;
-    border-left:6px solid var(--azul);
-    border-radius:12px;
-    padding:14px 16px;
-    margin-bottom:14px;
-    box-shadow:0 2px 8px rgba(37,99,235,.08)}
-  .bloco-fixo .titulo-bloco{
-    font-size:.78rem;font-weight:900;text-transform:uppercase;
-    letter-spacing:.8px;color:var(--azul-profundo);
-    margin-bottom:10px;display:flex;align-items:center;gap:8px}
-  .bloco-fixo .titulo-bloco::before{
-    content:'📋';font-size:1rem;line-height:1}
-
-  /* Config (não mexido, mas garante que inputs de lá fiquem claros também) */
+  /* Config */
   .config-status-cartao{border-radius:var(--raio);padding:14px 16px;
     margin-bottom:14px;display:flex;gap:14px;align-items:center;
     border:2px solid var(--linha);background:#fff;
@@ -694,12 +592,8 @@
   .crono-tabela thead th:first-child,
   .crono-tabela tbody td:first-child,
   .crono-tabela tfoot td:first-child{
-    width:1%;
-    white-space:nowrap;
-    text-align:left;
-    padding-left:10px;
-    padding-right:6px;
-  }
+    width:1%;white-space:nowrap;text-align:left;
+    padding-left:10px;padding-right:6px}
   .crono-tabela thead th{
     background:linear-gradient(135deg,#eff6ff,#dbeafe);
     color:var(--marca-mais-esc);font-weight:900;font-size:.66rem;
@@ -1220,6 +1114,39 @@ function normalizarStatus(status){
   if(s === 'outros' || s === 'outro') return 'outros';
   return 'em_aberto';
 }
+
+/* =========================================================
+   FORÇA MODO CLARO NOS INPUTS (nuclear)
+   Aplica inline !important em todos os controles — ganha
+   de qualquer CSS externo e desativa force dark do WebView.
+   ========================================================= */
+function forcarModoClaro(){
+  let count = 0;
+  try{
+    document.querySelectorAll('input, select, textarea').forEach(el => {
+      try{
+        el.style.setProperty('color-scheme', 'light', 'important');
+        el.style.setProperty('forced-color-adjust', 'none', 'important');
+        el.style.setProperty('background-color', '#ffffff', 'important');
+        el.style.setProperty('background-image', 'none', 'important');
+        el.style.setProperty('color', '#0f172a', 'important');
+        el.style.setProperty('-webkit-text-fill-color', '#0f172a', 'important');
+        count++;
+      }catch(e){ /* ignora */ }
+    });
+  }catch(e){ console.warn('[Modo Claro] falhou:', e); }
+  if(count > 0) console.log('[Modo Claro] ' + count + ' controles forçados para light');
+  return count;
+}
+/* Roda o quanto antes possível */
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', forcarModoClaro);
+} else {
+  forcarModoClaro();
+}
+/* Reforça após um tick (defesa contra renderização tardia) */
+setTimeout(forcarModoClaro, 100);
+setTimeout(forcarModoClaro, 500);
 
 /* ---------- GitHub ---------- */
 let ghConfig = {
@@ -2141,6 +2068,7 @@ function abrirNovaReceita(){
   tituloForm.innerHTML = '➕ Nova receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar';
   mostrarTela('nova');
+  forcarModoClaro();
   setTimeout(()=>campoFonte.focus(), 200);
 }
 function abrirEdicaoReceita(id){
@@ -2159,6 +2087,7 @@ function abrirEdicaoReceita(id){
   tituloForm.innerHTML = '✏️ Editar receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar alterações';
   mostrarTela('nova');
+  forcarModoClaro();
   setTimeout(()=>campoFonte.focus(), 200);
 }
 
@@ -2326,6 +2255,7 @@ function abrirEdicaoValor(r, p){
   const m = document.getElementById('modalEditarValor');
   m.classList.remove('escondido');
   m.style.display = 'flex';
+  forcarModoClaro();
   setTimeout(() => {
     const inp = document.getElementById('inputNovoValor');
     inp.focus();
@@ -2481,7 +2411,7 @@ document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
   }
 });
 
-/* ---------- Navegação de mês (tela principal) ---------- */
+/* ---------- Navegação de mês ---------- */
 function mudarMes(delta){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
@@ -2490,7 +2420,6 @@ function mudarMes(delta){
 document.getElementById('mesAnterior').addEventListener('click', () => mudarMes(-1));
 document.getElementById('mesProximo').addEventListener('click', () => mudarMes(1));
 
-/* ---------- Navegação de mês (cronológico) ---------- */
 function mudarMesCrono(delta){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
@@ -2566,6 +2495,7 @@ function atualizarConfigUI(){
 function abrirConfig(){
   atualizarConfigUI();
   mostrarTela('config');
+  forcarModoClaro();
 }
 document.getElementById('btnConfig').addEventListener('click', abrirConfig);
 document.getElementById('voltarConfig').addEventListener('click', () => {
@@ -2712,6 +2642,7 @@ document.getElementById('arquivoImportarTudo').addEventListener('change', async 
 
 /* ---------- Inicialização ---------- */
 (async function init(){
+  forcarModoClaro();
   carregarGH();
   try{
     const raw = localStorage.getItem(MES_KEY);
@@ -2734,6 +2665,7 @@ document.getElementById('arquivoImportarTudo').addEventListener('change', async 
 let ultimaRecargaVisible = 0;
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'visible'){
+    forcarModoClaro();
     const agora = Date.now();
     if(agora - ultimaRecargaVisible < 3000) return;
     ultimaRecargaVisible = agora;
