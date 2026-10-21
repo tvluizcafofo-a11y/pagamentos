@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-version="3.0" style="color-scheme: light !important;">
+<html lang="pt-BR" data-version="3.3" style="color-scheme: light !important;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Fluxo de Caixa v3.0</title>
+<title>Fluxo de Caixa v3.3</title>
 <style>
   :root{
     color-scheme: light;
@@ -35,10 +35,6 @@
     -webkit-tap-highlight-color:transparent;
     forced-color-adjust: none}
 
-  /* ============================================================
-     REGRAS AGRESSIVAS PARA FORÇAR FUNDO BRANCO EM FORMULÁRIOS
-     — aplicadas cedo e reforçadas depois via JS
-     ============================================================ */
   input, select, textarea{
     color-scheme: light !important;
     forced-color-adjust: none !important;
@@ -327,6 +323,83 @@
   .campo .dica{font-weight:500;color:#94a3b8;font-size:.72rem;margin-top:1px;
     line-height:1.4}
 
+  /* Campos: altura dividida por 3 (~32px) */
+  .campo input,
+  .campo select,
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="password"],
+  input[type="search"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="url"],
+  select,
+  textarea{
+    font:inherit;
+    font-weight:500;
+    color:#0f172a !important;
+    -webkit-text-fill-color:#0f172a !important;
+    background-color:#ffffff !important;
+    background-image:none !important;
+    border:2.5px solid #94a3b8;
+    border-radius:10px;
+    padding:4px 14px;
+    font-size:.85rem;
+    min-height:32px;
+    width:100%;
+    min-width:0;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s, background-color .15s;
+    color-scheme:light !important;
+    forced-color-adjust:none !important;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    line-height:1.2;
+  }
+  .campo input::placeholder,
+  .campo textarea::placeholder,
+  input::placeholder,
+  textarea::placeholder{
+    color:#94a3b8 !important;
+    opacity:1;
+    -webkit-text-fill-color:#94a3b8 !important;
+    font-weight:400;
+  }
+  .campo input:hover,
+  .campo select:hover{border-color:#64748b;background-color:#ffffff !important}
+  .campo input:focus,
+  .campo select:focus{border-color:#3b82f6;
+    box-shadow:0 0 0 4px rgba(59,130,246,.15);
+    background-color:#ffffff !important}
+  .campo select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat:no-repeat !important;
+    background-position:right 12px center !important;
+    background-size:12px !important;
+    padding-right:32px !important;
+    cursor:pointer;
+  }
+  .campo input:-webkit-autofill,
+  .campo input:-webkit-autofill:hover,
+  .campo input:-webkit-autofill:focus,
+  .campo input:-webkit-autofill:active{
+    -webkit-box-shadow:0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color:#0f172a !important;
+    caret-color:#0f172a;
+    transition:background-color 5000s ease-in-out 0s;
+  }
+  .campo input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:none;opacity:.65;cursor:pointer;
+  }
+  .campo input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1}
+  .campo input[type="number"]::-webkit-outer-spin-button,
+  .campo input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance:none;margin:0;
+  }
+  .campo input[type="number"]{-moz-appearance:textfield}
+
   .check-infinita{display:flex;align-items:flex-start;gap:14px;
     background:#f0f9ff;border:1.5px solid #bae6fd;
     border-radius:12px;padding:14px 16px;margin-top:4px;
@@ -339,7 +412,10 @@
     margin:2px 0 0 0 !important;flex-shrink:0;
     accent-color:#3b82f6;cursor:pointer;
     color-scheme:light !important;
-    forced-color-adjust:none !important}
+    forced-color-adjust:none !important;
+    min-height:auto !important;
+    padding:0 !important;
+    border:2px solid #cbd5e1 !important}
   .check-infinita .conteudo{flex:1;min-width:0}
   .check-infinita b{display:block;font-size:.9rem;font-weight:900;
     color:#1e40af;margin-bottom:3px}
@@ -573,11 +649,9 @@
   .crono-legenda i.l-real{background:#f0fdf4;border-color:#86efac}
   .crono-legenda i.l-pend{background:#fff;border-color:#cbd5e1}
 
-  /* Rodapé de versão */
   .rodape-versao{text-align:center;font-size:.66rem;color:#94a3b8;
     font-weight:700;padding:20px 0 16px;letter-spacing:.3px}
 
-  /* Debug banner */
   #debugBanner{background:#fef3c7;border:2px solid #fbbf24;
     border-radius:10px;padding:12px 14px;margin-bottom:14px;
     font-family:ui-monospace,monospace;font-size:.72rem;color:#78350f;
@@ -690,7 +764,7 @@
       <div id="listaDespesas"></div>
     </section>
 
-    <div class="rodape-versao" id="rodapeVersao">Fluxo de Caixa v3.0</div>
+    <div class="rodape-versao" id="rodapeVersao">Fluxo de Caixa v3.3</div>
   </section>
 
   <section class="tela escondido" id="tela-cronologico">
@@ -721,7 +795,7 @@
       <span><i class="l-pend"></i> Com pendências</span>
       <span>👆 Toque em uma data para ver os itens</span>
     </div>
-    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
+    <div class="rodape-versao">Fluxo de Caixa v3.3</div>
   </section>
 
   <section class="tela escondido" id="tela-nova">
@@ -785,7 +859,7 @@
     <h2 class="titulo-tela">📋 Receitas cadastradas</h2>
     <div id="listaTodasReceitas"></div>
     <button type="button" class="btn-nova-receita" id="btnNovaReceita2">➕ Nova receita</button>
-    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
+    <div class="rodape-versao">Fluxo de Caixa v3.3</div>
   </section>
 
   <section class="tela escondido" id="tela-config">
@@ -856,7 +930,7 @@
         <li>Se este app estiver no mesmo domínio do app de pagamentos, também tenta herdar a configuração automaticamente.</li>
       </ol>
     </div>
-    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
+    <div class="rodape-versao">Fluxo de Caixa v3.3</div>
   </section>
 
 </div>
@@ -902,7 +976,7 @@
 
 <script>
 /* =========================================================
-   FLUXO DE CAIXA v3.0 — Injeção agressiva de modo claro
+   FLUXO DE CAIXA v3.3 — campos ~32px (1/3 de 96) + modo claro
    ========================================================= */
 (function aplicarEstiloNuclear(){
   const st = document.createElement('style');
@@ -927,12 +1001,17 @@
       caret-color: #0f172a !important;
       color-scheme: light !important;
       forced-color-adjust: none !important;
-      -webkit-box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
-      box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
-      border: 1.5px solid #cbd5e1 !important;
+      -webkit-box-shadow: inset 0 0 0 1000px #ffffff !important;
+      box-shadow: inset 0 0 0 1000px #ffffff !important;
+      border: 2.5px solid #94a3b8 !important;
       -webkit-appearance: none !important;
       appearance: none !important;
       border-radius: 10px !important;
+      padding: 4px 14px !important;
+      min-height: 32px !important;
+      font-size: 0.85rem !important;
+      line-height: 1.2 !important;
+      box-sizing: border-box !important;
     }
     input::placeholder, textarea::placeholder {
       color: #94a3b8 !important;
@@ -974,31 +1053,47 @@
     input:-webkit-autofill:hover,
     input:-webkit-autofill:focus,
     input:-webkit-autofill:active {
-      -webkit-box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
-      box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
+      -webkit-box-shadow: inset 0 0 0 1000px #ffffff !important;
+      box-shadow: inset 0 0 0 1000px #ffffff !important;
       -webkit-text-fill-color: #0f172a !important;
       caret-color: #0f172a !important;
       transition: background-color 5000s ease-in-out 0s !important;
       color-scheme: light !important;
       forced-color-adjust: none !important;
     }
-    /* Select: mantém seta customizada, sem fundo preto */
     select {
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
       background-position: right 12px center !important;
       background-size: 12px !important;
-      padding-right: 36px !important;
+      padding-right: 32px !important;
     }
     select option {
       background: #ffffff !important;
       color: #0f172a !important;
     }
+    .check-infinita input[type="checkbox"] {
+      padding: 0 !important;
+      min-height: auto !important;
+      height: 22px !important;
+      width: 22px !important;
+      border: 2px solid #cbd5e1 !important;
+    }
+    .campo input:focus,
+    .campo select:focus,
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    input[type="date"]:focus,
+    input[type="password"]:focus,
+    select:focus {
+      border-color: #3b82f6 !important;
+      box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 4px rgba(59,130,246,.18) !important;
+      -webkit-box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 4px rgba(59,130,246,.18) !important;
+    }
   `;
   document.head.appendChild(st);
 })();
 
-/* Força inline em cada input após render */
 function forcarModoClaro(){
   try{
     const els = document.querySelectorAll('input, select, textarea');
@@ -1013,8 +1108,8 @@ function forcarModoClaro(){
         el.style.setProperty('forced-color-adjust', 'none', 'important');
       }catch(e){}
     });
-    console.log('[v3.0] forcarModoClaro: ' + els.length + ' controles');
-  }catch(e){ console.warn('[v3.0] forcarModoClaro falhou:', e); }
+    console.log('[v3.3] forcarModoClaro: ' + els.length + ' controles');
+  }catch(e){ console.warn('[v3.3] forcarModoClaro falhou:', e); }
 }
 if(document.readyState === 'loading'){
   document.addEventListener('DOMContentLoaded', forcarModoClaro);
@@ -1023,9 +1118,6 @@ setTimeout(forcarModoClaro, 100);
 setTimeout(forcarModoClaro, 500);
 setTimeout(forcarModoClaro, 1500);
 
-/* =========================================================
-   Modo debug: ?debug=1
-   ========================================================= */
 const debugMode = new URLSearchParams(location.search).get('debug') === '1';
 function renderDebug(){
   if(!debugMode) return;
@@ -1040,22 +1132,25 @@ function renderDebug(){
   const cs = getComputedStyle(testInput);
   const bg = cs.backgroundColor;
   const color = cs.color;
-  const scheme = cs.colorScheme || '(não suportado)';
+  const borderW = cs.borderTopWidth;
+  const borderC = cs.borderTopColor;
+  const height = cs.height;
+  const paddingV = cs.paddingTop;
   const okBg = bg === 'rgb(255, 255, 255)' || bg === '#ffffff';
   el.innerHTML =
-    `<b>Debug v3.0</b>\n` +
-    `Input testado: #${testInput.id || testInput.name || 'sem-id'}\n` +
-    `background-color: <span class="${okBg ? 'ok' : 'erro'}">${bg}</span> ${okBg ? '✅' : '❌ (deveria ser branco)'}\n` +
+    `<b>Debug v3.3</b>\n` +
+    `background-color: <span class="${okBg ? 'ok' : 'erro'}">${bg}</span> ${okBg ? '✅' : '❌'}\n` +
     `color: <span class="${color === 'rgb(15, 23, 42)' ? 'ok' : 'erro'}">${color}</span>\n` +
-    `color-scheme: ${scheme}\n` +
-    `--fundo: ${getComputedStyle(document.documentElement).getPropertyValue('--fundo')}\n` +
+    `border: ${borderW} ${borderC}\n` +
+    `height: ${height} · padding-top: ${paddingV}\n` +
+    `color-scheme: ${cs.colorScheme || '(não suportado)'}\n` +
     `UA: ${navigator.userAgent.slice(0, 100)}…`;
 }
 setTimeout(renderDebug, 300);
 setTimeout(renderDebug, 1000);
 
 /* =========================================================
-   Resto do app (mantido)
+   App
    ========================================================= */
 const CHAVE_RECEITAS = 'sistemaFluxo.v1';
 const CHAVE_PAGAMENTOS = 'sistemaPagamentos.v2';
@@ -1100,7 +1195,6 @@ function somarMeses(iso, n){
   return dataParaIso(alvo);
 }
 function mesDeIso(iso){ return iso.slice(0,7); }
-
 function ajustarDiaBase(isoBase, dia){
   if(!dia) return isoBase;
   const d=parseInt(dia,10); if(!d||d<1||d>31) return isoBase;
@@ -1117,7 +1211,6 @@ function ajustarDiaBase(isoBase, dia){
   }
   return res;
 }
-
 function normalizarStatus(status){
   const s = String(status || '').toLowerCase().trim();
   if(!s) return 'em_aberto';
@@ -1582,7 +1675,7 @@ function renderTelaPrincipal(){
   } else { contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>'; }
   renderAvisoVazio();
   const rv = document.getElementById('rodapeVersao');
-  if(rv) rv.textContent = `Fluxo de Caixa v3.0 · ${new Date().toLocaleString('pt-BR', {dateStyle:'short', timeStyle:'short'})}`;
+  if(rv) rv.textContent = `Fluxo de Caixa v3.3 · ${new Date().toLocaleString('pt-BR', {dateStyle:'short', timeStyle:'short'})}`;
 }
 
 function fmtDataColuna(iso){
