@@ -831,5 +831,24 @@
         "status": "em_aberto"
       }
     ]
+  },
+  {
+    "id": "mvhzkqsawf4wyx",
+    "fonte": "Saldo Inicial",
+    "tipo": "outro",
+    "valorBase": 18125.62,
+    "primeiroVencimento": "2026-10-01",
+    "diaVencimento": "",
+    "infinita": false,
+    "dataFim": "2026-10-01",
+    "criadoEm": "2026-10-21T10:45:41.914Z",
+    "parcelas": [
+      {
+        "id": "mvhzkqsaq88wwm",
+        "vencimento": "2026-10-01",
+        "valor": 18125.62,
+        "status": "em_aberto"
+      }
+    ]
   }
 ]
