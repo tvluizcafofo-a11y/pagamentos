@@ -833,21 +833,21 @@
     ]
   },
   {
-    "id": "mvi3mqqu3wo3rl",
-    "fonte": "Acerto de Saldo Inicial",
+    "id": "mvi224umcs3jqv",
+    "fonte": "Acerto de saldo inixial",
     "tipo": "outro",
-    "valorBase": 18125.62,
+    "valorBase": 7198.56,
     "primeiroVencimento": "2026-10-01",
     "diaVencimento": "",
     "infinita": false,
     "dataFim": "2026-10-01",
-    "criadoEm": "2026-10-21T12:39:13.639Z",
+    "criadoEm": "2026-10-21T11:55:12.526Z",
     "parcelas": [
       {
-        "id": "mvi3mqqvj0vx9e",
+        "id": "mvi224umtkbwar",
         "vencimento": "2026-10-01",
-        "valor": 18125.62,
-        "status": "recebido"
+        "valor": 7198.56,
+        "status": "em_aberto"
       }
     ]
   }
