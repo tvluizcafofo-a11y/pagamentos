@@ -78,7 +78,6 @@
   .nav-mes-btn:hover{background:linear-gradient(135deg,#99f6e4,#5eead4);transform:translateY(-2px)}
   .nav-mes-btn:active{transform:scale(.95)}
 
-  /* Card saldo */
   .card-saldo{
     background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#0d9488 100%);
     color:#fff;border-radius:16px;padding:18px 16px;margin-bottom:16px;
@@ -111,7 +110,6 @@
   .card-saldo .det-item.det-saida strong{color:#fca5a5}
   .card-saldo .det-item.det-pendente strong{font-size:.88rem;opacity:.92}
 
-  /* Seções */
   .secao{margin-bottom:16px}
   .secao-cabecalho{display:flex;align-items:center;gap:8px;margin-bottom:10px;
     flex-wrap:wrap}
@@ -134,7 +132,25 @@
   .lista-vazia .btn-vazio:hover{transform:translateY(-1px);
     box-shadow:0 5px 14px rgba(13,148,136,.4)}
 
-  /* Item receita */
+  /* Banner de estado vazio */
+  .aviso-vazio{background:linear-gradient(135deg,#fef3c7,#fde68a);
+    border:2px solid #fbbf24;border-left:6px solid var(--laranja);
+    border-radius:12px;padding:14px 16px;margin-bottom:14px;
+    font-size:.86rem;color:#78350f;font-weight:600;line-height:1.55;
+    display:flex;gap:12px;align-items:flex-start}
+  .aviso-vazio .icon{font-size:1.5rem;flex-shrink:0;line-height:1}
+  .aviso-vazio .body{flex:1;min-width:0}
+  .aviso-vazio b{display:block;font-size:.94rem;font-weight:900;
+    color:#92400e;margin-bottom:4px}
+  .aviso-vazio .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+  .aviso-vazio button{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+    color:#fff;padding:8px 16px;border-radius:8px;font-weight:900;font-size:.82rem;
+    border:2px solid #fff;box-shadow:0 2px 6px rgba(13,148,136,.3);transition:.15s}
+  .aviso-vazio button:hover{transform:translateY(-1px)}
+  .aviso-vazio button.neutro{background:#fff;color:#334155;border-color:#cbd5e1}
+  .aviso-vazio code{background:#fff;border:1px solid #fcd34d;border-radius:4px;
+    padding:1px 6px;font-family:monospace;font-size:.78rem}
+
   .item-receita{
     background:#fff;border:2px solid var(--linha);border-left:6px solid var(--azul);
     border-radius:12px;padding:12px 14px;margin-bottom:10px;
@@ -190,7 +206,6 @@
   .selo-status-receita.atrasado{background:var(--laranja-bg);color:var(--laranja-esc);
     border:1px solid #fdba74}
 
-  /* Despesas agrupadas por credor */
   .grupo-despesa{margin-bottom:14px}
   .grupo-despesa .grupo-cabecalho{display:flex;align-items:center;gap:8px;
     padding:8px 12px;background:linear-gradient(135deg,#f8fafc,#f1f5f9);
@@ -257,7 +272,6 @@
     transition:.15s;margin-top:10px;width:100%}
   .btn-secundario:hover{background:#e2e8f0}
 
-  /* Form */
   .form-cartao{background:#fff;border:2px solid var(--linha);border-radius:var(--raio);
     padding:16px;box-shadow:0 2px 8px rgba(15,23,42,.06);margin-bottom:14px}
   .grade-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
@@ -300,8 +314,8 @@
   .btn-neutro:hover{background:#e2e8f0}
   .btn-perigo{background:var(--vermelho-bg);color:#b91c1c;border-color:#fca5a5}
   .btn-perigo:hover{background:#fecaca}
+  .btn:disabled{opacity:.6;cursor:not-allowed}
 
-  /* Config */
   .config-status-cartao{border-radius:var(--raio);padding:14px 16px;
     margin-bottom:14px;display:flex;gap:14px;align-items:center;
     border:2px solid var(--linha);background:#fff;
@@ -328,7 +342,6 @@
     padding:2px 7px;font-family:ui-monospace,monospace;font-size:.72rem;
     color:#0369a1;font-weight:700;word-break:break-all}
 
-  /* Modal */
   .modal-fundo{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.75);
     display:flex;align-items:center;justify-content:center;padding:16px;
     z-index:999999;backdrop-filter:blur(2px)}
@@ -382,14 +395,12 @@
   .opcao-escopo.cancelar:hover{background:#fef2f2;border-color:#fca5a5}
   .opcao-escopo.cancelar .info b{color:#b91c1c}
 
-  /* Modal editar valor */
   .info-parcela-edit{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
     border:2px solid #5eead4;border-radius:10px;padding:12px 14px;
     margin-bottom:14px;font-size:.82rem;font-weight:600;color:#115e59;
     line-height:1.5}
   .info-parcela-edit b{color:var(--teal-esc);font-weight:900}
 
-  /* Lista todas as receitas */
   .item-receita-completa{background:#fff;border:2px solid var(--linha);
     border-left:6px solid var(--teal);border-radius:12px;padding:14px;
     margin-bottom:12px;box-shadow:0 2px 6px rgba(15,23,42,.06)}
@@ -440,7 +451,6 @@
 
 <div class="area">
 
-  <!-- TELA PRINCIPAL -->
   <section class="tela" id="tela-fluxo">
     <div class="nav-mes">
       <button type="button" class="nav-mes-btn" id="mesAnterior" aria-label="Mês anterior">‹</button>
@@ -478,6 +488,7 @@
       </div>
     </div>
 
+    <div id="avisoVazio"></div>
     <div id="avisoFonte"></div>
 
     <section class="secao">
@@ -499,7 +510,6 @@
     </section>
   </section>
 
-  <!-- NOVA / EDITAR RECEITA -->
   <section class="tela escondido" id="tela-nova">
     <button type="button" class="btn-voltar" id="voltarForm">Voltar</button>
     <h2 class="titulo-tela" id="tituloForm">➕ Nova receita</h2>
@@ -549,7 +559,6 @@
     </form>
   </section>
 
-  <!-- TODAS AS RECEITAS -->
   <section class="tela escondido" id="tela-todas">
     <button type="button" class="btn-voltar" id="voltarTodas">Voltar</button>
     <h2 class="titulo-tela">📋 Receitas cadastradas</h2>
@@ -557,7 +566,6 @@
     <button type="button" class="btn-nova-receita" id="btnNovaReceita2">➕ Nova receita</button>
   </section>
 
-  <!-- CONFIGURAÇÃO -->
   <section class="tela escondido" id="tela-config">
     <button type="button" class="btn-voltar" id="voltarConfig">Voltar</button>
     <h2 class="titulo-tela">⚙️ Configuração GitHub</h2>
@@ -597,7 +605,24 @@
       </label>
       <div class="acoes-form">
         <button type="button" class="btn btn-neutro" id="btnTestar">🔍 Testar</button>
-        <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar</button>
+        <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar e sincronizar</button>
+      </div>
+    </div>
+
+    <div class="form-cartao" style="margin-top:14px">
+      <h3 style="margin:0 0 10px;font-size:.95rem;font-weight:900;color:#0f172a;
+        display:flex;align-items:center;gap:8px">
+        💾 Backup e migração
+      </h3>
+      <p style="margin:0 0 12px;font-size:.82rem;color:var(--suave);
+        font-weight:600;line-height:1.5">
+        Exporte ou importe <b>tudo</b> (receitas + configuração do GitHub)
+        para migrar entre dispositivos ou recuperar de um APK novo.
+      </p>
+      <div class="acoes-form">
+        <button type="button" class="btn btn-neutro" id="btnExportarTudo">⬇ Exportar tudo</button>
+        <button type="button" class="btn btn-neutro" id="btnImportarTudo">⬆ Importar backup</button>
+        <input type="file" id="arquivoImportarTudo" accept="application/json" hidden>
       </div>
     </div>
 
@@ -618,7 +643,6 @@
 
 </div>
 
-<!-- Modal de escopo -->
 <div class="modal-fundo escondido" id="modalEscopo">
   <div class="modal-caixa">
     <h3><span class="emoji" id="escopoEmoji">🎯</span> <span id="escopoTitulo">Onde aplicar?</span></h3>
@@ -644,7 +668,6 @@
   </div>
 </div>
 
-<!-- Modal editar valor -->
 <div class="modal-fundo escondido" id="modalEditarValor">
   <div class="modal-caixa">
     <h3><span class="emoji">💰</span> Editar valor</h3>
@@ -682,8 +705,6 @@ let mesRef = new Date();
 let resolverEscopo = null;
 let syncTimer = null;
 let syncing = false;
-
-// estado do modal de edição de valor
 let edicaoValorPendente = null;
 
 const TIPO_LABEL = {
@@ -727,7 +748,6 @@ function ajustarDiaBase(isoBase, dia){
   return res;
 }
 
-/* ---------- Normalização de status ---------- */
 function normalizarStatus(status){
   const s = String(status || '').toLowerCase().trim();
   if(!s) return 'em_aberto';
@@ -842,7 +862,6 @@ async function carregarDividasGitHub(){
     if(info.content){
       texto = b64Dec(info.content);
     } else if(info.download_url){
-      // Arquivo > 1MB: usa download_url
       const raw = await fetch(info.download_url, {
         headers: { 'Authorization': `token ${ghConfig.token}` }
       });
@@ -904,7 +923,6 @@ async function carregarTudo(){
     }
   }
 
-  // *** DESPESAS: GitHub tem prioridade quando configurado ***
   if(ghConfigurado()){
     const remoto = await carregarDividasGitHub();
     if(remoto !== null){
@@ -1162,14 +1180,65 @@ function agruparDespesasPorCredor(itens){
     g.itens.push({divida, parcela});
     g.total += Number(parcela.valor || 0);
   });
-  // Dentro de cada grupo, ordena por vencimento
   const grupos = Array.from(mapa.values());
   grupos.forEach(g => {
     g.itens.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento));
   });
-  // Grupos ordenados por total decrescente
   grupos.sort((a,b) => b.total - a.total);
   return grupos;
+}
+
+/* ---------- Banner de estado vazio ---------- */
+function renderAvisoVazio(){
+  const el = document.getElementById('avisoVazio');
+  if(!el) return;
+
+  const temReceitas = receitas.length > 0;
+  const temDespesas = dividasPagamentos.length > 0;
+  if(temReceitas || temDespesas){ el.innerHTML = ''; return; }
+
+  if(ghConfigurado()){
+    el.innerHTML = `<div class="aviso-vazio">
+      <div class="icon">⚠️</div>
+      <div class="body">
+        <b>Nenhuma receita encontrada</b>
+        O GitHub está configurado, mas não há receitas em
+        <code>${esc(ghConfig.pathReceitas)}</code>
+        nem no armazenamento deste dispositivo.
+        <div class="btns">
+          <button type="button" id="btnVazioRecarregar">🔄 Recarregar do GitHub</button>
+        </div>
+      </div>
+    </div>`;
+    setTimeout(() => {
+      const b = document.getElementById('btnVazioRecarregar');
+      if(b) b.addEventListener('click', async () => {
+        await carregarTudo();
+        renderTelaPrincipal();
+      });
+    }, 0);
+  } else {
+    el.innerHTML = `<div class="aviso-vazio">
+      <div class="icon">⚠️</div>
+      <div class="body">
+        <b>Nenhum dado neste dispositivo</b>
+        Se você já cadastrou receitas em outro aparelho (navegador/PWA),
+        elas estão no <b>armazenamento daquele aparelho</b>, que este app
+        não acessa. Para recuperar, configure o GitHub abaixo com as
+        mesmas credenciais — ou importe um backup exportado anteriormente.
+        <div class="btns">
+          <button type="button" id="btnVazioConfig">⚙️ Configurar GitHub</button>
+          <button type="button" class="neutro" id="btnVazioImportar">⬆ Importar backup</button>
+        </div>
+      </div>
+    </div>`;
+    setTimeout(() => {
+      const bc = document.getElementById('btnVazioConfig');
+      if(bc) bc.addEventListener('click', abrirConfig);
+      const bi = document.getElementById('btnVazioImportar');
+      if(bi) bi.addEventListener('click', () => document.getElementById('arquivoImportarTudo').click());
+    }, 0);
+  }
 }
 
 function renderTelaPrincipal(){
@@ -1180,7 +1249,6 @@ function renderTelaPrincipal(){
   const recs = parcelasReceitaNoMes(mes);
   const dess = parcelasDespesaNoMes(mes);
 
-  // Totais
   let recebido = 0, pago = 0, aReceber = 0, aPagar = 0;
   recs.forEach(({parcela}) => {
     if(parcela.status === 'recebido') recebido += Number(parcela.valor||0);
@@ -1216,7 +1284,6 @@ function renderTelaPrincipal(){
   document.getElementById('contReceitas').textContent = recs.length;
   document.getElementById('contDespesas').textContent = dess.length;
 
-  // Aviso de fonte
   const aviso = document.getElementById('avisoFonte');
   if(fonteDespesas === 'vazio'){
     aviso.innerHTML = `<div class="aviso-fonte">
@@ -1231,7 +1298,6 @@ function renderTelaPrincipal(){
     aviso.innerHTML = '';
   }
 
-  // Receitas
   const contRec = document.getElementById('listaReceitas');
   if(recs.length){
     contRec.innerHTML = recs.map(({receita, parcela}) => parceReceitaHTML(receita, parcela)).join('');
@@ -1247,7 +1313,6 @@ function renderTelaPrincipal(){
     if(btnVazio) btnVazio.addEventListener('click', abrirNovaReceita);
   }
 
-  // Despesas (agrupadas por credor)
   const contDes = document.getElementById('listaDespesas');
   if(dess.length){
     const grupos = agruparDespesasPorCredor(dess);
@@ -1266,6 +1331,8 @@ function renderTelaPrincipal(){
   } else {
     contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>';
   }
+
+  renderAvisoVazio();
 }
 
 function renderTodasReceitas(){
@@ -1302,6 +1369,79 @@ function renderTodasReceitas(){
       </div>
     </div>`;
   }).join('');
+}
+
+/* ---------- Backup / Importação completa ---------- */
+function exportarTudo(){
+  const backup = {
+    versao: 1,
+    exportadoEm: new Date().toISOString(),
+    receitas: receitas,
+    githubConfig: {
+      owner: ghConfig.owner,
+      repo: ghConfig.repo,
+      branch: ghConfig.branch,
+      pathDividas: ghConfig.pathDividas,
+      pathReceitas: ghConfig.pathReceitas,
+      token: ghConfig.token,
+      autoSync: ghConfig.autoSync
+    }
+  };
+  const conteudo = JSON.stringify(backup, null, 2);
+  const blob = new Blob([conteudo], {type:'application/json;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `fluxo-backup-${hojeIso()}.json`;
+  a.style.display = 'none';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
+  alert('✅ Backup exportado.\n\n⚠️ O arquivo contém seu token do GitHub. Guarde em local seguro e não compartilhe.');
+}
+
+async function importarTudo(file){
+  try{
+    const texto = await file.text();
+    const dados = JSON.parse(texto);
+    if(!dados || typeof dados !== 'object') throw new Error('Formato inválido');
+
+    const temReceitas = Array.isArray(dados.receitas);
+    const temConfig = dados.githubConfig && typeof dados.githubConfig === 'object';
+    if(!temReceitas && !temConfig) throw new Error('Nenhum dado reconhecido no backup');
+
+    const resumo = [];
+    if(temReceitas) resumo.push(`${dados.receitas.length} receita(s)`);
+    if(temConfig && dados.githubConfig.token) resumo.push('configuração do GitHub');
+
+    if(!confirm(`Importar ${resumo.join(' e ')}?\n\nOs dados atuais serão substituídos.`)) return;
+
+    if(temReceitas){
+      receitas = dados.receitas;
+      receitas.forEach(r => { if(!Array.isArray(r.parcelas)) r.parcelas = []; });
+      localStorage.setItem(CHAVE_RECEITAS, JSON.stringify(receitas));
+      localStorage.removeItem(DIRTY_KEY);
+    }
+    if(temConfig){
+      const c = dados.githubConfig;
+      if(c.owner) ghConfig.owner = c.owner;
+      if(c.repo) ghConfig.repo = c.repo;
+      if(c.branch) ghConfig.branch = c.branch;
+      if(c.pathDividas) ghConfig.pathDividas = c.pathDividas;
+      if(c.pathReceitas) ghConfig.pathReceitas = c.pathReceitas;
+      if(c.token) ghConfig.token = c.token;
+      if(typeof c.autoSync === 'boolean') ghConfig.autoSync = c.autoSync;
+      salvarGH();
+    }
+
+    if(ghConfigurado()) await recarregarDespesas();
+    atualizarConfigUI();
+    renderTelaPrincipal();
+    alert('✅ Importação concluída.');
+  } catch(e){
+    console.error(e);
+    alert('❌ Erro ao importar: ' + (e.message || 'arquivo inválido'));
+  }
 }
 
 /* ---------- Navegação ---------- */
@@ -1529,7 +1669,7 @@ document.getElementById('listaReceitas').addEventListener('click', async (e) => 
   }
 });
 
-/* ---------- Edição de valor (modal) ---------- */
+/* ---------- Edição de valor ---------- */
 function abrirEdicaoValor(r, p){
   edicaoValorPendente = { receita: r, parcela: p };
   document.getElementById('infoEdicaoValor').innerHTML =
@@ -1579,7 +1719,6 @@ document.getElementById('btnAplicarValor').addEventListener('click', async () =>
   renderTelaPrincipal();
 });
 
-// enter no input
 document.getElementById('inputNovoValor').addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('btnAplicarValor').click(); }
 });
@@ -1604,7 +1743,7 @@ function aplicarExclusao(r, p, escopo){
   }
 }
 
-/* ---------- Modal de escopo ---------- */
+/* ---------- Modal escopo ---------- */
 function abrirModal(id){
   const m = document.getElementById(id);
   if(!m) return;
@@ -1758,7 +1897,8 @@ document.getElementById('voltarConfig').addEventListener('click', () => {
   renderTelaPrincipal();
 });
 
-document.getElementById('btnSalvarConfig').addEventListener('click', () => {
+/* ---------- Salvar config com sincronização segura ---------- */
+document.getElementById('btnSalvarConfig').addEventListener('click', async () => {
   const ow = elOwner.value.trim();
   const rp = elRepo.value.trim() || 'pagamentos';
   const br = elBranch.value.trim() || 'main';
@@ -1767,6 +1907,7 @@ document.getElementById('btnSalvarConfig').addEventListener('click', () => {
   const tk = elToken.value.trim();
   if(!ow){ alert('Informe o usuário GitHub.'); elOwner.focus(); return; }
   if(!tk){ alert('Informe o token.'); elToken.focus(); return; }
+
   ghConfig.owner = ow;
   ghConfig.repo = rp;
   ghConfig.branch = br;
@@ -1777,11 +1918,51 @@ document.getElementById('btnSalvarConfig').addEventListener('click', () => {
   salvarGH();
   atualizarConfigUI();
   setStatusSync('☁️ Configurado','ok');
-  (async () => {
-    await carregarTudo();
+
+  const btn = document.getElementById('btnSalvarConfig');
+  const orig = btn.textContent;
+  btn.textContent = '⏳ Sincronizando...';
+  btn.disabled = true;
+
+  try{
+    // PRIMEIRO busca do GitHub — nunca sobrescreve antes de saber o que já existe
+    const remoteReceitas = await carregarReceitasGitHub();
+    const temLocal = receitas.length > 0;
+
+    if(remoteReceitas !== null && remoteReceitas.length > 0){
+      if(temLocal && remoteReceitas.length !== receitas.length){
+        const usarRemoto = confirm(
+          `O GitHub já tem ${remoteReceitas.length} receita(s).\n` +
+          `Este dispositivo tem ${receitas.length} receita(s).\n\n` +
+          `[OK] Carregar do GitHub (substitui as locais)\n` +
+          `[Cancelar] Manter as locais (envia para o GitHub)`
+        );
+        if(usarRemoto){
+          receitas = remoteReceitas;
+          localStorage.setItem(CHAVE_RECEITAS, JSON.stringify(receitas));
+          localStorage.removeItem(DIRTY_KEY);
+        } else {
+          await salvarReceitasGitHub({silencioso:true});
+        }
+      } else {
+        receitas = remoteReceitas;
+        localStorage.setItem(CHAVE_RECEITAS, JSON.stringify(receitas));
+        localStorage.removeItem(DIRTY_KEY);
+      }
+    } else if(remoteReceitas !== null && remoteReceitas.length === 0 && temLocal){
+      await salvarReceitasGitHub({silencioso:true});
+    }
+
+    await recarregarDespesas();
     renderTelaPrincipal();
-  })();
-  salvarReceitasGitHub();
+    alert('✅ Configuração salva e sincronizada.');
+  } catch(e){
+    console.error(e);
+    alert('❌ Erro ao sincronizar: ' + (e.message || 'verifique a conexão'));
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
 });
 
 document.getElementById('btnTestar').addEventListener('click', async () => {
@@ -1844,6 +2025,17 @@ document.getElementById('btnRecarregarDespesas').addEventListener('click', async
   }
 });
 
+/* ---------- Wire-up export/import ---------- */
+document.getElementById('btnExportarTudo').addEventListener('click', exportarTudo);
+document.getElementById('btnImportarTudo').addEventListener('click',
+  () => document.getElementById('arquivoImportarTudo').click());
+document.getElementById('arquivoImportarTudo').addEventListener('change', async (e) => {
+  const f = e.target.files && e.target.files[0];
+  if(!f) return;
+  await importarTudo(f);
+  e.target.value = '';
+});
+
 /* ---------- Inicialização ---------- */
 (async function init(){
   carregarGH();
@@ -1864,19 +2056,14 @@ document.getElementById('btnRecarregarDespesas').addEventListener('click', async
   }
 })();
 
-/* ---------- Recarregamento ao voltar para a aba ---------- */
 let ultimaRecargaVisible = 0;
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'visible'){
     const agora = Date.now();
-    // Evita recarregar várias vezes em curto intervalo
     if(agora - ultimaRecargaVisible < 3000) return;
     ultimaRecargaVisible = agora;
     recarregarDespesas().then(ok => {
-      if(ok){
-        // Não exibe toast, apenas atualiza a tela
-        renderTelaPrincipal();
-      }
+      if(ok) renderTelaPrincipal();
     });
   }
   if(document.visibilityState === 'hidden'){
