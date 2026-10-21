@@ -171,7 +171,7 @@
         "id": "mvhh03y99fe9mh",
         "vencimento": "2026-10-20",
         "valor": 2370,
-        "status": "em_aberto"
+        "status": "recebido"
       },
       {
         "id": "mvhh03yahbu7k1",
@@ -671,6 +671,163 @@
         "id": "mvhh68lz2sjd6y",
         "vencimento": "2028-10-13",
         "valor": 1300,
+        "status": "em_aberto"
+      }
+    ]
+  },
+  {
+    "id": "mvhh8y74qbosgk",
+    "fonte": "Jackson Corretor",
+    "tipo": "aluguel",
+    "valorBase": 1208,
+    "primeiroVencimento": "2026-11-14",
+    "diaVencimento": "",
+    "infinita": true,
+    "dataFim": null,
+    "criadoEm": "2026-10-21T02:12:38.560Z",
+    "parcelas": [
+      {
+        "id": "mvhh8y74zep3fq",
+        "vencimento": "2026-11-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y749owcp7",
+        "vencimento": "2026-12-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74vjcekc",
+        "vencimento": "2027-01-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y742zbznm",
+        "vencimento": "2027-02-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y747i5vgl",
+        "vencimento": "2027-03-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74pmsmvw",
+        "vencimento": "2027-04-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y745v22ce",
+        "vencimento": "2027-05-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74gx5sh6",
+        "vencimento": "2027-06-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y744odl61",
+        "vencimento": "2027-07-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74wu33tn",
+        "vencimento": "2027-08-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74hvw06s",
+        "vencimento": "2027-09-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74wuv4w7",
+        "vencimento": "2027-10-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74eg0sjq",
+        "vencimento": "2027-11-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y7437sntl",
+        "vencimento": "2027-12-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74ae2rd0",
+        "vencimento": "2028-01-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y748ru7lo",
+        "vencimento": "2028-02-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y744yuv9h",
+        "vencimento": "2028-03-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y7415dkpc",
+        "vencimento": "2028-04-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74uciqyb",
+        "vencimento": "2028-05-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74vyo960",
+        "vencimento": "2028-06-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74yvetrz",
+        "vencimento": "2028-07-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y741lo97p",
+        "vencimento": "2028-08-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y74ls4o3s",
+        "vencimento": "2028-09-14",
+        "valor": 1208,
+        "status": "em_aberto"
+      },
+      {
+        "id": "mvhh8y744dvh1e",
+        "vencimento": "2028-10-14",
+        "valor": 1208,
         "status": "em_aberto"
       }
     ]
