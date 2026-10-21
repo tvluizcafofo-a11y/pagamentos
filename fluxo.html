@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d9488">
+<title>Fluxo de Caixa</title>
+<style>
+  :root{
+    --fundo:#f0fdf4;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
+    --verde:#16a34a;--verde-esc:#15803d;--verde-bg:#dcfce7;--verde-claro:#f0fdf4;
+    --azul:#2563eb;--azul-esc:#1d4ed8;--azul-bg:#eff6ff;--azul-claro:#dbeafe;
+    --vermelho:#dc2626;--vermelho-bg:#fee2e2;--vermelho-claro:#fef2f2;
+    --laranja:#f97316;--laranja-esc:#ea580c;--laranja-bg:#ffedd5;
+    --teal:#0d9488;--teal-esc:#0f766e;--teal-bg:#ccfbf1;
+    --roxo:#7c3aed;--roxo-bg:#ede9fe;
+    --raio:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;width:100%;max-width:100%;overflow-x:hidden}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--fundo);color:var(--texto);font-size:15px;line-height:1.45;
+    -webkit-tap-highlight-color:transparent}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+  header.topo{
+    background:linear-gradient(135deg,#0f766e 0%,#0d9488 50%,#14b8a6 100%);
+    color:#fff;padding:14px 16px 16px;position:sticky;top:0;z-index:20;
+    box-shadow:0 6px 20px rgba(13,148,136,.35);
+    border-bottom:4px solid #facc15}
+  header.topo .interno{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;
+    gap:10px;align-items:center;justify-content:space-between}
+  header.topo h1{margin:0;font-size:1.2rem;font-weight:900;
+    display:flex;align-items:center;gap:8px;text-shadow:0 2px 4px rgba(0,0,0,.2)}
+  header.topo p{margin:3px 0 0;font-size:.76rem;opacity:.95;font-weight:500}
+  .topo-acoes{display:flex;gap:8px;align-items:center}
+  .status-sync{font-size:.7rem;font-weight:800;background:rgba(255,255,255,.2);
+    padding:7px 12px;border-radius:99px;color:#fff;
+    border:2px solid rgba(255,255,255,.35);white-space:nowrap;cursor:pointer}
+  .status-sync.ok{background:rgba(22,163,74,.55);border-color:rgba(134,239,172,.85)}
+  .status-sync.erro{background:rgba(220,38,38,.55);border-color:rgba(252,165,165,.85)}
+  .status-sync.carregando,.status-sync.salvando{background:rgba(234,88,12,.55);border-color:rgba(253,186,116,.85)}
+  .status-sync.aviso{background:rgba(217,119,6,.55);border-color:rgba(252,211,77,.85)}
+  .btn-gh{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.22);
+    border:2px solid rgba(255,255,255,.4);color:#fff;font-size:1.1rem;
+    display:flex;align-items:center;justify-content:center;transition:.15s}
+  .btn-gh:hover{background:rgba(255,255,255,.35);transform:translateY(-1px)}
+
+  .area{max-width:1100px;margin:0 auto;padding:14px 12px}
+  .tela{animation:surgir .18s ease-out}
+  @keyframes surgir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .escondido{display:none !important}
+
+  .btn-voltar{display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;
+    font-weight:800;font-size:.9rem;padding:11px 20px;border-radius:12px;
+    box-shadow:0 4px 14px rgba(234,88,12,.4);margin-bottom:14px;
+    border:3px solid #fff}
+  .btn-voltar::before{content:'←';font-size:1.2rem;font-weight:900;line-height:1;
+    background:#fff;color:#ea580c;width:24px;height:24px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center}
+  .btn-voltar:hover{transform:translateY(-2px)}
+
+  h2.titulo-tela{margin:0 0 14px;font-size:1.35rem;font-weight:900;
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#0f172a;
+    padding-left:14px;position:relative;line-height:1.2}
+  h2.titulo-tela::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
+    width:6px;background:linear-gradient(180deg,var(--teal),var(--teal-esc));
+    border-radius:4px}
+
+  .nav-mes{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+  .nav-mes h2{margin:0;flex:1;text-align:center;font-size:1.3rem;font-weight:900;
+    color:#0f766e;text-transform:capitalize;line-height:1.1}
+  .nav-mes-btn{flex:0 0 auto;width:48px;height:48px;border-radius:12px;
+    background:linear-gradient(135deg,#ccfbf1,#99f6e4);border:2px solid #5eead4;
+    display:flex;align-items:center;justify-content:center;font-size:1.7rem;
+    font-weight:900;color:#0f766e;line-height:1;padding-bottom:3px}
+  .nav-mes-btn:hover{background:linear-gradient(135deg,#99f6e4,#5eead4);transform:translateY(-2px)}
+  .nav-mes-btn:active{transform:scale(.95)}
+
+  /* Card saldo */
+  .card-saldo{
+    background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#0d9488 100%);
+    color:#fff;border-radius:16px;padding:18px 16px;margin-bottom:16px;
+    box-shadow:0 8px 24px rgba(13,148,136,.35);
+    border:3px solid #fff;position:relative;overflow:hidden}
+  .card-saldo::before{content:'';position:absolute;top:-30px;right:-30px;
+    width:140px;height:140px;border-radius:50%;
+    background:rgba(255,255,255,.06);pointer-events:none}
+  .card-saldo .rotulo{font-size:.72rem;font-weight:800;text-transform:uppercase;
+    letter-spacing:.8px;opacity:.9;margin-bottom:6px}
+  .card-saldo .valor{font-size:2.2rem;font-weight:900;letter-spacing:-1px;
+    line-height:1.1;margin-bottom:4px;text-shadow:0 2px 6px rgba(0,0,0,.25)}
+  .card-saldo .valor.positivo{color:#86efac}
+  .card-saldo .valor.negativo{color:#fca5a5}
+  .card-saldo .subtitulo{font-size:.76rem;font-weight:600;opacity:.85;
+    margin-bottom:14px}
+  .card-saldo .divisor{display:flex;align-items:center;gap:10px;
+    margin:10px 0 10px;opacity:.75}
+  .card-saldo .divisor span{font-size:.64rem;font-weight:900;text-transform:uppercase;
+    letter-spacing:.8px;white-space:nowrap}
+  .card-saldo .divisor::before,.card-saldo .divisor::after{content:'';flex:1;
+    height:1px;background:rgba(255,255,255,.3)}
+  .card-saldo .detalhes{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+    gap:10px}
+  .card-saldo .det-item{display:flex;flex-direction:column;gap:2px}
+  .card-saldo .det-item span{font-size:.66rem;font-weight:700;text-transform:uppercase;
+    letter-spacing:.6px;opacity:.85}
+  .card-saldo .det-item strong{font-size:.94rem;font-weight:900}
+  .card-saldo .det-item.det-entrada strong{color:#86efac}
+  .card-saldo .det-item.det-saida strong{color:#fca5a5}
+  .card-saldo .det-item.det-pendente strong{font-size:.88rem;opacity:.92}
+
+  /* Seções */
+  .secao{margin-bottom:16px}
+  .secao-cabecalho{display:flex;align-items:center;gap:8px;margin-bottom:10px;
+    flex-wrap:wrap}
+  .secao-cabecalho h3{margin:0;font-size:1rem;font-weight:900;flex:1;min-width:0;
+    display:flex;align-items:center;gap:8px;color:#0f172a}
+  .secao-cabecalho h3 small{font-size:.72rem;font-weight:600;color:var(--suave)}
+  .secao-cabecalho .contador{font-size:.74rem;font-weight:900;padding:3px 10px;
+    border-radius:99px;background:var(--azul-bg);color:var(--azul-esc)}
+  .secao-cabecalho .contador.saida{background:var(--vermelho-bg);color:#991b1b}
+  .secao-cabecalho .contador.entrada{background:var(--verde-bg);color:var(--verde-esc)}
+
+  .lista-vazia{background:#fff;border:2px dashed var(--linha);border-radius:12px;
+    padding:20px 14px;text-align:center;color:var(--suave);
+    font-size:.86rem;font-weight:600}
+  .lista-vazia .btn-vazio{display:inline-flex;align-items:center;gap:8px;
+    background:linear-gradient(135deg,var(--teal),var(--teal-esc));color:#fff;
+    padding:10px 18px;border-radius:10px;font-weight:900;font-size:.84rem;
+    margin-top:12px;box-shadow:0 3px 10px rgba(13,148,136,.3);transition:.15s;
+    border:2px solid #fff}
+  .lista-vazia .btn-vazio:hover{transform:translateY(-1px);
+    box-shadow:0 5px 14px rgba(13,148,136,.4)}
+
+  /* Item receita */
+  .item-receita{
+    background:#fff;border:2px solid var(--linha);border-left:6px solid var(--azul);
+    border-radius:12px;padding:12px 14px;margin-bottom:10px;
+    box-shadow:0 2px 6px rgba(15,23,42,.06);
+    display:flex;flex-direction:column;gap:10px;transition:.15s}
+  .item-receita.st-recebido{border-left-color:var(--verde);
+    background:linear-gradient(135deg,#f0fdf4,#fff)}
+  .item-receita.st-atrasado{border-left-color:var(--laranja);
+    background:linear-gradient(135deg,#fff7ed,#fff)}
+  .item-receita:hover{box-shadow:0 4px 12px rgba(15,23,42,.1)}
+
+  .item-linha1{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .item-info{flex:1;min-width:0}
+  .item-info .fonte{font-size:.95rem;font-weight:900;color:#0f172a;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;
+    align-items:center;gap:6px}
+  .item-info .meta{font-size:.74rem;color:var(--suave);font-weight:600;margin-top:2px;
+    display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .item-info .meta b{color:#334155;font-weight:800}
+  .item-valor{flex-shrink:0;text-align:right}
+  .item-valor .num{font-size:1.15rem;font-weight:900;color:var(--azul-esc);
+    letter-spacing:-.3px}
+  .item-receita.st-recebido .item-valor .num{color:var(--verde-esc)}
+  .item-receita.st-atrasado .item-valor .num{color:var(--laranja-esc)}
+  .item-valor .sublabel{font-size:.62rem;font-weight:900;text-transform:uppercase;
+    letter-spacing:.5px;color:var(--suave);margin-top:1px}
+
+  .item-linha2{display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+    padding-top:8px;border-top:1px dashed var(--linha)}
+  .btn-acao-receita{padding:8px 12px;border-radius:8px;font-size:.78rem;font-weight:800;
+    display:inline-flex;align-items:center;gap:5px;transition:.15s;
+    border:2px solid transparent;white-space:nowrap}
+  .btn-acao-receita.receber{background:linear-gradient(135deg,var(--verde),#15803d);
+    color:#fff;box-shadow:0 2px 8px rgba(22,163,74,.3)}
+  .btn-acao-receita.receber:hover{box-shadow:0 4px 12px rgba(22,163,74,.45);
+    transform:translateY(-1px)}
+  .btn-acao-receita.desfazer{background:#f1f5f9;color:#475569;border-color:#cbd5e1}
+  .btn-acao-receita.desfazer:hover{background:#e2e8f0}
+  .btn-acao-receita.editar{background:var(--azul-bg);color:var(--azul-esc);
+    border-color:var(--azul-claro)}
+  .btn-acao-receita.editar:hover{background:#dbeafe}
+  .btn-acao-receita.excluir{background:var(--vermelho-bg);color:#b91c1c;
+    border-color:#fca5a5}
+  .btn-acao-receita.excluir:hover{background:#fecaca}
+
+  .selo-status-receita{font-size:.62rem;font-weight:900;padding:3px 9px;
+    border-radius:99px;text-transform:uppercase;letter-spacing:.5px;
+    display:inline-flex;align-items:center;gap:4px}
+  .selo-status-receita.recebido{background:var(--verde-bg);color:var(--verde-esc);
+    border:1px solid #86efac}
+  .selo-status-receita.aberto{background:var(--azul-bg);color:var(--azul-esc);
+    border:1px solid #bfdbfe}
+  .selo-status-receita.atrasado{background:var(--laranja-bg);color:var(--laranja-esc);
+    border:1px solid #fdba74}
+
+  /* Despesas agrupadas por credor */
+  .grupo-despesa{margin-bottom:14px}
+  .grupo-despesa .grupo-cabecalho{display:flex;align-items:center;gap:8px;
+    padding:8px 12px;background:linear-gradient(135deg,#f8fafc,#f1f5f9);
+    border:2px solid var(--linha);border-bottom:none;
+    border-radius:10px 10px 0 0;font-size:.82rem;font-weight:900;color:#334155}
+  .grupo-despesa .grupo-cabecalho .qtd-badge{font-size:.66rem;font-weight:900;
+    background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:99px;
+    margin-left:auto}
+  .grupo-despesa .grupo-total{font-size:.74rem;font-weight:800;color:#0f172a;
+    margin-left:8px}
+  .grupo-despesa .itens{border:2px solid var(--linha);border-top:none;
+    border-radius:0 0 10px 10px;overflow:hidden}
+  .grupo-despesa .itens .item-despesa{border-radius:0;border-left-width:4px;
+    border-top:none;border-left-color:var(--azul-claro);
+    border-right:none;border-bottom:1px solid var(--linha);
+    margin-bottom:0;padding:10px 14px}
+  .grupo-despesa .itens .item-despesa:last-child{border-bottom:none}
+  .grupo-despesa .itens .item-despesa.st-pago{border-left-color:var(--verde)}
+  .grupo-despesa .itens .item-despesa.st-em_atraso{border-left-color:var(--vermelho)}
+
+  .item-despesa{
+    background:#fff;
+    display:flex;justify-content:space-between;gap:10px;align-items:center;
+    box-shadow:none;opacity:.92}
+  .item-despesa.st-pago{opacity:1}
+  .item-despesa.st-em_atraso{opacity:1}
+  .item-despesa.st-outros{opacity:1}
+  .item-despesa .info{flex:1;min-width:0}
+  .item-despesa .info .fonte{font-size:.9rem;font-weight:800;color:#0f172a;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item-despesa .info .meta{font-size:.72rem;color:var(--suave);font-weight:600;
+    margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item-despesa .valor-area{flex-shrink:0;text-align:right}
+  .item-despesa .valor{font-size:1.05rem;font-weight:900;color:#334155;letter-spacing:-.3px}
+  .item-despesa.st-pago .valor{color:var(--verde-esc)}
+  .item-despesa.st-em_atraso .valor{color:#b91c1c}
+  .item-despesa .selo{font-size:.62rem;font-weight:900;padding:3px 8px;
+    border-radius:99px;margin-top:3px;display:inline-block}
+  .item-despesa .selo.pago{background:var(--verde-bg);color:var(--verde-esc)}
+  .item-despesa .selo.aberto{background:var(--azul-bg);color:var(--azul-esc)}
+  .item-despesa .selo.atrasado{background:var(--vermelho-bg);color:#b91c1c}
+  .item-despesa .selo.outros{background:var(--laranja-bg);color:var(--laranja-esc)}
+
+  .aviso-fonte{background:linear-gradient(135deg,#fef3c7,#ffedd5);
+    border:2px solid #fcd34d;border-left:6px solid var(--laranja);
+    border-radius:12px;padding:12px 14px;margin-bottom:14px;
+    font-size:.82rem;color:#78350f;font-weight:600;line-height:1.5;
+    display:flex;gap:10px;align-items:flex-start}
+  .aviso-fonte::before{content:'ℹ️';font-size:1.2rem;flex-shrink:0;line-height:1}
+
+  .btn-nova-receita{width:100%;margin-top:6px;
+    background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+    color:#fff;padding:14px 20px;border-radius:12px;font-weight:900;font-size:.95rem;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+    box-shadow:0 4px 14px rgba(13,148,136,.4);transition:.15s;
+    border:3px solid #fff}
+  .btn-nova-receita:hover{transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(13,148,136,.55)}
+  .btn-nova-receita:active{transform:translateY(0)}
+
+  .btn-secundario{display:inline-flex;align-items:center;justify-content:center;
+    gap:8px;background:#f1f5f9;color:#334155;border:2px solid #cbd5e1;
+    padding:11px 18px;border-radius:10px;font-weight:800;font-size:.84rem;
+    transition:.15s;margin-top:10px;width:100%}
+  .btn-secundario:hover{background:#e2e8f0}
+
+  /* Form */
+  .form-cartao{background:#fff;border:2px solid var(--linha);border-radius:var(--raio);
+    padding:16px;box-shadow:0 2px 8px rgba(15,23,42,.06);margin-bottom:14px}
+  .grade-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+  .campo{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:900;
+    color:#0f172a;letter-spacing:.2px}
+  .campo input,.campo select{font:inherit;font-weight:500;color:var(--texto);
+    background:#fff;border:2px solid var(--linha);border-radius:8px;
+    padding:10px 12px;font-size:.92rem;width:100%;min-width:0;outline:none;
+    transition:.15s}
+  .campo input:focus,.campo select:focus{border-color:var(--teal);
+    box-shadow:0 0 0 3px rgba(13,148,136,.18)}
+  .campo.largura-total{grid-column:1 / -1}
+  .campo .dica{font-weight:500;color:var(--suave);font-size:.72rem}
+
+  .check-infinita{display:flex;align-items:flex-start;gap:12px;
+    background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+    border:2px solid #5eead4;border-radius:12px;padding:12px 14px;
+    margin-top:6px;cursor:pointer;transition:.15s;grid-column:1 / -1}
+  .check-infinita:hover{border-color:var(--teal)}
+  .check-infinita input{width:22px;height:22px;margin:0;flex-shrink:0;
+    accent-color:var(--teal);cursor:pointer}
+  .check-infinita .conteudo{flex:1;min-width:0}
+  .check-infinita b{display:block;font-size:.9rem;font-weight:900;
+    color:var(--teal-esc);margin-bottom:2px}
+  .check-infinita small{display:block;font-size:.74rem;color:#115e59;font-weight:600;
+    line-height:1.4}
+  .check-infinita.ativo{background:linear-gradient(135deg,#ccfbf1,#99f6e4);
+    border-color:var(--teal)}
+
+  .acoes-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;
+    padding-top:14px;border-top:2px dashed var(--linha)}
+  .btn{padding:12px 20px;border-radius:10px;font-weight:800;font-size:.88rem;
+    display:inline-flex;align-items:center;gap:8px;transition:.15s;
+    border:2px solid transparent}
+  .btn-primario{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+    color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.35)}
+  .btn-primario:hover{box-shadow:0 6px 18px rgba(13,148,136,.45);
+    transform:translateY(-1px)}
+  .btn-neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
+  .btn-neutro:hover{background:#e2e8f0}
+  .btn-perigo{background:var(--vermelho-bg);color:#b91c1c;border-color:#fca5a5}
+  .btn-perigo:hover{background:#fecaca}
+
+  /* Config */
+  .config-status-cartao{border-radius:var(--raio);padding:14px 16px;
+    margin-bottom:14px;display:flex;gap:14px;align-items:center;
+    border:2px solid var(--linha);background:#fff;
+    border-left:6px solid var(--suave);box-shadow:0 2px 8px rgba(15,23,42,.06)}
+  .config-status-cartao.ok{border-color:#86efac;border-left-color:var(--verde);
+    background:linear-gradient(135deg,#f0fdf4,#dcfce7)}
+  .config-status-cartao.erro{border-color:#fca5a5;border-left-color:var(--vermelho);
+    background:linear-gradient(135deg,#fef2f2,#fee2e2)}
+  .config-status-cartao.aviso{border-color:#fcd34d;border-left-color:var(--laranja);
+    background:linear-gradient(135deg,#fffbeb,#fef3c7)}
+  .config-status-cartao .emoji{font-size:1.6rem;flex-shrink:0;line-height:1}
+  .config-status-cartao b{display:block;font-size:.92rem;font-weight:900;margin-bottom:2px}
+  .config-status-cartao small{font-size:.76rem;color:var(--suave);font-weight:600}
+  .config-status-cartao.ok b{color:var(--verde-esc)}
+  .config-status-cartao.erro b{color:#b91c1c}
+  .config-status-cartao.aviso b{color:#92400e}
+
+  .config-ajuda{background:linear-gradient(135deg,#f0f9ff,#e0f2fe);
+    border:2px solid #bae6fd;border-left:6px solid var(--azul);
+    border-radius:12px;padding:14px 16px;font-size:.78rem;color:#075985;
+    margin-top:14px;line-height:1.6;font-weight:500}
+  .config-ajuda b{color:#0c4a6e;font-weight:900}
+  .config-ajuda code{background:#fff;border:1px solid #bae6fd;border-radius:5px;
+    padding:2px 7px;font-family:ui-monospace,monospace;font-size:.72rem;
+    color:#0369a1;font-weight:700;word-break:break-all}
+
+  /* Modal */
+  .modal-fundo{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,23,42,.75);
+    display:flex;align-items:center;justify-content:center;padding:16px;
+    z-index:999999;backdrop-filter:blur(2px)}
+  .modal-caixa{background:#fff;border-radius:16px;max-width:520px;width:100%;
+    max-height:90vh;overflow-y:auto;padding:20px;
+    box-shadow:0 24px 60px rgba(0,0,0,.4)}
+  .modal-caixa h3{margin:0 0 12px;font-size:1.1rem;font-weight:900;
+    display:flex;align-items:center;gap:10px;padding-bottom:10px;
+    border-bottom:2px dashed var(--linha);color:#0f172a}
+  .modal-caixa h3 .emoji{font-size:1.5rem;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+    width:42px;height:42px;border-radius:12px;display:flex;
+    align-items:center;justify-content:center;flex-shrink:0}
+  .modal-caixa p{margin:8px 0;font-size:.86rem;color:var(--texto);font-weight:500}
+  .modal-acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;
+    justify-content:flex-end}
+  .btn-modal{padding:10px 16px;border-radius:10px;font-weight:800;font-size:.82rem;
+    display:inline-flex;align-items:center;gap:6px;transition:.15s;
+    border:2px solid transparent}
+  .btn-modal.primario{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+    color:#fff;box-shadow:0 3px 10px rgba(13,148,136,.3)}
+  .btn-modal.neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
+  .btn-modal.neutro:hover{background:#e2e8f0}
+
+  #textoEscopo{background:#f8fafc;border-left:5px solid var(--teal);
+    border-radius:8px;padding:12px 14px;font-size:.84rem;color:var(--texto);
+    line-height:1.6;margin:12px 0 4px;font-weight:500}
+  #textoEscopo b{color:var(--teal-esc);font-weight:900}
+  .linha-mudanca{display:flex;align-items:flex-start;gap:10px;padding:7px 0;
+    border-bottom:1px dashed #e2e8f0}
+  .linha-mudanca:last-child{border-bottom:none}
+  .linha-mudanca .campo-nome{font-weight:900;color:var(--teal-esc);min-width:80px;
+    flex-shrink:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.3px}
+  .linha-mudanca .valor-mudanca{color:var(--texto);word-break:break-word;
+    font-size:.84rem;font-weight:600}
+
+  .opcoes-escopo{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .opcao-escopo{display:flex;align-items:flex-start;gap:12px;background:#f8fafc;
+    border:2px solid #e2e8f0;border-radius:12px;padding:12px 14px;
+    text-align:left;cursor:pointer;width:100%;transition:.15s;font-weight:600}
+  .opcao-escopo:hover{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+    border-color:var(--teal);transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(13,148,136,.15)}
+  .opcao-escopo .icone{font-size:1.3rem;flex-shrink:0;width:28px;
+    text-align:center;background:#fff;border-radius:8px;padding:3px}
+  .opcao-escopo .info{flex:1;min-width:0}
+  .opcao-escopo .info b{display:block;color:var(--texto);font-size:.88rem;
+    font-weight:900;margin-bottom:2px}
+  .opcao-escopo .info small{display:block;color:var(--suave);font-size:.74rem;
+    font-weight:500}
+  .opcao-escopo.cancelar{background:#fff;border-color:#fee2e2}
+  .opcao-escopo.cancelar:hover{background:#fef2f2;border-color:#fca5a5}
+  .opcao-escopo.cancelar .info b{color:#b91c1c}
+
+  /* Modal editar valor */
+  .info-parcela-edit{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+    border:2px solid #5eead4;border-radius:10px;padding:12px 14px;
+    margin-bottom:14px;font-size:.82rem;font-weight:600;color:#115e59;
+    line-height:1.5}
+  .info-parcela-edit b{color:var(--teal-esc);font-weight:900}
+
+  /* Lista todas as receitas */
+  .item-receita-completa{background:#fff;border:2px solid var(--linha);
+    border-left:6px solid var(--teal);border-radius:12px;padding:14px;
+    margin-bottom:12px;box-shadow:0 2px 6px rgba(15,23,42,.06)}
+  .item-receita-completa .cabecalho{display:flex;justify-content:space-between;
+    gap:10px;align-items:flex-start;margin-bottom:10px}
+  .item-receita-completa .titulo-info{flex:1;min-width:0}
+  .item-receita-completa .titulo-info b{display:block;font-size:1rem;
+    font-weight:900;color:#0f172a}
+  .item-receita-completa .titulo-info small{display:block;font-size:.74rem;
+    color:var(--suave);font-weight:600;margin-top:2px}
+  .item-receita-completa .detalhes-grade{display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;
+    margin-top:8px;padding-top:8px;border-top:1px dashed var(--linha)}
+  .item-receita-completa .det{display:flex;flex-direction:column;gap:1px}
+  .item-receita-completa .det span{font-size:.62rem;font-weight:900;
+    text-transform:uppercase;letter-spacing:.5px;color:var(--suave)}
+  .item-receita-completa .det strong{font-size:.86rem;font-weight:800;color:#334155}
+  .item-receita-completa .rodape{display:flex;gap:8px;flex-wrap:wrap;
+    margin-top:10px;padding-top:10px;border-top:1px dashed var(--linha);
+    justify-content:flex-end}
+
+  @media (max-width:520px){
+    header.topo h1{font-size:1rem}
+    .card-saldo .valor{font-size:1.8rem}
+    .nav-mes h2{font-size:1.1rem}
+    .nav-mes-btn{width:42px;height:42px;font-size:1.5rem}
+    .item-info .fonte{font-size:.88rem}
+    .item-valor .num{font-size:1rem}
+    .btn-acao-receita{font-size:.72rem;padding:7px 10px}
+    .grade-form{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <div class="interno">
+    <div>
+      <h1>💹 Fluxo de Caixa</h1>
+      <p>Receitas e despesas realizadas</p>
+    </div>
+    <div class="topo-acoes">
+      <span class="status-sync" id="statusSync">☁️ Offline</span>
+      <button type="button" class="btn-gh" id="btnConfig" title="Configurações">⚙️</button>
+    </div>
+  </div>
+</header>
+
+<div class="area">
+
+  <!-- TELA PRINCIPAL -->
+  <section class="tela" id="tela-fluxo">
+    <div class="nav-mes">
+      <button type="button" class="nav-mes-btn" id="mesAnterior" aria-label="Mês anterior">‹</button>
+      <h2 id="tituloMes"></h2>
+      <button type="button" class="nav-mes-btn" id="mesProximo" aria-label="Próximo mês">›</button>
+    </div>
+
+    <div class="card-saldo" id="cardSaldo">
+      <div class="rotulo">💰 Saldo realizado do mês</div>
+      <div class="valor" id="saldoValor">R$ 0,00</div>
+      <div class="subtitulo" id="saldoSubtitulo">Recebido − Pago</div>
+
+      <div class="divisor"><span>✔ Já movimentado</span></div>
+      <div class="detalhes">
+        <div class="det-item det-entrada">
+          <span>✅ Recebido</span>
+          <strong id="totalRecebido">R$ 0,00</strong>
+        </div>
+        <div class="det-item det-saida">
+          <span>✅ Pago</span>
+          <strong id="totalPago">R$ 0,00</strong>
+        </div>
+      </div>
+
+      <div class="divisor"><span>⏳ Ainda pendente</span></div>
+      <div class="detalhes">
+        <div class="det-item det-pendente">
+          <span>📥 A receber</span>
+          <strong id="totalAReceber">R$ 0,00</strong>
+        </div>
+        <div class="det-item det-pendente">
+          <span>📤 A pagar</span>
+          <strong id="totalAPagar">R$ 0,00</strong>
+        </div>
+      </div>
+    </div>
+
+    <div id="avisoFonte"></div>
+
+    <section class="secao">
+      <div class="secao-cabecalho">
+        <h3>📥 Receitas</h3>
+        <span class="contador entrada" id="contReceitas">0</span>
+      </div>
+      <div id="listaReceitas"></div>
+      <button type="button" class="btn-nova-receita" id="btnNovaReceita">➕ Nova receita</button>
+      <button type="button" class="btn-secundario" id="btnTodasReceitas">📋 Gerenciar receitas cadastradas</button>
+    </section>
+
+    <section class="secao">
+      <div class="secao-cabecalho">
+        <h3>📤 Despesas <small>(somente leitura — app de pagamentos)</small></h3>
+        <span class="contador saida" id="contDespesas">0</span>
+      </div>
+      <div id="listaDespesas"></div>
+    </section>
+  </section>
+
+  <!-- NOVA / EDITAR RECEITA -->
+  <section class="tela escondido" id="tela-nova">
+    <button type="button" class="btn-voltar" id="voltarForm">Voltar</button>
+    <h2 class="titulo-tela" id="tituloForm">➕ Nova receita</h2>
+    <form class="form-cartao" id="formReceita" autocomplete="off">
+      <div class="grade-form">
+        <label class="campo largura-total">Fonte pagadora *
+          <input type="text" id="campoFonte" required placeholder="Ex.: Aluguel Apto 101, Holerite, Aposentadoria" maxlength="80">
+        </label>
+        <label class="campo">Tipo
+          <select id="campoTipo">
+            <option value="aluguel">Aluguel</option>
+            <option value="holerite">Holerite</option>
+            <option value="aposentadoria">Aposentadoria</option>
+            <option value="outro">Outro</option>
+          </select>
+        </label>
+        <label class="campo">Valor base (R$) *
+          <input type="number" id="campoValorBase" step="0.01" min="0.01" required>
+        </label>
+        <label class="campo">Primeiro vencimento *
+          <input type="date" id="campoPrimeiro" required>
+        </label>
+        <label class="campo">Dia do vencimento mensal
+          <select id="campoDiaVenc">
+            <option value="">Mesmo dia do 1º vencimento</option>
+          </select>
+          <span class="dica">Se escolher, a 1ª parcela é ajustada para o próximo dia válido.</span>
+        </label>
+
+        <label class="check-infinita" id="labelInfinita" for="campoInfinita">
+          <input type="checkbox" id="campoInfinita">
+          <div class="conteudo">
+            <b>♾️ Receita infinita</b>
+            <small>Sem fim de contrato (ex.: aposentadoria). As parcelas são geradas automaticamente e mantidas no horizonte.</small>
+          </div>
+        </label>
+
+        <label class="campo" id="blocoDataFim">Data fim do contrato *
+          <input type="date" id="campoDataFim">
+        </label>
+      </div>
+
+      <div class="acoes-form">
+        <button type="submit" class="btn btn-primario" id="btnSalvarForm">💾 Salvar</button>
+        <button type="button" class="btn btn-neutro" id="btnDescartar">✕ Descartar</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- TODAS AS RECEITAS -->
+  <section class="tela escondido" id="tela-todas">
+    <button type="button" class="btn-voltar" id="voltarTodas">Voltar</button>
+    <h2 class="titulo-tela">📋 Receitas cadastradas</h2>
+    <div id="listaTodasReceitas"></div>
+    <button type="button" class="btn-nova-receita" id="btnNovaReceita2">➕ Nova receita</button>
+  </section>
+
+  <!-- CONFIGURAÇÃO -->
+  <section class="tela escondido" id="tela-config">
+    <button type="button" class="btn-voltar" id="voltarConfig">Voltar</button>
+    <h2 class="titulo-tela">⚙️ Configuração GitHub</h2>
+
+    <div class="config-status-cartao" id="configStatus">
+      <span class="emoji">☁️</span>
+      <div style="flex:1;min-width:0">
+        <b id="configStatusTitulo">Não configurado</b>
+        <small id="configStatusDescricao">Sem sincronização — leitura local apenas.</small>
+      </div>
+    </div>
+
+    <div class="form-cartao">
+      <div class="grade-form">
+        <label class="campo">Usuário GitHub *
+          <input type="text" id="ghOwner" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="joaosilva">
+        </label>
+        <label class="campo">Repositório *
+          <input type="text" id="ghRepo" autocomplete="off" autocapitalize="off" spellcheck="false" value="pagamentos">
+        </label>
+        <label class="campo">Branch
+          <input type="text" id="ghBranch" autocomplete="off" autocapitalize="off" spellcheck="false" value="main">
+        </label>
+        <label class="campo">Caminho do dividas.json (leitura)
+          <input type="text" id="ghPathDividas" autocomplete="off" autocapitalize="off" spellcheck="false" value="dados/dividas.json">
+        </label>
+        <label class="campo">Caminho do receitas.json (escrita)
+          <input type="text" id="ghPathReceitas" autocomplete="off" autocapitalize="off" spellcheck="false" value="dados/receitas.json">
+        </label>
+      </div>
+      <label class="campo" style="margin-top:14px">Token pessoal *
+        <input type="password" id="ghToken" autocomplete="off" spellcheck="false" placeholder="github_pat_...">
+      </label>
+      <label class="campo" style="flex-direction:row;align-items:center;gap:8px;font-weight:900;margin-top:12px">
+        <input type="checkbox" id="ghAutoSync" checked style="width:auto;accent-color:var(--teal)">
+        Sincronizar receitas automaticamente
+      </label>
+      <div class="acoes-form">
+        <button type="button" class="btn btn-neutro" id="btnTestar">🔍 Testar</button>
+        <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar</button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-neutro" id="btnRecarregarDespesas" style="margin-top:14px;width:100%">
+      🔄 Recarregar despesas agora
+    </button>
+
+    <div class="config-ajuda">
+      <b>Como funciona</b>
+      <ol>
+        <li><b>Despesas</b> são lidas <b>somente</b> do <code>dividas.json</code>. O app de pagamentos continua sendo o único que escreve nele.</li>
+        <li><b>Receitas</b> ficam no <code>receitas.json</code> (separado). Só este app escreve nele.</li>
+        <li><b>GitHub tem prioridade</b> sobre o <code>localStorage</code> quando configurado — garante que os status mais recentes apareçam.</li>
+        <li>Se este app estiver no mesmo domínio do app de pagamentos, também tenta herdar a configuração automaticamente.</li>
+      </ol>
+    </div>
+  </section>
+
+</div>
+
+<!-- Modal de escopo -->
+<div class="modal-fundo escondido" id="modalEscopo">
+  <div class="modal-caixa">
+    <h3><span class="emoji" id="escopoEmoji">🎯</span> <span id="escopoTitulo">Onde aplicar?</span></h3>
+    <div id="textoEscopo"></div>
+    <div class="opcoes-escopo">
+      <button type="button" class="opcao-escopo" data-escopo="apenas">
+        <span class="icone">📌</span>
+        <div class="info"><b>Somente esta parcela</b><small id="subApenas">Aplica apenas nesta parcela</small></div>
+      </button>
+      <button type="button" class="opcao-escopo" data-escopo="futuras">
+        <span class="icone">➡️</span>
+        <div class="info"><b>Esta e as futuras</b><small id="subFuturas">Aplica nesta e em todas as posteriores</small></div>
+      </button>
+      <button type="button" class="opcao-escopo" data-escopo="todas">
+        <span class="icone">🔁</span>
+        <div class="info"><b>Todas as parcelas</b><small id="subTodas">Aplica em todas as parcelas da receita</small></div>
+      </button>
+      <button type="button" class="opcao-escopo cancelar" data-escopo="cancelar">
+        <span class="icone">✕</span>
+        <div class="info"><b>Cancelar</b><small>Fecha sem aplicar nada</small></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar valor -->
+<div class="modal-fundo escondido" id="modalEditarValor">
+  <div class="modal-caixa">
+    <h3><span class="emoji">💰</span> Editar valor</h3>
+    <div class="info-parcela-edit" id="infoEdicaoValor"></div>
+    <label class="campo">Novo valor (R$)
+      <input type="number" id="inputNovoValor" step="0.01" min="0.01" inputmode="decimal">
+    </label>
+    <div class="modal-acoes">
+      <button type="button" class="btn-modal neutro" id="btnCancelarValor">Cancelar</button>
+      <button type="button" class="btn-modal primario" id="btnAplicarValor">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   FLUXO DE CAIXA
+   ========================================================= */
+const CHAVE_RECEITAS = 'sistemaFluxo.v1';
+const CHAVE_PAGAMENTOS = 'sistemaPagamentos.v2';
+const GH_KEY = 'sistemaFluxo.github';
+const GH_PAGAMENTOS_KEY = 'sistemaPagamentos.github';
+const MES_KEY = 'sistemaFluxo.mesRef';
+const DIRTY_KEY = 'sistemaFluxo.dirty';
+
+const PARCELAS_INICIAIS = 24;
+const PARCELAS_MIN_FUTURAS = 12;
+const LIMITE_GITHUB_BYTES = 900 * 1024;
+
+let receitas = [];
+let dividasPagamentos = [];
+let editandoId = null;
+let fonteDespesas = '';
+let mesRef = new Date();
+let resolverEscopo = null;
+let syncTimer = null;
+let syncing = false;
+
+// estado do modal de edição de valor
+let edicaoValorPendente = null;
+
+const TIPO_LABEL = {
+  aluguel:'Aluguel', holerite:'Holerite',
+  aposentadoria:'Aposentadoria', outro:'Outro'
+};
+
+const gid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtBRL = (v) => Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const arr2 = (v) => Math.round((Number(v)+Number.EPSILON)*100)/100;
+const isoParaData = (iso) => { const [a,m,d]=iso.split('-').map(Number); return new Date(a,m-1,d); };
+const dataParaIso = (dt) => `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+const hojeIso = () => dataParaIso(new Date());
+const fmtBR = (iso) => iso ? isoParaData(iso).toLocaleDateString('pt-BR') : '—';
+const nomeMes = (m) => ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'][m];
+
+function somarMeses(iso, n){
+  const [a,m,d]=iso.split('-').map(Number);
+  const alvo=new Date(a,m-1+n,1);
+  const ud=new Date(alvo.getFullYear(),alvo.getMonth()+1,0).getDate();
+  alvo.setDate(Math.min(d,ud));
+  return dataParaIso(alvo);
+}
+function mesDeIso(iso){ return iso.slice(0,7); }
+
+function ajustarDiaBase(isoBase, dia){
+  if(!dia) return isoBase;
+  const d=parseInt(dia,10); if(!d||d<1||d>31) return isoBase;
+  const dt=isoParaData(isoBase);
+  const ano=dt.getFullYear(), mes=dt.getMonth();
+  const udm=new Date(ano,mes+1,0).getDate();
+  const df=Math.min(d,udm);
+  let res = `${ano}-${String(mes+1).padStart(2,'0')}-${String(df).padStart(2,'0')}`;
+  if(res < isoBase){
+    const pm=new Date(ano,mes+1,1);
+    const udp=new Date(pm.getFullYear(),pm.getMonth()+1,0).getDate();
+    const dp=Math.min(d,udp);
+    res = `${pm.getFullYear()}-${String(pm.getMonth()+1).padStart(2,'0')}-${String(dp).padStart(2,'0')}`;
+  }
+  return res;
+}
+
+/* ---------- Normalização de status ---------- */
+function normalizarStatus(status){
+  const s = String(status || '').toLowerCase().trim();
+  if(!s) return 'em_aberto';
+  if(s === 'pago' || s === 'recebido' || s === 'paid') return 'pago';
+  if(s === 'em_atraso' || s === 'atrasado' || s === 'atraso') return 'em_atraso';
+  if(s === 'outros' || s === 'outro') return 'outros';
+  return 'em_aberto';
+}
+
+/* ---------- GitHub ---------- */
+let ghConfig = {
+  owner:'', repo:'pagamentos', branch:'main',
+  pathDividas:'dados/dividas.json', pathReceitas:'dados/receitas.json',
+  token:'', autoSync:true
+};
+function carregarGH(){
+  try{
+    const raw=localStorage.getItem(GH_KEY);
+    if(raw) ghConfig={...ghConfig, ...JSON.parse(raw)};
+    else {
+      const rawPag = localStorage.getItem(GH_PAGAMENTOS_KEY);
+      if(rawPag){
+        const p = JSON.parse(rawPag);
+        ghConfig.owner = p.owner || '';
+        ghConfig.repo = p.repo || 'pagamentos';
+        ghConfig.branch = p.branch || 'main';
+        ghConfig.token = p.token || '';
+      }
+    }
+  }catch(e){}
+}
+function salvarGH(){ try{ localStorage.setItem(GH_KEY, JSON.stringify(ghConfig)); }catch(e){} }
+function ghConfigurado(){ return !!(ghConfig.owner && ghConfig.repo && ghConfig.token); }
+function setStatusSync(txt, tipo){
+  const el = document.getElementById('statusSync');
+  if(!el) return;
+  el.textContent = txt;
+  el.className = 'status-sync ' + (tipo || '');
+}
+function b64Enc(str){
+  const bytes = new TextEncoder().encode(str);
+  const CHUNK = 8192; let bin = '';
+  for(let i=0;i<bytes.length;i+=CHUNK){
+    const end = Math.min(i+CHUNK, bytes.length);
+    bin += String.fromCharCode.apply(null, bytes.subarray(i, end));
+  }
+  return btoa(bin);
+}
+function b64Dec(b64){
+  const bin = atob(String(b64).replace(/\s/g,''));
+  const bytes = new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) bytes[i]=bin.charCodeAt(i);
+  return new TextDecoder('utf-8').decode(bytes);
+}
+function ghHeaders(type){
+  return {
+    'Authorization': type === 'token' ? `token ${ghConfig.token}` : `Bearer ${ghConfig.token}`,
+    'Accept': 'application/vnd.github+json',
+    'X-GitHub-Api-Version': '2022-11-28'
+  };
+}
+async function fetchGH(url, opts){
+  opts = opts || {};
+  try{
+    let r = await fetch(url, { ...opts, headers: { ...(opts.headers||{}), ...ghHeaders('Bearer') } });
+    if(r.status === 401){
+      r = await fetch(url, { ...opts, headers: { ...(opts.headers||{}), ...ghHeaders('token') } });
+    }
+    return r;
+  }catch(e){ throw e; }
+}
+function ghURLContent(path){
+  return `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${path}`;
+}
+
+/* ---------- Storage local ---------- */
+function carregarReceitasLocais(){
+  try{
+    const raw = localStorage.getItem(CHAVE_RECEITAS);
+    receitas = raw ? JSON.parse(raw) : [];
+    if(!Array.isArray(receitas)) receitas = [];
+  }catch(e){ receitas = []; }
+}
+function salvarReceitasLocais(){
+  try{
+    localStorage.setItem(CHAVE_RECEITAS, JSON.stringify(receitas));
+    localStorage.setItem(DIRTY_KEY, '1');
+  }catch(e){
+    console.error('Erro ao salvar receitas locais:', e);
+    if(e && e.name === 'QuotaExceededError') alert('⚠️ Armazenamento local cheio.');
+  }
+}
+function lerDividasLocal(){
+  try{
+    const raw = localStorage.getItem(CHAVE_PAGAMENTOS);
+    if(!raw) return null;
+    const arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : null;
+  }catch(e){ return null; }
+}
+
+/* ---------- Carregar do GitHub ---------- */
+async function carregarDividasGitHub(){
+  if(!ghConfigurado()) return null;
+  try{
+    const r = await fetchGH(ghURLContent(ghConfig.pathDividas) + `?ref=${encodeURIComponent(ghConfig.branch)}`, {cache:'no-store'});
+    if(r.status === 404) return [];
+    if(!r.ok) return null;
+    const info = await r.json();
+
+    let texto = '';
+    if(info.content){
+      texto = b64Dec(info.content);
+    } else if(info.download_url){
+      // Arquivo > 1MB: usa download_url
+      const raw = await fetch(info.download_url, {
+        headers: { 'Authorization': `token ${ghConfig.token}` }
+      });
+      if(!raw.ok) return null;
+      texto = await raw.text();
+    } else {
+      return null;
+    }
+
+    texto = texto.replace(/^\uFEFF/,'').trim();
+    if(!texto) return [];
+    const arr = JSON.parse(texto);
+    return Array.isArray(arr) ? arr : null;
+  }catch(e){ console.error('[GH] dividas:', e); return null; }
+}
+
+async function carregarReceitasGitHub(){
+  if(!ghConfigurado()) return null;
+  try{
+    const r = await fetchGH(ghURLContent(ghConfig.pathReceitas) + `?ref=${encodeURIComponent(ghConfig.branch)}`, {cache:'no-store'});
+    if(r.status === 404) return [];
+    if(!r.ok) return null;
+    const info = await r.json();
+
+    let texto = '';
+    if(info.content){
+      texto = b64Dec(info.content);
+    } else if(info.download_url){
+      const raw = await fetch(info.download_url, {
+        headers: { 'Authorization': `token ${ghConfig.token}` }
+      });
+      if(!raw.ok) return null;
+      texto = await raw.text();
+    } else {
+      return null;
+    }
+
+    texto = texto.replace(/^\uFEFF/,'').trim();
+    if(!texto) return [];
+    const arr = JSON.parse(texto);
+    return Array.isArray(arr) ? arr : null;
+  }catch(e){ console.error('[GH] receitas:', e); return null; }
+}
+
+/* ---------- Carregamento principal ---------- */
+async function carregarTudo(){
+  const dirty = localStorage.getItem(DIRTY_KEY) === '1';
+  carregarReceitasLocais();
+
+  if(ghConfigurado()){
+    setStatusSync('☁️ Carregando...','carregando');
+    if(!dirty){
+      const remoto = await carregarReceitasGitHub();
+      if(remoto !== null){
+        receitas = remoto;
+        localStorage.setItem(CHAVE_RECEITAS, JSON.stringify(receitas));
+        localStorage.removeItem(DIRTY_KEY);
+      }
+    }
+  }
+
+  // *** DESPESAS: GitHub tem prioridade quando configurado ***
+  if(ghConfigurado()){
+    const remoto = await carregarDividasGitHub();
+    if(remoto !== null){
+      dividasPagamentos = remoto;
+      fonteDespesas = 'github';
+    } else {
+      const local = lerDividasLocal();
+      if(local){
+        dividasPagamentos = local;
+        fonteDespesas = 'localStorage';
+      } else {
+        dividasPagamentos = [];
+        fonteDespesas = 'vazio';
+      }
+    }
+  } else {
+    const local = lerDividasLocal();
+    if(local){
+      dividasPagamentos = local;
+      fonteDespesas = 'localStorage';
+    } else {
+      dividasPagamentos = [];
+      fonteDespesas = 'vazio';
+    }
+  }
+
+  if(ghConfigurado()){
+    setStatusSync(dirty ? '⚠️ Local pendente' : '✅ Carregado', dirty ? 'aviso' : 'ok');
+  } else {
+    setStatusSync('☁️ Offline','');
+  }
+
+  manutencaoReceitas();
+}
+
+async function recarregarDespesas(){
+  if(ghConfigurado()){
+    const remoto = await carregarDividasGitHub();
+    if(remoto !== null){
+      dividasPagamentos = remoto;
+      fonteDespesas = 'github';
+      return true;
+    }
+  }
+  const local = lerDividasLocal();
+  if(local){
+    dividasPagamentos = local;
+    fonteDespesas = 'localStorage';
+    return true;
+  }
+  return false;
+}
+
+/* ---------- Salvar receitas no GitHub ---------- */
+async function salvarReceitasGitHub(opts){
+  opts = opts || {};
+  if(!ghConfigurado()) return false;
+  if(syncing) return false;
+  syncing = true;
+  try{
+    setStatusSync('☁️ Salvando...','salvando');
+    const conteudo = JSON.stringify(receitas, null, 2);
+    const bytes = new Blob([conteudo]).size;
+    if(bytes > LIMITE_GITHUB_BYTES){
+      setStatusSync('⚠️ Arquivo grande','erro');
+      if(!opts.silencioso) alert('⚠️ O arquivo de receitas excede o limite.');
+      return false;
+    }
+
+    let sha = null;
+    const getR = await fetchGH(ghURLContent(ghConfig.pathReceitas) + `?ref=${encodeURIComponent(ghConfig.branch)}`);
+    if(getR.ok){ const info = await getR.json(); sha = info.sha; }
+    else if(getR.status === 404){ sha = null; }
+    else if(getR.status === 401){ setStatusSync('⚠️ Token inválido','erro'); return false; }
+    else if(getR.status === 403){ setStatusSync('⚠️ Sem permissão','erro'); return false; }
+    else { setStatusSync('⚠️ Erro ao salvar','erro'); return false; }
+
+    const body = {
+      message: `Receitas — ${new Date().toLocaleString('pt-BR')}`,
+      content: b64Enc(conteudo),
+      branch: ghConfig.branch
+    };
+    if(sha) body.sha = sha;
+
+    const putR = await fetchGH(ghURLContent(ghConfig.pathReceitas), {
+      method:'PUT',
+      headers:{ 'Content-Type':'application/json' },
+      body: JSON.stringify(body)
+    });
+
+    if(!putR.ok){
+      setStatusSync('⚠️ Erro ao salvar','erro');
+      if(!opts.silencioso) alert('❌ Não foi possível salvar no GitHub.');
+      return false;
+    }
+
+    localStorage.removeItem(DIRTY_KEY);
+    const h = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    setStatusSync(`✅ Salvo ${h}`,'ok');
+    return true;
+  }catch(e){
+    console.error('[GH] salvar receitas:', e);
+    setStatusSync('⚠️ Erro ao salvar','erro');
+    return false;
+  }finally{ syncing = false; }
+}
+function agendarSync(){
+  if(!ghConfigurado() || !ghConfig.autoSync) return;
+  if(syncTimer) clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => salvarReceitasGitHub({silencioso:true}), 2500);
+}
+function salvar(){ salvarReceitasLocais(); agendarSync(); }
+
+/* ---------- Manutenção de parcelas ---------- */
+function gerarParcelasAte(receita, ateData){
+  const diaVenc = receita.diaVencimento || '';
+  const base = ajustarDiaBase(receita.primeiroVencimento, diaVenc);
+  const valor = receita.valorBase;
+  const parcelas = [];
+  let cur = base;
+  let guard = 0;
+  while(guard++ < 1000){
+    if(ateData && cur > ateData) break;
+    parcelas.push({ id: gid(), vencimento: cur, valor: arr2(valor), status: 'em_aberto' });
+    cur = somarMeses(cur, 1);
+  }
+  return parcelas;
+}
+
+function manutencaoReceitas(){
+  let mudou = false;
+  const hj = hojeIso();
+  receitas.forEach(r => {
+    if(!Array.isArray(r.parcelas)) r.parcelas = [];
+
+    if(r.infinita){
+      let futuras = r.parcelas.filter(p => p.vencimento >= hj).length;
+      let guard = 0;
+      while(futuras < PARCELAS_MIN_FUTURAS && guard++ < 200){
+        const ultima = r.parcelas[r.parcelas.length-1];
+        const base = ultima ? ultima.vencimento : (r.primeiroVencimento || hj);
+        const proxima = somarMeses(base, 1);
+        r.parcelas.push({
+          id: gid(), vencimento: proxima,
+          valor: arr2(ultima ? ultima.valor : r.valorBase),
+          status: 'em_aberto'
+        });
+        futuras++; mudou = true;
+      }
+    } else if(r.dataFim){
+      const ultima = r.parcelas[r.parcelas.length-1];
+      if(!ultima){
+        r.parcelas = gerarParcelasAte(r, r.dataFim);
+        mudou = true;
+      } else if(ultima.vencimento < r.dataFim){
+        let cur = somarMeses(ultima.vencimento, 1);
+        let guard = 0;
+        while(cur <= r.dataFim && guard++ < 500){
+          r.parcelas.push({
+            id: gid(), vencimento: cur,
+            valor: arr2(ultima.valor), status: 'em_aberto'
+          });
+          cur = somarMeses(cur, 1);
+          mudou = true;
+        }
+      }
+    }
+  });
+  if(mudou) salvarReceitasLocais();
+}
+
+/* ---------- Renderização ---------- */
+function labelStatusParcelaReceita(p){
+  if(p.status === 'recebido') return {classe:'recebido', txt:'✅ Recebido'};
+  if(p.vencimento < hojeIso()) return {classe:'atrasado', txt:'⚠️ Atrasada'};
+  return {classe:'aberto', txt:'⏳ Em aberto'};
+}
+
+function parceReceitaHTML(receita, parcela){
+  const info = labelStatusParcelaReceita(parcela);
+  const tipo = TIPO_LABEL[receita.tipo] || 'Outro';
+  const podeReceber = parcela.status !== 'recebido';
+  return `<div class="item-receita st-${info.classe}" data-receita="${receita.id}" data-parcela="${parcela.id}">
+    <div class="item-linha1">
+      <div class="item-info">
+        <div class="fonte">📥 ${esc(receita.fonte)}</div>
+        <div class="meta">${esc(tipo)} · vence <b>${fmtBR(parcela.vencimento)}</b> · <span class="selo-status-receita ${info.classe}">${info.txt}</span></div>
+      </div>
+      <div class="item-valor">
+        <div class="num">${fmtBRL(parcela.valor)}</div>
+        <div class="sublabel">${receita.infinita ? '∞ contínua' : (receita.dataFim ? 'até '+fmtBR(receita.dataFim) : '')}</div>
+      </div>
+    </div>
+    <div class="item-linha2">
+      ${podeReceber
+        ? `<button type="button" class="btn-acao-receita receber" data-acao="marcarRecebido">✅ Marcar recebido</button>`
+        : `<button type="button" class="btn-acao-receita desfazer" data-acao="desmarcarRecebido">↩ Desfazer recebimento</button>`
+      }
+      <button type="button" class="btn-acao-receita editar" data-acao="editarValor">✏️ Editar valor</button>
+      <button type="button" class="btn-acao-receita excluir" data-acao="excluirParcela">🗑 Excluir</button>
+    </div>
+  </div>`;
+}
+
+function despesaHTML(divida, parcela){
+  const st = normalizarStatus(parcela.status);
+  const statusMap = {
+    pago: {classe:'pago', txt:'✅ Pago'},
+    em_atraso: {classe:'atrasado', txt:'⚠️ Em atraso'},
+    em_aberto: {classe:'aberto', txt:'⏳ Em aberto'},
+    outros: {classe:'outros', txt:'◆ Outros'}
+  };
+  const s = statusMap[st] || statusMap.em_aberto;
+  const desc = parcela.descricaoOverride || divida.descricao;
+  return `<div class="item-despesa st-${st}">
+    <div class="info">
+      <div class="fonte">${esc(desc)}</div>
+      <div class="meta">vence ${fmtBR(parcela.vencimento)} · parcela ${parcela.numero || '?'}</div>
+    </div>
+    <div class="valor-area">
+      <div class="valor">${fmtBRL(parcela.valor)}</div>
+      <div class="selo ${s.classe}">${s.txt}</div>
+    </div>
+  </div>`;
+}
+
+function parcelasReceitaNoMes(mes){
+  const out = [];
+  receitas.forEach(r => {
+    r.parcelas.forEach(p => {
+      if(mesDeIso(p.vencimento) === mes) out.push({receita:r, parcela:p});
+    });
+  });
+  out.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento));
+  return out;
+}
+
+function parcelasDespesaNoMes(mes){
+  const out = [];
+  dividasPagamentos.forEach(d => {
+    if(!Array.isArray(d.parcelas)) return;
+    d.parcelas.forEach(p => {
+      if(p.vencimento && mesDeIso(p.vencimento) === mes) out.push({divida:d, parcela:p});
+    });
+  });
+  return out;
+}
+
+function agruparDespesasPorCredor(itens){
+  const mapa = new Map();
+  itens.forEach(({divida, parcela}) => {
+    const credor = parcela.credorOverride || divida.credor || 'Outros';
+    if(!mapa.has(credor)) mapa.set(credor, { credor, itens: [], total: 0 });
+    const g = mapa.get(credor);
+    g.itens.push({divida, parcela});
+    g.total += Number(parcela.valor || 0);
+  });
+  // Dentro de cada grupo, ordena por vencimento
+  const grupos = Array.from(mapa.values());
+  grupos.forEach(g => {
+    g.itens.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento));
+  });
+  // Grupos ordenados por total decrescente
+  grupos.sort((a,b) => b.total - a.total);
+  return grupos;
+}
+
+function renderTelaPrincipal(){
+  const ano = mesRef.getFullYear(), m = mesRef.getMonth();
+  const mes = `${ano}-${String(m+1).padStart(2,'0')}`;
+  document.getElementById('tituloMes').textContent = `${nomeMes(m)} ${ano}`;
+
+  const recs = parcelasReceitaNoMes(mes);
+  const dess = parcelasDespesaNoMes(mes);
+
+  // Totais
+  let recebido = 0, pago = 0, aReceber = 0, aPagar = 0;
+  recs.forEach(({parcela}) => {
+    if(parcela.status === 'recebido') recebido += Number(parcela.valor||0);
+    else aReceber += Number(parcela.valor||0);
+  });
+  dess.forEach(({parcela}) => {
+    const st = normalizarStatus(parcela.status);
+    if(st === 'pago') pago += Number(parcela.valor||0);
+    else if(st === 'em_aberto' || st === 'em_atraso') aPagar += Number(parcela.valor||0);
+  });
+  const saldo = recebido - pago;
+  const saldoPrevisto = (recebido + aReceber) - (pago + aPagar);
+
+  const saldoEl = document.getElementById('saldoValor');
+  saldoEl.textContent = (saldo >= 0 ? '+ ' : '− ') + fmtBRL(Math.abs(saldo));
+  saldoEl.className = 'valor ' + (saldo >= 0 ? 'positivo' : 'negativo');
+
+  const subtEl = document.getElementById('saldoSubtitulo');
+  if(saldoPrevisto !== saldo){
+    const prevSinal = saldoPrevisto >= 0 ? '+' : '−';
+    subtEl.textContent = `Se tudo vencer: ${prevSinal} ${fmtBRL(Math.abs(saldoPrevisto))}`;
+  } else if(recs.length || dess.length){
+    subtEl.textContent = `Recebido − Pago`;
+  } else {
+    subtEl.textContent = `Sem movimentações neste mês`;
+  }
+
+  document.getElementById('totalRecebido').textContent = fmtBRL(recebido);
+  document.getElementById('totalPago').textContent = fmtBRL(pago);
+  document.getElementById('totalAReceber').textContent = fmtBRL(aReceber);
+  document.getElementById('totalAPagar').textContent = fmtBRL(aPagar);
+
+  document.getElementById('contReceitas').textContent = recs.length;
+  document.getElementById('contDespesas').textContent = dess.length;
+
+  // Aviso de fonte
+  const aviso = document.getElementById('avisoFonte');
+  if(fonteDespesas === 'vazio'){
+    aviso.innerHTML = `<div class="aviso-fonte">
+      Sem despesas carregadas. Abra o app de pagamentos no mesmo domínio ou configure o GitHub
+      em <b>⚙️ Configurações</b> para ver as despesas aqui.
+    </div>`;
+  } else if(fonteDespesas === 'localStorage'){
+    aviso.innerHTML = `<div class="aviso-fonte" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;border-left-color:var(--verde);color:#14532d">
+      Despesas lidas do <b>armazenamento local</b>. Para garantir os status mais recentes em qualquer aparelho, configure o GitHub.
+    </div>`;
+  } else {
+    aviso.innerHTML = '';
+  }
+
+  // Receitas
+  const contRec = document.getElementById('listaReceitas');
+  if(recs.length){
+    contRec.innerHTML = recs.map(({receita, parcela}) => parceReceitaHTML(receita, parcela)).join('');
+  } else {
+    contRec.innerHTML = `<div class="lista-vazia">
+      Nenhuma receita neste mês. 🎉
+      <br><br>
+      <button type="button" class="btn-vazio" id="btnVazioNova">
+        ➕ Cadastrar primeira receita
+      </button>
+    </div>`;
+    const btnVazio = document.getElementById('btnVazioNova');
+    if(btnVazio) btnVazio.addEventListener('click', abrirNovaReceita);
+  }
+
+  // Despesas (agrupadas por credor)
+  const contDes = document.getElementById('listaDespesas');
+  if(dess.length){
+    const grupos = agruparDespesasPorCredor(dess);
+    contDes.innerHTML = grupos.map(g => `
+      <div class="grupo-despesa">
+        <div class="grupo-cabecalho">
+          <span>📤 ${esc(g.credor)}</span>
+          <span class="grupo-total">${fmtBRL(g.total)}</span>
+          <span class="qtd-badge">${g.itens.length}x</span>
+        </div>
+        <div class="itens">
+          ${g.itens.map(({divida, parcela}) => despesaHTML(divida, parcela)).join('')}
+        </div>
+      </div>
+    `).join('');
+  } else {
+    contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>';
+  }
+}
+
+function renderTodasReceitas(){
+  const c = document.getElementById('listaTodasReceitas');
+  if(!receitas.length){
+    c.innerHTML = '<div class="lista-vazia">Nenhuma receita cadastrada ainda.</div>';
+    return;
+  }
+  c.innerHTML = receitas.map(r => {
+    const recebidas = r.parcelas.filter(p => p.status === 'recebido');
+    const totalRecebido = recebidas.reduce((s,p) => s + Number(p.valor||0), 0);
+    const totalPrevisto = r.parcelas.reduce((s,p) => s + Number(p.valor||0), 0);
+    const tipo = TIPO_LABEL[r.tipo] || 'Outro';
+    const periodo = r.infinita
+      ? '∞ contínua'
+      : (r.dataFim ? `até ${fmtBR(r.dataFim)}` : '—');
+    return `<div class="item-receita-completa" data-receita="${r.id}">
+      <div class="cabecalho">
+        <div class="titulo-info">
+          <b>${esc(r.fonte)}</b>
+          <small>${esc(tipo)} · desde ${fmtBR(r.primeiroVencimento)}</small>
+        </div>
+      </div>
+      <div class="detalhes-grade">
+        <div class="det"><span>Valor base</span><strong>${fmtBRL(r.valorBase)}</strong></div>
+        <div class="det"><span>Parcelas</span><strong>${r.parcelas.length}</strong></div>
+        <div class="det"><span>Recebido</span><strong style="color:var(--verde-esc)">${fmtBRL(totalRecebido)}</strong></div>
+        <div class="det"><span>Previsto total</span><strong>${fmtBRL(totalPrevisto)}</strong></div>
+        <div class="det"><span>Período</span><strong>${periodo}</strong></div>
+      </div>
+      <div class="rodape">
+        <button type="button" class="btn-acao-receita editar" data-acao="editarReceita">✏️ Editar</button>
+        <button type="button" class="btn-acao-receita excluir" data-acao="excluirReceita">🗑 Excluir receita</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------- Navegação ---------- */
+function mostrarTela(id){
+  ['fluxo','nova','todas','config'].forEach(t => {
+    document.getElementById('tela-'+t).classList.toggle('escondido', t !== id);
+  });
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ---------- Formulário ---------- */
+const formReceita = document.getElementById('formReceita');
+const campoFonte = document.getElementById('campoFonte');
+const campoTipo = document.getElementById('campoTipo');
+const campoValorBase = document.getElementById('campoValorBase');
+const campoPrimeiro = document.getElementById('campoPrimeiro');
+const campoDiaVenc = document.getElementById('campoDiaVenc');
+const campoInfinita = document.getElementById('campoInfinita');
+const campoDataFim = document.getElementById('campoDataFim');
+const labelInfinita = document.getElementById('labelInfinita');
+const blocoDataFim = document.getElementById('blocoDataFim');
+const tituloForm = document.getElementById('tituloForm');
+
+(function(){
+  for(let i=1;i<=31;i++){
+    const o=document.createElement('option'); o.value=i; o.textContent=`Dia ${i}`;
+    campoDiaVenc.appendChild(o);
+  }
+})();
+
+function alternarInfinita(){
+  const inf = campoInfinita.checked;
+  labelInfinita.classList.toggle('ativo', inf);
+  blocoDataFim.classList.toggle('escondido', inf);
+  if(inf) campoDataFim.removeAttribute('required');
+  else campoDataFim.setAttribute('required','');
+}
+campoInfinita.addEventListener('change', alternarInfinita);
+
+function limparForm(){
+  formReceita.reset();
+  campoInfinita.checked = false;
+  campoDiaVenc.value = '';
+  alternarInfinita();
+  campoPrimeiro.value = hojeIso();
+}
+function abrirNovaReceita(){
+  editandoId = null;
+  limparForm();
+  tituloForm.innerHTML = '➕ Nova receita';
+  document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar';
+  mostrarTela('nova');
+  setTimeout(()=>campoFonte.focus(), 200);
+}
+function abrirEdicaoReceita(id){
+  const r = receitas.find(x => x.id === id);
+  if(!r) return;
+  editandoId = id;
+  limparForm();
+  campoFonte.value = r.fonte || '';
+  campoTipo.value = r.tipo || 'aluguel';
+  campoValorBase.value = r.valorBase || '';
+  campoPrimeiro.value = r.primeiroVencimento || hojeIso();
+  campoDiaVenc.value = r.diaVencimento || '';
+  campoInfinita.checked = !!r.infinita;
+  campoDataFim.value = r.dataFim || '';
+  alternarInfinita();
+  tituloForm.innerHTML = '✏️ Editar receita';
+  document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar alterações';
+  mostrarTela('nova');
+  setTimeout(()=>campoFonte.focus(), 200);
+}
+
+formReceita.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const fonte = campoFonte.value.trim();
+  const tipo = campoTipo.value;
+  const valorBase = arr2(parseFloat(campoValorBase.value));
+  const primeiro = campoPrimeiro.value;
+  const diaVenc = campoDiaVenc.value;
+  const infinita = campoInfinita.checked;
+  const dataFim = infinita ? null : campoDataFim.value;
+
+  if(!fonte){ alert('Informe a fonte pagadora.'); campoFonte.focus(); return; }
+  if(!valorBase || valorBase <= 0){ alert('Valor base inválido.'); campoValorBase.focus(); return; }
+  if(!primeiro){ alert('Informe o primeiro vencimento.'); campoPrimeiro.focus(); return; }
+  if(!infinita && !dataFim){ alert('Informe a data fim do contrato (ou marque como infinita).'); campoDataFim.focus(); return; }
+  if(!infinita && dataFim < primeiro){
+    alert('A data fim deve ser posterior ao primeiro vencimento.');
+    campoDataFim.focus(); return;
+  }
+
+  const base = ajustarDiaBase(primeiro, diaVenc);
+
+  if(editandoId){
+    const r = receitas.find(x => x.id === editandoId);
+    if(!r) return;
+    r.fonte = fonte;
+    r.tipo = tipo;
+    r.diaVencimento = diaVenc;
+    r.infinita = infinita;
+    r.dataFim = dataFim;
+
+    if(!infinita){
+      r.parcelas = r.parcelas.filter(p => {
+        if(p.status === 'recebido') return true;
+        return p.vencimento <= dataFim;
+      });
+      const ultima = r.parcelas
+        .filter(p => p.status === 'recebido' || p.vencimento <= dataFim)
+        .sort((a,b)=>a.vencimento.localeCompare(b.vencimento))
+        .pop();
+      if(ultima && ultima.vencimento < dataFim){
+        let cur = somarMeses(ultima.vencimento, 1);
+        let guard = 0;
+        while(cur <= dataFim && guard++ < 500){
+          r.parcelas.push({
+            id: gid(), vencimento: cur,
+            valor: arr2(r.valorBase), status: 'em_aberto'
+          });
+          cur = somarMeses(cur, 1);
+        }
+      }
+    }
+    r.parcelas.sort((a,b)=>a.vencimento.localeCompare(b.vencimento));
+
+    salvar();
+    mostrarTela('todas');
+    renderTodasReceitas();
+    return;
+  }
+
+  const nova = {
+    id: gid(),
+    fonte, tipo,
+    valorBase,
+    primeiroVencimento: base,
+    diaVencimento: diaVenc,
+    infinita,
+    dataFim: infinita ? null : dataFim,
+    criadoEm: new Date().toISOString(),
+    parcelas: []
+  };
+
+  if(infinita){
+    let cur = base;
+    for(let i=0;i<PARCELAS_INICIAIS;i++){
+      nova.parcelas.push({
+        id: gid(), vencimento: cur,
+        valor: arr2(valorBase), status: 'em_aberto'
+      });
+      cur = somarMeses(cur, 1);
+    }
+  } else {
+    let cur = base;
+    let guard = 0;
+    while(cur <= dataFim && guard++ < 500){
+      nova.parcelas.push({
+        id: gid(), vencimento: cur,
+        valor: arr2(valorBase), status: 'em_aberto'
+      });
+      cur = somarMeses(cur, 1);
+    }
+  }
+
+  receitas.push(nova);
+  salvar();
+
+  const dt = isoParaData(base);
+  mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+
+document.getElementById('btnDescartar').addEventListener('click', () => {
+  if(!confirm('Descartar?')) return;
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+document.getElementById('voltarForm').addEventListener('click', () => {
+  if(!confirm('Voltar?')) return;
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+
+/* ---------- Ações em receitas ---------- */
+document.getElementById('listaReceitas').addEventListener('click', async (e) => {
+  const b = e.target.closest('[data-acao]');
+  if(!b) return;
+  const card = b.closest('[data-receita]');
+  if(!card) return;
+  const recId = card.dataset.receita;
+  const parcId = card.dataset.parcela;
+  const r = receitas.find(x => x.id === recId);
+  if(!r) return;
+  const p = r.parcelas.find(x => x.id === parcId);
+  if(!p) return;
+
+  const acao = b.dataset.acao;
+
+  if(acao === 'marcarRecebido'){
+    p.status = 'recebido';
+    salvar();
+    renderTelaPrincipal();
+    return;
+  }
+  if(acao === 'desmarcarRecebido'){
+    if(!confirm('Desfazer o recebimento desta parcela?')) return;
+    p.status = 'em_aberto';
+    salvar();
+    renderTelaPrincipal();
+    return;
+  }
+  if(acao === 'editarValor'){
+    abrirEdicaoValor(r, p);
+    return;
+  }
+  if(acao === 'excluirParcela'){
+    const esc = await perguntarEscopo(r, p, {}, {modo:'excluir'});
+    if(esc === 'cancelar') return;
+    aplicarExclusao(r, p, esc);
+    salvar();
+    renderTelaPrincipal();
+    return;
+  }
+});
+
+/* ---------- Edição de valor (modal) ---------- */
+function abrirEdicaoValor(r, p){
+  edicaoValorPendente = { receita: r, parcela: p };
+  document.getElementById('infoEdicaoValor').innerHTML =
+    `<b>${esc(r.fonte)}</b><br>` +
+    `Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual: <b>${fmtBRL(p.valor)}</b>`;
+  document.getElementById('inputNovoValor').value = Number(p.valor).toFixed(2);
+  const m = document.getElementById('modalEditarValor');
+  m.classList.remove('escondido');
+  m.style.display = 'flex';
+  setTimeout(() => {
+    const inp = document.getElementById('inputNovoValor');
+    inp.focus();
+    inp.select();
+  }, 100);
+}
+
+function fecharModalEdicaoValor(){
+  const m = document.getElementById('modalEditarValor');
+  m.classList.add('escondido');
+  m.style.display = '';
+  edicaoValorPendente = null;
+}
+
+document.getElementById('btnCancelarValor').addEventListener('click', fecharModalEdicaoValor);
+document.getElementById('modalEditarValor').addEventListener('click', (e) => {
+  if(e.target.id === 'modalEditarValor') fecharModalEdicaoValor();
+});
+
+document.getElementById('btnAplicarValor').addEventListener('click', async () => {
+  if(!edicaoValorPendente) return;
+  const inp = document.getElementById('inputNovoValor');
+  const raw = String(inp.value).replace(',', '.');
+  const v = arr2(parseFloat(raw));
+  if(!v || v <= 0){ alert('Valor inválido.'); inp.focus(); return; }
+
+  const { receita: r, parcela: p } = edicaoValorPendente;
+  if(v === Number(p.valor)){ fecharModalEdicaoValor(); return; }
+
+  fecharModalEdicaoValor();
+
+  const mud = { valor: v };
+  const esc = await perguntarEscopo(r, p, mud);
+  if(esc === 'cancelar') return;
+
+  aplicarMudancaValor(r, p, v, esc);
+  salvar();
+  renderTelaPrincipal();
+});
+
+// enter no input
+document.getElementById('inputNovoValor').addEventListener('keydown', (e) => {
+  if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('btnAplicarValor').click(); }
+});
+
+function aplicarMudancaValor(r, p, novoValor, escopo){
+  const afetadas = calcularAfetadas(r, p, escopo);
+  afetadas.forEach(x => { x.valor = arr2(novoValor); });
+  if(escopo === 'futuras' || escopo === 'todas'){
+    r.valorBase = arr2(novoValor);
+  }
+}
+
+function aplicarExclusao(r, p, escopo){
+  if(escopo === 'todas'){
+    receitas = receitas.filter(x => x.id !== r.id);
+  } else if(escopo === 'futuras'){
+    r.parcelas = r.parcelas.filter(x => x.vencimento < p.vencimento || x.status === 'recebido');
+    if(r.parcelas.length === 0) receitas = receitas.filter(x => x.id !== r.id);
+  } else {
+    r.parcelas = r.parcelas.filter(x => x.id !== p.id);
+    if(r.parcelas.length === 0) receitas = receitas.filter(x => x.id !== r.id);
+  }
+}
+
+/* ---------- Modal de escopo ---------- */
+function abrirModal(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  m.classList.remove('escondido');
+  m.style.display = 'flex';
+}
+function fecharModal(id){
+  const m = document.getElementById(id);
+  if(!m) return;
+  m.classList.add('escondido');
+  m.style.display = '';
+}
+
+function calcularAfetadas(r, p, escopo){
+  if(escopo === 'apenas') return [p];
+  if(escopo === 'todas') return r.parcelas.slice();
+  if(escopo === 'futuras') return r.parcelas.filter(x => x.vencimento >= p.vencimento);
+  return [p];
+}
+
+function perguntarEscopo(r, p, mud, opts){
+  opts = opts || {};
+  const modo = opts.modo || 'aplicar';
+  return new Promise(resolve => {
+    resolverEscopo = resolve;
+    const emoji = modo === 'excluir' ? '🗑' : '🎯';
+    const titulo = modo === 'excluir' ? 'O que excluir?' : 'Onde aplicar?';
+    document.getElementById('escopoEmoji').textContent = emoji;
+    document.getElementById('escopoTitulo').textContent = titulo;
+
+    if(modo === 'excluir'){
+      document.getElementById('textoEscopo').innerHTML =
+        `Parcela de <b>${fmtBR(p.vencimento)}</b> · <b>${fmtBRL(p.valor)}</b><br>` +
+        `Receita: <b>${esc(r.fonte)}</b><br><br>Escolha o alcance da exclusão:`;
+      document.getElementById('subApenas').textContent = 'Exclui apenas esta parcela';
+      document.getElementById('subFuturas').textContent = 'Exclui esta e todas as posteriores';
+      document.getElementById('subTodas').textContent = 'Exclui todas as parcelas desta receita';
+    } else {
+      document.getElementById('textoEscopo').innerHTML =
+        `Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual <b>${fmtBRL(p.valor)}</b><br>` +
+        `Receita: <b>${esc(r.fonte)}</b><br><br>` +
+        `Novo valor: <b>${fmtBRL(mud.valor)}</b><br><br>Aplicar a:`;
+      document.getElementById('subApenas').textContent = 'Altera apenas esta parcela';
+      document.getElementById('subFuturas').textContent = 'Altera esta e todas as posteriores (reajuste)';
+      document.getElementById('subTodas').textContent = 'Altera todas as parcelas (inclusive recebidas)';
+    }
+    abrirModal('modalEscopo');
+  });
+}
+
+document.getElementById('modalEscopo').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-escopo]');
+  if(!b){
+    if(e.target.id === 'modalEscopo' && resolverEscopo){
+      fecharModal('modalEscopo');
+      resolverEscopo('cancelar');
+      resolverEscopo = null;
+    }
+    return;
+  }
+  fecharModal('modalEscopo');
+  if(resolverEscopo){
+    resolverEscopo(b.dataset.escopo);
+    resolverEscopo = null;
+  }
+});
+
+/* ---------- Todas as receitas ---------- */
+document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-acao]');
+  if(!b) return;
+  const card = b.closest('[data-receita]');
+  if(!card) return;
+  const id = card.dataset.receita;
+  const r = receitas.find(x => x.id === id);
+  if(!r) return;
+
+  if(b.dataset.acao === 'editarReceita'){ abrirEdicaoReceita(id); return; }
+  if(b.dataset.acao === 'excluirReceita'){
+    const msg = r.infinita
+      ? `Excluir a receita "${r.fonte}" (infinita) e todas as ${r.parcelas.length} parcelas?`
+      : `Excluir a receita "${r.fonte}" e todas as ${r.parcelas.length} parcelas?`;
+    if(!confirm(msg)) return;
+    receitas = receitas.filter(x => x.id !== id);
+    salvar();
+    renderTodasReceitas();
+    return;
+  }
+});
+
+/* ---------- Navegação de mês ---------- */
+function mudarMes(delta){
+  mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
+  try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
+  renderTelaPrincipal();
+}
+document.getElementById('mesAnterior').addEventListener('click', () => mudarMes(-1));
+document.getElementById('mesProximo').addEventListener('click', () => mudarMes(1));
+
+/* ---------- Botões principais ---------- */
+document.getElementById('btnNovaReceita').addEventListener('click', abrirNovaReceita);
+document.getElementById('btnNovaReceita2').addEventListener('click', abrirNovaReceita);
+document.getElementById('btnTodasReceitas').addEventListener('click', () => {
+  renderTodasReceitas();
+  mostrarTela('todas');
+});
+document.getElementById('voltarTodas').addEventListener('click', () => {
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+
+/* ---------- Config ---------- */
+const elOwner = document.getElementById('ghOwner');
+const elRepo = document.getElementById('ghRepo');
+const elBranch = document.getElementById('ghBranch');
+const elPathD = document.getElementById('ghPathDividas');
+const elPathR = document.getElementById('ghPathReceitas');
+const elToken = document.getElementById('ghToken');
+const elAuto = document.getElementById('ghAutoSync');
+
+function atualizarConfigUI(){
+  elOwner.value = ghConfig.owner || '';
+  elRepo.value = ghConfig.repo || 'pagamentos';
+  elBranch.value = ghConfig.branch || 'main';
+  elPathD.value = ghConfig.pathDividas || 'dados/dividas.json';
+  elPathR.value = ghConfig.pathReceitas || 'dados/receitas.json';
+  elToken.value = ghConfig.token || '';
+  elAuto.checked = !!ghConfig.autoSync;
+  const status = document.getElementById('configStatus');
+  if(ghConfigurado()){
+    status.className = 'config-status-cartao ok';
+    status.querySelector('.emoji').textContent = '✅';
+    document.getElementById('configStatusTitulo').textContent = 'Configurado';
+    document.getElementById('configStatusDescricao').textContent =
+      `${ghConfig.owner}/${ghConfig.repo} — ${ghConfig.pathReceitas}`;
+  } else {
+    status.className = 'config-status-cartao aviso';
+    status.querySelector('.emoji').textContent = '⚠️';
+    document.getElementById('configStatusTitulo').textContent = 'Não configurado';
+    document.getElementById('configStatusDescricao').textContent =
+      'Sem sincronização — leitura local apenas.';
+  }
+}
+function abrirConfig(){
+  atualizarConfigUI();
+  mostrarTela('config');
+}
+document.getElementById('btnConfig').addEventListener('click', abrirConfig);
+document.getElementById('voltarConfig').addEventListener('click', () => {
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+
+document.getElementById('btnSalvarConfig').addEventListener('click', () => {
+  const ow = elOwner.value.trim();
+  const rp = elRepo.value.trim() || 'pagamentos';
+  const br = elBranch.value.trim() || 'main';
+  const pd = elPathD.value.trim() || 'dados/dividas.json';
+  const pr = elPathR.value.trim() || 'dados/receitas.json';
+  const tk = elToken.value.trim();
+  if(!ow){ alert('Informe o usuário GitHub.'); elOwner.focus(); return; }
+  if(!tk){ alert('Informe o token.'); elToken.focus(); return; }
+  ghConfig.owner = ow;
+  ghConfig.repo = rp;
+  ghConfig.branch = br;
+  ghConfig.pathDividas = pd;
+  ghConfig.pathReceitas = pr;
+  ghConfig.token = tk;
+  ghConfig.autoSync = elAuto.checked;
+  salvarGH();
+  atualizarConfigUI();
+  setStatusSync('☁️ Configurado','ok');
+  (async () => {
+    await carregarTudo();
+    renderTelaPrincipal();
+  })();
+  salvarReceitasGitHub();
+});
+
+document.getElementById('btnTestar').addEventListener('click', async () => {
+  const ow = elOwner.value.trim();
+  const rp = elRepo.value.trim();
+  const tk = elToken.value.trim();
+  const br = elBranch.value.trim() || 'main';
+  const pd = elPathD.value.trim() || 'dados/dividas.json';
+  const pr = elPathR.value.trim() || 'dados/receitas.json';
+  if(!ow || !rp || !tk){ alert('Preencha usuário, repositório e token.'); return; }
+  const btn = document.getElementById('btnTestar');
+  const orig = btn.textContent;
+  btn.textContent = '⏳ Testando...';
+  btn.disabled = true;
+  try{
+    const r = await fetch(`https://api.github.com/repos/${ow}/${rp}`, {
+      headers: {
+        'Authorization': `Bearer ${tk}`,
+        'Accept': 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28'
+      }
+    });
+    if(!r.ok){
+      alert(r.status === 401 ? '❌ Token inválido.' :
+            r.status === 404 ? '❌ Repositório não encontrado.' :
+            '❌ Erro ' + r.status);
+      return;
+    }
+    const info = await r.json();
+    let msg = `✅ Conectado a ${info.full_name}\nPush: ${info.permissions?.push ? 'SIM' : 'NÃO'}\n\n`;
+    const rd = await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pd}?ref=${br}`, {
+      headers: {'Authorization': `Bearer ${tk}`,'Accept':'application/vnd.github+json'}
+    });
+    msg += rd.status === 200 ? `📄 ${pd} existe\n` : `📄 ${pd} ainda não existe\n`;
+    const rr = await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pr}?ref=${br}`, {
+      headers: {'Authorization': `Bearer ${tk}`,'Accept':'application/vnd.github+json'}
+    });
+    msg += rr.status === 200 ? `📄 ${pr} existe` : `📄 ${pr} ainda não existe`;
+    alert(msg);
+  }catch(e){
+    alert('❌ Rede: ' + e.message);
+  }finally{
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+});
+
+document.getElementById('btnRecarregarDespesas').addEventListener('click', async () => {
+  const btn = document.getElementById('btnRecarregarDespesas');
+  const orig = btn.textContent;
+  btn.textContent = '⏳ Recarregando...';
+  btn.disabled = true;
+  try{
+    const ok = await recarregarDespesas();
+    renderTelaPrincipal();
+    if(!ok) alert('Não foi possível recarregar. Verifique a configuração do GitHub.');
+  } finally {
+    btn.textContent = orig;
+    btn.disabled = false;
+  }
+});
+
+/* ---------- Inicialização ---------- */
+(async function init(){
+  carregarGH();
+  try{
+    const raw = localStorage.getItem(MES_KEY);
+    if(raw){
+      const d = isoParaData(raw);
+      if(!isNaN(d.getTime())) mesRef = new Date(d.getFullYear(), d.getMonth(), 1);
+    }
+  }catch(e){}
+
+  await carregarTudo();
+  atualizarConfigUI();
+  renderTelaPrincipal();
+
+  if(localStorage.getItem(DIRTY_KEY) === '1' && ghConfigurado()){
+    salvarReceitasGitHub({silencioso:true});
+  }
+})();
+
+/* ---------- Recarregamento ao voltar para a aba ---------- */
+let ultimaRecargaVisible = 0;
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'visible'){
+    const agora = Date.now();
+    // Evita recarregar várias vezes em curto intervalo
+    if(agora - ultimaRecargaVisible < 3000) return;
+    ultimaRecargaVisible = agora;
+    recarregarDespesas().then(ok => {
+      if(ok){
+        // Não exibe toast, apenas atualiza a tela
+        renderTelaPrincipal();
+      }
+    });
+  }
+  if(document.visibilityState === 'hidden'){
+    if(ghConfigurado() && ghConfig.autoSync){
+      if(syncTimer){ clearTimeout(syncTimer); syncTimer = null; }
+      salvarReceitasGitHub({silencioso:true});
+    }
+  }
+});
+</script>
+</body>
+</html>
