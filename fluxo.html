@@ -10,12 +10,10 @@
   :root{
     color-scheme: light only;
     --fundo:#f8fafc;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
-    /* Verde: mantido só para status semântico (pago/recebido/positivo) */
     --verde:#16a34a;--verde-esc:#15803d;--verde-bg:#dcfce7;--verde-claro:#f0fdf4;
     --azul:#2563eb;--azul-esc:#1d4ed8;--azul-bg:#eff6ff;--azul-claro:#dbeafe;
     --vermelho:#dc2626;--vermelho-bg:#fee2e2;--vermelho-claro:#fef2f2;
     --laranja:#f97316;--laranja-esc:#ea580c;--laranja-bg:#ffedd5;
-    /* Marca: azul suave (substitui o antigo teal) */
     --marca:#3b82f6;
     --marca-esc:#2563eb;
     --marca-mais-esc:#1d4ed8;
@@ -85,7 +83,6 @@
     width:6px;background:linear-gradient(180deg,var(--marca),var(--marca-esc));
     border-radius:4px}
 
-  /* Botão Ver Fluxo Cronológico - topo da página */
   .btn-ver-fluxo{
     width:100%;
     margin-bottom:14px;
@@ -313,50 +310,262 @@
     transition:.15s;margin-top:10px;width:100%}
   .btn-secundario:hover{background:#e2e8f0}
 
-  .form-cartao{background:#fff;border:2px solid var(--linha);border-radius:var(--raio);
-    padding:16px;box-shadow:0 2px 8px rgba(15,23,42,.06);margin-bottom:14px}
-  .grade-form{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
-  .campo{display:flex;flex-direction:column;gap:5px;font-size:.82rem;font-weight:900;
-    color:#0f172a;letter-spacing:.2px}
-  .campo input,.campo select{font:inherit;font-weight:500;color:var(--texto);
-    background:#fff;border:2px solid var(--linha);border-radius:8px;
-    padding:10px 12px;font-size:.92rem;width:100%;min-width:0;outline:none;
-    transition:.15s;color-scheme:light}
-  .campo input:focus,.campo select:focus{border-color:var(--marca);
-    box-shadow:0 0 0 3px rgba(59,130,246,.18)}
+  /* =========================================================
+     FORMULÁRIO NOVA / EDITAR RECEITA — visual leve
+     ========================================================= */
+  .form-cartao{
+    background:#ffffff;
+    border:1px solid #e2e8f0;
+    border-radius:16px;
+    padding:22px 20px;
+    box-shadow:0 1px 3px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.05);
+    margin-bottom:16px;
+  }
+
+  .form-intro{
+    background:linear-gradient(135deg,#eff6ff,#e0f2fe);
+    border:1.5px solid #bae6fd;
+    border-left:4px solid #3b82f6;
+    border-radius:10px;
+    padding:13px 15px;
+    font-size:.84rem;
+    color:#1e40af;
+    font-weight:600;
+    margin-bottom:22px;
+    line-height:1.55;
+  }
+  .form-intro .obrig{color:#dc2626;font-weight:900}
+
+  .grade-form{
+    display:grid;
+    gap:18px;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  }
+
+  .campo{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    font-size:.78rem;
+    font-weight:700;
+    color:#475569;
+    letter-spacing:.2px;
+    margin:0;
+  }
+  .campo-label{
+    display:block;
+    color:#334155;
+    font-size:.74rem;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:.7px;
+    line-height:1.3;
+  }
+  .campo-label .obrig{color:#dc2626;font-weight:900}
   .campo.largura-total{grid-column:1 / -1}
-  .campo .dica{font-weight:500;color:var(--suave);font-size:.72rem}
+  .campo .dica{
+    font-weight:500;
+    color:#94a3b8;
+    font-size:.72rem;
+    margin-top:1px;
+    line-height:1.4;
+  }
 
-  .check-infinita{display:flex;align-items:flex-start;gap:12px;
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
-    border:2px solid #93c5fd;border-radius:12px;padding:12px 14px;
-    margin-top:6px;cursor:pointer;transition:.15s;grid-column:1 / -1}
-  .check-infinita:hover{border-color:var(--marca)}
-  .check-infinita input{width:22px;height:22px;margin:0;flex-shrink:0;
-    accent-color:var(--marca);cursor:pointer}
+  /* ============== INPUTS: FORÇA VISUAL CLARO ============== */
+  .campo input,
+  .campo select,
+  input[type="text"],
+  input[type="number"],
+  input[type="date"],
+  input[type="password"],
+  input[type="search"],
+  select{
+    font:inherit;
+    font-weight:500;
+    color:#0f172a !important;
+    -webkit-text-fill-color:#0f172a !important;
+    background-color:#ffffff !important;
+    background-image:none !important;
+    border:1.5px solid #cbd5e1;
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:.92rem;
+    width:100%;
+    min-width:0;
+    outline:none;
+    transition:border-color .15s, box-shadow .15s, background-color .15s;
+    color-scheme:light !important;
+    forced-color-adjust:none !important;
+    -webkit-appearance:none;
+    -moz-appearance:none;
+    appearance:none;
+    line-height:1.4;
+  }
+  .campo input::placeholder{
+    color:#94a3b8;
+    opacity:1;
+    -webkit-text-fill-color:#94a3b8;
+    font-weight:400;
+  }
+  .campo input:hover,
+  .campo select:hover{
+    border-color:#94a3b8;
+    background-color:#ffffff !important;
+  }
+  .campo input:focus,
+  .campo select:focus{
+    border-color:#3b82f6;
+    box-shadow:0 0 0 4px rgba(59,130,246,.12);
+    background-color:#ffffff !important;
+  }
+  .campo select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat:no-repeat !important;
+    background-position:right 12px center !important;
+    background-size:12px !important;
+    padding-right:36px !important;
+    cursor:pointer;
+  }
+
+  /* Fix autofill (fundo preto em WebView) */
+  .campo input:-webkit-autofill,
+  .campo input:-webkit-autofill:hover,
+  .campo input:-webkit-autofill:focus,
+  .campo input:-webkit-autofill:active{
+    -webkit-box-shadow:0 0 0 1000px #ffffff inset !important;
+    -webkit-text-fill-color:#0f172a !important;
+    caret-color:#0f172a;
+    transition:background-color 5000s ease-in-out 0s;
+  }
+
+  /* Ícone do date picker no WebView */
+  .campo input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:none;
+    opacity:.65;
+    cursor:pointer;
+  }
+  .campo input[type="date"]::-webkit-calendar-picker-indicator:hover{
+    opacity:1;
+  }
+  /* Remove spinner feio do number em alguns WebViews */
+  .campo input[type="number"]::-webkit-outer-spin-button,
+  .campo input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance:none;
+    margin:0;
+  }
+  .campo input[type="number"]{-moz-appearance:textfield}
+
+  /* Checkbox "receita infinita" */
+  .check-infinita{
+    display:flex;
+    align-items:flex-start;
+    gap:14px;
+    background:#f0f9ff;
+    border:1.5px solid #bae6fd;
+    border-radius:12px;
+    padding:14px 16px;
+    margin-top:4px;
+    cursor:pointer;
+    transition:.15s;
+    grid-column:1 / -1;
+    forced-color-adjust:none;
+  }
+  .check-infinita:hover{
+    border-color:#7dd3fc;
+    background:#eff6ff;
+  }
+  .check-infinita.ativo{
+    background:#dbeafe;
+    border-color:#60a5fa;
+  }
+  .check-infinita input{
+    width:22px !important;
+    height:22px !important;
+    margin:2px 0 0 0 !important;
+    flex-shrink:0;
+    accent-color:#3b82f6;
+    cursor:pointer;
+    color-scheme:light;
+    forced-color-adjust:none;
+  }
   .check-infinita .conteudo{flex:1;min-width:0}
-  .check-infinita b{display:block;font-size:.9rem;font-weight:900;
-    color:var(--marca-mais-esc);margin-bottom:2px}
-  .check-infinita small{display:block;font-size:.74rem;color:#1e40af;font-weight:600;
-    line-height:1.4}
-  .check-infinita.ativo{background:linear-gradient(135deg,#dbeafe,#bfdbfe);
-    border-color:var(--marca)}
+  .check-infinita b{
+    display:block;
+    font-size:.9rem;
+    font-weight:900;
+    color:#1e40af;
+    margin-bottom:3px;
+  }
+  .check-infinita small{
+    display:block;
+    font-size:.74rem;
+    color:#1e40af;
+    font-weight:600;
+    line-height:1.45;
+    opacity:.85;
+  }
+  .check-infinita.ativo b{color:#1d4ed8}
+  .check-infinita.ativo small{color:#1d4ed8}
 
-  .acoes-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;
-    padding-top:14px;border-top:2px dashed var(--linha)}
-  .btn{padding:12px 20px;border-radius:10px;font-weight:800;font-size:.88rem;
-    display:inline-flex;align-items:center;gap:8px;transition:.15s;
-    border:2px solid transparent}
-  .btn-primario{background:linear-gradient(135deg,var(--marca),var(--marca-esc));
-    color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.28)}
-  .btn-primario:hover{box-shadow:0 6px 18px rgba(37,99,235,.4);
-    transform:translateY(-1px)}
-  .btn-neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
+  /* Botões do form */
+  .acoes-form{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:26px;
+    padding-top:20px;
+    border-top:1px solid #e2e8f0;
+  }
+  .btn{
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:800;
+    font-size:.88rem;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:.15s;
+    border:2px solid transparent;
+    flex:1;
+    justify-content:center;
+    min-width:0;
+  }
+  .btn-primario{
+    background:linear-gradient(135deg,var(--marca),var(--marca-esc));
+    color:#fff;
+    box-shadow:0 4px 12px rgba(37,99,235,.28);
+  }
+  .btn-primario:hover{
+    box-shadow:0 6px 18px rgba(37,99,235,.4);
+    transform:translateY(-1px);
+  }
+  .btn-neutro{
+    background:#f1f5f9;
+    color:#334155;
+    border-color:#cbd5e1;
+  }
   .btn-neutro:hover{background:#e2e8f0}
   .btn-perigo{background:var(--vermelho-bg);color:#b91c1c;border-color:#fca5a5}
   .btn-perigo:hover{background:#fecaca}
   .btn:disabled{opacity:.6;cursor:not-allowed}
 
+  /* Bloco-fixo (usado no form de edição de dívida do pagamentos — mantido por compatibilidade) */
+  .bloco-fixo{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #bfdbfe;
+    border-left:6px solid var(--azul);
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:14px;
+    box-shadow:0 2px 8px rgba(37,99,235,.08)}
+  .bloco-fixo .titulo-bloco{
+    font-size:.78rem;font-weight:900;text-transform:uppercase;
+    letter-spacing:.8px;color:var(--azul-profundo);
+    margin-bottom:10px;display:flex;align-items:center;gap:8px}
+  .bloco-fixo .titulo-bloco::before{
+    content:'📋';font-size:1rem;line-height:1}
+
+  /* Config (não mexido, mas garante que inputs de lá fiquem claros também) */
   .config-status-cartao{border-radius:var(--raio);padding:14px 16px;
     margin-bottom:14px;display:flex;gap:14px;align-items:center;
     border:2px solid var(--linha);background:#fff;
@@ -463,7 +672,6 @@
     margin-top:10px;padding-top:10px;border-top:1px dashed var(--linha);
     justify-content:flex-end}
 
-  /* ========== TELA FLUXO CRONOLÓGICO ========== */
   .crono-info-anterior{
     background:linear-gradient(135deg,#eff6ff,#dbeafe);
     border:2px solid #93c5fd;border-left:6px solid var(--marca);
@@ -618,7 +826,9 @@
     .item-info .fonte{font-size:.88rem}
     .item-valor .num{font-size:1rem}
     .btn-acao-receita{font-size:.72rem;padding:7px 10px}
-    .grade-form{grid-template-columns:1fr}
+    .grade-form{grid-template-columns:1fr;gap:16px}
+    .form-cartao{padding:18px 16px}
+    .btn{font-size:.84rem;padding:11px 16px}
     .crono-tabela{font-size:.76rem;min-width:480px}
     .crono-tabela thead th{font-size:.6rem;padding:8px 6px}
     .crono-tabela tbody td{padding:8px 5px}
@@ -750,11 +960,20 @@
     <button type="button" class="btn-voltar" id="voltarForm">Voltar</button>
     <h2 class="titulo-tela" id="tituloForm">➕ Nova receita</h2>
     <form class="form-cartao" id="formReceita" autocomplete="off">
+
+      <div class="form-intro">
+        Preencha os dados abaixo para cadastrar uma nova fonte de receita. Campos com
+        <span class="obrig">*</span> são obrigatórios.
+      </div>
+
       <div class="grade-form">
-        <label class="campo largura-total">Fonte pagadora *
+        <label class="campo largura-total">
+          <span class="campo-label">Fonte pagadora <span class="obrig">*</span></span>
           <input type="text" id="campoFonte" required placeholder="Ex.: Aluguel Apto 101, Holerite, Aposentadoria" maxlength="80">
         </label>
-        <label class="campo">Tipo
+
+        <label class="campo">
+          <span class="campo-label">Tipo</span>
           <select id="campoTipo">
             <option value="aluguel">Aluguel</option>
             <option value="holerite">Holerite</option>
@@ -762,13 +981,19 @@
             <option value="outro">Outro</option>
           </select>
         </label>
-        <label class="campo">Valor base (R$) *
-          <input type="number" id="campoValorBase" step="0.01" min="0.01" required>
+
+        <label class="campo">
+          <span class="campo-label">Valor base (R$) <span class="obrig">*</span></span>
+          <input type="number" id="campoValorBase" step="0.01" min="0.01" required placeholder="0,00">
         </label>
-        <label class="campo">Primeiro vencimento *
+
+        <label class="campo">
+          <span class="campo-label">Primeiro vencimento <span class="obrig">*</span></span>
           <input type="date" id="campoPrimeiro" required>
         </label>
-        <label class="campo">Dia do vencimento mensal
+
+        <label class="campo">
+          <span class="campo-label">Dia do vencimento mensal</span>
           <select id="campoDiaVenc">
             <option value="">Mesmo dia do 1º vencimento</option>
           </select>
@@ -783,7 +1008,8 @@
           </div>
         </label>
 
-        <label class="campo" id="blocoDataFim">Data fim do contrato *
+        <label class="campo" id="blocoDataFim">
+          <span class="campo-label">Data fim do contrato <span class="obrig">*</span></span>
           <input type="date" id="campoDataFim">
         </label>
       </div>
