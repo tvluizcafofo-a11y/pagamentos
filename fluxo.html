@@ -3,27 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0d9488">
+<meta name="theme-color" content="#3b82f6">
 <meta name="color-scheme" content="only light">
 <title>Fluxo de Caixa</title>
 <style>
   :root{
     color-scheme: light only;
-    --fundo:#f0fdf4;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
+    --fundo:#f8fafc;--cartao:#fff;--texto:#0f172a;--suave:#64748b;--linha:#e2e8f0;
+    /* Verde: mantido só para status semântico (pago/recebido/positivo) */
     --verde:#16a34a;--verde-esc:#15803d;--verde-bg:#dcfce7;--verde-claro:#f0fdf4;
     --azul:#2563eb;--azul-esc:#1d4ed8;--azul-bg:#eff6ff;--azul-claro:#dbeafe;
     --vermelho:#dc2626;--vermelho-bg:#fee2e2;--vermelho-claro:#fef2f2;
     --laranja:#f97316;--laranja-esc:#ea580c;--laranja-bg:#ffedd5;
-    --teal:#0d9488;--teal-esc:#0f766e;--teal-bg:#ccfbf1;
+    /* Marca: azul suave (substitui o antigo teal) */
+    --marca:#3b82f6;
+    --marca-esc:#2563eb;
+    --marca-mais-esc:#1d4ed8;
+    --marca-bg:#dbeafe;
+    --marca-claro:#eff6ff;
+    --marca-medio:#bfdbfe;
+    --marca-borda:#93c5fd;
     --roxo:#7c3aed;--roxo-bg:#ede9fe;
     --raio:14px;
   }
-  /* Fallback para WebViews antigos que forçam dark mode */
   html{
     color-scheme: light only;
     forced-color-adjust: none;
     -webkit-text-size-adjust: 100%;
-    background:#f0fdf4;
+    background:#f8fafc;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;width:100%;max-width:100%;overflow-x:hidden}
@@ -34,14 +41,14 @@
   button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
   header.topo{
-    background:linear-gradient(135deg,#0f766e 0%,#0d9488 50%,#14b8a6 100%);
+    background:linear-gradient(135deg,#2563eb 0%,#3b82f6 100%);
     color:#fff;padding:14px 16px 16px;position:sticky;top:0;z-index:20;
-    box-shadow:0 6px 20px rgba(13,148,136,.35);
-    border-bottom:4px solid #facc15}
+    box-shadow:0 4px 16px rgba(37,99,235,.22);
+    border-bottom:3px solid #bfdbfe}
   header.topo .interno{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;
     gap:10px;align-items:center;justify-content:space-between}
   header.topo h1{margin:0;font-size:1.2rem;font-weight:900;
-    display:flex;align-items:center;gap:8px;text-shadow:0 2px 4px rgba(0,0,0,.2)}
+    display:flex;align-items:center;gap:8px;text-shadow:0 1px 3px rgba(0,0,0,.15)}
   header.topo p{margin:3px 0 0;font-size:.76rem;opacity:.95;font-weight:500}
   .topo-acoes{display:flex;gap:8px;align-items:center}
   .status-sync{font-size:.7rem;font-weight:800;background:rgba(255,255,255,.2);
@@ -64,7 +71,7 @@
   .btn-voltar{display:inline-flex;align-items:center;gap:10px;
     background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;
     font-weight:800;font-size:.9rem;padding:11px 20px;border-radius:12px;
-    box-shadow:0 4px 14px rgba(234,88,12,.4);margin-bottom:14px;
+    box-shadow:0 4px 14px rgba(234,88,12,.35);margin-bottom:14px;
     border:3px solid #fff}
   .btn-voltar::before{content:'←';font-size:1.2rem;font-weight:900;line-height:1;
     background:#fff;color:#ea580c;width:24px;height:24px;border-radius:50%;
@@ -75,23 +82,48 @@
     display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#0f172a;
     padding-left:14px;position:relative;line-height:1.2}
   h2.titulo-tela::before{content:'';position:absolute;left:0;top:6px;bottom:6px;
-    width:6px;background:linear-gradient(180deg,var(--teal),var(--teal-esc));
+    width:6px;background:linear-gradient(180deg,var(--marca),var(--marca-esc));
     border-radius:4px}
+
+  /* Botão Ver Fluxo Cronológico - topo da página */
+  .btn-ver-fluxo{
+    width:100%;
+    margin-bottom:14px;
+    background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
+    color:#fff;
+    padding:14px 20px;
+    border-radius:12px;
+    font-weight:900;
+    font-size:.95rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    box-shadow:0 4px 14px rgba(37,99,235,.28);
+    transition:.15s;
+    border:3px solid #fff;
+    letter-spacing:.2px
+  }
+  .btn-ver-fluxo:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(37,99,235,.4)
+  }
+  .btn-ver-fluxo:active{transform:translateY(0)}
 
   .nav-mes{display:flex;align-items:center;gap:10px;margin-bottom:14px}
   .nav-mes h2{margin:0;flex:1;text-align:center;font-size:1.3rem;font-weight:900;
-    color:#0f766e;text-transform:capitalize;line-height:1.1}
+    color:#1d4ed8;text-transform:capitalize;line-height:1.1}
   .nav-mes-btn{flex:0 0 auto;width:48px;height:48px;border-radius:12px;
-    background:linear-gradient(135deg,#ccfbf1,#99f6e4);border:2px solid #5eead4;
+    background:linear-gradient(135deg,#dbeafe,#bfdbfe);border:2px solid #93c5fd;
     display:flex;align-items:center;justify-content:center;font-size:1.7rem;
-    font-weight:900;color:#0f766e;line-height:1;padding-bottom:3px}
-  .nav-mes-btn:hover{background:linear-gradient(135deg,#99f6e4,#5eead4);transform:translateY(-2px)}
+    font-weight:900;color:#1d4ed8;line-height:1;padding-bottom:3px}
+  .nav-mes-btn:hover{background:linear-gradient(135deg,#bfdbfe,#93c5fd);transform:translateY(-2px)}
   .nav-mes-btn:active{transform:scale(.95)}
 
   .card-saldo{
-    background:linear-gradient(135deg,#134e4a 0%,#0f766e 60%,#0d9488 100%);
+    background:linear-gradient(135deg,#1e3a8a 0%,#1d4ed8 55%,#2563eb 100%);
     color:#fff;border-radius:16px;padding:18px 16px;margin-bottom:16px;
-    box-shadow:0 8px 24px rgba(13,148,136,.35);
+    box-shadow:0 6px 20px rgba(37,99,235,.28);
     border:3px solid #fff;position:relative;overflow:hidden}
   .card-saldo::before{content:'';position:absolute;top:-30px;right:-30px;
     width:140px;height:140px;border-radius:50%;
@@ -99,7 +131,7 @@
   .card-saldo .rotulo{font-size:.72rem;font-weight:800;text-transform:uppercase;
     letter-spacing:.8px;opacity:.9;margin-bottom:6px}
   .card-saldo .valor{font-size:2.2rem;font-weight:900;letter-spacing:-1px;
-    line-height:1.1;margin-bottom:4px;text-shadow:0 2px 6px rgba(0,0,0,.25)}
+    line-height:1.1;margin-bottom:4px;text-shadow:0 2px 6px rgba(0,0,0,.2)}
   .card-saldo .valor.positivo{color:#86efac}
   .card-saldo .valor.negativo{color:#fca5a5}
   .card-saldo .subtitulo{font-size:.76rem;font-weight:600;opacity:.85;
@@ -135,12 +167,12 @@
     padding:20px 14px;text-align:center;color:var(--suave);
     font-size:.86rem;font-weight:600}
   .lista-vazia .btn-vazio{display:inline-flex;align-items:center;gap:8px;
-    background:linear-gradient(135deg,var(--teal),var(--teal-esc));color:#fff;
+    background:linear-gradient(135deg,var(--marca),var(--marca-esc));color:#fff;
     padding:10px 18px;border-radius:10px;font-weight:900;font-size:.84rem;
-    margin-top:12px;box-shadow:0 3px 10px rgba(13,148,136,.3);transition:.15s;
+    margin-top:12px;box-shadow:0 3px 10px rgba(37,99,235,.25);transition:.15s;
     border:2px solid #fff}
   .lista-vazia .btn-vazio:hover{transform:translateY(-1px);
-    box-shadow:0 5px 14px rgba(13,148,136,.4)}
+    box-shadow:0 5px 14px rgba(37,99,235,.35)}
 
   .aviso-vazio{background:linear-gradient(135deg,#fef3c7,#fde68a);
     border:2px solid #fbbf24;border-left:6px solid var(--laranja);
@@ -152,9 +184,9 @@
   .aviso-vazio b{display:block;font-size:.94rem;font-weight:900;
     color:#92400e;margin-bottom:4px}
   .aviso-vazio .btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-  .aviso-vazio button{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+  .aviso-vazio button{background:linear-gradient(135deg,var(--marca),var(--marca-esc));
     color:#fff;padding:8px 16px;border-radius:8px;font-weight:900;font-size:.82rem;
-    border:2px solid #fff;box-shadow:0 2px 6px rgba(13,148,136,.3);transition:.15s}
+    border:2px solid #fff;box-shadow:0 2px 6px rgba(37,99,235,.25);transition:.15s}
   .aviso-vazio button:hover{transform:translateY(-1px)}
   .aviso-vazio button.neutro{background:#fff;color:#334155;border-color:#cbd5e1}
   .aviso-vazio code{background:#fff;border:1px solid #fcd34d;border-radius:4px;
@@ -266,13 +298,13 @@
   .aviso-fonte::before{content:'ℹ️';font-size:1.2rem;flex-shrink:0;line-height:1}
 
   .btn-nova-receita{width:100%;margin-top:6px;
-    background:linear-gradient(135deg,var(--teal),var(--teal-esc));
+    background:linear-gradient(135deg,var(--marca),var(--marca-esc));
     color:#fff;padding:14px 20px;border-radius:12px;font-weight:900;font-size:.95rem;
     display:flex;align-items:center;justify-content:center;gap:10px;
-    box-shadow:0 4px 14px rgba(13,148,136,.4);transition:.15s;
+    box-shadow:0 4px 14px rgba(37,99,235,.28);transition:.15s;
     border:3px solid #fff}
   .btn-nova-receita:hover{transform:translateY(-2px);
-    box-shadow:0 8px 22px rgba(13,148,136,.55)}
+    box-shadow:0 8px 22px rgba(37,99,235,.4)}
   .btn-nova-receita:active{transform:translateY(0)}
 
   .btn-secundario{display:inline-flex;align-items:center;justify-content:center;
@@ -290,34 +322,34 @@
     background:#fff;border:2px solid var(--linha);border-radius:8px;
     padding:10px 12px;font-size:.92rem;width:100%;min-width:0;outline:none;
     transition:.15s;color-scheme:light}
-  .campo input:focus,.campo select:focus{border-color:var(--teal);
-    box-shadow:0 0 0 3px rgba(13,148,136,.18)}
+  .campo input:focus,.campo select:focus{border-color:var(--marca);
+    box-shadow:0 0 0 3px rgba(59,130,246,.18)}
   .campo.largura-total{grid-column:1 / -1}
   .campo .dica{font-weight:500;color:var(--suave);font-size:.72rem}
 
   .check-infinita{display:flex;align-items:flex-start;gap:12px;
-    background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
-    border:2px solid #5eead4;border-radius:12px;padding:12px 14px;
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #93c5fd;border-radius:12px;padding:12px 14px;
     margin-top:6px;cursor:pointer;transition:.15s;grid-column:1 / -1}
-  .check-infinita:hover{border-color:var(--teal)}
+  .check-infinita:hover{border-color:var(--marca)}
   .check-infinita input{width:22px;height:22px;margin:0;flex-shrink:0;
-    accent-color:var(--teal);cursor:pointer}
+    accent-color:var(--marca);cursor:pointer}
   .check-infinita .conteudo{flex:1;min-width:0}
   .check-infinita b{display:block;font-size:.9rem;font-weight:900;
-    color:var(--teal-esc);margin-bottom:2px}
-  .check-infinita small{display:block;font-size:.74rem;color:#115e59;font-weight:600;
+    color:var(--marca-mais-esc);margin-bottom:2px}
+  .check-infinita small{display:block;font-size:.74rem;color:#1e40af;font-weight:600;
     line-height:1.4}
-  .check-infinita.ativo{background:linear-gradient(135deg,#ccfbf1,#99f6e4);
-    border-color:var(--teal)}
+  .check-infinita.ativo{background:linear-gradient(135deg,#dbeafe,#bfdbfe);
+    border-color:var(--marca)}
 
   .acoes-form{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;
     padding-top:14px;border-top:2px dashed var(--linha)}
   .btn{padding:12px 20px;border-radius:10px;font-weight:800;font-size:.88rem;
     display:inline-flex;align-items:center;gap:8px;transition:.15s;
     border:2px solid transparent}
-  .btn-primario{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
-    color:#fff;box-shadow:0 4px 12px rgba(13,148,136,.35)}
-  .btn-primario:hover{box-shadow:0 6px 18px rgba(13,148,136,.45);
+  .btn-primario{background:linear-gradient(135deg,var(--marca),var(--marca-esc));
+    color:#fff;box-shadow:0 4px 12px rgba(37,99,235,.28)}
+  .btn-primario:hover{box-shadow:0 6px 18px rgba(37,99,235,.4);
     transform:translateY(-1px)}
   .btn-neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
   .btn-neutro:hover{background:#e2e8f0}
@@ -360,7 +392,7 @@
   .modal-caixa h3{margin:0 0 12px;font-size:1.1rem;font-weight:900;
     display:flex;align-items:center;gap:10px;padding-bottom:10px;
     border-bottom:2px dashed var(--linha);color:#0f172a}
-  .modal-caixa h3 .emoji{font-size:1.5rem;background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
+  .modal-caixa h3 .emoji{font-size:1.5rem;background:linear-gradient(135deg,#eff6ff,#dbeafe);
     width:42px;height:42px;border-radius:12px;display:flex;
     align-items:center;justify-content:center;flex-shrink:0}
   .modal-caixa p{margin:8px 0;font-size:.86rem;color:var(--texto);font-weight:500}
@@ -369,19 +401,19 @@
   .btn-modal{padding:10px 16px;border-radius:10px;font-weight:800;font-size:.82rem;
     display:inline-flex;align-items:center;gap:6px;transition:.15s;
     border:2px solid transparent}
-  .btn-modal.primario{background:linear-gradient(135deg,var(--teal),var(--teal-esc));
-    color:#fff;box-shadow:0 3px 10px rgba(13,148,136,.3)}
+  .btn-modal.primario{background:linear-gradient(135deg,var(--marca),var(--marca-esc));
+    color:#fff;box-shadow:0 3px 10px rgba(37,99,235,.25)}
   .btn-modal.neutro{background:#f1f5f9;color:#334155;border-color:#cbd5e1}
   .btn-modal.neutro:hover{background:#e2e8f0}
 
-  #textoEscopo{background:#f8fafc;border-left:5px solid var(--teal);
+  #textoEscopo{background:#f8fafc;border-left:5px solid var(--marca);
     border-radius:8px;padding:12px 14px;font-size:.84rem;color:var(--texto);
     line-height:1.6;margin:12px 0 4px;font-weight:500}
-  #textoEscopo b{color:var(--teal-esc);font-weight:900}
+  #textoEscopo b{color:var(--marca-mais-esc);font-weight:900}
   .linha-mudanca{display:flex;align-items:flex-start;gap:10px;padding:7px 0;
     border-bottom:1px dashed #e2e8f0}
   .linha-mudanca:last-child{border-bottom:none}
-  .linha-mudanca .campo-nome{font-weight:900;color:var(--teal-esc);min-width:80px;
+  .linha-mudanca .campo-nome{font-weight:900;color:var(--marca-mais-esc);min-width:80px;
     flex-shrink:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.3px}
   .linha-mudanca .valor-mudanca{color:var(--texto);word-break:break-word;
     font-size:.84rem;font-weight:600}
@@ -390,9 +422,9 @@
   .opcao-escopo{display:flex;align-items:flex-start;gap:12px;background:#f8fafc;
     border:2px solid #e2e8f0;border-radius:12px;padding:12px 14px;
     text-align:left;cursor:pointer;width:100%;transition:.15s;font-weight:600}
-  .opcao-escopo:hover{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
-    border-color:var(--teal);transform:translateY(-2px);
-    box-shadow:0 6px 16px rgba(13,148,136,.15)}
+  .opcao-escopo:hover{background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-color:var(--marca);transform:translateY(-2px);
+    box-shadow:0 6px 16px rgba(37,99,235,.15)}
   .opcao-escopo .icone{font-size:1.3rem;flex-shrink:0;width:28px;
     text-align:center;background:#fff;border-radius:8px;padding:3px}
   .opcao-escopo .info{flex:1;min-width:0}
@@ -404,14 +436,14 @@
   .opcao-escopo.cancelar:hover{background:#fef2f2;border-color:#fca5a5}
   .opcao-escopo.cancelar .info b{color:#b91c1c}
 
-  .info-parcela-edit{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);
-    border:2px solid #5eead4;border-radius:10px;padding:12px 14px;
-    margin-bottom:14px;font-size:.82rem;font-weight:600;color:#115e59;
+  .info-parcela-edit{background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #93c5fd;border-radius:10px;padding:12px 14px;
+    margin-bottom:14px;font-size:.82rem;font-weight:600;color:#1e40af;
     line-height:1.5}
-  .info-parcela-edit b{color:var(--teal-esc);font-weight:900}
+  .info-parcela-edit b{color:var(--marca-mais-esc);font-weight:900}
 
   .item-receita-completa{background:#fff;border:2px solid var(--linha);
-    border-left:6px solid var(--teal);border-radius:12px;padding:14px;
+    border-left:6px solid var(--marca);border-radius:12px;padding:14px;
     margin-bottom:12px;box-shadow:0 2px 6px rgba(15,23,42,.06)}
   .item-receita-completa .cabecalho{display:flex;justify-content:space-between;
     gap:10px;align-items:flex-start;margin-bottom:10px}
@@ -431,6 +463,153 @@
     margin-top:10px;padding-top:10px;border-top:1px dashed var(--linha);
     justify-content:flex-end}
 
+  /* ========== TELA FLUXO CRONOLÓGICO ========== */
+  .crono-info-anterior{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border:2px solid #93c5fd;border-left:6px solid var(--marca);
+    border-radius:12px;padding:12px 14px;margin-bottom:14px;
+    display:flex;justify-content:space-between;align-items:center;gap:10px;
+    flex-wrap:wrap;font-size:.78rem;color:#1e40af;font-weight:600}
+  .crono-info-anterior span{flex:1;min-width:0}
+  .crono-info-anterior b{font-size:1rem;font-weight:900;letter-spacing:-.3px}
+  .crono-info-anterior b.positivo{color:var(--verde-esc)}
+  .crono-info-anterior b.negativo{color:#b91c1c}
+  .crono-info-anterior small{display:block;font-size:.68rem;opacity:.85;
+    margin-top:2px;font-weight:500}
+
+  .crono-tabela-area{
+    background:#fff;border:2px solid var(--linha);border-radius:12px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    box-shadow:0 2px 8px rgba(15,23,42,.06);margin-bottom:14px}
+  .crono-tabela{width:100%;border-collapse:collapse;font-size:.8rem;
+    min-width:520px}
+  .crono-tabela thead th:first-child,
+  .crono-tabela tbody td:first-child,
+  .crono-tabela tfoot td:first-child{
+    width:1%;
+    white-space:nowrap;
+    text-align:left;
+    padding-left:10px;
+    padding-right:6px;
+  }
+  .crono-tabela thead th{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    color:var(--marca-mais-esc);font-weight:900;font-size:.66rem;
+    text-transform:uppercase;letter-spacing:.6px;
+    padding:10px 8px;text-align:right;
+    border-bottom:2px solid #93c5fd;white-space:nowrap}
+  .crono-tabela tbody td{
+    padding:9px 8px;border-bottom:1px solid #f1f5f9;
+    text-align:right;font-weight:600;color:#334155;
+    font-variant-numeric:tabular-nums;white-space:nowrap;
+    transition:background .15s}
+  .crono-tabela tbody td:first-child{
+    font-weight:800;color:#0f172a;font-variant-numeric:normal;
+    font-size:.82rem}
+  .crono-tabela tbody tr:last-child td{border-bottom:none}
+  .crono-tabela tbody td.rec{color:var(--verde-esc);font-weight:900}
+  .crono-tabela tbody td.desp{color:#b91c1c;font-weight:900}
+  .crono-tabela tbody td.saldo{font-weight:900}
+  .crono-tabela tbody td.saldo.positivo{color:var(--verde-esc)}
+  .crono-tabela tbody td.saldo.negativo{color:#b91c1c}
+  .crono-tabela tbody td.saldo.zero{color:var(--suave);font-weight:700}
+  .crono-tabela tbody td.acum{font-weight:900;letter-spacing:-.2px}
+  .crono-tabela tbody td.acum.positivo{color:var(--verde-esc);
+    background:rgba(22,163,74,.05)}
+  .crono-tabela tbody td.acum.negativo{color:#b91c1c;
+    background:rgba(220,38,38,.05)}
+  .crono-tabela tbody td.acum.zero{color:var(--suave);font-weight:700;
+    background:rgba(100,116,139,.05)}
+
+  .crono-tabela tbody tr.crono-linha{cursor:pointer}
+  .crono-tabela tbody tr.crono-linha:hover td{background:rgba(59,130,246,.06)}
+  .crono-tabela tbody tr.crono-linha.dia-realizado td{
+    background:rgba(22,163,74,.05)}
+  .crono-tabela tbody tr.crono-linha.dia-realizado:hover td{
+    background:rgba(22,163,74,.11)}
+  .crono-tabela tbody tr.crono-linha.expandido td{
+    background:rgba(59,130,246,.10);
+    border-bottom-color:#93c5fd}
+  .crono-tabela tbody tr.crono-linha.expandido td:first-child{
+    color:var(--marca-mais-esc)}
+
+  .seta-expand{
+    display:inline-block;font-size:.55rem;color:var(--suave);
+    margin-left:3px;opacity:.7;
+    transition:transform .2s ease, color .2s ease;
+    vertical-align:middle}
+  .crono-tabela tbody tr.crono-linha.expandido .seta-expand{
+    transform:rotate(180deg);
+    color:var(--marca-mais-esc);
+    opacity:1}
+
+  .crono-detalhe-row td{
+    padding:0 !important;
+    background:#f8fafc !important;
+    border-bottom:2px solid #93c5fd !important;
+    text-align:left !important;
+    white-space:normal !important;
+    font-variant-numeric:normal !important}
+  .crono-detalhe{
+    padding:10px 12px;display:flex;flex-direction:column;gap:6px;
+    animation:cronoDetalheIn .18s ease-out}
+  @keyframes cronoDetalheIn{
+    from{opacity:0;transform:translateY(-4px)}
+    to{opacity:1;transform:none}
+  }
+  .crono-detalhe-item{
+    display:flex;align-items:center;gap:10px;
+    padding:8px 10px;background:#fff;
+    border:1.5px solid var(--linha);border-radius:8px;
+    font-weight:600;min-width:0}
+  .crono-detalhe-item.rec{border-left:4px solid var(--verde)}
+  .crono-detalhe-item.desp{border-left:4px solid var(--vermelho)}
+  .crono-detalhe-ico{font-size:1rem;flex-shrink:0;line-height:1}
+  .crono-detalhe-info{flex:1;min-width:0}
+  .crono-detalhe-info b{
+    display:block;font-size:.84rem;font-weight:900;color:#0f172a;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .crono-detalhe-info small{
+    display:block;font-size:.72rem;color:var(--suave);font-weight:500;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    margin-top:1px}
+  .crono-detalhe-valor{
+    font-size:.88rem;font-weight:900;color:var(--texto);
+    flex-shrink:0;font-variant-numeric:tabular-nums;letter-spacing:-.2px}
+  .crono-detalhe-item.rec .crono-detalhe-valor{color:var(--verde-esc)}
+  .crono-detalhe-item.desp .crono-detalhe-valor{color:#b91c1c}
+
+  .status-recebido,.status-pago{color:var(--verde-esc);font-weight:800}
+  .status-aberto{color:var(--azul-esc);font-weight:800}
+  .status-atrasado,.status-outros{color:var(--laranja-esc);font-weight:800}
+
+  .crono-tabela tfoot td{
+    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-top:2px solid var(--marca);
+    font-weight:900;color:var(--marca-mais-esc);
+    padding:11px 8px;text-align:right;
+    font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.8rem}
+  .crono-tabela tfoot td.rec{color:var(--verde-esc)}
+  .crono-tabela tfoot td.desp{color:#b91c1c}
+  .crono-tabela tfoot td.saldo.positivo{color:var(--verde-esc)}
+  .crono-tabela tfoot td.saldo.negativo{color:#b91c1c}
+  .crono-tabela tfoot td.acum.positivo{color:var(--verde-esc)}
+  .crono-tabela tfoot td.acum.negativo{color:#b91c1c}
+
+  .crono-vazio{padding:24px 14px !important;text-align:center !important;
+    color:var(--suave) !important;font-weight:600 !important;
+    font-size:.86rem !important;font-variant-numeric:normal !important}
+
+  .crono-legenda{
+    display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
+    padding:10px 12px;background:#fff;border:2px solid var(--linha);
+    border-radius:10px;font-size:.72rem;color:var(--suave);font-weight:600}
+  .crono-legenda span{display:flex;align-items:center;gap:6px}
+  .crono-legenda i{width:12px;height:12px;border-radius:4px;
+    display:inline-block;border:2px solid transparent}
+  .crono-legenda i.l-real{background:#f0fdf4;border-color:#86efac}
+  .crono-legenda i.l-pend{background:#fff;border-color:#cbd5e1}
+
   @media (max-width:520px){
     header.topo h1{font-size:1rem}
     .card-saldo .valor{font-size:1.8rem}
@@ -440,6 +619,19 @@
     .item-valor .num{font-size:1rem}
     .btn-acao-receita{font-size:.72rem;padding:7px 10px}
     .grade-form{grid-template-columns:1fr}
+    .crono-tabela{font-size:.76rem;min-width:480px}
+    .crono-tabela thead th{font-size:.6rem;padding:8px 6px}
+    .crono-tabela tbody td{padding:8px 5px}
+    .crono-tabela tfoot td{padding:10px 5px;font-size:.76rem}
+    .crono-tabela thead th:first-child,
+    .crono-tabela tbody td:first-child,
+    .crono-tabela tfoot td:first-child{padding-left:8px;padding-right:4px}
+    .crono-detalhe{padding:8px 10px;gap:5px}
+    .crono-detalhe-item{padding:7px 9px;gap:8px}
+    .crono-detalhe-info b{font-size:.8rem}
+    .crono-detalhe-info small{font-size:.68rem}
+    .crono-detalhe-valor{font-size:.82rem}
+    .btn-ver-fluxo{font-size:.88rem;padding:13px 16px}
   }
 </style>
 </head>
@@ -461,6 +653,8 @@
 <div class="area">
 
   <section class="tela" id="tela-fluxo">
+    <button type="button" class="btn-ver-fluxo" id="btnCronologico">📊 Ver fluxo cronológico</button>
+
     <div class="nav-mes">
       <button type="button" class="nav-mes-btn" id="mesAnterior" aria-label="Mês anterior">‹</button>
       <h2 id="tituloMes"></h2>
@@ -517,6 +711,39 @@
       </div>
       <div id="listaDespesas"></div>
     </section>
+  </section>
+
+  <section class="tela escondido" id="tela-cronologico">
+    <button type="button" class="btn-voltar" id="voltarCronologico">Voltar</button>
+    <div class="nav-mes">
+      <button type="button" class="nav-mes-btn" id="cronoMesAnterior" aria-label="Mês anterior">‹</button>
+      <h2 id="cronoTituloMes"></h2>
+      <button type="button" class="nav-mes-btn" id="cronoMesProximo" aria-label="Próximo mês">›</button>
+    </div>
+
+    <div class="crono-info-anterior" id="cronoSaldoAnterior"></div>
+
+    <div class="crono-tabela-area">
+      <table class="crono-tabela">
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Receita</th>
+            <th>Despesa</th>
+            <th>Saldo</th>
+            <th>Acum.</th>
+          </tr>
+        </thead>
+        <tbody id="cronoTbody"></tbody>
+        <tfoot id="cronoTfoot"></tfoot>
+      </table>
+    </div>
+
+    <div class="crono-legenda">
+      <span><i class="l-real"></i> Tudo pago/recebido</span>
+      <span><i class="l-pend"></i> Com pendências</span>
+      <span>👆 Toque em uma data para ver os itens</span>
+    </div>
   </section>
 
   <section class="tela escondido" id="tela-nova">
@@ -609,7 +836,7 @@
         <input type="password" id="ghToken" autocomplete="off" spellcheck="false" placeholder="github_pat_...">
       </label>
       <label class="campo" style="flex-direction:row;align-items:center;gap:8px;font-weight:900;margin-top:12px">
-        <input type="checkbox" id="ghAutoSync" checked style="width:auto;accent-color:var(--teal)">
+        <input type="checkbox" id="ghAutoSync" checked style="width:auto;accent-color:var(--marca)">
         Sincronizar receitas automaticamente
       </label>
       <div class="acoes-form">
@@ -715,6 +942,8 @@ let resolverEscopo = null;
 let syncTimer = null;
 let syncing = false;
 let edicaoValorPendente = null;
+
+const cronoDiasExpandidos = new Set();
 
 const TIPO_LABEL = {
   aluguel:'Aluguel', holerite:'Holerite',
@@ -1103,7 +1332,7 @@ function manutencaoReceitas(){
   if(mudou) salvarReceitasLocais();
 }
 
-/* ---------- Renderização ---------- */
+/* ---------- Renderização: tela principal ---------- */
 function labelStatusParcelaReceita(p){
   if(p.status === 'recebido') return {classe:'recebido', txt:'✅ Recebido'};
   if(p.vencimento < hojeIso()) return {classe:'atrasado', txt:'⚠️ Atrasada'};
@@ -1197,7 +1426,6 @@ function agruparDespesasPorCredor(itens){
   return grupos;
 }
 
-/* ---------- Banner de estado vazio ---------- */
 function renderAvisoVazio(){
   const el = document.getElementById('avisoVazio');
   if(!el) return;
@@ -1300,7 +1528,7 @@ function renderTelaPrincipal(){
       em <b>⚙️ Configurações</b> para ver as despesas aqui.
     </div>`;
   } else if(fonteDespesas === 'localStorage'){
-    aviso.innerHTML = `<div class="aviso-fonte" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border-color:#86efac;border-left-color:var(--verde);color:#14532d">
+    aviso.innerHTML = `<div class="aviso-fonte" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd;border-left-color:var(--marca);color:#1e40af">
       Despesas lidas do <b>armazenamento local</b>. Para garantir os status mais recentes em qualquer aparelho, configure o GitHub.
     </div>`;
   } else {
@@ -1344,6 +1572,190 @@ function renderTelaPrincipal(){
   renderAvisoVazio();
 }
 
+/* ---------- Renderização: fluxo cronológico ---------- */
+function fmtDataColuna(iso){
+  const dt = isoParaData(iso);
+  const d = String(dt.getDate()).padStart(2,'0');
+  const sem = ['D','S','T','Q','Q','S','S'][dt.getDay()];
+  return `${d} ${sem}`;
+}
+
+function renderDetalheDia(receitasDia, despesasDia){
+  let html = '';
+  receitasDia.forEach(({receita, parcela}) => {
+    const status = labelStatusParcelaReceita(parcela);
+    const tipo = TIPO_LABEL[receita.tipo] || 'Outro';
+    html += `<div class="crono-detalhe-item rec">
+      <span class="crono-detalhe-ico">📥</span>
+      <div class="crono-detalhe-info">
+        <b>${esc(receita.fonte)}</b>
+        <small>${esc(tipo)} · <span class="status-${status.classe}">${status.txt}</span></small>
+      </div>
+      <span class="crono-detalhe-valor">${fmtBRL(parcela.valor)}</span>
+    </div>`;
+  });
+  despesasDia.forEach(({divida, parcela}) => {
+    const st = normalizarStatus(parcela.status);
+    const credor = parcela.credorOverride || divida.credor || '—';
+    const desc = parcela.descricaoOverride || divida.descricao || '';
+    const statusMap = {
+      pago: {classe:'pago', txt:'✅ Pago'},
+      em_atraso: {classe:'atrasado', txt:'⚠️ Em atraso'},
+      em_aberto: {classe:'aberto', txt:'⏳ Em aberto'},
+      outros: {classe:'outros', txt:'◆ Outros'}
+    };
+    const s = statusMap[st] || statusMap.em_aberto;
+    const linhaMeta = desc ? `${esc(desc)} · <span class="status-${s.classe}">${s.txt}</span>`
+                           : `<span class="status-${s.classe}">${s.txt}</span>`;
+    html += `<div class="crono-detalhe-item desp">
+      <span class="crono-detalhe-ico">📤</span>
+      <div class="crono-detalhe-info">
+        <b>${esc(credor)}</b>
+        <small>${linhaMeta}</small>
+      </div>
+      <span class="crono-detalhe-valor">${fmtBRL(parcela.valor)}</span>
+    </div>`;
+  });
+  return html;
+}
+
+function renderCronologico(){
+  const ano = mesRef.getFullYear(), m = mesRef.getMonth();
+  const mes = `${ano}-${String(m+1).padStart(2,'0')}`;
+  const tituloEl = document.getElementById('cronoTituloMes');
+  if(tituloEl) tituloEl.textContent = `${nomeMes(m)} ${ano}`;
+
+  let acumuladoAnterior = 0;
+  receitas.forEach(r => {
+    r.parcelas.forEach(p => {
+      if(p.vencimento && mesDeIso(p.vencimento) < mes){
+        acumuladoAnterior += Number(p.valor || 0);
+      }
+    });
+  });
+  dividasPagamentos.forEach(d => {
+    if(!Array.isArray(d.parcelas)) return;
+    d.parcelas.forEach(p => {
+      if(p.vencimento && mesDeIso(p.vencimento) < mes){
+        acumuladoAnterior -= Number(p.valor || 0);
+      }
+    });
+  });
+
+  const diasMap = new Map();
+  function garantirDia(iso){
+    if(!diasMap.has(iso)) diasMap.set(iso, { receitas: [], despesas: [] });
+    return diasMap.get(iso);
+  }
+  receitas.forEach(r => {
+    r.parcelas.forEach(p => {
+      if(p.vencimento && mesDeIso(p.vencimento) === mes){
+        garantirDia(p.vencimento).receitas.push({ receita: r, parcela: p });
+      }
+    });
+  });
+  dividasPagamentos.forEach(d => {
+    if(!Array.isArray(d.parcelas)) return;
+    d.parcelas.forEach(p => {
+      if(p.vencimento && mesDeIso(p.vencimento) === mes){
+        garantirDia(p.vencimento).despesas.push({ divida: d, parcela: p });
+      }
+    });
+  });
+
+  const dias = Array.from(diasMap.keys()).sort();
+  let acumulado = acumuladoAnterior;
+  const linhas = [];
+  let totalRecMes = 0, totalDespMes = 0, totalSaldoMes = 0;
+
+  dias.forEach(iso => {
+    const dia = diasMap.get(iso);
+    const totalRec = dia.receitas.reduce((s,{parcela}) => s + Number(parcela.valor||0), 0);
+    const totalDesp = dia.despesas.reduce((s,{parcela}) => s + Number(parcela.valor||0), 0);
+    const saldo = totalRec - totalDesp;
+    acumulado += saldo;
+
+    const recsOk = dia.receitas.every(({parcela}) => parcela.status === 'recebido');
+    const despsOk = dia.despesas.every(({parcela}) => normalizarStatus(parcela.status) === 'pago');
+    const allOk = recsOk && despsOk && (dia.receitas.length + dia.despesas.length > 0);
+
+    linhas.push({ iso, totalRec, totalDesp, saldo, acumulado, allOk });
+    totalRecMes += totalRec;
+    totalDespMes += totalDesp;
+    totalSaldoMes += saldo;
+  });
+
+  const infoEl = document.getElementById('cronoSaldoAnterior');
+  if(infoEl){
+    const sinal = acumuladoAnterior >= 0 ? '+' : '−';
+    const classe = acumuladoAnterior >= 0 ? 'positivo' : 'negativo';
+    infoEl.innerHTML = `
+      <span>
+        Saldo acumulado até o início do mês
+        <small>Base: todas as movimentações por vencimento (anteriores a este mês)</small>
+      </span>
+      <b class="${classe}">${sinal} ${fmtBRL(Math.abs(acumuladoAnterior))}</b>
+    `;
+  }
+
+  const tbody = document.getElementById('cronoTbody');
+  if(!linhas.length){
+    tbody.innerHTML = `<tr><td colspan="5" class="crono-vazio">
+      Nenhum movimento neste mês.<br>
+      <small style="font-weight:500;opacity:.85">Navegue para outro mês ou cadastre receitas.</small>
+    </td></tr>`;
+  } else {
+    tbody.innerHTML = linhas.map(l => {
+      const classeSaldo = l.saldo > 0 ? 'positivo' : (l.saldo < 0 ? 'negativo' : 'zero');
+      const classeAcum = l.acumulado > 0 ? 'positivo' : (l.acumulado < 0 ? 'negativo' : 'zero');
+      const sinalSaldo = l.saldo > 0 ? '+' : (l.saldo < 0 ? '−' : '');
+      const sinalAcum = l.acumulado >= 0 ? '+' : '−';
+      const expandido = cronoDiasExpandidos.has(l.iso);
+      const dia = diasMap.get(l.iso);
+      const numItens = dia.receitas.length + dia.despesas.length;
+
+      let html = `<tr class="crono-linha${l.allOk ? ' dia-realizado' : ''}${expandido ? ' expandido' : ''}"
+        data-iso="${l.iso}"
+        title="Toque para ver os ${numItens} item(ns) deste dia">
+        <td>${fmtDataColuna(l.iso)} <span class="seta-expand">▾</span></td>
+        <td class="rec">${l.totalRec > 0 ? fmtBRL(l.totalRec) : '—'}</td>
+        <td class="desp">${l.totalDesp > 0 ? fmtBRL(l.totalDesp) : '—'}</td>
+        <td class="saldo ${classeSaldo}">${l.saldo !== 0 ? sinalSaldo + ' ' + fmtBRL(Math.abs(l.saldo)) : '—'}</td>
+        <td class="acum ${classeAcum}">${sinalAcum} ${fmtBRL(Math.abs(l.acumulado))}</td>
+      </tr>`;
+
+      if(expandido){
+        html += `<tr class="crono-detalhe-row" data-iso="${l.iso}">
+          <td colspan="5">
+            <div class="crono-detalhe">
+              ${renderDetalheDia(dia.receitas, dia.despesas)}
+            </div>
+          </td>
+        </tr>`;
+      }
+      return html;
+    }).join('');
+  }
+
+  const tfoot = document.getElementById('cronoTfoot');
+  if(linhas.length){
+    const classeSaldoMes = totalSaldoMes > 0 ? 'positivo' : (totalSaldoMes < 0 ? 'negativo' : '');
+    const classeAcumFinal = acumulado > 0 ? 'positivo' : (acumulado < 0 ? 'negativo' : '');
+    const sinalSaldoMes = totalSaldoMes >= 0 ? '+' : '−';
+    const sinalAcumFinal = acumulado >= 0 ? '+' : '−';
+    tfoot.innerHTML = `<tr>
+      <td>Total</td>
+      <td class="rec">${fmtBRL(totalRecMes)}</td>
+      <td class="desp">${fmtBRL(totalDespMes)}</td>
+      <td class="saldo ${classeSaldoMes}">${sinalSaldoMes} ${fmtBRL(Math.abs(totalSaldoMes))}</td>
+      <td class="acum ${classeAcumFinal}">${sinalAcumFinal} ${fmtBRL(Math.abs(acumulado))}</td>
+    </tr>`;
+  } else {
+    tfoot.innerHTML = '';
+  }
+}
+
+/* ---------- Renderização: todas as receitas ---------- */
 function renderTodasReceitas(){
   const c = document.getElementById('listaTodasReceitas');
   if(!receitas.length){
@@ -1455,7 +1867,7 @@ async function importarTudo(file){
 
 /* ---------- Navegação ---------- */
 function mostrarTela(id){
-  ['fluxo','nova','todas','config'].forEach(t => {
+  ['fluxo','nova','todas','config','cronologico'].forEach(t => {
     document.getElementById('tela-'+t).classList.toggle('escondido', t !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
@@ -1843,7 +2255,7 @@ document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
   }
 });
 
-/* ---------- Navegação de mês ---------- */
+/* ---------- Navegação de mês (tela principal) ---------- */
 function mudarMes(delta){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
@@ -1852,6 +2264,27 @@ function mudarMes(delta){
 document.getElementById('mesAnterior').addEventListener('click', () => mudarMes(-1));
 document.getElementById('mesProximo').addEventListener('click', () => mudarMes(1));
 
+/* ---------- Navegação de mês (cronológico) ---------- */
+function mudarMesCrono(delta){
+  mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
+  try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
+  cronoDiasExpandidos.clear();
+  renderCronologico();
+}
+document.getElementById('cronoMesAnterior').addEventListener('click', () => mudarMesCrono(-1));
+document.getElementById('cronoMesProximo').addEventListener('click', () => mudarMesCrono(1));
+
+/* ---------- Clique em linha do cronológico ---------- */
+document.getElementById('cronoTbody').addEventListener('click', (e) => {
+  const tr = e.target.closest('.crono-linha');
+  if(!tr) return;
+  const iso = tr.dataset.iso;
+  if(!iso) return;
+  if(cronoDiasExpandidos.has(iso)) cronoDiasExpandidos.delete(iso);
+  else cronoDiasExpandidos.add(iso);
+  renderCronologico();
+});
+
 /* ---------- Botões principais ---------- */
 document.getElementById('btnNovaReceita').addEventListener('click', abrirNovaReceita);
 document.getElementById('btnNovaReceita2').addEventListener('click', abrirNovaReceita);
@@ -1859,7 +2292,15 @@ document.getElementById('btnTodasReceitas').addEventListener('click', () => {
   renderTodasReceitas();
   mostrarTela('todas');
 });
+document.getElementById('btnCronologico').addEventListener('click', () => {
+  renderCronologico();
+  mostrarTela('cronologico');
+});
 document.getElementById('voltarTodas').addEventListener('click', () => {
+  mostrarTela('fluxo');
+  renderTelaPrincipal();
+});
+document.getElementById('voltarCronologico').addEventListener('click', () => {
   mostrarTela('fluxo');
   renderTelaPrincipal();
 });
@@ -1906,7 +2347,6 @@ document.getElementById('voltarConfig').addEventListener('click', () => {
   renderTelaPrincipal();
 });
 
-/* ---------- Salvar config com sincronização segura ---------- */
 document.getElementById('btnSalvarConfig').addEventListener('click', async () => {
   const ow = elOwner.value.trim();
   const rp = elRepo.value.trim() || 'pagamentos';
@@ -2064,6 +2504,7 @@ document.getElementById('arquivoImportarTudo').addEventListener('change', async 
   }
 })();
 
+/* ---------- Refresh ao voltar para o app ---------- */
 let ultimaRecargaVisible = 0;
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'visible'){
@@ -2071,7 +2512,11 @@ document.addEventListener('visibilitychange', () => {
     if(agora - ultimaRecargaVisible < 3000) return;
     ultimaRecargaVisible = agora;
     recarregarDespesas().then(ok => {
-      if(ok) renderTelaPrincipal();
+      if(!ok) return;
+      const cronoVisivel = !document.getElementById('tela-cronologico').classList.contains('escondido');
+      const fluxoVisivel = !document.getElementById('tela-fluxo').classList.contains('escondido');
+      if(cronoVisivel) renderCronologico();
+      else if(fluxoVisivel) renderTelaPrincipal();
     });
   }
   if(document.visibilityState === 'hidden'){
