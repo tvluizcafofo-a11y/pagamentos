@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-version="3.0" style="color-scheme: light !important;">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#3b82f6">
+<meta name="theme-color" content="#ffffff">
 <meta name="color-scheme" content="light">
 <meta name="supported-color-schemes" content="light">
-<title>Fluxo de Caixa</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Fluxo de Caixa v3.0</title>
 <style>
   :root{
     color-scheme: light;
@@ -16,15 +17,9 @@
     --azul:#2563eb;--azul-esc:#1d4ed8;--azul-bg:#eff6ff;--azul-claro:#dbeafe;
     --vermelho:#dc2626;--vermelho-bg:#fee2e2;--vermelho-claro:#fef2f2;
     --laranja:#f97316;--laranja-esc:#ea580c;--laranja-bg:#ffedd5;
-    --marca:#3b82f6;
-    --marca-esc:#2563eb;
-    --marca-mais-esc:#1d4ed8;
-    --marca-bg:#dbeafe;
-    --marca-claro:#eff6ff;
-    --marca-medio:#bfdbfe;
-    --marca-borda:#93c5fd;
-    --roxo:#7c3aed;--roxo-bg:#ede9fe;
-    --raio:14px;
+    --marca:#3b82f6;--marca-esc:#2563eb;--marca-mais-esc:#1d4ed8;
+    --marca-bg:#dbeafe;--marca-claro:#eff6ff;--marca-medio:#bfdbfe;--marca-borda:#93c5fd;
+    --roxo:#7c3aed;--roxo-bg:#ede9fe;--raio:14px;
   }
   html{
     color-scheme: light;
@@ -39,20 +34,19 @@
     background:var(--fundo);color:var(--texto);font-size:15px;line-height:1.45;
     -webkit-tap-highlight-color:transparent;
     forced-color-adjust: none}
-  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
-  /* FORÇA BRUTA EM TODOS OS CONTROLES (defesa em profundidade) */
+  /* ============================================================
+     REGRAS AGRESSIVAS PARA FORÇAR FUNDO BRANCO EM FORMULÁRIOS
+     — aplicadas cedo e reforçadas depois via JS
+     ============================================================ */
   input, select, textarea{
     color-scheme: light !important;
     forced-color-adjust: none !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
   }
-  input[type="text"], input[type="number"], input[type="date"],
-  input[type="password"], input[type="search"], input[type="email"],
-  input[type="tel"], input[type="url"], select, textarea{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
+
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit}
 
   header.topo{
     background:linear-gradient(135deg,#2563eb 0%,#3b82f6 100%);
@@ -99,8 +93,7 @@
     width:6px;background:linear-gradient(180deg,var(--marca),var(--marca-esc));
     border-radius:4px}
 
-  .btn-ver-fluxo{
-    width:100%;margin-bottom:14px;
+  .btn-ver-fluxo{width:100%;margin-bottom:14px;
     background:linear-gradient(135deg,#3b82f6 0%,#2563eb 100%);
     color:#fff;padding:14px 20px;border-radius:12px;
     font-weight:900;font-size:.95rem;
@@ -193,8 +186,7 @@
   .aviso-vazio code{background:#fff;border:1px solid #fcd34d;border-radius:4px;
     padding:1px 6px;font-family:monospace;font-size:.78rem}
 
-  .item-receita{
-    background:#fff;border:2px solid var(--linha);border-left:6px solid var(--azul);
+  .item-receita{background:#fff;border:2px solid var(--linha);border-left:6px solid var(--azul);
     border-radius:12px;padding:12px 14px;margin-bottom:10px;
     box-shadow:0 2px 6px rgba(15,23,42,.06);
     display:flex;flex-direction:column;gap:10px;transition:.15s}
@@ -268,8 +260,7 @@
   .grupo-despesa .itens .item-despesa.st-pago{border-left-color:var(--verde)}
   .grupo-despesa .itens .item-despesa.st-em_atraso{border-left-color:var(--vermelho)}
 
-  .item-despesa{
-    background:#fff;
+  .item-despesa{background:#fff;
     display:flex;justify-content:space-between;gap:10px;align-items:center;
     box-shadow:none;opacity:.92}
   .item-despesa.st-pago{opacity:1}
@@ -314,27 +305,14 @@
     transition:.15s;margin-top:10px;width:100%}
   .btn-secundario:hover{background:#e2e8f0}
 
-  /* ========== FORMULÁRIO ========== */
-  .form-cartao{
-    background:#ffffff;
-    border:1px solid #e2e8f0;
-    border-radius:16px;
-    padding:22px 20px;
+  .form-cartao{background:#ffffff;border:1px solid #e2e8f0;
+    border-radius:16px;padding:22px 20px;
     box-shadow:0 1px 3px rgba(15,23,42,.04), 0 8px 24px rgba(15,23,42,.05);
-    margin-bottom:16px;
-  }
-  .form-intro{
-    background:linear-gradient(135deg,#eff6ff,#e0f2fe);
-    border:1.5px solid #bae6fd;
-    border-left:4px solid #3b82f6;
-    border-radius:10px;
-    padding:13px 15px;
-    font-size:.84rem;
-    color:#1e40af;
-    font-weight:600;
-    margin-bottom:22px;
-    line-height:1.55;
-  }
+    margin-bottom:16px}
+  .form-intro{background:linear-gradient(135deg,#eff6ff,#e0f2fe);
+    border:1.5px solid #bae6fd;border-left:4px solid #3b82f6;
+    border-radius:10px;padding:13px 15px;font-size:.84rem;
+    color:#1e40af;font-weight:600;margin-bottom:22px;line-height:1.55}
   .form-intro .obrig{color:#dc2626;font-weight:900}
 
   .grade-form{display:grid;gap:18px;
@@ -349,85 +327,7 @@
   .campo .dica{font-weight:500;color:#94a3b8;font-size:.72rem;margin-top:1px;
     line-height:1.4}
 
-  /* ============== INPUTS: FORÇA VISUAL CLARO ============== */
-  .campo input,
-  .campo select,
-  input[type="text"],
-  input[type="number"],
-  input[type="date"],
-  input[type="password"],
-  input[type="search"],
-  input[type="email"],
-  input[type="tel"],
-  input[type="url"],
-  select,
-  textarea{
-    font:inherit;
-    font-weight:500;
-    color:#0f172a !important;
-    -webkit-text-fill-color:#0f172a !important;
-    background-color:#ffffff !important;
-    background-image:none !important;
-    border:1.5px solid #cbd5e1;
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:.92rem;
-    width:100%;
-    min-width:0;
-    outline:none;
-    transition:border-color .15s, box-shadow .15s, background-color .15s;
-    color-scheme:light !important;
-    forced-color-adjust:none !important;
-    -webkit-appearance:none;
-    -moz-appearance:none;
-    appearance:none;
-    line-height:1.4;
-  }
-  .campo input::placeholder,
-  .campo textarea::placeholder,
-  input::placeholder,
-  textarea::placeholder{
-    color:#94a3b8 !important;
-    opacity:1;
-    -webkit-text-fill-color:#94a3b8 !important;
-    font-weight:400;
-  }
-  .campo input:hover,
-  .campo select:hover{border-color:#94a3b8;background-color:#ffffff !important}
-  .campo input:focus,
-  .campo select:focus{border-color:#3b82f6;
-    box-shadow:0 0 0 4px rgba(59,130,246,.12);
-    background-color:#ffffff !important}
-  .campo select{
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
-    background-repeat:no-repeat !important;
-    background-position:right 12px center !important;
-    background-size:12px !important;
-    padding-right:36px !important;
-    cursor:pointer;
-  }
-  /* Autofill */
-  .campo input:-webkit-autofill,
-  .campo input:-webkit-autofill:hover,
-  .campo input:-webkit-autofill:focus,
-  .campo input:-webkit-autofill:active{
-    -webkit-box-shadow:0 0 0 1000px #ffffff inset !important;
-    -webkit-text-fill-color:#0f172a !important;
-    caret-color:#0f172a;
-    transition:background-color 5000s ease-in-out 0s;
-  }
-  .campo input[type="date"]::-webkit-calendar-picker-indicator{
-    filter:none;opacity:.65;cursor:pointer;
-  }
-  .campo input[type="date"]::-webkit-calendar-picker-indicator:hover{opacity:1}
-  .campo input[type="number"]::-webkit-outer-spin-button,
-  .campo input[type="number"]::-webkit-inner-spin-button{
-    -webkit-appearance:none;margin:0;
-  }
-  .campo input[type="number"]{-moz-appearance:textfield}
-
-  .check-infinita{
-    display:flex;align-items:flex-start;gap:14px;
+  .check-infinita{display:flex;align-items:flex-start;gap:14px;
     background:#f0f9ff;border:1.5px solid #bae6fd;
     border-radius:12px;padding:14px 16px;margin-top:4px;
     cursor:pointer;transition:.15s;grid-column:1 / -1;
@@ -463,7 +363,6 @@
   .btn-perigo:hover{background:#fecaca}
   .btn:disabled{opacity:.6;cursor:not-allowed}
 
-  /* Config */
   .config-status-cartao{border-radius:var(--raio);padding:14px 16px;
     margin-bottom:14px;display:flex;gap:14px;align-items:center;
     border:2px solid var(--linha);background:#fff;
@@ -517,13 +416,6 @@
     border-radius:8px;padding:12px 14px;font-size:.84rem;color:var(--texto);
     line-height:1.6;margin:12px 0 4px;font-weight:500}
   #textoEscopo b{color:var(--marca-mais-esc);font-weight:900}
-  .linha-mudanca{display:flex;align-items:flex-start;gap:10px;padding:7px 0;
-    border-bottom:1px dashed #e2e8f0}
-  .linha-mudanca:last-child{border-bottom:none}
-  .linha-mudanca .campo-nome{font-weight:900;color:var(--marca-mais-esc);min-width:80px;
-    flex-shrink:0;font-size:.78rem;text-transform:uppercase;letter-spacing:.3px}
-  .linha-mudanca .valor-mudanca{color:var(--texto);word-break:break-word;
-    font-size:.84rem;font-weight:600}
 
   .opcoes-escopo{display:flex;flex-direction:column;gap:10px;margin-top:14px}
   .opcao-escopo{display:flex;align-items:flex-start;gap:12px;background:#f8fafc;
@@ -570,8 +462,7 @@
     margin-top:10px;padding-top:10px;border-top:1px dashed var(--linha);
     justify-content:flex-end}
 
-  .crono-info-anterior{
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+  .crono-info-anterior{background:linear-gradient(135deg,#eff6ff,#dbeafe);
     border:2px solid #93c5fd;border-left:6px solid var(--marca);
     border-radius:12px;padding:12px 14px;margin-bottom:14px;
     display:flex;justify-content:space-between;align-items:center;gap:10px;
@@ -583,31 +474,25 @@
   .crono-info-anterior small{display:block;font-size:.68rem;opacity:.85;
     margin-top:2px;font-weight:500}
 
-  .crono-tabela-area{
-    background:#fff;border:2px solid var(--linha);border-radius:12px;
+  .crono-tabela-area{background:#fff;border:2px solid var(--linha);border-radius:12px;
     overflow-x:auto;-webkit-overflow-scrolling:touch;
     box-shadow:0 2px 8px rgba(15,23,42,.06);margin-bottom:14px}
-  .crono-tabela{width:100%;border-collapse:collapse;font-size:.8rem;
-    min-width:520px}
+  .crono-tabela{width:100%;border-collapse:collapse;font-size:.8rem;min-width:520px}
   .crono-tabela thead th:first-child,
   .crono-tabela tbody td:first-child,
-  .crono-tabela tfoot td:first-child{
-    width:1%;white-space:nowrap;text-align:left;
+  .crono-tabela tfoot td:first-child{width:1%;white-space:nowrap;text-align:left;
     padding-left:10px;padding-right:6px}
-  .crono-tabela thead th{
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
+  .crono-tabela thead th{background:linear-gradient(135deg,#eff6ff,#dbeafe);
     color:var(--marca-mais-esc);font-weight:900;font-size:.66rem;
     text-transform:uppercase;letter-spacing:.6px;
     padding:10px 8px;text-align:right;
     border-bottom:2px solid #93c5fd;white-space:nowrap}
-  .crono-tabela tbody td{
-    padding:9px 8px;border-bottom:1px solid #f1f5f9;
+  .crono-tabela tbody td{padding:9px 8px;border-bottom:1px solid #f1f5f9;
     text-align:right;font-weight:600;color:#334155;
     font-variant-numeric:tabular-nums;white-space:nowrap;
     transition:background .15s}
-  .crono-tabela tbody td:first-child{
-    font-weight:800;color:#0f172a;font-variant-numeric:normal;
-    font-size:.82rem}
+  .crono-tabela tbody td:first-child{font-weight:800;color:#0f172a;
+    font-variant-numeric:normal;font-size:.82rem}
   .crono-tabela tbody tr:last-child td{border-bottom:none}
   .crono-tabela tbody td.rec{color:var(--verde-esc);font-weight:900}
   .crono-tabela tbody td.desp{color:#b91c1c;font-weight:900}
@@ -622,61 +507,40 @@
     background:rgba(220,38,38,.05)}
   .crono-tabela tbody td.acum.zero{color:var(--suave);font-weight:700;
     background:rgba(100,116,139,.05)}
-
   .crono-tabela tbody tr.crono-linha{cursor:pointer}
   .crono-tabela tbody tr.crono-linha:hover td{background:rgba(59,130,246,.06)}
-  .crono-tabela tbody tr.crono-linha.dia-realizado td{
-    background:rgba(22,163,74,.05)}
-  .crono-tabela tbody tr.crono-linha.dia-realizado:hover td{
-    background:rgba(22,163,74,.11)}
-  .crono-tabela tbody tr.crono-linha.expandido td{
-    background:rgba(59,130,246,.10);
+  .crono-tabela tbody tr.crono-linha.dia-realizado td{background:rgba(22,163,74,.05)}
+  .crono-tabela tbody tr.crono-linha.dia-realizado:hover td{background:rgba(22,163,74,.11)}
+  .crono-tabela tbody tr.crono-linha.expandido td{background:rgba(59,130,246,.10);
     border-bottom-color:#93c5fd}
-  .crono-tabela tbody tr.crono-linha.expandido td:first-child{
-    color:var(--marca-mais-esc)}
+  .crono-tabela tbody tr.crono-linha.expandido td:first-child{color:var(--marca-mais-esc)}
 
-  .seta-expand{
-    display:inline-block;font-size:.55rem;color:var(--suave);
+  .seta-expand{display:inline-block;font-size:.55rem;color:var(--suave);
     margin-left:3px;opacity:.7;
-    transition:transform .2s ease, color .2s ease;
-    vertical-align:middle}
-  .crono-tabela tbody tr.crono-linha.expandido .seta-expand{
-    transform:rotate(180deg);
-    color:var(--marca-mais-esc);
-    opacity:1}
+    transition:transform .2s ease, color .2s ease;vertical-align:middle}
+  .crono-tabela tbody tr.crono-linha.expandido .seta-expand{transform:rotate(180deg);
+    color:var(--marca-mais-esc);opacity:1}
 
-  .crono-detalhe-row td{
-    padding:0 !important;
-    background:#f8fafc !important;
-    border-bottom:2px solid #93c5fd !important;
-    text-align:left !important;
-    white-space:normal !important;
-    font-variant-numeric:normal !important}
-  .crono-detalhe{
-    padding:10px 12px;display:flex;flex-direction:column;gap:6px;
+  .crono-detalhe-row td{padding:0 !important;background:#f8fafc !important;
+    border-bottom:2px solid #93c5fd !important;text-align:left !important;
+    white-space:normal !important;font-variant-numeric:normal !important}
+  .crono-detalhe{padding:10px 12px;display:flex;flex-direction:column;gap:6px;
     animation:cronoDetalheIn .18s ease-out}
-  @keyframes cronoDetalheIn{
-    from{opacity:0;transform:translateY(-4px)}
-    to{opacity:1;transform:none}
-  }
-  .crono-detalhe-item{
-    display:flex;align-items:center;gap:10px;
+  @keyframes cronoDetalheIn{from{opacity:0;transform:translateY(-4px)}
+    to{opacity:1;transform:none}}
+  .crono-detalhe-item{display:flex;align-items:center;gap:10px;
     padding:8px 10px;background:#fff;
-    border:1.5px solid var(--linha);border-radius:8px;
-    font-weight:600;min-width:0}
+    border:1.5px solid var(--linha);border-radius:8px;font-weight:600;min-width:0}
   .crono-detalhe-item.rec{border-left:4px solid var(--verde)}
   .crono-detalhe-item.desp{border-left:4px solid var(--vermelho)}
   .crono-detalhe-ico{font-size:1rem;flex-shrink:0;line-height:1}
   .crono-detalhe-info{flex:1;min-width:0}
-  .crono-detalhe-info b{
-    display:block;font-size:.84rem;font-weight:900;color:#0f172a;
+  .crono-detalhe-info b{display:block;font-size:.84rem;font-weight:900;color:#0f172a;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .crono-detalhe-info small{
-    display:block;font-size:.72rem;color:var(--suave);font-weight:500;
-    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  .crono-detalhe-info small{display:block;font-size:.72rem;color:var(--suave);
+    font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
     margin-top:1px}
-  .crono-detalhe-valor{
-    font-size:.88rem;font-weight:900;color:var(--texto);
+  .crono-detalhe-valor{font-size:.88rem;font-weight:900;color:var(--texto);
     flex-shrink:0;font-variant-numeric:tabular-nums;letter-spacing:-.2px}
   .crono-detalhe-item.rec .crono-detalhe-valor{color:var(--verde-esc)}
   .crono-detalhe-item.desp .crono-detalhe-valor{color:#b91c1c}
@@ -685,10 +549,8 @@
   .status-aberto{color:var(--azul-esc);font-weight:800}
   .status-atrasado,.status-outros{color:var(--laranja-esc);font-weight:800}
 
-  .crono-tabela tfoot td{
-    background:linear-gradient(135deg,#eff6ff,#dbeafe);
-    border-top:2px solid var(--marca);
-    font-weight:900;color:var(--marca-mais-esc);
+  .crono-tabela tfoot td{background:linear-gradient(135deg,#eff6ff,#dbeafe);
+    border-top:2px solid var(--marca);font-weight:900;color:var(--marca-mais-esc);
     padding:11px 8px;text-align:right;
     font-variant-numeric:tabular-nums;white-space:nowrap;font-size:.8rem}
   .crono-tabela tfoot td.rec{color:var(--verde-esc)}
@@ -702,8 +564,7 @@
     color:var(--suave) !important;font-weight:600 !important;
     font-size:.86rem !important;font-variant-numeric:normal !important}
 
-  .crono-legenda{
-    display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
+  .crono-legenda{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;
     padding:10px 12px;background:#fff;border:2px solid var(--linha);
     border-radius:10px;font-size:.72rem;color:var(--suave);font-weight:600}
   .crono-legenda span{display:flex;align-items:center;gap:6px}
@@ -711,6 +572,19 @@
     display:inline-block;border:2px solid transparent}
   .crono-legenda i.l-real{background:#f0fdf4;border-color:#86efac}
   .crono-legenda i.l-pend{background:#fff;border-color:#cbd5e1}
+
+  /* Rodapé de versão */
+  .rodape-versao{text-align:center;font-size:.66rem;color:#94a3b8;
+    font-weight:700;padding:20px 0 16px;letter-spacing:.3px}
+
+  /* Debug banner */
+  #debugBanner{background:#fef3c7;border:2px solid #fbbf24;
+    border-radius:10px;padding:12px 14px;margin-bottom:14px;
+    font-family:ui-monospace,monospace;font-size:.72rem;color:#78350f;
+    line-height:1.6;white-space:pre-wrap;word-break:break-word}
+  #debugBanner b{color:#92400e}
+  #debugBanner .ok{color:#15803d;font-weight:900}
+  #debugBanner .erro{color:#b91c1c;font-weight:900}
 
   @media (max-width:520px){
     header.topo h1{font-size:1rem}
@@ -756,6 +630,8 @@
 
 <div class="area">
 
+  <div id="debugBanner" class="escondido"></div>
+
   <section class="tela" id="tela-fluxo">
     <button type="button" class="btn-ver-fluxo" id="btnCronologico">📊 Ver fluxo cronológico</button>
 
@@ -769,7 +645,6 @@
       <div class="rotulo">💰 Saldo realizado do mês</div>
       <div class="valor" id="saldoValor">R$ 0,00</div>
       <div class="subtitulo" id="saldoSubtitulo">Recebido − Pago</div>
-
       <div class="divisor"><span>✔ Já movimentado</span></div>
       <div class="detalhes">
         <div class="det-item det-entrada">
@@ -781,7 +656,6 @@
           <strong id="totalPago">R$ 0,00</strong>
         </div>
       </div>
-
       <div class="divisor"><span>⏳ Ainda pendente</span></div>
       <div class="detalhes">
         <div class="det-item det-pendente">
@@ -815,6 +689,8 @@
       </div>
       <div id="listaDespesas"></div>
     </section>
+
+    <div class="rodape-versao" id="rodapeVersao">Fluxo de Caixa v3.0</div>
   </section>
 
   <section class="tela escondido" id="tela-cronologico">
@@ -824,9 +700,7 @@
       <h2 id="cronoTituloMes"></h2>
       <button type="button" class="nav-mes-btn" id="cronoMesProximo" aria-label="Próximo mês">›</button>
     </div>
-
     <div class="crono-info-anterior" id="cronoSaldoAnterior"></div>
-
     <div class="crono-tabela-area">
       <table class="crono-tabela">
         <thead>
@@ -842,30 +716,27 @@
         <tfoot id="cronoTfoot"></tfoot>
       </table>
     </div>
-
     <div class="crono-legenda">
       <span><i class="l-real"></i> Tudo pago/recebido</span>
       <span><i class="l-pend"></i> Com pendências</span>
       <span>👆 Toque em uma data para ver os itens</span>
     </div>
+    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
   </section>
 
   <section class="tela escondido" id="tela-nova">
     <button type="button" class="btn-voltar" id="voltarForm">Voltar</button>
     <h2 class="titulo-tela" id="tituloForm">➕ Nova receita</h2>
     <form class="form-cartao" id="formReceita" autocomplete="off">
-
       <div class="form-intro">
         Preencha os dados abaixo para cadastrar uma nova fonte de receita. Campos com
         <span class="obrig">*</span> são obrigatórios.
       </div>
-
       <div class="grade-form">
         <label class="campo largura-total">
           <span class="campo-label">Fonte pagadora <span class="obrig">*</span></span>
           <input type="text" id="campoFonte" required placeholder="Ex.: Aluguel Apto 101, Holerite, Aposentadoria" maxlength="80">
         </label>
-
         <label class="campo">
           <span class="campo-label">Tipo</span>
           <select id="campoTipo">
@@ -875,17 +746,14 @@
             <option value="outro">Outro</option>
           </select>
         </label>
-
         <label class="campo">
           <span class="campo-label">Valor base (R$) <span class="obrig">*</span></span>
           <input type="number" id="campoValorBase" step="0.01" min="0.01" required placeholder="0,00">
         </label>
-
         <label class="campo">
           <span class="campo-label">Primeiro vencimento <span class="obrig">*</span></span>
           <input type="date" id="campoPrimeiro" required>
         </label>
-
         <label class="campo">
           <span class="campo-label">Dia do vencimento mensal</span>
           <select id="campoDiaVenc">
@@ -893,7 +761,6 @@
           </select>
           <span class="dica">Se escolher, a 1ª parcela é ajustada para o próximo dia válido.</span>
         </label>
-
         <label class="check-infinita" id="labelInfinita" for="campoInfinita">
           <input type="checkbox" id="campoInfinita">
           <div class="conteudo">
@@ -901,13 +768,11 @@
             <small>Sem fim de contrato (ex.: aposentadoria). As parcelas são geradas automaticamente e mantidas no horizonte.</small>
           </div>
         </label>
-
         <label class="campo" id="blocoDataFim">
           <span class="campo-label">Data fim do contrato <span class="obrig">*</span></span>
           <input type="date" id="campoDataFim">
         </label>
       </div>
-
       <div class="acoes-form">
         <button type="submit" class="btn btn-primario" id="btnSalvarForm">💾 Salvar</button>
         <button type="button" class="btn btn-neutro" id="btnDescartar">✕ Descartar</button>
@@ -920,12 +785,12 @@
     <h2 class="titulo-tela">📋 Receitas cadastradas</h2>
     <div id="listaTodasReceitas"></div>
     <button type="button" class="btn-nova-receita" id="btnNovaReceita2">➕ Nova receita</button>
+    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
   </section>
 
   <section class="tela escondido" id="tela-config">
     <button type="button" class="btn-voltar" id="voltarConfig">Voltar</button>
     <h2 class="titulo-tela">⚙️ Configuração GitHub</h2>
-
     <div class="config-status-cartao" id="configStatus">
       <span class="emoji">☁️</span>
       <div style="flex:1;min-width:0">
@@ -933,7 +798,6 @@
         <small id="configStatusDescricao">Sem sincronização — leitura local apenas.</small>
       </div>
     </div>
-
     <div class="form-cartao">
       <div class="grade-form">
         <label class="campo">Usuário GitHub *
@@ -964,7 +828,6 @@
         <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar e sincronizar</button>
       </div>
     </div>
-
     <div class="form-cartao" style="margin-top:14px">
       <h3 style="margin:0 0 10px;font-size:.95rem;font-weight:900;color:#0f172a;
         display:flex;align-items:center;gap:8px">
@@ -981,11 +844,9 @@
         <input type="file" id="arquivoImportarTudo" accept="application/json" hidden>
       </div>
     </div>
-
     <button type="button" class="btn btn-neutro" id="btnRecarregarDespesas" style="margin-top:14px;width:100%">
       🔄 Recarregar despesas agora
     </button>
-
     <div class="config-ajuda">
       <b>Como funciona</b>
       <ol>
@@ -995,6 +856,7 @@
         <li>Se este app estiver no mesmo domínio do app de pagamentos, também tenta herdar a configuração automaticamente.</li>
       </ol>
     </div>
+    <div class="rodape-versao">Fluxo de Caixa v3.0</div>
   </section>
 
 </div>
@@ -1040,7 +902,160 @@
 
 <script>
 /* =========================================================
-   FLUXO DE CAIXA
+   FLUXO DE CAIXA v3.0 — Injeção agressiva de modo claro
+   ========================================================= */
+(function aplicarEstiloNuclear(){
+  const st = document.createElement('style');
+  st.id = 'estiloNuclearModoClaro';
+  st.textContent = `
+    html, body {
+      color-scheme: light !important;
+      forced-color-adjust: none !important;
+    }
+    input, select, textarea,
+    input[type="text"], input[type="number"], input[type="date"],
+    input[type="password"], input[type="search"], input[type="email"],
+    input[type="tel"], input[type="url"], input[type="time"],
+    input[type="datetime-local"], input[type="month"], input[type="week"],
+    input:not([type]), select, textarea {
+      background: #ffffff !important;
+      background-color: #ffffff !important;
+      background-image: none !important;
+      background-blend-mode: normal !important;
+      color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
+      caret-color: #0f172a !important;
+      color-scheme: light !important;
+      forced-color-adjust: none !important;
+      -webkit-box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
+      box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
+      border: 1.5px solid #cbd5e1 !important;
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      border-radius: 10px !important;
+    }
+    input::placeholder, textarea::placeholder {
+      color: #94a3b8 !important;
+      -webkit-text-fill-color: #94a3b8 !important;
+      opacity: 1 !important;
+    }
+    input::-webkit-datetime-edit,
+    input::-webkit-datetime-edit-fields-wrapper,
+    input::-webkit-datetime-edit-text,
+    input::-webkit-datetime-edit-month-field,
+    input::-webkit-datetime-edit-day-field,
+    input::-webkit-datetime-edit-year-field,
+    input::-webkit-datetime-edit-hour-field,
+    input::-webkit-datetime-edit-minute-field,
+    input::-webkit-datetime-edit-second-field,
+    input::-webkit-datetime-edit-millisecond-field,
+    input::-webkit-datetime-edit-meridiem-field {
+      background: transparent !important;
+      background-color: transparent !important;
+      color: #0f172a !important;
+      -webkit-text-fill-color: #0f172a !important;
+      color-scheme: light !important;
+      forced-color-adjust: none !important;
+    }
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button,
+    input::-webkit-clear-button {
+      -webkit-appearance: none !important;
+      appearance: none !important;
+      display: none !important;
+    }
+    input::-webkit-calendar-picker-indicator {
+      filter: none !important;
+      opacity: 0.7 !important;
+      cursor: pointer !important;
+      background-color: transparent !important;
+    }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      -webkit-box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
+      box-shadow: inset 0 0 0 1000px #ffffff, 0 0 0 1.5px #cbd5e1 !important;
+      -webkit-text-fill-color: #0f172a !important;
+      caret-color: #0f172a !important;
+      transition: background-color 5000s ease-in-out 0s !important;
+      color-scheme: light !important;
+      forced-color-adjust: none !important;
+    }
+    /* Select: mantém seta customizada, sem fundo preto */
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 12px center !important;
+      background-size: 12px !important;
+      padding-right: 36px !important;
+    }
+    select option {
+      background: #ffffff !important;
+      color: #0f172a !important;
+    }
+  `;
+  document.head.appendChild(st);
+})();
+
+/* Força inline em cada input após render */
+function forcarModoClaro(){
+  try{
+    const els = document.querySelectorAll('input, select, textarea');
+    els.forEach(el => {
+      try{
+        el.style.setProperty('background', '#ffffff', 'important');
+        el.style.setProperty('background-color', '#ffffff', 'important');
+        el.style.setProperty('background-image', 'none', 'important');
+        el.style.setProperty('color', '#0f172a', 'important');
+        el.style.setProperty('-webkit-text-fill-color', '#0f172a', 'important');
+        el.style.setProperty('color-scheme', 'light', 'important');
+        el.style.setProperty('forced-color-adjust', 'none', 'important');
+      }catch(e){}
+    });
+    console.log('[v3.0] forcarModoClaro: ' + els.length + ' controles');
+  }catch(e){ console.warn('[v3.0] forcarModoClaro falhou:', e); }
+}
+if(document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', forcarModoClaro);
+} else { forcarModoClaro(); }
+setTimeout(forcarModoClaro, 100);
+setTimeout(forcarModoClaro, 500);
+setTimeout(forcarModoClaro, 1500);
+
+/* =========================================================
+   Modo debug: ?debug=1
+   ========================================================= */
+const debugMode = new URLSearchParams(location.search).get('debug') === '1';
+function renderDebug(){
+  if(!debugMode) return;
+  const el = document.getElementById('debugBanner');
+  if(!el) return;
+  el.classList.remove('escondido');
+  const testInput = document.getElementById('campoFonte') || document.querySelector('input');
+  if(!testInput){
+    el.innerHTML = '<b>Debug:</b> nenhum input na página ainda. Abra o formulário Nova Receita.';
+    return;
+  }
+  const cs = getComputedStyle(testInput);
+  const bg = cs.backgroundColor;
+  const color = cs.color;
+  const scheme = cs.colorScheme || '(não suportado)';
+  const okBg = bg === 'rgb(255, 255, 255)' || bg === '#ffffff';
+  el.innerHTML =
+    `<b>Debug v3.0</b>\n` +
+    `Input testado: #${testInput.id || testInput.name || 'sem-id'}\n` +
+    `background-color: <span class="${okBg ? 'ok' : 'erro'}">${bg}</span> ${okBg ? '✅' : '❌ (deveria ser branco)'}\n` +
+    `color: <span class="${color === 'rgb(15, 23, 42)' ? 'ok' : 'erro'}">${color}</span>\n` +
+    `color-scheme: ${scheme}\n` +
+    `--fundo: ${getComputedStyle(document.documentElement).getPropertyValue('--fundo')}\n` +
+    `UA: ${navigator.userAgent.slice(0, 100)}…`;
+}
+setTimeout(renderDebug, 300);
+setTimeout(renderDebug, 1000);
+
+/* =========================================================
+   Resto do app (mantido)
    ========================================================= */
 const CHAVE_RECEITAS = 'sistemaFluxo.v1';
 const CHAVE_PAGAMENTOS = 'sistemaPagamentos.v2';
@@ -1048,7 +1063,6 @@ const GH_KEY = 'sistemaFluxo.github';
 const GH_PAGAMENTOS_KEY = 'sistemaPagamentos.github';
 const MES_KEY = 'sistemaFluxo.mesRef';
 const DIRTY_KEY = 'sistemaFluxo.dirty';
-
 const PARCELAS_INICIAIS = 24;
 const PARCELAS_MIN_FUTURAS = 12;
 const LIMITE_GITHUB_BYTES = 900 * 1024;
@@ -1062,14 +1076,12 @@ let resolverEscopo = null;
 let syncTimer = null;
 let syncing = false;
 let edicaoValorPendente = null;
-
 const cronoDiasExpandidos = new Set();
 
 const TIPO_LABEL = {
   aluguel:'Aluguel', holerite:'Holerite',
   aposentadoria:'Aposentadoria', outro:'Outro'
 };
-
 const gid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,8);
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmtBRL = (v) => Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
@@ -1115,40 +1127,6 @@ function normalizarStatus(status){
   return 'em_aberto';
 }
 
-/* =========================================================
-   FORÇA MODO CLARO NOS INPUTS (nuclear)
-   Aplica inline !important em todos os controles — ganha
-   de qualquer CSS externo e desativa force dark do WebView.
-   ========================================================= */
-function forcarModoClaro(){
-  let count = 0;
-  try{
-    document.querySelectorAll('input, select, textarea').forEach(el => {
-      try{
-        el.style.setProperty('color-scheme', 'light', 'important');
-        el.style.setProperty('forced-color-adjust', 'none', 'important');
-        el.style.setProperty('background-color', '#ffffff', 'important');
-        el.style.setProperty('background-image', 'none', 'important');
-        el.style.setProperty('color', '#0f172a', 'important');
-        el.style.setProperty('-webkit-text-fill-color', '#0f172a', 'important');
-        count++;
-      }catch(e){ /* ignora */ }
-    });
-  }catch(e){ console.warn('[Modo Claro] falhou:', e); }
-  if(count > 0) console.log('[Modo Claro] ' + count + ' controles forçados para light');
-  return count;
-}
-/* Roda o quanto antes possível */
-if(document.readyState === 'loading'){
-  document.addEventListener('DOMContentLoaded', forcarModoClaro);
-} else {
-  forcarModoClaro();
-}
-/* Reforça após um tick (defesa contra renderização tardia) */
-setTimeout(forcarModoClaro, 100);
-setTimeout(forcarModoClaro, 500);
-
-/* ---------- GitHub ---------- */
 let ghConfig = {
   owner:'', repo:'pagamentos', branch:'main',
   pathDividas:'dados/dividas.json', pathReceitas:'dados/receitas.json',
@@ -1213,8 +1191,6 @@ async function fetchGH(url, opts){
 function ghURLContent(path){
   return `https://api.github.com/repos/${ghConfig.owner}/${ghConfig.repo}/contents/${path}`;
 }
-
-/* ---------- Storage local ---------- */
 function carregarReceitasLocais(){
   try{
     const raw = localStorage.getItem(CHAVE_RECEITAS);
@@ -1239,8 +1215,6 @@ function lerDividasLocal(){
     return Array.isArray(arr) ? arr : null;
   }catch(e){ return null; }
 }
-
-/* ---------- Carregar do GitHub ---------- */
 async function carregarDividasGitHub(){
   if(!ghConfigurado()) return null;
   try{
@@ -1248,27 +1222,19 @@ async function carregarDividasGitHub(){
     if(r.status === 404) return [];
     if(!r.ok) return null;
     const info = await r.json();
-
     let texto = '';
-    if(info.content){
-      texto = b64Dec(info.content);
-    } else if(info.download_url){
-      const raw = await fetch(info.download_url, {
-        headers: { 'Authorization': `token ${ghConfig.token}` }
-      });
+    if(info.content){ texto = b64Dec(info.content); }
+    else if(info.download_url){
+      const raw = await fetch(info.download_url, { headers: { 'Authorization': `token ${ghConfig.token}` } });
       if(!raw.ok) return null;
       texto = await raw.text();
-    } else {
-      return null;
-    }
-
+    } else return null;
     texto = texto.replace(/^\uFEFF/,'').trim();
     if(!texto) return [];
     const arr = JSON.parse(texto);
     return Array.isArray(arr) ? arr : null;
   }catch(e){ console.error('[GH] dividas:', e); return null; }
 }
-
 async function carregarReceitasGitHub(){
   if(!ghConfigurado()) return null;
   try{
@@ -1276,32 +1242,22 @@ async function carregarReceitasGitHub(){
     if(r.status === 404) return [];
     if(!r.ok) return null;
     const info = await r.json();
-
     let texto = '';
-    if(info.content){
-      texto = b64Dec(info.content);
-    } else if(info.download_url){
-      const raw = await fetch(info.download_url, {
-        headers: { 'Authorization': `token ${ghConfig.token}` }
-      });
+    if(info.content){ texto = b64Dec(info.content); }
+    else if(info.download_url){
+      const raw = await fetch(info.download_url, { headers: { 'Authorization': `token ${ghConfig.token}` } });
       if(!raw.ok) return null;
       texto = await raw.text();
-    } else {
-      return null;
-    }
-
+    } else return null;
     texto = texto.replace(/^\uFEFF/,'').trim();
     if(!texto) return [];
     const arr = JSON.parse(texto);
     return Array.isArray(arr) ? arr : null;
   }catch(e){ console.error('[GH] receitas:', e); return null; }
 }
-
-/* ---------- Carregamento principal ---------- */
 async function carregarTudo(){
   const dirty = localStorage.getItem(DIRTY_KEY) === '1';
   carregarReceitasLocais();
-
   if(ghConfigurado()){
     setStatusSync('☁️ Carregando...','carregando');
     if(!dirty){
@@ -1313,61 +1269,33 @@ async function carregarTudo(){
       }
     }
   }
-
   if(ghConfigurado()){
     const remoto = await carregarDividasGitHub();
-    if(remoto !== null){
-      dividasPagamentos = remoto;
-      fonteDespesas = 'github';
-    } else {
+    if(remoto !== null){ dividasPagamentos = remoto; fonteDespesas = 'github'; }
+    else {
       const local = lerDividasLocal();
-      if(local){
-        dividasPagamentos = local;
-        fonteDespesas = 'localStorage';
-      } else {
-        dividasPagamentos = [];
-        fonteDespesas = 'vazio';
-      }
+      if(local){ dividasPagamentos = local; fonteDespesas = 'localStorage'; }
+      else { dividasPagamentos = []; fonteDespesas = 'vazio'; }
     }
   } else {
     const local = lerDividasLocal();
-    if(local){
-      dividasPagamentos = local;
-      fonteDespesas = 'localStorage';
-    } else {
-      dividasPagamentos = [];
-      fonteDespesas = 'vazio';
-    }
+    if(local){ dividasPagamentos = local; fonteDespesas = 'localStorage'; }
+    else { dividasPagamentos = []; fonteDespesas = 'vazio'; }
   }
-
   if(ghConfigurado()){
     setStatusSync(dirty ? '⚠️ Local pendente' : '✅ Carregado', dirty ? 'aviso' : 'ok');
-  } else {
-    setStatusSync('☁️ Offline','');
-  }
-
+  } else { setStatusSync('☁️ Offline',''); }
   manutencaoReceitas();
 }
-
 async function recarregarDespesas(){
   if(ghConfigurado()){
     const remoto = await carregarDividasGitHub();
-    if(remoto !== null){
-      dividasPagamentos = remoto;
-      fonteDespesas = 'github';
-      return true;
-    }
+    if(remoto !== null){ dividasPagamentos = remoto; fonteDespesas = 'github'; return true; }
   }
   const local = lerDividasLocal();
-  if(local){
-    dividasPagamentos = local;
-    fonteDespesas = 'localStorage';
-    return true;
-  }
+  if(local){ dividasPagamentos = local; fonteDespesas = 'localStorage'; return true; }
   return false;
 }
-
-/* ---------- Salvar receitas no GitHub ---------- */
 async function salvarReceitasGitHub(opts){
   opts = opts || {};
   if(!ghConfigurado()) return false;
@@ -1382,7 +1310,6 @@ async function salvarReceitasGitHub(opts){
       if(!opts.silencioso) alert('⚠️ O arquivo de receitas excede o limite.');
       return false;
     }
-
     let sha = null;
     const getR = await fetchGH(ghURLContent(ghConfig.pathReceitas) + `?ref=${encodeURIComponent(ghConfig.branch)}`);
     if(getR.ok){ const info = await getR.json(); sha = info.sha; }
@@ -1390,26 +1317,16 @@ async function salvarReceitasGitHub(opts){
     else if(getR.status === 401){ setStatusSync('⚠️ Token inválido','erro'); return false; }
     else if(getR.status === 403){ setStatusSync('⚠️ Sem permissão','erro'); return false; }
     else { setStatusSync('⚠️ Erro ao salvar','erro'); return false; }
-
-    const body = {
-      message: `Receitas — ${new Date().toLocaleString('pt-BR')}`,
-      content: b64Enc(conteudo),
-      branch: ghConfig.branch
-    };
+    const body = { message: `Receitas — ${new Date().toLocaleString('pt-BR')}`, content: b64Enc(conteudo), branch: ghConfig.branch };
     if(sha) body.sha = sha;
-
     const putR = await fetchGH(ghURLContent(ghConfig.pathReceitas), {
-      method:'PUT',
-      headers:{ 'Content-Type':'application/json' },
-      body: JSON.stringify(body)
+      method:'PUT', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body)
     });
-
     if(!putR.ok){
       setStatusSync('⚠️ Erro ao salvar','erro');
       if(!opts.silencioso) alert('❌ Não foi possível salvar no GitHub.');
       return false;
     }
-
     localStorage.removeItem(DIRTY_KEY);
     const h = new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
     setStatusSync(`✅ Salvo ${h}`,'ok');
@@ -1427,7 +1344,6 @@ function agendarSync(){
 }
 function salvar(){ salvarReceitasLocais(); agendarSync(); }
 
-/* ---------- Manutenção de parcelas ---------- */
 function gerarParcelasAte(receita, ateData){
   const diaVenc = receita.diaVencimento || '';
   const base = ajustarDiaBase(receita.primeiroVencimento, diaVenc);
@@ -1442,13 +1358,11 @@ function gerarParcelasAte(receita, ateData){
   }
   return parcelas;
 }
-
 function manutencaoReceitas(){
   let mudou = false;
   const hj = hojeIso();
   receitas.forEach(r => {
     if(!Array.isArray(r.parcelas)) r.parcelas = [];
-
     if(r.infinita){
       let futuras = r.parcelas.filter(p => p.vencimento >= hj).length;
       let guard = 0;
@@ -1456,26 +1370,17 @@ function manutencaoReceitas(){
         const ultima = r.parcelas[r.parcelas.length-1];
         const base = ultima ? ultima.vencimento : (r.primeiroVencimento || hj);
         const proxima = somarMeses(base, 1);
-        r.parcelas.push({
-          id: gid(), vencimento: proxima,
-          valor: arr2(ultima ? ultima.valor : r.valorBase),
-          status: 'em_aberto'
-        });
+        r.parcelas.push({ id: gid(), vencimento: proxima, valor: arr2(ultima ? ultima.valor : r.valorBase), status: 'em_aberto' });
         futuras++; mudou = true;
       }
     } else if(r.dataFim){
       const ultima = r.parcelas[r.parcelas.length-1];
-      if(!ultima){
-        r.parcelas = gerarParcelasAte(r, r.dataFim);
-        mudou = true;
-      } else if(ultima.vencimento < r.dataFim){
+      if(!ultima){ r.parcelas = gerarParcelasAte(r, r.dataFim); mudou = true; }
+      else if(ultima.vencimento < r.dataFim){
         let cur = somarMeses(ultima.vencimento, 1);
         let guard = 0;
         while(cur <= r.dataFim && guard++ < 500){
-          r.parcelas.push({
-            id: gid(), vencimento: cur,
-            valor: arr2(ultima.valor), status: 'em_aberto'
-          });
+          r.parcelas.push({ id: gid(), vencimento: cur, valor: arr2(ultima.valor), status: 'em_aberto' });
           cur = somarMeses(cur, 1);
           mudou = true;
         }
@@ -1485,13 +1390,11 @@ function manutencaoReceitas(){
   if(mudou) salvarReceitasLocais();
 }
 
-/* ---------- Renderização: tela principal ---------- */
 function labelStatusParcelaReceita(p){
   if(p.status === 'recebido') return {classe:'recebido', txt:'✅ Recebido'};
   if(p.vencimento < hojeIso()) return {classe:'atrasado', txt:'⚠️ Atrasada'};
   return {classe:'aberto', txt:'⏳ Em aberto'};
 }
-
 function parceReceitaHTML(receita, parcela){
   const info = labelStatusParcelaReceita(parcela);
   const tipo = TIPO_LABEL[receita.tipo] || 'Outro';
@@ -1510,14 +1413,12 @@ function parceReceitaHTML(receita, parcela){
     <div class="item-linha2">
       ${podeReceber
         ? `<button type="button" class="btn-acao-receita receber" data-acao="marcarRecebido">✅ Marcar recebido</button>`
-        : `<button type="button" class="btn-acao-receita desfazer" data-acao="desmarcarRecebido">↩ Desfazer recebimento</button>`
-      }
+        : `<button type="button" class="btn-acao-receita desfazer" data-acao="desmarcarRecebido">↩ Desfazer recebimento</button>`}
       <button type="button" class="btn-acao-receita editar" data-acao="editarValor">✏️ Editar valor</button>
       <button type="button" class="btn-acao-receita excluir" data-acao="excluirParcela">🗑 Excluir</button>
     </div>
   </div>`;
 }
-
 function despesaHTML(divida, parcela){
   const st = normalizarStatus(parcela.status);
   const statusMap = {
@@ -1539,18 +1440,14 @@ function despesaHTML(divida, parcela){
     </div>
   </div>`;
 }
-
 function parcelasReceitaNoMes(mes){
   const out = [];
-  receitas.forEach(r => {
-    r.parcelas.forEach(p => {
-      if(mesDeIso(p.vencimento) === mes) out.push({receita:r, parcela:p});
-    });
-  });
+  receitas.forEach(r => r.parcelas.forEach(p => {
+    if(mesDeIso(p.vencimento) === mes) out.push({receita:r, parcela:p});
+  }));
   out.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento));
   return out;
 }
-
 function parcelasDespesaNoMes(mes){
   const out = [];
   dividasPagamentos.forEach(d => {
@@ -1561,7 +1458,6 @@ function parcelasDespesaNoMes(mes){
   });
   return out;
 }
-
 function agruparDespesasPorCredor(itens){
   const mapa = new Map();
   itens.forEach(({divida, parcela}) => {
@@ -1572,21 +1468,16 @@ function agruparDespesasPorCredor(itens){
     g.total += Number(parcela.valor || 0);
   });
   const grupos = Array.from(mapa.values());
-  grupos.forEach(g => {
-    g.itens.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento));
-  });
+  grupos.forEach(g => { g.itens.sort((a,b) => a.parcela.vencimento.localeCompare(b.parcela.vencimento)); });
   grupos.sort((a,b) => b.total - a.total);
   return grupos;
 }
-
 function renderAvisoVazio(){
   const el = document.getElementById('avisoVazio');
   if(!el) return;
-
   const temReceitas = receitas.length > 0;
   const temDespesas = dividasPagamentos.length > 0;
   if(temReceitas || temDespesas){ el.innerHTML = ''; return; }
-
   if(ghConfigurado()){
     el.innerHTML = `<div class="aviso-vazio">
       <div class="icon">⚠️</div>
@@ -1602,20 +1493,16 @@ function renderAvisoVazio(){
     </div>`;
     setTimeout(() => {
       const b = document.getElementById('btnVazioRecarregar');
-      if(b) b.addEventListener('click', async () => {
-        await carregarTudo();
-        renderTelaPrincipal();
-      });
+      if(b) b.addEventListener('click', async () => { await carregarTudo(); renderTelaPrincipal(); });
     }, 0);
   } else {
     el.innerHTML = `<div class="aviso-vazio">
       <div class="icon">⚠️</div>
       <div class="body">
         <b>Nenhum dado neste dispositivo</b>
-        Se você já cadastrou receitas em outro aparelho (navegador/PWA),
-        elas estão no <b>armazenamento daquele aparelho</b>, que este app
-        não acessa. Para recuperar, configure o GitHub abaixo com as
-        mesmas credenciais — ou importe um backup exportado anteriormente.
+        Se você já cadastrou receitas em outro aparelho, elas estão no
+        armazenamento <b>daquele</b> aparelho. Configure o GitHub abaixo
+        com as mesmas credenciais — ou importe um backup.
         <div class="btns">
           <button type="button" id="btnVazioConfig">⚙️ Configurar GitHub</button>
           <button type="button" class="neutro" id="btnVazioImportar">⬆ Importar backup</button>
@@ -1630,15 +1517,12 @@ function renderAvisoVazio(){
     }, 0);
   }
 }
-
 function renderTelaPrincipal(){
   const ano = mesRef.getFullYear(), m = mesRef.getMonth();
   const mes = `${ano}-${String(m+1).padStart(2,'0')}`;
   document.getElementById('tituloMes').textContent = `${nomeMes(m)} ${ano}`;
-
   const recs = parcelasReceitaNoMes(mes);
   const dess = parcelasDespesaNoMes(mes);
-
   let recebido = 0, pago = 0, aReceber = 0, aPagar = 0;
   recs.forEach(({parcela}) => {
     if(parcela.status === 'recebido') recebido += Number(parcela.valor||0);
@@ -1651,58 +1535,37 @@ function renderTelaPrincipal(){
   });
   const saldo = recebido - pago;
   const saldoPrevisto = (recebido + aReceber) - (pago + aPagar);
-
   const saldoEl = document.getElementById('saldoValor');
   saldoEl.textContent = (saldo >= 0 ? '+ ' : '− ') + fmtBRL(Math.abs(saldo));
   saldoEl.className = 'valor ' + (saldo >= 0 ? 'positivo' : 'negativo');
-
   const subtEl = document.getElementById('saldoSubtitulo');
   if(saldoPrevisto !== saldo){
     const prevSinal = saldoPrevisto >= 0 ? '+' : '−';
     subtEl.textContent = `Se tudo vencer: ${prevSinal} ${fmtBRL(Math.abs(saldoPrevisto))}`;
-  } else if(recs.length || dess.length){
-    subtEl.textContent = `Recebido − Pago`;
-  } else {
-    subtEl.textContent = `Sem movimentações neste mês`;
-  }
-
+  } else if(recs.length || dess.length){ subtEl.textContent = `Recebido − Pago`; }
+  else { subtEl.textContent = `Sem movimentações neste mês`; }
   document.getElementById('totalRecebido').textContent = fmtBRL(recebido);
   document.getElementById('totalPago').textContent = fmtBRL(pago);
   document.getElementById('totalAReceber').textContent = fmtBRL(aReceber);
   document.getElementById('totalAPagar').textContent = fmtBRL(aPagar);
-
   document.getElementById('contReceitas').textContent = recs.length;
   document.getElementById('contDespesas').textContent = dess.length;
-
   const aviso = document.getElementById('avisoFonte');
   if(fonteDespesas === 'vazio'){
-    aviso.innerHTML = `<div class="aviso-fonte">
-      Sem despesas carregadas. Abra o app de pagamentos no mesmo domínio ou configure o GitHub
-      em <b>⚙️ Configurações</b> para ver as despesas aqui.
-    </div>`;
+    aviso.innerHTML = `<div class="aviso-fonte">Sem despesas carregadas. Abra o app de pagamentos no mesmo domínio ou configure o GitHub em <b>⚙️ Configurações</b>.</div>`;
   } else if(fonteDespesas === 'localStorage'){
-    aviso.innerHTML = `<div class="aviso-fonte" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd;border-left-color:var(--marca);color:#1e40af">
-      Despesas lidas do <b>armazenamento local</b>. Para garantir os status mais recentes em qualquer aparelho, configure o GitHub.
-    </div>`;
-  } else {
-    aviso.innerHTML = '';
-  }
-
+    aviso.innerHTML = `<div class="aviso-fonte" style="background:linear-gradient(135deg,#eff6ff,#dbeafe);border-color:#93c5fd;border-left-color:var(--marca);color:#1e40af">Despesas lidas do <b>armazenamento local</b>. Configure o GitHub para sincronizar entre aparelhos.</div>`;
+  } else { aviso.innerHTML = ''; }
   const contRec = document.getElementById('listaReceitas');
-  if(recs.length){
-    contRec.innerHTML = recs.map(({receita, parcela}) => parceReceitaHTML(receita, parcela)).join('');
-  } else {
+  if(recs.length){ contRec.innerHTML = recs.map(({receita, parcela}) => parceReceitaHTML(receita, parcela)).join(''); }
+  else {
     contRec.innerHTML = `<div class="lista-vazia">
-      Nenhuma receita neste mês. 🎉
-      <br><br>
-      <button type="button" class="btn-vazio" id="btnVazioNova">
-        ➕ Cadastrar primeira receita
-      </button>
+      Nenhuma receita neste mês. 🎉<br><br>
+      <button type="button" class="btn-vazio" id="btnVazioNova">➕ Cadastrar primeira receita</button>
     </div>`;
-    const btnVazio = document.getElementById('btnVazioNova');
-    if(btnVazio) btnVazio.addEventListener('click', abrirNovaReceita);
+    const bv = document.getElementById('btnVazioNova');
+    if(bv) bv.addEventListener('click', abrirNovaReceita);
   }
-
   const contDes = document.getElementById('listaDespesas');
   if(dess.length){
     const grupos = agruparDespesasPorCredor(dess);
@@ -1713,26 +1576,21 @@ function renderTelaPrincipal(){
           <span class="grupo-total">${fmtBRL(g.total)}</span>
           <span class="qtd-badge">${g.itens.length}x</span>
         </div>
-        <div class="itens">
-          ${g.itens.map(({divida, parcela}) => despesaHTML(divida, parcela)).join('')}
-        </div>
+        <div class="itens">${g.itens.map(({divida, parcela}) => despesaHTML(divida, parcela)).join('')}</div>
       </div>
     `).join('');
-  } else {
-    contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>';
-  }
-
+  } else { contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>'; }
   renderAvisoVazio();
+  const rv = document.getElementById('rodapeVersao');
+  if(rv) rv.textContent = `Fluxo de Caixa v3.0 · ${new Date().toLocaleString('pt-BR', {dateStyle:'short', timeStyle:'short'})}`;
 }
 
-/* ---------- Renderização: fluxo cronológico ---------- */
 function fmtDataColuna(iso){
   const dt = isoParaData(iso);
   const d = String(dt.getDate()).padStart(2,'0');
   const sem = ['D','S','T','Q','Q','S','S'][dt.getDay()];
   return `${d} ${sem}`;
 }
-
 function renderDetalheDia(receitasDia, despesasDia){
   let html = '';
   receitasDia.forEach(({receita, parcela}) => {
@@ -1758,8 +1616,7 @@ function renderDetalheDia(receitasDia, despesasDia){
       outros: {classe:'outros', txt:'◆ Outros'}
     };
     const s = statusMap[st] || statusMap.em_aberto;
-    const linhaMeta = desc ? `${esc(desc)} · <span class="status-${s.classe}">${s.txt}</span>`
-                           : `<span class="status-${s.classe}">${s.txt}</span>`;
+    const linhaMeta = desc ? `${esc(desc)} · <span class="status-${s.classe}">${s.txt}</span>` : `<span class="status-${s.classe}">${s.txt}</span>`;
     html += `<div class="crono-detalhe-item desp">
       <span class="crono-detalhe-ico">📤</span>
       <div class="crono-detalhe-info">
@@ -1771,73 +1628,53 @@ function renderDetalheDia(receitasDia, despesasDia){
   });
   return html;
 }
-
 function renderCronologico(){
   const ano = mesRef.getFullYear(), m = mesRef.getMonth();
   const mes = `${ano}-${String(m+1).padStart(2,'0')}`;
   const tituloEl = document.getElementById('cronoTituloMes');
   if(tituloEl) tituloEl.textContent = `${nomeMes(m)} ${ano}`;
-
   let acumuladoAnterior = 0;
-  receitas.forEach(r => {
-    r.parcelas.forEach(p => {
-      if(p.vencimento && mesDeIso(p.vencimento) < mes){
-        acumuladoAnterior += Number(p.valor || 0);
-      }
-    });
-  });
+  receitas.forEach(r => r.parcelas.forEach(p => {
+    if(p.vencimento && mesDeIso(p.vencimento) < mes) acumuladoAnterior += Number(p.valor || 0);
+  }));
   dividasPagamentos.forEach(d => {
     if(!Array.isArray(d.parcelas)) return;
     d.parcelas.forEach(p => {
-      if(p.vencimento && mesDeIso(p.vencimento) < mes){
-        acumuladoAnterior -= Number(p.valor || 0);
-      }
+      if(p.vencimento && mesDeIso(p.vencimento) < mes) acumuladoAnterior -= Number(p.valor || 0);
     });
   });
-
   const diasMap = new Map();
   function garantirDia(iso){
     if(!diasMap.has(iso)) diasMap.set(iso, { receitas: [], despesas: [] });
     return diasMap.get(iso);
   }
-  receitas.forEach(r => {
-    r.parcelas.forEach(p => {
-      if(p.vencimento && mesDeIso(p.vencimento) === mes){
-        garantirDia(p.vencimento).receitas.push({ receita: r, parcela: p });
-      }
-    });
-  });
+  receitas.forEach(r => r.parcelas.forEach(p => {
+    if(p.vencimento && mesDeIso(p.vencimento) === mes) garantirDia(p.vencimento).receitas.push({ receita: r, parcela: p });
+  }));
   dividasPagamentos.forEach(d => {
     if(!Array.isArray(d.parcelas)) return;
     d.parcelas.forEach(p => {
-      if(p.vencimento && mesDeIso(p.vencimento) === mes){
-        garantirDia(p.vencimento).despesas.push({ divida: d, parcela: p });
-      }
+      if(p.vencimento && mesDeIso(p.vencimento) === mes) garantirDia(p.vencimento).despesas.push({ divida: d, parcela: p });
     });
   });
-
   const dias = Array.from(diasMap.keys()).sort();
   let acumulado = acumuladoAnterior;
   const linhas = [];
   let totalRecMes = 0, totalDespMes = 0, totalSaldoMes = 0;
-
   dias.forEach(iso => {
     const dia = diasMap.get(iso);
     const totalRec = dia.receitas.reduce((s,{parcela}) => s + Number(parcela.valor||0), 0);
     const totalDesp = dia.despesas.reduce((s,{parcela}) => s + Number(parcela.valor||0), 0);
     const saldo = totalRec - totalDesp;
     acumulado += saldo;
-
     const recsOk = dia.receitas.every(({parcela}) => parcela.status === 'recebido');
     const despsOk = dia.despesas.every(({parcela}) => normalizarStatus(parcela.status) === 'pago');
     const allOk = recsOk && despsOk && (dia.receitas.length + dia.despesas.length > 0);
-
     linhas.push({ iso, totalRec, totalDesp, saldo, acumulado, allOk });
     totalRecMes += totalRec;
     totalDespMes += totalDesp;
     totalSaldoMes += saldo;
   });
-
   const infoEl = document.getElementById('cronoSaldoAnterior');
   if(infoEl){
     const sinal = acumuladoAnterior >= 0 ? '+' : '−';
@@ -1850,13 +1687,9 @@ function renderCronologico(){
       <b class="${classe}">${sinal} ${fmtBRL(Math.abs(acumuladoAnterior))}</b>
     `;
   }
-
   const tbody = document.getElementById('cronoTbody');
   if(!linhas.length){
-    tbody.innerHTML = `<tr><td colspan="5" class="crono-vazio">
-      Nenhum movimento neste mês.<br>
-      <small style="font-weight:500;opacity:.85">Navegue para outro mês ou cadastre receitas.</small>
-    </td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5" class="crono-vazio">Nenhum movimento neste mês.</td></tr>`;
   } else {
     tbody.innerHTML = linhas.map(l => {
       const classeSaldo = l.saldo > 0 ? 'positivo' : (l.saldo < 0 ? 'negativo' : 'zero');
@@ -1866,30 +1699,22 @@ function renderCronologico(){
       const expandido = cronoDiasExpandidos.has(l.iso);
       const dia = diasMap.get(l.iso);
       const numItens = dia.receitas.length + dia.despesas.length;
-
       let html = `<tr class="crono-linha${l.allOk ? ' dia-realizado' : ''}${expandido ? ' expandido' : ''}"
-        data-iso="${l.iso}"
-        title="Toque para ver os ${numItens} item(ns) deste dia">
+        data-iso="${l.iso}" title="Toque para ver os ${numItens} item(ns)">
         <td>${fmtDataColuna(l.iso)} <span class="seta-expand">▾</span></td>
         <td class="rec">${l.totalRec > 0 ? fmtBRL(l.totalRec) : '—'}</td>
         <td class="desp">${l.totalDesp > 0 ? fmtBRL(l.totalDesp) : '—'}</td>
         <td class="saldo ${classeSaldo}">${l.saldo !== 0 ? sinalSaldo + ' ' + fmtBRL(Math.abs(l.saldo)) : '—'}</td>
         <td class="acum ${classeAcum}">${sinalAcum} ${fmtBRL(Math.abs(l.acumulado))}</td>
       </tr>`;
-
       if(expandido){
         html += `<tr class="crono-detalhe-row" data-iso="${l.iso}">
-          <td colspan="5">
-            <div class="crono-detalhe">
-              ${renderDetalheDia(dia.receitas, dia.despesas)}
-            </div>
-          </td>
+          <td colspan="5"><div class="crono-detalhe">${renderDetalheDia(dia.receitas, dia.despesas)}</div></td>
         </tr>`;
       }
       return html;
     }).join('');
   }
-
   const tfoot = document.getElementById('cronoTfoot');
   if(linhas.length){
     const classeSaldoMes = totalSaldoMes > 0 ? 'positivo' : (totalSaldoMes < 0 ? 'negativo' : '');
@@ -1903,12 +1728,9 @@ function renderCronologico(){
       <td class="saldo ${classeSaldoMes}">${sinalSaldoMes} ${fmtBRL(Math.abs(totalSaldoMes))}</td>
       <td class="acum ${classeAcumFinal}">${sinalAcumFinal} ${fmtBRL(Math.abs(acumulado))}</td>
     </tr>`;
-  } else {
-    tfoot.innerHTML = '';
-  }
+  } else { tfoot.innerHTML = ''; }
 }
 
-/* ---------- Renderização: todas as receitas ---------- */
 function renderTodasReceitas(){
   const c = document.getElementById('listaTodasReceitas');
   if(!receitas.length){
@@ -1920,9 +1742,7 @@ function renderTodasReceitas(){
     const totalRecebido = recebidas.reduce((s,p) => s + Number(p.valor||0), 0);
     const totalPrevisto = r.parcelas.reduce((s,p) => s + Number(p.valor||0), 0);
     const tipo = TIPO_LABEL[r.tipo] || 'Outro';
-    const periodo = r.infinita
-      ? '∞ contínua'
-      : (r.dataFim ? `até ${fmtBR(r.dataFim)}` : '—');
+    const periodo = r.infinita ? '∞ contínua' : (r.dataFim ? `até ${fmtBR(r.dataFim)}` : '—');
     return `<div class="item-receita-completa" data-receita="${r.id}">
       <div class="cabecalho">
         <div class="titulo-info">
@@ -1945,20 +1765,15 @@ function renderTodasReceitas(){
   }).join('');
 }
 
-/* ---------- Backup / Importação completa ---------- */
 function exportarTudo(){
   const backup = {
-    versao: 1,
+    versao: 3,
     exportadoEm: new Date().toISOString(),
     receitas: receitas,
     githubConfig: {
-      owner: ghConfig.owner,
-      repo: ghConfig.repo,
-      branch: ghConfig.branch,
-      pathDividas: ghConfig.pathDividas,
-      pathReceitas: ghConfig.pathReceitas,
-      token: ghConfig.token,
-      autoSync: ghConfig.autoSync
+      owner: ghConfig.owner, repo: ghConfig.repo, branch: ghConfig.branch,
+      pathDividas: ghConfig.pathDividas, pathReceitas: ghConfig.pathReceitas,
+      token: ghConfig.token, autoSync: ghConfig.autoSync
     }
   };
   const conteudo = JSON.stringify(backup, null, 2);
@@ -1971,25 +1786,20 @@ function exportarTudo(){
   document.body.appendChild(a);
   a.click();
   setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 1500);
-  alert('✅ Backup exportado.\n\n⚠️ O arquivo contém seu token do GitHub. Guarde em local seguro e não compartilhe.');
+  alert('✅ Backup exportado.\n\n⚠️ O arquivo contém seu token do GitHub. Guarde em local seguro.');
 }
-
 async function importarTudo(file){
   try{
     const texto = await file.text();
     const dados = JSON.parse(texto);
     if(!dados || typeof dados !== 'object') throw new Error('Formato inválido');
-
     const temReceitas = Array.isArray(dados.receitas);
     const temConfig = dados.githubConfig && typeof dados.githubConfig === 'object';
     if(!temReceitas && !temConfig) throw new Error('Nenhum dado reconhecido no backup');
-
     const resumo = [];
     if(temReceitas) resumo.push(`${dados.receitas.length} receita(s)`);
     if(temConfig && dados.githubConfig.token) resumo.push('configuração do GitHub');
-
     if(!confirm(`Importar ${resumo.join(' e ')}?\n\nOs dados atuais serão substituídos.`)) return;
-
     if(temReceitas){
       receitas = dados.receitas;
       receitas.forEach(r => { if(!Array.isArray(r.parcelas)) r.parcelas = []; });
@@ -2007,7 +1817,6 @@ async function importarTudo(file){
       if(typeof c.autoSync === 'boolean') ghConfig.autoSync = c.autoSync;
       salvarGH();
     }
-
     if(ghConfigurado()) await recarregarDespesas();
     atualizarConfigUI();
     renderTelaPrincipal();
@@ -2018,15 +1827,15 @@ async function importarTudo(file){
   }
 }
 
-/* ---------- Navegação ---------- */
 function mostrarTela(id){
   ['fluxo','nova','todas','config','cronologico'].forEach(t => {
     document.getElementById('tela-'+t).classList.toggle('escondido', t !== id);
   });
   window.scrollTo({top:0, behavior:'smooth'});
+  setTimeout(forcarModoClaro, 50);
+  setTimeout(forcarModoClaro, 200);
 }
 
-/* ---------- Formulário ---------- */
 const formReceita = document.getElementById('formReceita');
 const campoFonte = document.getElementById('campoFonte');
 const campoTipo = document.getElementById('campoTipo');
@@ -2045,7 +1854,6 @@ const tituloForm = document.getElementById('tituloForm');
     campoDiaVenc.appendChild(o);
   }
 })();
-
 function alternarInfinita(){
   const inf = campoInfinita.checked;
   labelInfinita.classList.toggle('ativo', inf);
@@ -2054,7 +1862,6 @@ function alternarInfinita(){
   else campoDataFim.setAttribute('required','');
 }
 campoInfinita.addEventListener('change', alternarInfinita);
-
 function limparForm(){
   formReceita.reset();
   campoInfinita.checked = false;
@@ -2068,8 +1875,7 @@ function abrirNovaReceita(){
   tituloForm.innerHTML = '➕ Nova receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar';
   mostrarTela('nova');
-  forcarModoClaro();
-  setTimeout(()=>campoFonte.focus(), 200);
+  setTimeout(()=>{ forcarModoClaro(); renderDebug(); campoFonte.focus(); }, 200);
 }
 function abrirEdicaoReceita(id){
   const r = receitas.find(x => x.id === id);
@@ -2087,8 +1893,7 @@ function abrirEdicaoReceita(id){
   tituloForm.innerHTML = '✏️ Editar receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar alterações';
   mostrarTela('nova');
-  forcarModoClaro();
-  setTimeout(()=>campoFonte.focus(), 200);
+  setTimeout(()=>{ forcarModoClaro(); renderDebug(); campoFonte.focus(); }, 200);
 }
 
 formReceita.addEventListener('submit', (e) => {
@@ -2100,98 +1905,65 @@ formReceita.addEventListener('submit', (e) => {
   const diaVenc = campoDiaVenc.value;
   const infinita = campoInfinita.checked;
   const dataFim = infinita ? null : campoDataFim.value;
-
   if(!fonte){ alert('Informe a fonte pagadora.'); campoFonte.focus(); return; }
   if(!valorBase || valorBase <= 0){ alert('Valor base inválido.'); campoValorBase.focus(); return; }
   if(!primeiro){ alert('Informe o primeiro vencimento.'); campoPrimeiro.focus(); return; }
   if(!infinita && !dataFim){ alert('Informe a data fim do contrato (ou marque como infinita).'); campoDataFim.focus(); return; }
-  if(!infinita && dataFim < primeiro){
-    alert('A data fim deve ser posterior ao primeiro vencimento.');
-    campoDataFim.focus(); return;
-  }
-
+  if(!infinita && dataFim < primeiro){ alert('A data fim deve ser posterior ao primeiro vencimento.'); campoDataFim.focus(); return; }
   const base = ajustarDiaBase(primeiro, diaVenc);
-
   if(editandoId){
     const r = receitas.find(x => x.id === editandoId);
     if(!r) return;
-    r.fonte = fonte;
-    r.tipo = tipo;
-    r.diaVencimento = diaVenc;
-    r.infinita = infinita;
-    r.dataFim = dataFim;
-
+    r.fonte = fonte; r.tipo = tipo; r.diaVencimento = diaVenc; r.infinita = infinita; r.dataFim = dataFim;
     if(!infinita){
       r.parcelas = r.parcelas.filter(p => {
         if(p.status === 'recebido') return true;
         return p.vencimento <= dataFim;
       });
-      const ultima = r.parcelas
-        .filter(p => p.status === 'recebido' || p.vencimento <= dataFim)
-        .sort((a,b)=>a.vencimento.localeCompare(b.vencimento))
-        .pop();
+      const ultima = r.parcelas.filter(p => p.status === 'recebido' || p.vencimento <= dataFim)
+        .sort((a,b)=>a.vencimento.localeCompare(b.vencimento)).pop();
       if(ultima && ultima.vencimento < dataFim){
         let cur = somarMeses(ultima.vencimento, 1);
         let guard = 0;
         while(cur <= dataFim && guard++ < 500){
-          r.parcelas.push({
-            id: gid(), vencimento: cur,
-            valor: arr2(r.valorBase), status: 'em_aberto'
-          });
+          r.parcelas.push({ id: gid(), vencimento: cur, valor: arr2(r.valorBase), status: 'em_aberto' });
           cur = somarMeses(cur, 1);
         }
       }
     }
     r.parcelas.sort((a,b)=>a.vencimento.localeCompare(b.vencimento));
-
     salvar();
     mostrarTela('todas');
     renderTodasReceitas();
     return;
   }
-
   const nova = {
-    id: gid(),
-    fonte, tipo,
-    valorBase,
-    primeiroVencimento: base,
-    diaVencimento: diaVenc,
-    infinita,
-    dataFim: infinita ? null : dataFim,
-    criadoEm: new Date().toISOString(),
-    parcelas: []
+    id: gid(), fonte, tipo, valorBase,
+    primeiroVencimento: base, diaVencimento: diaVenc,
+    infinita, dataFim: infinita ? null : dataFim,
+    criadoEm: new Date().toISOString(), parcelas: []
   };
-
   if(infinita){
     let cur = base;
     for(let i=0;i<PARCELAS_INICIAIS;i++){
-      nova.parcelas.push({
-        id: gid(), vencimento: cur,
-        valor: arr2(valorBase), status: 'em_aberto'
-      });
+      nova.parcelas.push({ id: gid(), vencimento: cur, valor: arr2(valorBase), status: 'em_aberto' });
       cur = somarMeses(cur, 1);
     }
   } else {
     let cur = base;
     let guard = 0;
     while(cur <= dataFim && guard++ < 500){
-      nova.parcelas.push({
-        id: gid(), vencimento: cur,
-        valor: arr2(valorBase), status: 'em_aberto'
-      });
+      nova.parcelas.push({ id: gid(), vencimento: cur, valor: arr2(valorBase), status: 'em_aberto' });
       cur = somarMeses(cur, 1);
     }
   }
-
   receitas.push(nova);
   salvar();
-
   const dt = isoParaData(base);
   mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
   mostrarTela('fluxo');
   renderTelaPrincipal();
 });
-
 document.getElementById('btnDescartar').addEventListener('click', () => {
   if(!confirm('Descartar?')) return;
   mostrarTela('fluxo');
@@ -2203,111 +1975,70 @@ document.getElementById('voltarForm').addEventListener('click', () => {
   renderTelaPrincipal();
 });
 
-/* ---------- Ações em receitas ---------- */
 document.getElementById('listaReceitas').addEventListener('click', async (e) => {
-  const b = e.target.closest('[data-acao]');
-  if(!b) return;
-  const card = b.closest('[data-receita]');
-  if(!card) return;
+  const b = e.target.closest('[data-acao]'); if(!b) return;
+  const card = b.closest('[data-receita]'); if(!card) return;
   const recId = card.dataset.receita;
   const parcId = card.dataset.parcela;
-  const r = receitas.find(x => x.id === recId);
-  if(!r) return;
-  const p = r.parcelas.find(x => x.id === parcId);
-  if(!p) return;
-
+  const r = receitas.find(x => x.id === recId); if(!r) return;
+  const p = r.parcelas.find(x => x.id === parcId); if(!p) return;
   const acao = b.dataset.acao;
-
-  if(acao === 'marcarRecebido'){
-    p.status = 'recebido';
-    salvar();
-    renderTelaPrincipal();
-    return;
-  }
+  if(acao === 'marcarRecebido'){ p.status = 'recebido'; salvar(); renderTelaPrincipal(); return; }
   if(acao === 'desmarcarRecebido'){
     if(!confirm('Desfazer o recebimento desta parcela?')) return;
-    p.status = 'em_aberto';
-    salvar();
-    renderTelaPrincipal();
-    return;
+    p.status = 'em_aberto'; salvar(); renderTelaPrincipal(); return;
   }
-  if(acao === 'editarValor'){
-    abrirEdicaoValor(r, p);
-    return;
-  }
+  if(acao === 'editarValor'){ abrirEdicaoValor(r, p); return; }
   if(acao === 'excluirParcela'){
     const esc = await perguntarEscopo(r, p, {}, {modo:'excluir'});
     if(esc === 'cancelar') return;
-    aplicarExclusao(r, p, esc);
-    salvar();
-    renderTelaPrincipal();
-    return;
+    aplicarExclusao(r, p, esc); salvar(); renderTelaPrincipal(); return;
   }
 });
 
-/* ---------- Edição de valor ---------- */
 function abrirEdicaoValor(r, p){
   edicaoValorPendente = { receita: r, parcela: p };
   document.getElementById('infoEdicaoValor').innerHTML =
-    `<b>${esc(r.fonte)}</b><br>` +
-    `Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual: <b>${fmtBRL(p.valor)}</b>`;
+    `<b>${esc(r.fonte)}</b><br>Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual: <b>${fmtBRL(p.valor)}</b>`;
   document.getElementById('inputNovoValor').value = Number(p.valor).toFixed(2);
   const m = document.getElementById('modalEditarValor');
   m.classList.remove('escondido');
   m.style.display = 'flex';
-  forcarModoClaro();
-  setTimeout(() => {
-    const inp = document.getElementById('inputNovoValor');
-    inp.focus();
-    inp.select();
-  }, 100);
+  setTimeout(()=>{ forcarModoClaro(); const inp = document.getElementById('inputNovoValor'); inp.focus(); inp.select(); }, 100);
 }
-
 function fecharModalEdicaoValor(){
   const m = document.getElementById('modalEditarValor');
-  m.classList.add('escondido');
-  m.style.display = '';
+  m.classList.add('escondido'); m.style.display = '';
   edicaoValorPendente = null;
 }
-
 document.getElementById('btnCancelarValor').addEventListener('click', fecharModalEdicaoValor);
 document.getElementById('modalEditarValor').addEventListener('click', (e) => {
   if(e.target.id === 'modalEditarValor') fecharModalEdicaoValor();
 });
-
 document.getElementById('btnAplicarValor').addEventListener('click', async () => {
   if(!edicaoValorPendente) return;
   const inp = document.getElementById('inputNovoValor');
   const raw = String(inp.value).replace(',', '.');
   const v = arr2(parseFloat(raw));
   if(!v || v <= 0){ alert('Valor inválido.'); inp.focus(); return; }
-
   const { receita: r, parcela: p } = edicaoValorPendente;
   if(v === Number(p.valor)){ fecharModalEdicaoValor(); return; }
-
   fecharModalEdicaoValor();
-
   const mud = { valor: v };
   const esc = await perguntarEscopo(r, p, mud);
   if(esc === 'cancelar') return;
-
   aplicarMudancaValor(r, p, v, esc);
   salvar();
   renderTelaPrincipal();
 });
-
 document.getElementById('inputNovoValor').addEventListener('keydown', (e) => {
   if(e.key === 'Enter'){ e.preventDefault(); document.getElementById('btnAplicarValor').click(); }
 });
-
 function aplicarMudancaValor(r, p, novoValor, escopo){
   const afetadas = calcularAfetadas(r, p, escopo);
   afetadas.forEach(x => { x.valor = arr2(novoValor); });
-  if(escopo === 'futuras' || escopo === 'todas'){
-    r.valorBase = arr2(novoValor);
-  }
+  if(escopo === 'futuras' || escopo === 'todas') r.valorBase = arr2(novoValor);
 }
-
 function aplicarExclusao(r, p, escopo){
   if(escopo === 'todas'){
     receitas = receitas.filter(x => x.id !== r.id);
@@ -2319,50 +2050,40 @@ function aplicarExclusao(r, p, escopo){
     if(r.parcelas.length === 0) receitas = receitas.filter(x => x.id !== r.id);
   }
 }
-
-/* ---------- Modal escopo ---------- */
 function abrirModal(id){
   const m = document.getElementById(id);
   if(!m) return;
   m.classList.remove('escondido');
   m.style.display = 'flex';
+  setTimeout(forcarModoClaro, 50);
 }
 function fecharModal(id){
   const m = document.getElementById(id);
   if(!m) return;
-  m.classList.add('escondido');
-  m.style.display = '';
+  m.classList.add('escondido'); m.style.display = '';
 }
-
 function calcularAfetadas(r, p, escopo){
   if(escopo === 'apenas') return [p];
   if(escopo === 'todas') return r.parcelas.slice();
   if(escopo === 'futuras') return r.parcelas.filter(x => x.vencimento >= p.vencimento);
   return [p];
 }
-
 function perguntarEscopo(r, p, mud, opts){
   opts = opts || {};
   const modo = opts.modo || 'aplicar';
   return new Promise(resolve => {
     resolverEscopo = resolve;
-    const emoji = modo === 'excluir' ? '🗑' : '🎯';
-    const titulo = modo === 'excluir' ? 'O que excluir?' : 'Onde aplicar?';
-    document.getElementById('escopoEmoji').textContent = emoji;
-    document.getElementById('escopoTitulo').textContent = titulo;
-
+    document.getElementById('escopoEmoji').textContent = modo === 'excluir' ? '🗑' : '🎯';
+    document.getElementById('escopoTitulo').textContent = modo === 'excluir' ? 'O que excluir?' : 'Onde aplicar?';
     if(modo === 'excluir'){
       document.getElementById('textoEscopo').innerHTML =
-        `Parcela de <b>${fmtBR(p.vencimento)}</b> · <b>${fmtBRL(p.valor)}</b><br>` +
-        `Receita: <b>${esc(r.fonte)}</b><br><br>Escolha o alcance da exclusão:`;
+        `Parcela de <b>${fmtBR(p.vencimento)}</b> · <b>${fmtBRL(p.valor)}</b><br>Receita: <b>${esc(r.fonte)}</b><br><br>Escolha o alcance da exclusão:`;
       document.getElementById('subApenas').textContent = 'Exclui apenas esta parcela';
       document.getElementById('subFuturas').textContent = 'Exclui esta e todas as posteriores';
       document.getElementById('subTodas').textContent = 'Exclui todas as parcelas desta receita';
     } else {
       document.getElementById('textoEscopo').innerHTML =
-        `Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual <b>${fmtBRL(p.valor)}</b><br>` +
-        `Receita: <b>${esc(r.fonte)}</b><br><br>` +
-        `Novo valor: <b>${fmtBRL(mud.valor)}</b><br><br>Aplicar a:`;
+        `Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual <b>${fmtBRL(p.valor)}</b><br>Receita: <b>${esc(r.fonte)}</b><br><br>Novo valor: <b>${fmtBRL(mud.valor)}</b><br><br>Aplicar a:`;
       document.getElementById('subApenas').textContent = 'Altera apenas esta parcela';
       document.getElementById('subFuturas').textContent = 'Altera esta e todas as posteriores (reajuste)';
       document.getElementById('subTodas').textContent = 'Altera todas as parcelas (inclusive recebidas)';
@@ -2370,7 +2091,6 @@ function perguntarEscopo(r, p, mud, opts){
     abrirModal('modalEscopo');
   });
 }
-
 document.getElementById('modalEscopo').addEventListener('click', (e) => {
   const b = e.target.closest('[data-escopo]');
   if(!b){
@@ -2382,22 +2102,13 @@ document.getElementById('modalEscopo').addEventListener('click', (e) => {
     return;
   }
   fecharModal('modalEscopo');
-  if(resolverEscopo){
-    resolverEscopo(b.dataset.escopo);
-    resolverEscopo = null;
-  }
+  if(resolverEscopo){ resolverEscopo(b.dataset.escopo); resolverEscopo = null; }
 });
-
-/* ---------- Todas as receitas ---------- */
 document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
-  const b = e.target.closest('[data-acao]');
-  if(!b) return;
-  const card = b.closest('[data-receita]');
-  if(!card) return;
+  const b = e.target.closest('[data-acao]'); if(!b) return;
+  const card = b.closest('[data-receita]'); if(!card) return;
   const id = card.dataset.receita;
-  const r = receitas.find(x => x.id === id);
-  if(!r) return;
-
+  const r = receitas.find(x => x.id === id); if(!r) return;
   if(b.dataset.acao === 'editarReceita'){ abrirEdicaoReceita(id); return; }
   if(b.dataset.acao === 'excluirReceita'){
     const msg = r.infinita
@@ -2410,8 +2121,6 @@ document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
     return;
   }
 });
-
-/* ---------- Navegação de mês ---------- */
 function mudarMes(delta){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
@@ -2419,7 +2128,6 @@ function mudarMes(delta){
 }
 document.getElementById('mesAnterior').addEventListener('click', () => mudarMes(-1));
 document.getElementById('mesProximo').addEventListener('click', () => mudarMes(1));
-
 function mudarMesCrono(delta){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
@@ -2428,19 +2136,14 @@ function mudarMesCrono(delta){
 }
 document.getElementById('cronoMesAnterior').addEventListener('click', () => mudarMesCrono(-1));
 document.getElementById('cronoMesProximo').addEventListener('click', () => mudarMesCrono(1));
-
-/* ---------- Clique em linha do cronológico ---------- */
 document.getElementById('cronoTbody').addEventListener('click', (e) => {
   const tr = e.target.closest('.crono-linha');
   if(!tr) return;
-  const iso = tr.dataset.iso;
-  if(!iso) return;
+  const iso = tr.dataset.iso; if(!iso) return;
   if(cronoDiasExpandidos.has(iso)) cronoDiasExpandidos.delete(iso);
   else cronoDiasExpandidos.add(iso);
   renderCronologico();
 });
-
-/* ---------- Botões principais ---------- */
 document.getElementById('btnNovaReceita').addEventListener('click', abrirNovaReceita);
 document.getElementById('btnNovaReceita2').addEventListener('click', abrirNovaReceita);
 document.getElementById('btnTodasReceitas').addEventListener('click', () => {
@@ -2452,15 +2155,12 @@ document.getElementById('btnCronologico').addEventListener('click', () => {
   mostrarTela('cronologico');
 });
 document.getElementById('voltarTodas').addEventListener('click', () => {
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  mostrarTela('fluxo'); renderTelaPrincipal();
 });
 document.getElementById('voltarCronologico').addEventListener('click', () => {
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  mostrarTela('fluxo'); renderTelaPrincipal();
 });
 
-/* ---------- Config ---------- */
 const elOwner = document.getElementById('ghOwner');
 const elRepo = document.getElementById('ghRepo');
 const elBranch = document.getElementById('ghBranch');
@@ -2468,7 +2168,6 @@ const elPathD = document.getElementById('ghPathDividas');
 const elPathR = document.getElementById('ghPathReceitas');
 const elToken = document.getElementById('ghToken');
 const elAuto = document.getElementById('ghAutoSync');
-
 function atualizarConfigUI(){
   elOwner.value = ghConfig.owner || '';
   elRepo.value = ghConfig.repo || 'pagamentos';
@@ -2488,21 +2187,14 @@ function atualizarConfigUI(){
     status.className = 'config-status-cartao aviso';
     status.querySelector('.emoji').textContent = '⚠️';
     document.getElementById('configStatusTitulo').textContent = 'Não configurado';
-    document.getElementById('configStatusDescricao').textContent =
-      'Sem sincronização — leitura local apenas.';
+    document.getElementById('configStatusDescricao').textContent = 'Sem sincronização — leitura local apenas.';
   }
 }
-function abrirConfig(){
-  atualizarConfigUI();
-  mostrarTela('config');
-  forcarModoClaro();
-}
+function abrirConfig(){ atualizarConfigUI(); mostrarTela('config'); }
 document.getElementById('btnConfig').addEventListener('click', abrirConfig);
 document.getElementById('voltarConfig').addEventListener('click', () => {
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  mostrarTela('fluxo'); renderTelaPrincipal();
 });
-
 document.getElementById('btnSalvarConfig').addEventListener('click', async () => {
   const ow = elOwner.value.trim();
   const rp = elRepo.value.trim() || 'pagamentos';
@@ -2512,27 +2204,16 @@ document.getElementById('btnSalvarConfig').addEventListener('click', async () =>
   const tk = elToken.value.trim();
   if(!ow){ alert('Informe o usuário GitHub.'); elOwner.focus(); return; }
   if(!tk){ alert('Informe o token.'); elToken.focus(); return; }
-
-  ghConfig.owner = ow;
-  ghConfig.repo = rp;
-  ghConfig.branch = br;
-  ghConfig.pathDividas = pd;
-  ghConfig.pathReceitas = pr;
-  ghConfig.token = tk;
-  ghConfig.autoSync = elAuto.checked;
-  salvarGH();
-  atualizarConfigUI();
-  setStatusSync('☁️ Configurado','ok');
-
+  ghConfig.owner = ow; ghConfig.repo = rp; ghConfig.branch = br;
+  ghConfig.pathDividas = pd; ghConfig.pathReceitas = pr;
+  ghConfig.token = tk; ghConfig.autoSync = elAuto.checked;
+  salvarGH(); atualizarConfigUI(); setStatusSync('☁️ Configurado','ok');
   const btn = document.getElementById('btnSalvarConfig');
   const orig = btn.textContent;
-  btn.textContent = '⏳ Sincronizando...';
-  btn.disabled = true;
-
+  btn.textContent = '⏳ Sincronizando...'; btn.disabled = true;
   try{
     const remoteReceitas = await carregarReceitasGitHub();
     const temLocal = receitas.length > 0;
-
     if(remoteReceitas !== null && remoteReceitas.length > 0){
       if(temLocal && remoteReceitas.length !== receitas.length){
         const usarRemoto = confirm(
@@ -2556,7 +2237,6 @@ document.getElementById('btnSalvarConfig').addEventListener('click', async () =>
     } else if(remoteReceitas !== null && remoteReceitas.length === 0 && temLocal){
       await salvarReceitasGitHub({silencioso:true});
     }
-
     await recarregarDespesas();
     renderTelaPrincipal();
     alert('✅ Configuração salva e sincronizada.');
@@ -2564,11 +2244,9 @@ document.getElementById('btnSalvarConfig').addEventListener('click', async () =>
     console.error(e);
     alert('❌ Erro ao sincronizar: ' + (e.message || 'verifique a conexão'));
   } finally {
-    btn.textContent = orig;
-    btn.disabled = false;
+    btn.textContent = orig; btn.disabled = false;
   }
 });
-
 document.getElementById('btnTestar').addEventListener('click', async () => {
   const ow = elOwner.value.trim();
   const rp = elRepo.value.trim();
@@ -2579,20 +2257,13 @@ document.getElementById('btnTestar').addEventListener('click', async () => {
   if(!ow || !rp || !tk){ alert('Preencha usuário, repositório e token.'); return; }
   const btn = document.getElementById('btnTestar');
   const orig = btn.textContent;
-  btn.textContent = '⏳ Testando...';
-  btn.disabled = true;
+  btn.textContent = '⏳ Testando...'; btn.disabled = true;
   try{
     const r = await fetch(`https://api.github.com/repos/${ow}/${rp}`, {
-      headers: {
-        'Authorization': `Bearer ${tk}`,
-        'Accept': 'application/vnd.github+json',
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
+      headers: { 'Authorization': `Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28' }
     });
     if(!r.ok){
-      alert(r.status === 401 ? '❌ Token inválido.' :
-            r.status === 404 ? '❌ Repositório não encontrado.' :
-            '❌ Erro ' + r.status);
+      alert(r.status === 401 ? '❌ Token inválido.' : r.status === 404 ? '❌ Repositório não encontrado.' : '❌ Erro ' + r.status);
       return;
     }
     const info = await r.json();
@@ -2606,33 +2277,21 @@ document.getElementById('btnTestar').addEventListener('click', async () => {
     });
     msg += rr.status === 200 ? `📄 ${pr} existe` : `📄 ${pr} ainda não existe`;
     alert(msg);
-  }catch(e){
-    alert('❌ Rede: ' + e.message);
-  }finally{
-    btn.textContent = orig;
-    btn.disabled = false;
-  }
+  }catch(e){ alert('❌ Rede: ' + e.message); }
+  finally{ btn.textContent = orig; btn.disabled = false; }
 });
-
 document.getElementById('btnRecarregarDespesas').addEventListener('click', async () => {
   const btn = document.getElementById('btnRecarregarDespesas');
   const orig = btn.textContent;
-  btn.textContent = '⏳ Recarregando...';
-  btn.disabled = true;
+  btn.textContent = '⏳ Recarregando...'; btn.disabled = true;
   try{
     const ok = await recarregarDespesas();
     renderTelaPrincipal();
     if(!ok) alert('Não foi possível recarregar. Verifique a configuração do GitHub.');
-  } finally {
-    btn.textContent = orig;
-    btn.disabled = false;
-  }
+  } finally { btn.textContent = orig; btn.disabled = false; }
 });
-
-/* ---------- Wire-up export/import ---------- */
 document.getElementById('btnExportarTudo').addEventListener('click', exportarTudo);
-document.getElementById('btnImportarTudo').addEventListener('click',
-  () => document.getElementById('arquivoImportarTudo').click());
+document.getElementById('btnImportarTudo').addEventListener('click', () => document.getElementById('arquivoImportarTudo').click());
 document.getElementById('arquivoImportarTudo').addEventListener('change', async (e) => {
   const f = e.target.files && e.target.files[0];
   if(!f) return;
@@ -2640,7 +2299,6 @@ document.getElementById('arquivoImportarTudo').addEventListener('change', async 
   e.target.value = '';
 });
 
-/* ---------- Inicialização ---------- */
 (async function init(){
   forcarModoClaro();
   carregarGH();
@@ -2651,17 +2309,14 @@ document.getElementById('arquivoImportarTudo').addEventListener('change', async 
       if(!isNaN(d.getTime())) mesRef = new Date(d.getFullYear(), d.getMonth(), 1);
     }
   }catch(e){}
-
   await carregarTudo();
   atualizarConfigUI();
   renderTelaPrincipal();
-
   if(localStorage.getItem(DIRTY_KEY) === '1' && ghConfigurado()){
     salvarReceitasGitHub({silencioso:true});
   }
 })();
 
-/* ---------- Refresh ao voltar para o app ---------- */
 let ultimaRecargaVisible = 0;
 document.addEventListener('visibilitychange', () => {
   if(document.visibilityState === 'visible'){
