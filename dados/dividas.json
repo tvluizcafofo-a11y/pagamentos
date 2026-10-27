@@ -3665,5 +3665,33 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "mvqlrrvtvccw7n",
+    "credor": "Copasa",
+    "descricao": "Água cisplatina. (301,45 / 6) X 2",
+    "valorTotal": 301.45,
+    "valorParcela": 100.48,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-27",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-10-27",
+    "ultimoVencimento": "2026-10-27",
+    "criadoEm": "2026-10-27T11:29:10.889Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mvqlrrvtzmdyjw",
+        "numero": 1,
+        "valor": 100.48,
+        "vencimento": "2026-10-27",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
