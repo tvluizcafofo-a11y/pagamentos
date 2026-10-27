@@ -3689,8 +3689,15 @@
         "valor": 100.48,
         "vencimento": "2026-10-27",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mvqm0u8a3yupcp",
+          "nome": "Comprovante_27-10-2026_083429.png.png",
+          "nomeArquivo": "Copasa_2026-10-27.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        }
       }
     ]
   }
