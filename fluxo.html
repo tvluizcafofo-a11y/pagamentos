@@ -71,9 +71,14 @@
   .btn-gh:hover{background:rgba(255,255,255,.35);transform:translateY(-1px)}
 
   .area{max-width:1100px;margin:0 auto;padding:14px 12px}
-  .tela{animation:surgir .18s ease-out}
+  .tela{animation:surgir .18s ease-out; position: relative; overflow-x: hidden;}
   @keyframes surgir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .escondido{display:none !important}
+
+  @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+  .anim-slide-esquerda { animation: slideInRight 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+  .anim-slide-direita { animation: slideInLeft 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
 
   .btn-voltar{display:inline-flex;align-items:center;gap:10px;
     background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;
@@ -326,7 +331,6 @@
   .campo .dica{font-weight:500;color:#94a3b8;font-size:.72rem;margin-top:1px;
     line-height:1.4}
 
-  /* Campos: altura dividida por 3 (~32px) */
   .campo input,
   .campo select,
   input[type="text"],
@@ -1176,6 +1180,7 @@ let resolverEscopo = null;
 let syncTimer = null;
 let syncing = false;
 let edicaoValorPendente = null;
+let telaAtual = 'fluxo';
 const cronoDiasExpandidos = new Set();
 
 const TIPO_LABEL = {
@@ -1925,7 +1930,9 @@ async function importarTudo(file){
   }
 }
 
+/* ================= Navegação com histórico (Voltar Android) ================= */
 function mostrarTela(id){
+  telaAtual = id;
   ['fluxo','nova','todas','config','cronologico'].forEach(t => {
     document.getElementById('tela-'+t).classList.toggle('escondido', t !== id);
   });
@@ -1933,6 +1940,73 @@ function mostrarTela(id){
   setTimeout(forcarModoClaro, 50);
   setTimeout(forcarModoClaro, 200);
 }
+
+function atualizarConteudoTela(id){
+  if (id === 'fluxo') renderTelaPrincipal();
+  else if (id === 'cronologico') renderCronologico();
+  else if (id === 'todas') renderTodasReceitas();
+  else if (id === 'config') atualizarConfigUI();
+}
+
+function navegarPara(id){
+  if (id === telaAtual) { mostrarTela(id); return; }
+  try { history.pushState({ tela: id }, ''); } catch(e) {}
+  mostrarTela(id);
+}
+
+function tentarSairDoApp(){
+  // Capacitor
+  if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+    try { window.Capacitor.Plugins.App.exitApp(); return; } catch(e) {}
+  }
+  // Cordova / PhoneGap
+  if (navigator.app && typeof navigator.app.exitApp === 'function') {
+    try { navigator.app.exitApp(); return; } catch(e) {}
+  }
+  // Bridges customizadas
+  if (window.Android && typeof window.Android.exitApp === 'function') {
+    try { window.Android.exitApp(); return; } catch(e) {}
+  }
+  if (window.AndroidBridge && typeof window.AndroidBridge.exitApp === 'function') {
+    try { window.AndroidBridge.exitApp(); return; } catch(e) {}
+  }
+}
+
+function voltarTela(){
+  if (telaAtual !== 'fluxo') {
+    history.back();
+  } else {
+    tentarSairDoApp();
+  }
+}
+
+(function configurarNavegacaoHistorico(){
+  try { history.replaceState({ tela: 'fluxo' }, ''); } catch(e) {}
+
+  window.addEventListener('popstate', (e) => {
+    const tela = (e && e.state && e.state.tela) || 'fluxo';
+    mostrarTela(tela);
+    atualizarConteudoTela(tela);
+  });
+
+  // Capacitor
+  if (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.App) {
+    try {
+      window.Capacitor.Plugins.App.addListener('backButton', () => {
+        if (telaAtual !== 'fluxo') history.back();
+        else window.Capacitor.Plugins.App.exitApp();
+      });
+    } catch(e) { console.warn('[back] Capacitor:', e); }
+  }
+
+  // Cordova
+  document.addEventListener('backbutton', (e) => {
+    e.preventDefault();
+    if (telaAtual !== 'fluxo') history.back();
+    else tentarSairDoApp();
+  }, false);
+})();
+/* ================= Fim navegação ================= */
 
 const formReceita = document.getElementById('formReceita');
 const campoFonte = document.getElementById('campoFonte');
@@ -1972,7 +2046,7 @@ function abrirNovaReceita(){
   limparForm();
   tituloForm.innerHTML = '➕ Nova receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar';
-  mostrarTela('nova');
+  navegarPara('nova');
   setTimeout(()=>{ forcarModoClaro(); renderDebug(); campoFonte.focus(); }, 200);
 }
 function abrirEdicaoReceita(id){
@@ -1990,7 +2064,7 @@ function abrirEdicaoReceita(id){
   alternarInfinita();
   tituloForm.innerHTML = '✏️ Editar receita';
   document.getElementById('btnSalvarForm').innerHTML = '💾 Salvar alterações';
-  mostrarTela('nova');
+  navegarPara('nova');
   setTimeout(()=>{ forcarModoClaro(); renderDebug(); campoFonte.focus(); }, 200);
 }
 
@@ -2031,8 +2105,7 @@ formReceita.addEventListener('submit', (e) => {
     }
     r.parcelas.sort((a,b)=>a.vencimento.localeCompare(b.vencimento));
     salvar();
-    mostrarTela('todas');
-    renderTodasReceitas();
+    voltarTela();
     return;
   }
   const nova = {
@@ -2059,18 +2132,15 @@ formReceita.addEventListener('submit', (e) => {
   salvar();
   const dt = isoParaData(base);
   mesRef = new Date(dt.getFullYear(), dt.getMonth(), 1);
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  voltarTela();
 });
 document.getElementById('btnDescartar').addEventListener('click', () => {
   if(!confirm('Descartar?')) return;
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  voltarTela();
 });
 document.getElementById('voltarForm').addEventListener('click', () => {
   if(!confirm('Voltar?')) return;
-  mostrarTela('fluxo');
-  renderTelaPrincipal();
+  voltarTela();
 });
 
 document.getElementById('listaReceitas').addEventListener('click', async (e) => {
@@ -2219,21 +2289,85 @@ document.getElementById('listaTodasReceitas').addEventListener('click', (e) => {
     return;
   }
 });
-function mudarMes(delta){
+function mudarMes(delta, direcao = null){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
   renderTelaPrincipal();
+  
+  if(direcao){
+    const el = document.getElementById('tela-fluxo');
+    el.classList.remove('anim-slide-esquerda', 'anim-slide-direita');
+    void el.offsetWidth;
+    el.classList.add(direcao === 'esquerda' ? 'anim-slide-esquerda' : 'anim-slide-direita');
+  }
 }
 document.getElementById('mesAnterior').addEventListener('click', () => mudarMes(-1));
 document.getElementById('mesProximo').addEventListener('click', () => mudarMes(1));
-function mudarMesCrono(delta){
+
+function mudarMesCrono(delta, direcao = null){
   mesRef = new Date(mesRef.getFullYear(), mesRef.getMonth() + delta, 1);
   try{ localStorage.setItem(MES_KEY, mesRef.toISOString().slice(0,10)); }catch(e){}
   cronoDiasExpandidos.clear();
   renderCronologico();
+
+  if(direcao){
+    const el = document.getElementById('tela-cronologico');
+    el.classList.remove('anim-slide-esquerda', 'anim-slide-direita');
+    void el.offsetWidth;
+    el.classList.add(direcao === 'esquerda' ? 'anim-slide-esquerda' : 'anim-slide-direita');
+  }
 }
 document.getElementById('cronoMesAnterior').addEventListener('click', () => mudarMesCrono(-1));
 document.getElementById('cronoMesProximo').addEventListener('click', () => mudarMesCrono(1));
+
+function configurarSwipe() {
+  const telas = [
+    { el: document.getElementById('tela-fluxo'), isCrono: false },
+    { el: document.getElementById('tela-cronologico'), isCrono: true }
+  ];
+
+  telas.forEach(({ el, isCrono }) => {
+    let tStartX = 0;
+    let tStartY = 0;
+    let tracking = false;
+
+    el.addEventListener('touchstart', (e) => {
+      if (e.target.closest('.crono-tabela-area') || e.target.closest('input') || e.target.closest('select') || e.target.closest('button')) {
+        tracking = false;
+        return;
+      }
+      const touch = e.touches[0];
+      tStartX = touch.clientX;
+      tStartY = touch.clientY;
+      tracking = true;
+    }, { passive: true });
+
+    el.addEventListener('touchend', (e) => {
+      if (!tracking) return;
+      tracking = false;
+      
+      const touch = e.changedTouches[0];
+      const tEndX = touch.clientX;
+      const tEndY = touch.clientY;
+
+      const diffX = tStartX - tEndX;
+      const diffY = tStartY - tEndY;
+
+      if (Math.abs(diffX) > Math.abs(diffY) * 1.5 && Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          if (isCrono) mudarMesCrono(1, 'esquerda');
+          else mudarMes(1, 'esquerda');
+        } else {
+          if (isCrono) mudarMesCrono(-1, 'direita');
+          else mudarMes(-1, 'direita');
+        }
+      }
+    }, { passive: true });
+  });
+}
+
+setTimeout(configurarSwipe, 100);
+
 document.getElementById('cronoTbody').addEventListener('click', (e) => {
   const tr = e.target.closest('.crono-linha');
   if(!tr) return;
@@ -2246,17 +2380,17 @@ document.getElementById('btnNovaReceita').addEventListener('click', abrirNovaRec
 document.getElementById('btnNovaReceita2').addEventListener('click', abrirNovaReceita);
 document.getElementById('btnTodasReceitas').addEventListener('click', () => {
   renderTodasReceitas();
-  mostrarTela('todas');
+  navegarPara('todas');
 });
 document.getElementById('btnCronologico').addEventListener('click', () => {
   renderCronologico();
-  mostrarTela('cronologico');
+  navegarPara('cronologico');
 });
 document.getElementById('voltarTodas').addEventListener('click', () => {
-  mostrarTela('fluxo'); renderTelaPrincipal();
+  voltarTela();
 });
 document.getElementById('voltarCronologico').addEventListener('click', () => {
-  mostrarTela('fluxo'); renderTelaPrincipal();
+  voltarTela();
 });
 
 const elOwner = document.getElementById('ghOwner');
@@ -2288,10 +2422,10 @@ function atualizarConfigUI(){
     document.getElementById('configStatusDescricao').textContent = 'Sem sincronização — leitura local apenas.';
   }
 }
-function abrirConfig(){ atualizarConfigUI(); mostrarTela('config'); }
+function abrirConfig(){ atualizarConfigUI(); navegarPara('config'); }
 document.getElementById('btnConfig').addEventListener('click', abrirConfig);
 document.getElementById('voltarConfig').addEventListener('click', () => {
-  mostrarTela('fluxo'); renderTelaPrincipal();
+  voltarTela();
 });
 document.getElementById('btnSalvarConfig').addEventListener('click', async () => {
   const ow = elOwner.value.trim();
