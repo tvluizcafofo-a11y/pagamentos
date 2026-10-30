@@ -75,10 +75,16 @@
   @keyframes surgir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .escondido{display:none !important}
 
-  @keyframes slideInRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
-  @keyframes slideInLeft { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
-  .anim-slide-esquerda { animation: slideInRight 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-  .anim-slide-direita { animation: slideInLeft 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+/* Swipe de troca de mês — saída + entrada (sem piscada) */
+@keyframes swipeOutLeft  { from { opacity: 1; transform: translateX(0); }     to { opacity: 0; transform: translateX(-40px); } }
+@keyframes swipeOutRight { from { opacity: 1; transform: translateX(0); }     to { opacity: 0; transform: translateX(40px); } }
+@keyframes swipeInFromRight { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes swipeInFromLeft  { from { opacity: 0; transform: translateX(-40px); } to { opacity: 1; transform: translateX(0); } }
+
+.anim-slide-sair-esquerda   { animation: swipeOutLeft  0.18s cubic-bezier(0.4, 0, 1, 1) forwards; }
+.anim-slide-sair-direita    { animation: swipeOutRight 0.18s cubic-bezier(0.4, 0, 1, 1) forwards; }
+.anim-slide-entrar-esquerda { animation: swipeInFromRight 0.22s cubic-bezier(0, 0, 0.2, 1) both; }
+.anim-slide-entrar-direita  { animation: swipeInFromLeft  0.22s cubic-bezier(0, 0, 0.2, 1) both; }
 
   .btn-voltar{display:inline-flex;align-items:center;gap:10px;
     background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;
@@ -1531,10 +1537,12 @@ function despesaHTML(divida, parcela){
     outros: {classe:'outros', txt:'◆ Outros'}
   };
   const s = statusMap[st] || statusMap.em_aberto;
-  const desc = parcela.descricaoOverride || divida.descricao;
+  const credor = parcela.credorOverride || divida.credor || 'Outros';
+  const desc = parcela.descricaoOverride || divida.descricao || '';
   return `<div class="item-despesa st-${st}">
     <div class="info">
-      <div class="fonte">${esc(desc)}</div>
+      <div class="fonte">${esc(credor)}</div>
+      ${desc ? `<div class="meta">${esc(desc)}</div>` : ''}
       <div class="meta">vence ${fmtBR(parcela.vencimento)} · parcela ${parcela.numero || '?'}</div>
     </div>
     <div class="valor-area">
@@ -1670,19 +1678,19 @@ function renderTelaPrincipal(){
     if(bv) bv.addEventListener('click', abrirNovaReceita);
   }
   const contDes = document.getElementById('listaDespesas');
-  if(dess.length){
-    const grupos = agruparDespesasPorCredor(dess);
-    contDes.innerHTML = grupos.map(g => `
-      <div class="grupo-despesa">
-        <div class="grupo-cabecalho">
-          <span>📤 ${esc(g.credor)}</span>
-          <span class="grupo-total">${fmtBRL(g.total)}</span>
-          <span class="qtd-badge">${g.itens.length}x</span>
-        </div>
-        <div class="itens">${g.itens.map(({divida, parcela}) => despesaHTML(divida, parcela)).join('')}</div>
-      </div>
-    `).join('');
-  } else { contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>'; }
+if(dess.length){
+  // ORDENA APENAS POR VENCIMENTO — sem agrupamento, sem olhar credor
+  dess.sort((a, b) => String(a.parcela.vencimento).localeCompare(String(b.parcela.vencimento)));
+  const totalMes = dess.reduce((s, {parcela}) => s + Number(parcela.valor || 0), 0);
+  contDes.innerHTML = `<div class="grupo-despesa">
+    <div class="grupo-cabecalho">
+      <span>📤 Despesas do mês</span>
+      <span class="grupo-total">${fmtBRL(totalMes)}</span>
+      <span class="qtd-badge">${dess.length}x</span>
+    </div>
+    <div class="itens">${dess.map(({divida, parcela}) => despesaHTML(divida, parcela)).join('')}</div>
+  </div>`;
+} else { contDes.innerHTML = '<div class="lista-vazia">Nenhuma despesa neste mês.</div>'; }
   renderAvisoVazio();
   const rv = document.getElementById('rodapeVersao');
   if(rv) rv.textContent = `Fluxo de Caixa v3.3 · ${new Date().toLocaleString('pt-BR', {dateStyle:'short', timeStyle:'short'})}`;
