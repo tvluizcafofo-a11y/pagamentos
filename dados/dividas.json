@@ -762,8 +762,15 @@
         "valor": 200,
         "vencimento": "2026-10-30",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null,
+        "status": "pago",
+        "comprovante": {
+          "id": "mvv5wgu30oro1e",
+          "nome": "Comprovante_30-10-2026_130144.png.webp",
+          "nomeArquivo": "Geisa_2026-10-30.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        },
         "credorOverride": "Geisa"
       },
       {
