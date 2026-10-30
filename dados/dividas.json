@@ -541,7 +541,14 @@
         "vencimento": "2026-10-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=2DB1FB8AE0297C858C65C70126994905",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": {
+          "id": "mvux5mdiuwn9dq",
+          "nome": "pbh-anhangai-30.10.2026.webp",
+          "nomeArquivo": "Prefeitura_de_BH_2026-10-30.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mu8j480rw6d31k",
