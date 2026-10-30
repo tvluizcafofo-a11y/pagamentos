@@ -540,7 +540,7 @@
         "valor": 332.11,
         "vencimento": "2026-10-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=2DB1FB8AE0297C858C65C70126994905",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": {
           "id": "mvux5mdiuwn9dq",
           "nome": "pbh-anhangai-30.10.2026.webp",
