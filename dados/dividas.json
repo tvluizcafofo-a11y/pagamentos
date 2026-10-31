@@ -3715,5 +3715,42 @@
         }
       }
     ]
+  },
+  {
+    "id": "mvwc5u7bz8fdo1",
+    "credor": "Secretaria da Receita Federal",
+    "descricao": "DARF",
+    "valorTotal": 0,
+    "valorParcela": 147.96,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-10-30",
+    "qtdParcelas": 2,
+    "primeiroVencimento": "2026-10-30",
+    "ultimoVencimento": "2026-11-30",
+    "criadoEm": "2026-10-31T11:46:47.975Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mvwc5u7b3groc2",
+        "numero": 1,
+        "valor": 147.96,
+        "vencimento": "2026-10-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mvwc5u7bdbe7lp",
+        "numero": 2,
+        "valor": 147.96,
+        "vencimento": "2026-11-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
