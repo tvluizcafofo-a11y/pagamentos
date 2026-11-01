@@ -107,7 +107,8 @@
         "vencimento": "2026-10-30",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=9C86472177489A6A6D6685739958B51C",
         "status": "outros",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "Parcelamento Cisplatina:  2755790/2024 - Não foi pago"
       },
       {
         "id": "mu8hhuyo9owexk",
