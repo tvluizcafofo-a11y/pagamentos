@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f8fafc">
+<meta name="color-scheme" content="light only">
+<title>Fluxo de Caixa v2.0</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topo"><div class="interno">
+  <div><h1>💹 Fluxo de Caixa</h1><p>Receitas e despesas realizadas</p></div>
+  <div class="topo-acoes">
+    <span class="status-sync" id="statusSync">☁️ Offline</span>
+    <button class="btn-gh" id="btnConfig">⚙️</button>
+  </div>
+</div></header>
+
+<div class="area">
+  <section class="tela" id="tela-fluxo">
+    <button class="btn-ver-fluxo" id="btnCronologico">📊 Ver fluxo cronológico</button>
+    <button class="btn-ver-fluxo" id="btnGraficos" style="background:linear-gradient(135deg,#7c3aed,#6d28d9)">📈 Ver gráficos</button>
+    <div class="nav-mes">
+      <button class="nav-mes-btn" id="mesAnterior">‹</button>
+      <h2 id="tituloMes"></h2>
+      <button class="nav-mes-btn" id="mesProximo">›</button>
+    </div>
+    <div class="swipe-content" id="swc-fluxo">
+      <div class="card-saldo">
+        <div class="rotulo">💰 Saldo realizado do mês</div>
+        <div class="valor" id="saldoValor">R$ 0,00</div>
+        <div class="subtitulo" id="saldoSubtitulo">Recebido − Pago</div>
+        <div class="divisor"><span>✔ Já movimentado</span></div>
+        <div class="detalhes">
+          <div class="det-item det-entrada"><span>✅ Recebido</span><strong id="totalRecebido">R$ 0,00</strong></div>
+          <div class="det-item det-saida"><span>✅ Pago</span><strong id="totalPago">R$ 0,00</strong></div>
+        </div>
+        <div class="divisor"><span>⏳ Ainda pendente</span></div>
+        <div class="detalhes">
+          <div class="det-item det-pendente"><span>📥 A receber</span><strong id="totalAReceber">R$ 0,00</strong></div>
+          <div class="det-item det-pendente"><span>📤 A pagar</span><strong id="totalAPagar">R$ 0,00</strong></div>
+        </div>
+      </div>
+      <div id="avisoVazio"></div>
+      <div id="avisoFonte"></div>
+      <section class="secao">
+        <div class="secao-cabecalho"><h3>📥 Receitas</h3><span class="contador entrada" id="contReceitas">0</span></div>
+        <div id="listaReceitas"></div>
+        <button class="btn-nova-receita" id="btnNovaReceita">➕ Nova receita</button>
+        <button class="btn-secundario" id="btnTodasReceitas">📋 Gerenciar receitas cadastradas</button>
+      </section>
+      <section class="secao">
+        <div class="secao-cabecalho"><h3>📤 Despesas <small>(somente leitura)</small></h3><span class="contador saida" id="contDespesas">0</span></div>
+        <div id="listaDespesas"></div>
+      </section>
+      <div class="rodape-versao" id="rodapeVersao">Fluxo de Caixa v2.0</div>
+    </div>
+  </section>
+
+  <section class="tela escondido" id="tela-cronologico">
+    <button class="btn-voltar" id="voltarCronologico">Voltar</button>
+    <div class="nav-mes">
+      <button class="nav-mes-btn" id="cronoMesAnterior">‹</button>
+      <h2 id="cronoTituloMes"></h2>
+      <button class="nav-mes-btn" id="cronoMesProximo">›</button>
+    </div>
+    <div class="swipe-content" id="swc-cronologico">
+      <div class="crono-info" id="cronoSaldoAnterior"></div>
+      <div class="crono-tabela-area"><table class="crono-tabela">
+        <thead><tr><th>Data</th><th>Receita</th><th>Despesa</th><th>Saldo</th><th>Acum.</th></tr></thead>
+        <tbody id="cronoTbody"></tbody><tfoot id="cronoTfoot"></tfoot>
+      </table></div>
+      <div class="rodape-versao">Fluxo de Caixa v2.0</div>
+    </div>
+    <div class="crono-legenda">
+      <span><i class="l-real"></i> Tudo pago/recebido</span>
+      <span><i class="l-pend"></i> Com pendências</span>
+      <span>👆 Toque em uma data para ver os itens</span>
+    </div>
+  </section>
+
+  <section class="tela escondido" id="tela-graficos">
+    <button type="button" class="btn-voltar" id="voltarGraficos">Voltar</button>
+    <h2 class="titulo-tela">📊 Gráficos</h2>
+    <div class="graficos-tabs" id="tabsPeriodo">
+      <button type="button" class="grafico-tab ativo" data-periodo="quinzenal">Quinzenal</button>
+      <button type="button" class="grafico-tab" data-periodo="mensal">Mensal</button>
+      <button type="button" class="grafico-tab" data-periodo="anual">Anual</button>
+    </div>
+    <div class="graficos-tabs" id="tabsTipo">
+      <button type="button" class="grafico-tab ativo" data-tipo="linha">📈 Linha</button>
+      <button type="button" class="grafico-tab" data-tipo="coluna">📊 Coluna</button>
+      <button type="button" class="grafico-tab" data-tipo="pizza">🥧 Pizza</button>
+      <button type="button" class="grafico-tab" data-tipo="saldo">💹 Saldo</button>
+    </div>
+    <div class="grafico-resumo" id="graficoResumo"></div>
+    <div class="grafico-container">
+      <canvas id="graficoCanvas"></canvas>
+    </div>
+  </section>
+
+  <section class="tela escondido" id="tela-nova">
+    <button class="btn-voltar" id="voltarForm">Voltar</button>
+    <h2 class="titulo-tela" id="tituloForm">➕ Nova receita</h2>
+    <form class="form-cartao" id="formReceita" autocomplete="off">
+      <div class="form-intro">Preencha os dados abaixo. Campos com <span class="obrig">*</span> são obrigatórios.</div>
+      <div class="grade-form">
+        <label class="campo largura-total"><span class="campo-label">Fonte pagadora <span class="obrig">*</span></span>
+          <input type="text" id="campoFonte" required placeholder="Ex.: Aluguel Apto 101, Holerite" maxlength="80"></label>
+        <label class="campo"><span class="campo-label">Tipo</span>
+          <select id="campoTipo"><option value="aluguel">Aluguel</option><option value="holerite">Holerite</option><option value="aposentadoria">Aposentadoria</option><option value="outro">Outro</option></select></label>
+        <label class="campo"><span class="campo-label">Valor base (R$) <span class="obrig">*</span></span>
+          <input type="number" id="campoValorBase" step="0.01" min="0.01" required placeholder="0,00"></label>
+        <label class="campo"><span class="campo-label">1º vencimento <span class="obrig">*</span></span>
+          <input type="date" id="campoPrimeiro" required></label>
+        <label class="campo"><span class="campo-label">Dia mensal</span>
+          <select id="campoDiaVenc"><option value="">Mesmo do 1º</option></select>
+          <span class="dica">Se escolher, a 1ª parcela é ajustada para o próximo dia válido.</span></label>
+        <label class="check-infinita" id="labelInfinita" for="campoInfinita">
+          <input type="checkbox" id="campoInfinita">
+          <div class="conteudo"><b>♾️ Receita infinita</b><small>Sem fim de contrato (ex.: aposentadoria). Parcelas são geradas automaticamente.</small></div>
+        </label>
+        <label class="campo" id="blocoDataFim"><span class="campo-label">Data fim <span class="obrig">*</span></span>
+          <input type="date" id="campoDataFim"></label>
+      </div>
+      <div class="acoes-form">
+        <button type="submit" class="btn btn-primario" id="btnSalvarForm">💾 Salvar</button>
+        <button type="button" class="btn btn-neutro" id="btnDescartar">✕ Descartar</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="tela escondido" id="tela-todas">
+    <button class="btn-voltar" id="voltarTodas">Voltar</button>
+    <h2 class="titulo-tela">📋 Receitas cadastradas</h2>
+    <div id="listaTodasReceitas"></div>
+    <button class="btn-nova-receita" id="btnNovaReceita2">➕ Nova receita</button>
+  </section>
+
+  <section class="tela escondido" id="tela-config">
+    <button class="btn-voltar" id="voltarConfig">Voltar</button>
+    <h2 class="titulo-tela">⚙️ Configuração GitHub</h2>
+    <div class="config-status" id="configStatus">
+      <span class="emoji">☁️</span>
+      <div style="flex:1;min-width:0"><b id="configStatusTitulo">Não configurado</b><small id="configStatusDescricao">Sem sincronização — leitura local apenas.</small></div>
+    </div>
+    <div class="form-cartao">
+      <div class="grade-form">
+        <label class="campo">Usuário GitHub *<input type="text" id="ghOwner" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="joaosilva"></label>
+        <label class="campo">Repositório *<input type="text" id="ghRepo" autocomplete="off" autocapitalize="off" spellcheck="false" value="pagamentos"></label>
+        <label class="campo">Branch<input type="text" id="ghBranch" autocomplete="off" autocapitalize="off" spellcheck="false" value="main"></label>
+        <label class="campo">dividas.json (leitura)<input type="text" id="ghPathDividas" autocomplete="off" autocapitalize="off" spellcheck="false" value="dados/dividas.json"></label>
+        <label class="campo">receitas.json (escrita)<input type="text" id="ghPathReceitas" autocomplete="off" autocapitalize="off" spellcheck="false" value="dados/receitas.json"></label>
+      </div>
+      <label class="campo" style="margin-top:14px">Token pessoal *<input type="password" id="ghToken" autocomplete="off" spellcheck="false" placeholder="github_pat_..."></label>
+      <label style="display:flex;align-items:center;gap:8px;font-weight:800;margin-top:12px;font-size:.84rem;color:#334155;cursor:pointer">
+        <input type="checkbox" id="ghAutoSync" checked style="width:20px;height:20px;min-height:auto;accent-color:var(--marca)">
+        Sincronizar receitas automaticamente
+      </label>
+      <div class="acoes-form">
+        <button type="button" class="btn btn-neutro" id="btnTestar">🔍 Testar</button>
+        <button type="button" class="btn btn-primario" id="btnSalvarConfig">💾 Salvar e sincronizar</button>
+      </div>
+    </div>
+    <div class="form-cartao" style="margin-top:14px">
+      <h3 style="margin:0 0 10px;font-size:.92rem;font-weight:900;color:#0f172a">💾 Backup e migração</h3>
+      <p style="margin:0 0 12px;font-size:.8rem;color:var(--suave);font-weight:600;line-height:1.5">Exporte ou importe <b>tudo</b> (receitas + configuração GitHub).</p>
+      <div class="acoes-form">
+        <button type="button" class="btn btn-neutro" id="btnExportarTudo">⬇ Exportar</button>
+        <button type="button" class="btn btn-neutro" id="btnImportarTudo">⬆ Importar</button>
+        <input type="file" id="arquivoImportarTudo" accept="application/json" hidden>
+      </div>
+    </div>
+    <button type="button" class="btn btn-neutro" id="btnRecarregarDespesas" style="margin-top:14px;width:100%">🔄 Recarregar despesas</button>
+    <div class="config-ajuda">
+      <b>Como funciona</b>
+      <ol style="margin:6px 0 0;padding-left:20px">
+        <li><b>Despesas</b> vêm do <code>dividas.json</code> (app de pagamentos escreve).</li>
+        <li><b>Receitas</b> no <code>receitas.json</code> (só este app escreve).</li>
+        <li><b>GitHub tem prioridade</b> sobre o localStorage quando configurado.</li>
+      </ol>
+    </div>
+    <div class="rodape-versao">Fluxo de Caixa v2.0</div>
+  </section>
+</div>
+
+<div class="modal-fundo escondido" id="modalEscopo">
+  <div class="modal-caixa">
+    <h3><span class="emoji" id="escopoEmoji">🎯</span> <span id="escopoTitulo">Onde aplicar?</span></h3>
+    <div id="textoEscopo"></div>
+    <div class="opcoes-escopo">
+      <button class="opcao-escopo" data-escopo="apenas"><span class="icone">📌</span><div class="info"><b>Somente esta parcela</b><small id="subApenas">Aplica apenas nesta parcela</small></div></button>
+      <button class="opcao-escopo" data-escopo="futuras"><span class="icone">➡️</span><div class="info"><b>Esta e as futuras</b><small id="subFuturas">Aplica nesta e em todas as posteriores</small></div></button>
+      <button class="opcao-escopo" data-escopo="todas"><span class="icone">🔁</span><div class="info"><b>Todas as parcelas</b><small id="subTodas">Aplica em todas as parcelas</small></div></button>
+      <button class="opcao-escopo cancelar" data-escopo="cancelar"><span class="icone">✕</span><div class="info"><b>Cancelar</b><small>Fecha sem aplicar nada</small></div></button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-fundo escondido" id="modalEditarValor">
+  <div class="modal-caixa">
+    <h3><span class="emoji">💰</span> Editar valor</h3>
+    <div class="info-parcela-edit" id="infoEdicaoValor"></div>
+    <label class="campo">Novo valor (R$)<input type="number" id="inputNovoValor" step="0.01" min="0.01" inputmode="decimal"></label>
+    <div class="modal-acoes">
+      <button class="btn-modal neutro" id="btnCancelarValor">Cancelar</button>
+      <button class="btn-modal primario" id="btnAplicarValor">Continuar</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
