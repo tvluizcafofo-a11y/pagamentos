@@ -787,8 +787,15 @@
         "valor": 200,
         "vencimento": "2026-11-06",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null,
+        "status": "pago",
+        "comprovante": {
+          "id": "mw4z41wjs2945a",
+          "nome": "Comprovante_06-11-2026_092918.png.webp",
+          "nomeArquivo": "Geisa_2026-11-06.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        },
         "credorOverride": "Geisa",
         "descricaoOverride": "DESCONTAR - Semanada Geisa -  50 REAIS"
       },
