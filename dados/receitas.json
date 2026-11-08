@@ -850,5 +850,24 @@
         "status": "recebido"
       }
     ]
+  },
+  {
+    "id": "mw4ywag6l773rz",
+    "fonte": "Valores a Receber - Nradesco",
+    "tipo": "outro",
+    "valorBase": 1631.14,
+    "primeiroVencimento": "2026-11-03",
+    "diaVencimento": "3",
+    "infinita": false,
+    "dataFim": "2026-11-03",
+    "criadoEm": "2026-11-06T12:45:23.046Z",
+    "parcelas": [
+      {
+        "id": "mw4ywagaoalbdw",
+        "vencimento": "2026-11-03",
+        "valor": 1631.14,
+        "status": "recebido"
+      }
+    ]
   }
 ]
