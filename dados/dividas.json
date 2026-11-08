@@ -1500,7 +1500,7 @@
         "valor": 100,
         "vencimento": "2026-11-07",
         "link": "",
-        "status": "em_aberto",
+        "status": "em_atraso",
         "comprovante": null,
         "descricaoOverride": "Conta de luz - Déb. Aut. Unid.Cons. 126504001840"
       },
