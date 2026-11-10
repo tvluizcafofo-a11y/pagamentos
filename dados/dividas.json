@@ -2001,7 +2001,7 @@
         "valor": 130.99,
         "vencimento": "2026-11-10",
         "link": "31988129977",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null,
         "descricaoOverride": "Vivo Celular - Deb. Aut."
       },
