@@ -4066,5 +4066,33 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "mwf2eb2jhqosvi",
+    "credor": "Luiz Martins",
+    "descricao": "Investimento B3 - BBAS3",
+    "valorTotal": 0,
+    "valorParcela": 1551.18,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-11-13",
+    "qtdParcelas": 1,
+    "primeiroVencimento": "2026-11-13",
+    "ultimoVencimento": "2026-11-13",
+    "criadoEm": "2026-11-13T14:21:04.267Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mwf2eb2jq48q2l",
+        "numero": 1,
+        "valor": 1551.18,
+        "vencimento": "2026-11-13",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
