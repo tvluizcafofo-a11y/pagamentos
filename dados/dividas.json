@@ -805,7 +805,7 @@
         "valor": 200,
         "vencimento": "2026-11-13",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null,
         "credorOverride": "Geisa",
         "descricaoOverride": "Semanada Geisa - descontar R$ 61,00"
