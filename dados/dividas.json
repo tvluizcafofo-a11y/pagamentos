@@ -3536,8 +3536,15 @@
         "valor": 300,
         "vencimento": "2026-11-16",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mwgm5g2mbp9ipi",
+          "nome": "Comprovante_14-11-2026_132106.png.webp",
+          "nomeArquivo": "Geisa_2026-11-16.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mvfriq3h4lurrj",
