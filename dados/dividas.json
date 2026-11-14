@@ -61,7 +61,14 @@
         "vencimento": "2026-11-16",
         "link": "https://cobranca-siatu.pbh.gov.br/cobranca/guia?idGuia=8C703B8A5618A5A48F37AB369AE09C2B",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": {
+          "id": "mwgn2aw1zi9cyc",
+          "nome": "Comprovante_14-11-2026_134627.png.png",
+          "nomeArquivo": "Prefeitura_de_BH_2026-11-16.png",
+          "tipo": "image/png",
+          "ext": "png",
+          "enviado": true
+        }
       },
       {
         "id": "mu8g7bvkd0tuf4",
