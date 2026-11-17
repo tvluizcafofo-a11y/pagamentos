@@ -660,10 +660,10 @@ document.getElementById('listaReceitas').addEventListener('click',async e=>{
   const card=e.target.closest('[data-receita]');if(!card) return;
   const r=receitas.find(x=>x.id===card.dataset.receita);if(!r) return;
 
-  /* Toque no painel de valor → editar todos os campos da receita */
-  if(e.target.closest('.item-valor')){abrirEdicaoReceita(r.id);return}
+  const b=e.target.closest('[data-acao]');
+  /* Qualquer clique fora dos botões → editar a receita inteira */
+  if(!b){abrirEdicaoReceita(r.id);return}
 
-  const b=e.target.closest('[data-acao]');if(!b) return;
   const p=r.parcelas.find(x=>x.id===card.dataset.parcela);if(!p) return;
   const a=b.dataset.acao;
   if(a==='marcarRecebido'){p.status='recebido';salvar();renderTelaPrincipal();return}
