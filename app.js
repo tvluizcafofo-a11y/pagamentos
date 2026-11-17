@@ -74,6 +74,55 @@ function carregarGH(){
 function salvarGH(){try{localStorage.setItem(CH_GH,JSON.stringify(ghConfig))}catch(e){}}
 function ghConfigurado(){return!!(ghConfig.owner&&ghConfig.repo&&ghConfig.token)}
 function setStatusSync(txt,tipo){const el=document.getElementById('statusSync');if(el){el.textContent=txt;el.className='status-sync '+(tipo||'')}}
+
+/* ========== Dialog bonito (substitui TODOS os alert/confirm nativos) ==========
+   - ensureGHDialog() cria o modal automaticamente se ele não existir no HTML.
+   - Assim, nada cai no alert/confirm feio do navegador, mesmo se o HTML
+     estiver desatualizado ou o elemento tiver sido removido.
+============================================================================== */
+function ensureGHDialog(){
+  let modal=document.getElementById('modalGHDialog');
+  if(modal) return modal;
+  modal=document.createElement('div');
+  modal.id='modalGHDialog';
+  modal.className='modal-fundo escondido';
+  modal.innerHTML='<div class="modal-caixa modal-gh"><div class="modal-gh-icon" id="ghDlgIcon">☁️</div><h3 id="ghDlgTitulo">Título</h3><div class="modal-gh-body" id="ghDlgBody"></div><div class="modal-gh-acoes" id="ghDlgAcoes"></div></div>';
+  document.body.appendChild(modal);
+  return modal;
+}
+function ghDialog({icone='☁️',titulo='',html='',tipo='info',botoes=[{label:'OK',classe:'gh-ok',valor:true}]}){
+  return new Promise(resolve=>{
+    const modal=ensureGHDialog();
+    const caixa=modal.querySelector('.modal-gh');
+    caixa.className='modal-caixa modal-gh '+(tipo||'');
+    document.getElementById('ghDlgIcon').textContent=icone;
+    document.getElementById('ghDlgTitulo').textContent=titulo;
+    document.getElementById('ghDlgBody').innerHTML=html;
+    const acoes=document.getElementById('ghDlgAcoes');
+    acoes.innerHTML='';
+    botoes.forEach(b=>{
+      const btn=document.createElement('button');
+      btn.className=b.classe||'gh-ok';
+      btn.innerHTML=b.label;
+      btn.onclick=()=>{fechar();resolve(b.valor)};
+      acoes.appendChild(btn);
+    });
+    function fechar(){modal.classList.add('escondido');modal.removeEventListener('click',onBackdrop)}
+    function onBackdrop(e){if(e.target.id==='modalGHDialog'){fechar();resolve(null)}}
+    modal.addEventListener('click',onBackdrop);
+    modal.classList.remove('escondido');
+  });
+}
+function ghAlert(titulo,html,icone='☁️',tipo='info'){
+  return ghDialog({icone,titulo,html,tipo,botoes:[{label:'OK',classe:'gh-ok',valor:true}]});
+}
+function ghConfirm(titulo,html,labelSim='Sim',labelNao='Não',icone='❓',tipo='pergunta'){
+  return ghDialog({icone,titulo,html,tipo,botoes:[
+    {label:labelNao,classe:'gh-nao',valor:false},
+    {label:labelSim,classe:'gh-sim',valor:true}
+  ]});
+}
+
 function b64Enc(str){
   const bytes=new TextEncoder().encode(str);const CHUNK=8192;let bin='';
   for(let i=0;i<bytes.length;i+=CHUNK) bin+=String.fromCharCode.apply(null,bytes.subarray(i,Math.min(i+CHUNK,bytes.length)));
@@ -120,7 +169,10 @@ function carregarReceitasLocais(){
 }
 function salvarReceitasLocais(){
   try{localStorage.setItem(CH_RECEITAS,JSON.stringify(receitas));localStorage.setItem(CH_DIRTY,'1')}
-  catch(e){console.error('salvar receitas:',e);if(e&&e.name==='QuotaExceededError')alert('⚠️ Armazenamento local cheio.')}
+  catch(e){
+    console.error('salvar receitas:',e);
+    if(e&&e.name==='QuotaExceededError') ghAlert('Armazenamento cheio','Não foi possível salvar localmente.<br>Libere espaço no dispositivo.','⚠️','aviso');
+  }
 }
 function lerDividasLocal(){
   try{const raw=localStorage.getItem(CH_PAGAMENTOS);if(!raw)return null;const arr=JSON.parse(raw);return Array.isArray(arr)?arr:null}
@@ -163,7 +215,11 @@ async function salvarReceitasGitHub(opts){
   try{
     setStatusSync('☁️ Salvando...','salvando');
     const conteudo=JSON.stringify(receitas,null,2);
-    if(new Blob([conteudo]).size>LIMITE_GH){setStatusSync('⚠️ Arquivo grande','erro');if(!opts.silencioso) alert('⚠️ O arquivo de receitas excede o limite.');return false}
+    if(new Blob([conteudo]).size>LIMITE_GH){
+      setStatusSync('⚠️ Arquivo grande','erro');
+      if(!opts.silencioso) await ghAlert('Arquivo muito grande','O arquivo de receitas excede o limite de 900 KB do GitHub.','⚠️','aviso');
+      return false;
+    }
     let sha=null;
     const getR=await fetchGH(ghURL(ghConfig.pathReceitas)+`?ref=${encodeURIComponent(ghConfig.branch)}`);
     if(getR.ok){const info=await getR.json();sha=info.sha}
@@ -174,7 +230,11 @@ async function salvarReceitasGitHub(opts){
     const body={message:`Receitas — ${new Date().toLocaleString('pt-BR')}`,content:b64Enc(conteudo),branch:ghConfig.branch};
     if(sha) body.sha=sha;
     const putR=await fetchGH(ghURL(ghConfig.pathReceitas),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-    if(!putR.ok){setStatusSync('⚠️ Erro ao salvar','erro');if(!opts.silencioso) alert('❌ Não foi possível salvar no GitHub.');return false}
+    if(!putR.ok){
+      setStatusSync('⚠️ Erro ao salvar','erro');
+      if(!opts.silencioso) await ghAlert('Erro ao salvar','Não foi possível salvar no GitHub.<br>Verifique sua conexão e as permissões do token.','❌','erro');
+      return false;
+    }
     localStorage.removeItem(CH_DIRTY);
     setStatusSync(`✅ Salvo ${new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})}`,'ok');
     return true;
@@ -509,7 +569,7 @@ function exportarTudo(){
   a.href=url;a.download=`fluxo-backup-${hojeIso()}.json`;a.style.display='none';
   document.body.appendChild(a);a.click();
   setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url)},1500);
-  alert('✅ Backup exportado.\n\n⚠️ Contém seu token GitHub. Guarde em local seguro.');
+  ghAlert('Backup exportado','Arquivo salvo com sucesso.<br><br><b>⚠️ Contém seu token GitHub.</b><br>Guarde em local seguro.','💾','sucesso');
 }
 async function importarTudo(file){
   try{
@@ -520,14 +580,15 @@ async function importarTudo(file){
     const resumo=[];
     if(temRec) resumo.push(`${dados.receitas.length} receita(s)`);
     if(temCfg&&dados.githubConfig.token) resumo.push('config GitHub');
-    if(!confirm(`Importar ${resumo.join(' e ')}?\n\nOs dados atuais serão substituídos.`)) return;
+    const ok=await ghConfirm('Importar backup?',`Serão importados <b>${esc(resumo.join(' e '))}</b>.<br><br>Os dados atuais serão substituídos.`,'Sim, importar','Cancelar','📥','pergunta');
+    if(!ok) return;
     if(temRec){receitas=dados.receitas;receitas.forEach(r=>{if(!Array.isArray(r.parcelas))r.parcelas=[]});localStorage.setItem(CH_RECEITAS,JSON.stringify(receitas));localStorage.removeItem(CH_DIRTY)}
     if(temCfg){const c=dados.githubConfig;['owner','repo','branch','pathDividas','pathReceitas','token'].forEach(k=>{if(c[k])ghConfig[k]=c[k]});if(typeof c.autoSync==='boolean') ghConfig.autoSync=c.autoSync;salvarGH()}
     if(ghConfigurado()) await recarregarDespesas();
     atualizarConfigUI();
     renderTelaPrincipal();
-    alert('✅ Importação concluída.');
-  }catch(e){console.error(e);alert('❌ Erro: '+(e.message||'arquivo inválido'))}
+    await ghAlert('Importação concluída','Os dados foram restaurados com sucesso.','✅','sucesso');
+  }catch(e){console.error(e);await ghAlert('Erro na importação',esc(e.message||'Arquivo inválido'),'❌','erro')}
 }
 
 /* NAVEGAÇÃO */
@@ -613,17 +674,17 @@ function abrirEdicaoReceita(id){
   navegarPara('nova');
   setTimeout(()=>campoFonte.focus(),200);
 }
-formReceita.addEventListener('submit',e=>{
+formReceita.addEventListener('submit',async e=>{
   e.preventDefault();
   const fonte=campoFonte.value.trim(),tipo=campoTipo.value;
   const valorBase=arr2(parseFloat(campoValorBase.value));
   const primeiro=campoPrimeiro.value,diaVenc=campoDiaVenc.value;
   const infinita=campoInfinita.checked,dataFim=infinita?null:campoDataFim.value;
-  if(!fonte){alert('Informe a fonte.');campoFonte.focus();return}
-  if(!valorBase||valorBase<=0){alert('Valor inválido.');campoValorBase.focus();return}
-  if(!primeiro){alert('Informe o 1º vencimento.');campoPrimeiro.focus();return}
-  if(!infinita&&!dataFim){alert('Informe data fim (ou marque infinita).');campoDataFim.focus();return}
-  if(!infinita&&dataFim<primeiro){alert('Data fim deve ser posterior.');campoDataFim.focus();return}
+  if(!fonte){await ghAlert('Campo obrigatório','Informe a fonte pagadora.','⚠️','aviso');campoFonte.focus();return}
+  if(!valorBase||valorBase<=0){await ghAlert('Valor inválido','O valor base deve ser maior que zero.','⚠️','aviso');campoValorBase.focus();return}
+  if(!primeiro){await ghAlert('Campo obrigatório','Informe o primeiro vencimento.','⚠️','aviso');campoPrimeiro.focus();return}
+  if(!infinita&&!dataFim){await ghAlert('Campo obrigatório','Informe a data fim (ou marque receita infinita).','⚠️','aviso');campoDataFim.focus();return}
+  if(!infinita&&dataFim<primeiro){await ghAlert('Data inválida','A data fim deve ser posterior ao primeiro vencimento.','⚠️','aviso');campoDataFim.focus();return}
   const base=ajustarDiaBase(primeiro,diaVenc);
   if(editandoId){
     const r=receitas.find(x=>x.id===editandoId);if(!r) return;
@@ -652,8 +713,16 @@ formReceita.addEventListener('submit',e=>{
   mesRef=new Date(dt.getFullYear(),dt.getMonth(),1);
   voltarTela();
 });
-document.getElementById('btnDescartar').addEventListener('click',()=>{if(confirm('Descartar?'))voltarTela()});
-document.getElementById('voltarForm').addEventListener('click',()=>{if(confirm('Voltar?'))voltarTela()});
+
+/* Botões do formulário — diálogos bonitos */
+document.getElementById('btnDescartar').addEventListener('click',async()=>{
+  const ok=await ghConfirm('Descartar alterações?','As informações preenchidas serão perdidas.','Sim, descartar','Continuar editando','🗑','pergunta');
+  if(ok) voltarTela();
+});
+document.getElementById('voltarForm').addEventListener('click',async()=>{
+  const ok=await ghConfirm('Sair da edição?','As alterações não salvas serão perdidas.','Sim, sair','Continuar editando','←','pergunta');
+  if(ok) voltarTela();
+});
 
 /* AÇÕES RECEITAS */
 document.getElementById('listaReceitas').addEventListener('click',async e=>{
@@ -667,7 +736,11 @@ document.getElementById('listaReceitas').addEventListener('click',async e=>{
   const p=r.parcelas.find(x=>x.id===card.dataset.parcela);if(!p) return;
   const a=b.dataset.acao;
   if(a==='marcarRecebido'){p.status='recebido';salvar();renderTelaPrincipal();return}
-  if(a==='desmarcarRecebido'){if(!confirm('Desfazer o recebimento?'))return;p.status='em_aberto';salvar();renderTelaPrincipal();return}
+  if(a==='desmarcarRecebido'){
+    const ok=await ghConfirm('Desfazer recebimento?','A parcela voltará ao status "Em aberto".','Sim, desfazer','Cancelar','↩','pergunta');
+    if(!ok) return;
+    p.status='em_aberto';salvar();renderTelaPrincipal();return;
+  }
   if(a==='excluirParcela'){
     const sc=await perguntarEscopo(r,p,{},'excluir');
     if(sc==='cancelar') return;
@@ -708,13 +781,14 @@ document.getElementById('modalEscopo').addEventListener('click',e=>{
   document.getElementById('modalEscopo').classList.add('escondido');
   if(resolverEscopo){resolverEscopo(b.dataset.escopo);resolverEscopo=null}
 });
-document.getElementById('listaTodasReceitas').addEventListener('click',e=>{
+document.getElementById('listaTodasReceitas').addEventListener('click',async e=>{
   const b=e.target.closest('[data-acao]');if(!b) return;
   const card=b.closest('[data-receita]');if(!card) return;
   const r=receitas.find(x=>x.id===card.dataset.receita);if(!r) return;
   if(b.dataset.acao==='editarReceita'){abrirEdicaoReceita(r.id);return}
   if(b.dataset.acao==='excluirReceita'){
-    if(!confirm(`Excluir "${r.fonte}" e as ${r.parcelas.length} parcelas?`)) return;
+    const ok=await ghConfirm('Excluir receita?',`Excluir <b>${esc(r.fonte)}</b> e suas <b>${r.parcelas.length}</b> parcela(s)?<br><br>Esta ação não pode ser desfeita.`,'Sim, excluir','Cancelar','🗑','aviso');
+    if(!ok) return;
     receitas=receitas.filter(x=>x.id!==r.id);
     salvar();renderTodasReceitas();
   }
@@ -745,7 +819,7 @@ function mudarMesCrono(delta){
 document.getElementById('cronoMesAnterior').addEventListener('click',()=>mudarMesCrono(-1));
 document.getElementById('cronoMesProximo').addEventListener('click',()=>mudarMesCrono(1));
 
-/* ========== SWIPE (gatilho restrito: card-saldo + listas / crono-info) ========== */
+/* ========== SWIPE ========== */
 function configurarSwipe(){
   const telas=[
     {
@@ -1036,11 +1110,13 @@ function atualizarConfigUI(){
 function abrirConfig(){atualizarConfigUI();navegarPara('config')}
 document.getElementById('btnConfig').addEventListener('click',abrirConfig);
 document.getElementById('voltarConfig').addEventListener('click',voltarTela);
+
+/* ========== Salvar configuração GitHub ========== */
 document.getElementById('btnSalvarConfig').addEventListener('click',async()=>{
   const ow=elOwner.value.trim(),rp=elRepo.value.trim()||'pagamentos',br=elBranch.value.trim()||'main';
   const pd=elPathD.value.trim()||'dados/dividas.json',pr=elPathR.value.trim()||'dados/receitas.json',tk=elToken.value.trim();
-  if(!ow){alert('Informe usuário GitHub.');elOwner.focus();return}
-  if(!tk){alert('Informe token.');elToken.focus();return}
+  if(!ow){await ghAlert('Campo obrigatório','Informe o usuário do GitHub para continuar.','⚠️','aviso');elOwner.focus();return}
+  if(!tk){await ghAlert('Campo obrigatório','Informe o token pessoal do GitHub para continuar.','⚠️','aviso');elToken.focus();return}
   Object.assign(ghConfig,{owner:ow,repo:rp,branch:br,pathDividas:pd,pathReceitas:pr,token:tk,autoSync:elAuto.checked});
   salvarGH();atualizarConfigUI();setStatusSync('☁️ Configurado','ok');
   const btn=document.getElementById('btnSalvarConfig'),orig=btn.textContent;
@@ -1050,40 +1126,64 @@ document.getElementById('btnSalvarConfig').addEventListener('click',async()=>{
     const temLocal=receitas.length>0;
     if(remoto!==null&&remoto.length>0){
       if(temLocal&&remoto.length!==receitas.length){
-        const usarR=confirm(`GitHub: ${remoto.length} receita(s)\nLocal: ${receitas.length}\n\n[OK] Carregar do GitHub\n[Cancelar] Enviar local`);
+        const usarR=await ghConfirm(
+          'Encontramos dados diferentes',
+          `<div class="destaque">☁️ GitHub: <b>${remoto.length}</b> receita(s)<br>💾 Local: <b>${receitas.length}</b> receita(s)</div><br>Qual fonte deseja usar como principal?`,
+          '☁️ Carregar do GitHub',
+          '💾 Enviar local',
+          '🔀','pergunta'
+        );
+        if(usarR===null){btn.textContent=orig;btn.disabled=false;return}
         if(usarR){receitas=remoto;localStorage.setItem(CH_RECEITAS,JSON.stringify(receitas));localStorage.removeItem(CH_DIRTY)}
         else await salvarReceitasGitHub({silencioso:true});
       } else {receitas=remoto;localStorage.setItem(CH_RECEITAS,JSON.stringify(receitas));localStorage.removeItem(CH_DIRTY)}
     } else if(remoto!==null&&remoto.length===0&&temLocal){await salvarReceitasGitHub({silencioso:true})}
     await recarregarDespesas();
     renderTelaPrincipal();
-    alert('✅ Configuração salva e sincronizada.');
-  }catch(e){console.error(e);alert('❌ Erro: '+(e.message||'verifique a conexão'))}
+    await ghAlert('Tudo certo!',`Configuração salva e sincronizada com sucesso.<br><br><code>${esc(ow)}/${esc(rp)}</code>`,'✅','sucesso');
+  }catch(e){console.error(e);await ghAlert('Erro na configuração',esc(e.message||'Verifique a conexão e tente novamente.'),'❌','erro')}
   finally{btn.textContent=orig;btn.disabled=false}
 });
+
+/* ========== Testar conexão GitHub ========== */
 document.getElementById('btnTestar').addEventListener('click',async()=>{
   const ow=elOwner.value.trim(),rp=elRepo.value.trim(),tk=elToken.value.trim();
   const br=elBranch.value.trim()||'main',pd=elPathD.value.trim()||'dados/dividas.json',pr=elPathR.value.trim()||'dados/receitas.json';
-  if(!ow||!rp||!tk){alert('Preencha usuário, repositório e token.');return}
+  if(!ow||!rp||!tk){await ghAlert('Campos obrigatórios','Preencha usuário, repositório e token antes de testar.','⚠️','aviso');return}
   const btn=document.getElementById('btnTestar'),orig=btn.textContent;
   btn.textContent='⏳ Testando...';btn.disabled=true;
   try{
     const r=await fetch(`https://api.github.com/repos/${ow}/${rp}`,{headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});
-    if(!r.ok){alert(r.status===401?'❌ Token inválido.':r.status===404?'❌ Repositório não encontrado.':'❌ Erro '+r.status);return}
+    if(!r.ok){
+      const msg=r.status===401?'Token inválido ou expirado.':r.status===404?'Repositório não encontrado.':'Erro '+r.status;
+      await ghAlert('Não foi possível conectar',msg,'❌','erro');
+      return;
+    }
     const info=await r.json();
-    let msg=`✅ ${info.full_name}\nPush: ${info.permissions?.push?'SIM':'NÃO'}\n\n`;
     const rd=await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pd}?ref=${br}`,{headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json'}});
-    msg+=rd.status===200?`📄 ${pd} existe\n`:`📄 ${pd} ainda não existe\n`;
     const rr=await fetch(`https://api.github.com/repos/${ow}/${rp}/contents/${pr}?ref=${br}`,{headers:{'Authorization':`Bearer ${tk}`,'Accept':'application/vnd.github+json'}});
-    msg+=rr.status===200?`📄 ${pr} existe`:`📄 ${pr} ainda não existe`;
-    alert(msg);
-  }catch(e){alert('❌ Rede: '+e.message)}
+    const pushOk=!!info.permissions?.push;
+    const html=`
+      <div class="destaque">${esc(info.full_name)}</div>
+      <div class="lista-check">
+        <div>${pushOk?'✅':'⛔'} Permissão de push: <b>${pushOk?'SIM':'NÃO'}</b></div>
+        <div>${rd.status===200?'✅':'📄'} <code>${esc(pd)}</code> ${rd.status===200?'existe':'ainda não existe'}</div>
+        <div>${rr.status===200?'✅':'📄'} <code>${esc(pr)}</code> ${rr.status===200?'existe':'ainda não existe'}</div>
+      </div>
+    `;
+    await ghAlert(pushOk?'Conexão OK':'Conexão parcial',html,pushOk?'✅':'⚠️',pushOk?'sucesso':'aviso');
+  }catch(e){await ghAlert('Erro de rede',esc(e.message||'Verifique sua conexão.'),'❌','erro')}
   finally{btn.textContent=orig;btn.disabled=false}
 });
+
 document.getElementById('btnRecarregarDespesas').addEventListener('click',async()=>{
   const btn=document.getElementById('btnRecarregarDespesas'),orig=btn.textContent;
   btn.textContent='⏳ Recarregando...';btn.disabled=true;
-  try{const ok=await recarregarDespesas();renderTelaPrincipal();if(!ok) alert('Não foi possível recarregar.')}
+  try{
+    const ok=await recarregarDespesas();
+    renderTelaPrincipal();
+    if(!ok) await ghAlert('Não foi possível recarregar','Verifique a conexão com o GitHub ou o armazenamento local.','⚠️','aviso');
+  }
   finally{btn.textContent=orig;btn.disabled=false}
 });
 document.getElementById('btnExportarTudo').addEventListener('click',exportarTudo);
