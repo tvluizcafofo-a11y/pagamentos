@@ -293,3 +293,7 @@ h2.titulo-tela::before{content:'';position:absolute;left:0;top:5px;bottom:5px;wi
   .grafico-container{padding:12px 8px;min-height:280px}
   .grafico-tab{padding:7px 11px;font-size:.72rem}
 }
+/* Painel de valor clicável — abre edição completa da receita */
+.item-valor.editavel{cursor:pointer;border-radius:8px;padding:2px 6px;margin:-2px -6px;transition:background .15s,transform .15s}
+.item-valor.editavel:hover{background:rgba(37,99,235,.10);transform:scale(1.02)}
+.item-valor.editavel:active{transform:scale(.98)}

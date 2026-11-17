@@ -49,7 +49,6 @@
         <div class="secao-cabecalho"><h3>📥 Receitas</h3><span class="contador entrada" id="contReceitas">0</span></div>
         <div id="listaReceitas"></div>
         <button class="btn-nova-receita" id="btnNovaReceita">➕ Nova receita</button>
-        <button class="btn-secundario" id="btnTodasReceitas">📋 Gerenciar receitas cadastradas</button>
       </section>
       <section class="secao">
         <div class="secao-cabecalho"><h3>📤 Despesas <small>(somente leitura)</small></h3><span class="contador saida" id="contDespesas">0</span></div>
@@ -195,18 +194,6 @@
       <button class="opcao-escopo" data-escopo="futuras"><span class="icone">➡️</span><div class="info"><b>Esta e as futuras</b><small id="subFuturas">Aplica nesta e em todas as posteriores</small></div></button>
       <button class="opcao-escopo" data-escopo="todas"><span class="icone">🔁</span><div class="info"><b>Todas as parcelas</b><small id="subTodas">Aplica em todas as parcelas</small></div></button>
       <button class="opcao-escopo cancelar" data-escopo="cancelar"><span class="icone">✕</span><div class="info"><b>Cancelar</b><small>Fecha sem aplicar nada</small></div></button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-fundo escondido" id="modalEditarValor">
-  <div class="modal-caixa">
-    <h3><span class="emoji">💰</span> Editar valor</h3>
-    <div class="info-parcela-edit" id="infoEdicaoValor"></div>
-    <label class="campo">Novo valor (R$)<input type="number" id="inputNovoValor" step="0.01" min="0.01" inputmode="decimal"></label>
-    <div class="modal-acoes">
-      <button class="btn-modal neutro" id="btnCancelarValor">Cancelar</button>
-      <button class="btn-modal primario" id="btnAplicarValor">Continuar</button>
     </div>
   </div>
 </div>

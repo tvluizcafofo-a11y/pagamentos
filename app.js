@@ -2,14 +2,24 @@
 const CH_RECEITAS='sistemaFluxo.v1',CH_PAGAMENTOS='sistemaPagamentos.v2';
 const CH_GH='sistemaFluxo.github',CH_GH_PAG='sistemaPagamentos.github';
 const CH_MES='sistemaFluxo.mesRef',CH_DIRTY='sistemaFluxo.dirty';
+const CH_GRAF_PERIODO='sistemaFluxo.grafPeriodo',CH_GRAF_TIPO='sistemaFluxo.grafTipo';
 const PARCELAS_INICIAIS=24,PARCELAS_MIN_FUTURAS=12,LIMITE_GH=900*1024;
 const TIPO_LABEL={aluguel:'Aluguel',holerite:'Holerite',aposentadoria:'Aposentadoria',outro:'Outro'};
 
 let receitas=[],dividasPagamentos=[],editandoId=null,fonteDespesas='';
-let mesRef=new Date(),resolverEscopo=null,syncTimer=null,syncing=false,edicaoValorPendente=null;
+let mesRef=new Date(),resolverEscopo=null,syncTimer=null,syncing=false;
 let telaAtual='fluxo';
 let graficosPeriodo='quinzenal',graficosTipo='linha',graficoAtual=null;
 const cronoDiasExpandidos=new Set();
+
+(function carregarPreferenciasGraficos(){
+  try{
+    const p=localStorage.getItem(CH_GRAF_PERIODO);
+    if(p&&['quinzenal','mensal','anual'].includes(p)) graficosPeriodo=p;
+    const t=localStorage.getItem(CH_GRAF_TIPO);
+    if(t&&['linha','coluna','pizza','saldo'].includes(t)) graficosTipo=t;
+  }catch(e){}
+})();
 
 const gid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -224,8 +234,8 @@ function cardReceitaHTML(r,p){
   const podeReceber=p.status!=='recebido';
   return`<div class="item-receita st-${st.classe}" data-receita="${r.id}" data-parcela="${p.id}">
     <div class="item-linha1"><div class="item-info"><div class="fonte">📥 ${esc(r.fonte)}</div><div class="meta">${esc(tipo)} · vence <b>${fmtBR(p.vencimento)}</b> · <span class="selo-status ${st.classe}">${st.txt}</span></div></div>
-    <div class="item-valor"><div class="num">${fmtBRL(p.valor)}</div><div class="sublabel">${r.infinita?'∞ contínua':(r.dataFim?'até '+fmtBR(r.dataFim):'')}</div></div></div>
-    <div class="item-linha2">${podeReceber?`<button class="btn-acao receber" data-acao="marcarRecebido">✅ Marcar recebido</button>`:`<button class="btn-acao desfazer" data-acao="desmarcarRecebido">↩ Desfazer</button>`}<button class="btn-acao editar" data-acao="editarValor">✏️ Editar valor</button><button class="btn-acao excluir" data-acao="excluirParcela">🗑 Excluir</button></div></div>`;
+    <div class="item-valor editavel" title="Toque para editar a receita"><div class="num">${fmtBRL(p.valor)}</div><div class="sublabel">${r.infinita?'∞ contínua':(r.dataFim?'até '+fmtBR(r.dataFim):'')}</div></div></div>
+    <div class="item-linha2">${podeReceber?`<button class="btn-acao receber" data-acao="marcarRecebido">✅ Marcar recebido</button>`:`<button class="btn-acao desfazer" data-acao="desmarcarRecebido">↩ Desfazer</button>`}<button class="btn-acao excluir" data-acao="excluirParcela">🗑 Excluir</button></div></div>`;
 }
 function cardDespesaHTML(d,p){
   const st=normalizarStatus(p.status);
@@ -647,50 +657,23 @@ document.getElementById('voltarForm').addEventListener('click',()=>{if(confirm('
 
 /* AÇÕES RECEITAS */
 document.getElementById('listaReceitas').addEventListener('click',async e=>{
-  const b=e.target.closest('[data-acao]');if(!b) return;
-  const card=b.closest('[data-receita]');if(!card) return;
+  const card=e.target.closest('[data-receita]');if(!card) return;
   const r=receitas.find(x=>x.id===card.dataset.receita);if(!r) return;
+
+  /* Toque no painel de valor → editar todos os campos da receita */
+  if(e.target.closest('.item-valor')){abrirEdicaoReceita(r.id);return}
+
+  const b=e.target.closest('[data-acao]');if(!b) return;
   const p=r.parcelas.find(x=>x.id===card.dataset.parcela);if(!p) return;
   const a=b.dataset.acao;
   if(a==='marcarRecebido'){p.status='recebido';salvar();renderTelaPrincipal();return}
   if(a==='desmarcarRecebido'){if(!confirm('Desfazer o recebimento?'))return;p.status='em_aberto';salvar();renderTelaPrincipal();return}
-  if(a==='editarValor'){abrirEdicaoValor(r,p);return}
   if(a==='excluirParcela'){
     const sc=await perguntarEscopo(r,p,{},'excluir');
     if(sc==='cancelar') return;
     aplicarExclusao(r,p,sc);salvar();renderTelaPrincipal();return;
   }
 });
-function abrirEdicaoValor(r,p){
-  edicaoValorPendente={receita:r,parcela:p};
-  document.getElementById('infoEdicaoValor').innerHTML=`<b>${esc(r.fonte)}</b><br>Parcela de <b>${fmtBR(p.vencimento)}</b> · valor atual: <b>${fmtBRL(p.valor)}</b>`;
-  document.getElementById('inputNovoValor').value=Number(p.valor).toFixed(2);
-  document.getElementById('modalEditarValor').classList.remove('escondido');
-  setTimeout(()=>{const inp=document.getElementById('inputNovoValor');inp.focus();inp.select()},100);
-}
-function fecharModalEdicaoValor(){
-  document.getElementById('modalEditarValor').classList.add('escondido');
-  edicaoValorPendente=null;
-}
-document.getElementById('btnCancelarValor').addEventListener('click',fecharModalEdicaoValor);
-document.getElementById('modalEditarValor').addEventListener('click',e=>{if(e.target.id==='modalEditarValor')fecharModalEdicaoValor()});
-document.getElementById('btnAplicarValor').addEventListener('click',async()=>{
-  if(!edicaoValorPendente) return;
-  const inp=document.getElementById('inputNovoValor');
-  const v=arr2(parseFloat(String(inp.value).replace(',','.')));
-  if(!v||v<=0){alert('Valor inválido.');inp.focus();return}
-  const{receita:r,parcela:p}=edicaoValorPendente;
-  if(v===Number(p.valor)){fecharModalEdicaoValor();return}
-  fecharModalEdicaoValor();
-  const sc=await perguntarEscopo(r,p,{valor:v});
-  if(sc==='cancelar') return;
-  aplicarMudancaValor(r,p,v,sc);salvar();renderTelaPrincipal();
-});
-document.getElementById('inputNovoValor').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();document.getElementById('btnAplicarValor').click()}});
-function aplicarMudancaValor(r,p,novo,sc){
-  calcularAfetadas(r,p,sc).forEach(x=>{x.valor=arr2(novo)});
-  if(sc==='futuras'||sc==='todas') r.valorBase=arr2(novo);
-}
 function aplicarExclusao(r,p,sc){
   if(sc==='todas') receitas=receitas.filter(x=>x.id!==r.id);
   else if(sc==='futuras'){
@@ -700,12 +683,6 @@ function aplicarExclusao(r,p,sc){
     r.parcelas=r.parcelas.filter(x=>x.id!==p.id);
     if(!r.parcelas.length) receitas=receitas.filter(x=>x.id!==r.id);
   }
-}
-function calcularAfetadas(r,p,sc){
-  if(sc==='apenas') return[p];
-  if(sc==='todas') return r.parcelas.slice();
-  if(sc==='futuras') return r.parcelas.filter(x=>x.vencimento>=p.vencimento);
-  return[p];
 }
 function perguntarEscopo(r,p,mud,modo){
   modo=modo||'aplicar';
@@ -718,11 +695,6 @@ function perguntarEscopo(r,p,mud,modo){
       document.getElementById('subApenas').textContent='Exclui apenas esta parcela';
       document.getElementById('subFuturas').textContent='Exclui esta e posteriores';
       document.getElementById('subTodas').textContent='Exclui todas as parcelas';
-    } else {
-      document.getElementById('textoEscopo').innerHTML=`Parcela de <b>${fmtBR(p.vencimento)}</b> · atual <b>${fmtBRL(p.valor)}</b><br>Receita: <b>${esc(r.fonte)}</b><br><br>Novo valor: <b>${fmtBRL(mud.valor)}</b><br><br>Aplicar a:`;
-      document.getElementById('subApenas').textContent='Altera apenas esta';
-      document.getElementById('subFuturas').textContent='Altera esta e posteriores (reajuste)';
-      document.getElementById('subTodas').textContent='Altera todas (inclusive recebidas)';
     }
     document.getElementById('modalEscopo').classList.remove('escondido');
   });
@@ -773,9 +745,6 @@ function mudarMesCrono(delta){
 document.getElementById('cronoMesAnterior').addEventListener('click',()=>mudarMesCrono(-1));
 document.getElementById('cronoMesProximo').addEventListener('click',()=>mudarMesCrono(1));
 
-/* ========== SWIPE (NOVA LÓGICA — anima o wrapper) ========== */
-/* ========== SWIPE (gatilho restrito aos quadros de saldo) ========== */
-/* ========== SWIPE (gatilho restrito aos quadros de saldo) ========== */
 /* ========== SWIPE (gatilho restrito: card-saldo + listas / crono-info) ========== */
 function configurarSwipe(){
   const telas=[
@@ -939,7 +908,6 @@ function configurarSwipe(){
       requestAnimationFrame(frame);
     }
 
-    /* ⬇️ anexa os mesmos handlers a TODOS os alvos deste grupo */
     alvosValidos.forEach(alvo=>{
       alvo.style.touchAction='pan-y';
 
@@ -1012,23 +980,28 @@ document.getElementById('cronoTbody').addEventListener('click',e=>{
 });
 document.getElementById('btnNovaReceita').addEventListener('click',abrirNovaReceita);
 document.getElementById('btnNovaReceita2').addEventListener('click',abrirNovaReceita);
-document.getElementById('btnTodasReceitas').addEventListener('click',()=>{renderTodasReceitas();navegarPara('todas')});
 document.getElementById('btnCronologico').addEventListener('click',()=>{renderCronologico();navegarPara('cronologico')});
 document.getElementById('btnGraficos').addEventListener('click',()=>{renderGraficos();navegarPara('graficos')});
 document.getElementById('voltarTodas').addEventListener('click',voltarTela);
 document.getElementById('voltarCronologico').addEventListener('click',voltarTela);
 document.getElementById('voltarGraficos').addEventListener('click',voltarTela);
 
+function atualizarTabsGraficos(){
+  document.querySelectorAll('#tabsPeriodo .grafico-tab').forEach(t=>t.classList.toggle('ativo',t.dataset.periodo===graficosPeriodo));
+  document.querySelectorAll('#tabsTipo .grafico-tab').forEach(t=>t.classList.toggle('ativo',t.dataset.tipo===graficosTipo));
+}
 document.getElementById('tabsPeriodo').addEventListener('click',e=>{
   const btn=e.target.closest('[data-periodo]');if(!btn) return;
   graficosPeriodo=btn.dataset.periodo;
-  document.querySelectorAll('#tabsPeriodo .grafico-tab').forEach(t=>t.classList.toggle('ativo',t===btn));
+  try{localStorage.setItem(CH_GRAF_PERIODO,graficosPeriodo)}catch(e){}
+  atualizarTabsGraficos();
   renderGraficos();
 });
 document.getElementById('tabsTipo').addEventListener('click',e=>{
   const btn=e.target.closest('[data-tipo]');if(!btn) return;
   graficosTipo=btn.dataset.tipo;
-  document.querySelectorAll('#tabsTipo .grafico-tab').forEach(t=>t.classList.toggle('ativo',t===btn));
+  try{localStorage.setItem(CH_GRAF_TIPO,graficosTipo)}catch(e){}
+  atualizarTabsGraficos();
   renderGraficos();
 });
 
@@ -1129,6 +1102,7 @@ document.getElementById('arquivoImportarTudo').addEventListener('change',async e
   await carregarTudo();
   atualizarConfigUI();
   renderTelaPrincipal();
+  atualizarTabsGraficos();
   if(localStorage.getItem(CH_DIRTY)==='1'&&ghConfigurado()) salvarReceitasGitHub({silencioso:true});
 })();
 
