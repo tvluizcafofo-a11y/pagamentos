@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cronograma de Dívidas</title>
+
+  <style>
+    :root { --bg:#f8fafc; --card:#fff; --text:#0f172a; --muted:#64748b; --border:#e2e8f0; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+           background:var(--bg); color:var(--text); }
+    .container { max-width:1280px; margin:0 auto; padding:2rem 1.25rem; }
+    header h1 { margin:0 0 .25rem; font-size:1.5rem; }
+    header p  { margin:0 0 1.5rem; color:var(--muted); }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:12px;
+            padding:1rem; box-shadow:0 1px 3px rgba(15,23,42,.06); }
+
+    /* Filtro */
+    .filters {
+      display: flex;
+      gap: .5rem 1.5rem;
+      padding: .75rem 1rem;
+      background: #f8fafc;
+      border-radius: 8px;
+      margin-bottom: .75rem;
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+      align-items: center;
+      font-size: .9rem;
+    }
+    .filters > strong { color: var(--muted); font-weight: 600; }
+    .filters label {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      cursor: pointer;
+      color: var(--text);
+      padding: .25rem .5rem;
+      border-radius: 6px;
+      transition: background .15s;
+    }
+    .filters label:hover { background: #eef2f7; }
+    .filters input[type="radio"] { cursor: pointer; accent-color: #3b82f6; }
+    .filters .legend {
+      margin-left: auto;
+      display: flex;
+      gap: 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+    .filters .dot {
+      display: inline-block;
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .chart-wrap { position:relative; width:100%; }
+    .chart-scroll {
+      max-height: 80vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .5rem;
+      background: #fcfcfd;
+    }
+    canvas { display:block; }
+
+    #status { padding:.75rem 1rem; font-size:.9rem; border-radius:8px;
+              background:#f1f5f9; margin-bottom:.75rem; }
+    #status.ok  { background:#dcfce7; color:#166534; }
+    #status.err { background:#fee2e2; color:#991b1b; white-space:pre-wrap; }
+    table { width:100%; border-collapse:collapse; font-size:.85rem; margin-top:.5rem; }
+    th, td { padding:.5rem; text-align:left; border-bottom:1px solid var(--border); }
+    th { background:#f8fafc; font-weight:600; }
+    footer { margin-top:1rem; font-size:.8rem; color:var(--muted); word-break:break-all; }
+    code { background:#eef2f7; padding:.1rem .35rem; border-radius:4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Cronograma de Dívidas</h1>
+      <p>Barras horizontais do 1º vencimento à última parcela de cada dívida.</p>
+    </header>
+
+    <div class="card">
+      <div class="filters">
+        <strong>Exibir:</strong>
+        <label><input type="radio" name="filtro" value="todas" checked> Todas as dívidas</label>
+        <label><input type="radio" name="filtro" value="comfim"> Somente com data de término</label>
+        <div class="legend">
+          <span><span class="dot" style="background:#3b82f6"></span>Em aberto</span>
+          <span><span class="dot" style="background:#10b981"></span>Quitada</span>
+          <span><span class="dot" style="background:#f59e0b"></span>Sem término</span>
+        </div>
+      </div>
+      <div id="status">Carregando…</div>
+      <div class="chart-wrap" id="wrap" style="display:none;">
+        <div class="chart-scroll" id="scroll">
+          <canvas id="grafico"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <footer>Fonte: <code id="urlFonte">—</code></footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <script>
+    /* ============================================================
+       Configuração
+       ============================================================ */
+    const CAMINHOS_JSON = [
+      "dados/dividas.json",
+      "./dados/dividas.json",
+      "https://raw.githubusercontent.com/tvluizcafofo-a11y/pagamentos/main/dados/dividas.json"
+    ];
+    const CDN_CHART = [
+      "https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js",
+      "https://unpkg.com/chart.js@4.4.1/dist/chart.umd.min.js",
+      "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"
+    ];
+
+    const $status   = document.getElementById("status");
+    const $wrap     = document.getElementById("wrap");
+    const $scroll   = document.getElementById("scroll");
+    const $urlFonte = document.getElementById("urlFonte");
+    const log       = (...a) => console.log("[cronograma]", ...a);
+
+    let itensBrutos = [];      // todos os itens normalizados
+    let filtroAtual = "todas"; // "todas" | "comfim"
+
+    function setStatus(html, cls) {
+      $status.className = cls || "";
+      $status.innerHTML = html;
+      $status.style.display = "block";
+    }
+
+    /* ============================================================
+       Carregadores
+       ============================================================ */
+    const loadedScripts = new Set();
+    function loadScriptOnce(url) {
+      if (loadedScripts.has(url)) return Promise.resolve();
+      return new Promise((res, rej) => {
+        const s = document.createElement("script");
+        s.src = url;
+        s.onload  = () => { loadedScripts.add(url); res(); };
+        s.onerror = () => rej(new Error("Falhou: " + url));
+        document.head.appendChild(s);
+      });
+    }
+    async function ensureChartJS() {
+      if (typeof window.Chart !== "undefined") { log("Chart.js já disponível"); return; }
+      for (const u of CDN_CHART) {
+        try { await loadScriptOnce(u); if (window.Chart) { log("Chart.js de:", u); return; } }
+        catch (e) { log(e.message); }
+      }
+      throw new Error("Chart.js não pôde ser carregado por nenhum CDN.");
+    }
+
+    /* ============================================================
+       Utilidades
+       ============================================================ */
+    function parseData(s) {
+      if (!s) return null;
+      if (s instanceof Date) return isNaN(s) ? null : s;
+      if (typeof s === "number") { const d = new Date(s); return isNaN(d) ? null : d; }
+      if (typeof s === "string") {
+        if (/^\d{4}-\d{2}-\d{2}/.test(s)) { const d = new Date(s.slice(0,10) + "T00:00:00"); return isNaN(d) ? null : d; }
+        if (/^\d{2}\/\d{2}\/\d{4}$/.test(s)) {
+          const [dd, mm, aa] = s.split("/");
+          const d = new Date(`${aa}-${mm}-${dd}T00:00:00`);
+          return isNaN(d) ? null : d;
+        }
+      }
+      const d = new Date(s);
+      return isNaN(d) ? null : d;
+    }
+    const brl = v => Number(v || 0).toLocaleString("pt-BR", { style:"currency", currency:"BRL" });
+    const fmtData = d => d.toLocaleDateString("pt-BR");
+
+    /* ============================================================
+       Normalização — marca dívidas contínuas/sem término
+       ============================================================ */
+    function normalizar(d) {
+      if (!d || typeof d !== "object") return null;
+      const credor = d.credor || d.nome || d.titulo || d.title || "";
+      const desc   = d.descricao || d.description || d.desc || "";
+      const nome   = [credor, desc].filter(Boolean).join(" – ") || d.id || "(sem nome)";
+
+      let inicio = parseData(d.primeiroVencimento || d.dataInicio || d.inicio || d.start);
+      let fim    = parseData(d.ultimoVencimento  || d.dataFim    || d.fim    || d.end);
+
+      const parcelas = Array.isArray(d.parcelas) ? d.parcelas : null;
+      if (parcelas && parcelas.length) {
+        const datas = parcelas.map(p => parseData(p.vencimento || p.data))
+                              .filter(Boolean).sort((a,b) => a - b);
+        if (datas.length) {
+          if (!inicio) inicio = datas[0];
+          if (!fim)    fim    = datas[datas.length - 1];
+        }
+      }
+
+      if (!inicio) return null; // sem início não dá para plotar
+
+      // "Infinita" = contínua declarada OU sem data de término
+      const infinita = d.continuada === true || !fim;
+
+      if (fim && fim < inicio) { const t = inicio; inicio = fim; fim = t; }
+
+      let quitada = false;
+      if (parcelas && parcelas.length) {
+        quitada = parcelas.every(p => (p.status || "").toLowerCase() === "pago");
+      }
+
+      const valor = d.valorParcela || d.valorTotal || d.valor || 0;
+      const parcs = d.qtdParcelas || (parcelas ? parcelas.length : null);
+      return { nome, inicio, fim, valor, parcs, quitada, infinita };
+    }
+
+    /* ============================================================
+       Carregar JSON
+       ============================================================ */
+    async function carregarJSON() {
+      const erros = [];
+      for (const url of CAMINHOS_JSON) {
+        try {
+          log("Tentando:", url);
+          const r = await fetch(url, { cache: "no-store" });
+          if (!r.ok) { erros.push(`${url} → HTTP ${r.status}`); continue; }
+          const txt = await r.text();
+          if (/^\s*<(?:!doctype|html)/i.test(txt)) { erros.push(`${url} → retornou HTML`); continue; }
+          const dados = JSON.parse(txt);
+          $urlFonte.textContent = url;
+          log("✓ Carregado de:", url);
+          return dados;
+        } catch (e) { erros.push(`${url} → ${e.message}`); }
+      }
+      throw new Error("Nenhum caminho do JSON funcionou:\n" + erros.join("\n"));
+    }
+
+    /* ============================================================
+       Eixo X: linear com ticks mensais
+       ============================================================ */
+    function buildXAxis(minMs, maxMs) {
+      const start = new Date(minMs); start.setDate(1); start.setHours(0,0,0,0);
+      const end   = new Date(maxMs); end.setDate(1);   end.setMonth(end.getMonth() + 1); end.setHours(0,0,0,0);
+
+      return {
+        type: "linear",
+        min: start.getTime(),
+        max: end.getTime(),
+        afterBuildTicks: (axis) => {
+          const ticks = [];
+          let cur = new Date(start);
+          while (cur.getTime() <= axis.max) {
+            ticks.push({ value: cur.getTime() });
+            cur = new Date(cur.getFullYear(), cur.getMonth() + 1, 1);
+          }
+          const maxTicks = 20;
+          if (ticks.length > maxTicks) {
+            const step = Math.ceil(ticks.length / maxTicks);
+            axis.ticks = ticks.filter((_, i) => i % step === 0);
+          } else {
+            axis.ticks = ticks;
+          }
+        },
+        ticks: {
+          maxRotation: 45,
+          minRotation: 0,
+          callback: (value) => {
+            const d = new Date(value);
+            const m = String(d.getMonth() + 1).padStart(2, "0");
+            const y = String(d.getFullYear()).slice(-2);
+            return `${m}/${y}`;
+          }
+        },
+        title: { display: true, text: "Mês / Ano", color: "#475569" },
+        grid: { color: "#eef2f7" }
+      };
+    }
+
+    /* ============================================================
+       Fallback: tabela
+       ============================================================ */
+    function renderTabela(itens, motivo) {
+      $wrap.style.display = "none";
+      const linhas = itens.map(it => `
+        <tr>
+          <td>${it.nome}</td>
+          <td>${fmtData(it.inicio)}</td>
+          <td>${it.fim ? fmtData(it.fim) : "—"}</td>
+          <td>${brl(it.valor)}</td>
+          <td>${it.parcs ?? "—"}</td>
+        </tr>`).join("");
+      setStatus(`⚠️ ${motivo}<br>Exibindo como tabela:`, "err");
+      const tbl = document.createElement("table");
+      tbl.innerHTML = `<thead><tr>
+        <th>Dívida</th><th>Início</th><th>Fim</th><th>Valor</th><th>Parcelas</th>
+      </tr></thead><tbody>${linhas}</tbody>`;
+      $status.appendChild(tbl);
+    }
+
+    /* ============================================================
+       Desenhar (com filtro)
+       ============================================================ */
+    function desenharGrafico() {
+      // Aplica o filtro escolhido
+      const itens = filtroAtual === "comfim"
+        ? itensBrutos.filter(x => !x.infinita && x.fim)
+        : itensBrutos.slice();
+
+      if (!itens.length) {
+        $wrap.style.display = "none";
+        if (filtroAtual === "comfim") {
+          setStatus("ℹ️ Nenhuma dívida com data de término para exibir. " +
+                    "Tente a opção “Todas as dívidas”.", "");
+        } else {
+          setStatus("❌ Nenhuma dívida para exibir.", "err");
+        }
+        return;
+      }
+
+      itens.sort((a,b) => a.inicio - b.inicio);
+
+      $wrap.style.display = "block";
+      $status.style.display = "none";
+
+      const alturaCanvas = Math.max(320, itens.length * 32 + 80);
+      const canvas = document.getElementById("grafico");
+      canvas.style.height = alturaCanvas + "px";
+      canvas.style.width  = "100%";
+      $scroll.style.maxHeight = "80vh";
+
+      // Referência: maior fim entre as dívidas COM término (ou hoje)
+      const maxFiniteMs = Math.max(
+        ...itensBrutos.filter(x => !x.infinita && x.fim).map(x => x.fim.getTime()),
+        Date.now()
+      );
+
+      // Cor por categoria
+      const cores = itens.map(x => {
+        if (x.infinita) return "#f59e0b"; // laranja
+        if (x.quitada)  return "#10b981"; // verde
+        return "#3b82f6";                 // azul
+      });
+
+      // Dados: [inicio, fimVisual]
+      const data = itens.map(x => {
+        if (x.infinita) {
+          const inicioMs = x.inicio.getTime();
+          const fimVisual = Math.max(maxFiniteMs, inicioMs + 180 * 24 * 3600 * 1000);
+          return [inicioMs, fimVisual];
+        }
+        return [x.inicio.getTime(), x.fim.getTime()];
+      });
+
+      const minMs = Math.min(...data.map(d => d[0]));
+      const maxMs = Math.max(...data.map(d => d[1]));
+
+      log("Filtro:", filtroAtual, "| itens:", itens.length);
+
+      try {
+        const ctx = canvas.getContext("2d");
+        if (window._chart) window._chart.destroy();
+
+        window._chart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: itens.map(x => x.nome),
+            datasets: [{
+              label: "Período",
+              data,
+              backgroundColor: cores.map(c => c + "CC"),
+              borderColor:     cores,
+              borderWidth: 1.5,
+              borderRadius: 4,
+              barPercentage: 0.72,
+              categoryPercentage: 0.85
+            }]
+          },
+          options: {
+            indexAxis: "y",
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: false,
+            plugins: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: `Cronograma de Dívidas – ${itens.length} dívida${itens.length !== 1 ? "s" : ""}`,
+                font: { size: 14, weight: "600" },
+                padding: { bottom: 12 }
+              },
+              tooltip: {
+                callbacks: {
+                  title: items => items[0].label,
+                  label: item => {
+                    const it = itens[item.dataIndex];
+                    if (!it) return "";
+                    const l = [
+                      `Início: ${fmtData(it.inicio)}`,
+                      `Fim:    ${it.fim ? fmtData(it.fim) : "sem data"}${it.infinita ? " (contínua)" : ""}`,
+                      `Valor:  ${brl(it.valor)}`
+                    ];
+                    if (it.parcs) l.push(`Parcelas: ${it.parcs}`);
+                    if (!it.infinita) l.push(`Status: ${it.quitada ? "quitada" : "em aberto"}`);
+                    return l;
+                  }
+                }
+              }
+            },
+            scales: {
+              x: buildXAxis(minMs, maxMs),
+              y: {
+                ticks: {
+                  autoSkip: false,
+                  color: "#0f172a",
+                  font: { size: 10 },
+                  callback: function(value) {
+                    const label = this.getLabelForValue(value);
+                    return label.length > 42 ? label.slice(0, 40) + "…" : label;
+                  }
+                },
+                grid: { display: false }
+              }
+            }
+          }
+        });
+
+        log("✓ Chart criado. Altura:", window._chart.height);
+      } catch (e) {
+        console.error("Erro no Chart:", e);
+        renderTabela(itens, "Erro ao desenhar o gráfico: " + e.message);
+      }
+    }
+
+    /* ============================================================
+       Render principal
+       ============================================================ */
+    async function renderizar(dadosBrutos) {
+      let lista = [];
+      if (Array.isArray(dadosBrutos))                lista = dadosBrutos;
+      else if (Array.isArray(dadosBrutos.dividas))   lista = dadosBrutos.dividas;
+      else if (Array.isArray(dadosBrutos.debts))     lista = dadosBrutos.debts;
+      else if (Array.isArray(dadosBrutos.data))      lista = dadosBrutos.data;
+
+      log("Lista:", lista.length, "itens");
+      itensBrutos = lista.map(normalizar).filter(Boolean);
+      log("Válidos:", itensBrutos.length,
+          "| com término:", itensBrutos.filter(x => !x.infinita).length,
+          "| sem término:", itensBrutos.filter(x => x.infinita).length);
+
+      if (!itensBrutos.length) {
+        return setStatus(
+          "❌ Nenhuma dívida teve datas reconhecidas. Chaves do 1º item: " +
+          JSON.stringify(Object.keys(lista[0] || {})),
+          "err"
+        );
+      }
+
+      try { await ensureChartJS(); }
+      catch (e) { return renderTabela(itensBrutos, e.message); }
+
+      desenharGrafico();
+    }
+
+    /* ============================================================
+       Listener do filtro
+       ============================================================ */
+    document.querySelectorAll('input[name="filtro"]').forEach(radio => {
+      radio.addEventListener("change", () => {
+        filtroAtual = radio.value;
+        log("Filtro alterado para:", filtroAtual);
+        if (itensBrutos.length) desenharGrafico();
+      });
+    });
+
+    /* ============================================================
+       Boot
+       ============================================================ */
+    (async () => {
+      try {
+        setStatus("Carregando dados…");
+        const dados = await carregarJSON();
+        await renderizar(dados);
+      } catch (e) {
+        console.error(e);
+        setStatus("❌ " + e.message, "err");
+      }
+    })();
+  </script>
+</body>
+</html>
