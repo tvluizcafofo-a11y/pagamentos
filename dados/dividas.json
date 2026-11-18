@@ -3006,20 +3006,17 @@
       }
     ]
   },
+
   {
     "id": "mu9oox4efzb2t5",
     "credor": "Domínio Administração",
     "descricao": "Acordo condomínios atrasados",
-    "valorTotal": 0,
+    "valorTotal": 1066.5,
     "valorParcela": 355.5,
-    "modo": "continua",
-    "periodicidade": "mensal",
-    "diaEspecifico": "18",
-    "continuada": true,
-    "ancora": "2026-09-18",
-    "qtdParcelas": 14,
+    "modo": "parcelas",
+    "qtdParcelas": 3,
     "primeiroVencimento": "2026-09-18",
-    "ultimoVencimento": "2027-10-18",
+    "ultimoVencimento": "2026-11-18",
     "criadoEm": "2026-09-20T10:39:09.231Z",
     "aberto": false,
     "parcelas": [
@@ -3063,108 +3060,14 @@
           "ext": "webp",
           "enviado": true
         }
-      },
-      {
-        "id": "mwmgje4p7t9l0m",
-        "numero": 4,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgjru5xc0463",
-        "numero": 5,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgk2fx1p9q8y",
-        "numero": 6,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgkdwdrc8s00",
-        "numero": 7,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgkoxseunbbr",
-        "numero": 8,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgky7b4z3rjy",
-        "numero": 9,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmglf4pvnzyjq",
-        "numero": 10,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmglisvhmg8tz",
-        "numero": 11,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmgllwerwpjp9",
-        "numero": 12,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmglq9vlm4wdt",
-        "numero": 13,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mwmglxww9oz8jg",
-        "numero": 14,
-        "valor": 355.5,
-        "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
       }
-    ]
+    ],
+    "periodicidade": "mensal",
+    "diaEspecifico": "18",
+    "continuada": false,
+    "ancora": "2026-09-18"
   },
+
   {
     "id": "mu9pyx8whhvcip",
     "credor": "Secretaria de Estado da Fazenda",
