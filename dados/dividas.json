@@ -3947,5 +3947,204 @@
         }
       }
     ]
+  },
+  {
+    "id": "mwmhl3dha4jout",
+    "credor": "Domínio Administração",
+    "descricao": "Acordo condomínios atrasados",
+    "valorTotal": 0,
+    "valorParcela": 355.5,
+    "modo": "ultima",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-12-18",
+    "qtdParcelas": 20,
+    "primeiroVencimento": "2026-12-18",
+    "ultimoVencimento": "2028-07-18",
+    "criadoEm": "2026-11-18T19:00:38.357Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mwmhl3dgkis941",
+        "numero": 1,
+        "valor": 355.5,
+        "vencimento": "2026-12-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dgu57k7f",
+        "numero": 2,
+        "valor": 355.5,
+        "vencimento": "2027-01-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dg7ss7t1",
+        "numero": 3,
+        "valor": 355.5,
+        "vencimento": "2027-02-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh953css",
+        "numero": 4,
+        "valor": 355.5,
+        "vencimento": "2027-03-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh58j4ar",
+        "numero": 5,
+        "valor": 355.5,
+        "vencimento": "2027-04-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh1muu32",
+        "numero": 6,
+        "valor": 355.5,
+        "vencimento": "2027-05-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhjwvwei",
+        "numero": 7,
+        "valor": 355.5,
+        "vencimento": "2027-06-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh8qz8qc",
+        "numero": 8,
+        "valor": 355.5,
+        "vencimento": "2027-07-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh4exckt",
+        "numero": 9,
+        "valor": 355.5,
+        "vencimento": "2027-08-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhj5f5ou",
+        "numero": 10,
+        "valor": 355.5,
+        "vencimento": "2027-09-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhzmprao",
+        "numero": 11,
+        "valor": 355.5,
+        "vencimento": "2027-10-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhqp4gtp",
+        "numero": 12,
+        "valor": 355.5,
+        "vencimento": "2027-11-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhovki4i",
+        "numero": 13,
+        "valor": 355.5,
+        "vencimento": "2027-12-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhysmzfn",
+        "numero": 14,
+        "valor": 355.5,
+        "vencimento": "2028-01-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dh3usmer",
+        "numero": 15,
+        "valor": 355.5,
+        "vencimento": "2028-02-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhaq19eg",
+        "numero": 16,
+        "valor": 355.5,
+        "vencimento": "2028-03-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhitvo0v",
+        "numero": 17,
+        "valor": 355.5,
+        "vencimento": "2028-04-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhkw0pzi",
+        "numero": 18,
+        "valor": 355.5,
+        "vencimento": "2028-05-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhtagqst",
+        "numero": 19,
+        "valor": 355.5,
+        "vencimento": "2028-06-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwmhl3dhf6ieig",
+        "numero": 20,
+        "valor": 355.5,
+        "vencimento": "2028-07-18",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
