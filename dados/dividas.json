@@ -2989,9 +2989,9 @@
     "diaEspecifico": "18",
     "continuada": true,
     "ancora": "2026-09-18",
-    "qtdParcelas": 24,
+    "qtdParcelas": 23,
     "primeiroVencimento": "2026-09-18",
-    "ultimoVencimento": "2028-08-18",
+    "ultimoVencimento": "2028-07-18",
     "criadoEm": "2026-09-20T10:39:09.231Z",
     "aberto": false,
     "parcelas": [
@@ -3212,15 +3212,6 @@
         "numero": 23,
         "valor": 355.5,
         "vencimento": "2028-07-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4ej6blwd",
-        "numero": 24,
-        "valor": 355.5,
-        "vencimento": "2028-08-18",
         "link": "",
         "status": "em_aberto",
         "comprovante": null
