@@ -2989,9 +2989,9 @@
     "diaEspecifico": "18",
     "continuada": true,
     "ancora": "2026-09-18",
-    "qtdParcelas": 23,
+    "qtdParcelas": 14,
     "primeiroVencimento": "2026-09-18",
-    "ultimoVencimento": "2028-07-18",
+    "ultimoVencimento": "2027-10-18",
     "criadoEm": "2026-09-20T10:39:09.231Z",
     "aberto": false,
     "parcelas": [
@@ -3037,7 +3037,7 @@
         }
       },
       {
-        "id": "mu9oox4ephlic0",
+        "id": "mwmcuutv075su2",
         "numero": 4,
         "valor": 355.5,
         "vencimento": "2026-12-18",
@@ -3046,7 +3046,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4eateoa9",
+        "id": "mwmcuutv30pyk5",
         "numero": 5,
         "valor": 355.5,
         "vencimento": "2027-01-18",
@@ -3055,7 +3055,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4et2j5lv",
+        "id": "mwmcuutv7qvjv2",
         "numero": 6,
         "valor": 355.5,
         "vencimento": "2027-02-18",
@@ -3064,7 +3064,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4e4cj7f4",
+        "id": "mwmcuutvtub368",
         "numero": 7,
         "valor": 355.5,
         "vencimento": "2027-03-18",
@@ -3073,7 +3073,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4er54e10",
+        "id": "mwmcuutvq6pic3",
         "numero": 8,
         "valor": 355.5,
         "vencimento": "2027-04-18",
@@ -3082,7 +3082,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4e2xqzzs",
+        "id": "mwmcuutwzzxqi8",
         "numero": 9,
         "valor": 355.5,
         "vencimento": "2027-05-18",
@@ -3091,7 +3091,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4elivv1l",
+        "id": "mwmcuutwidzm3c",
         "numero": 10,
         "valor": 355.5,
         "vencimento": "2027-06-18",
@@ -3100,7 +3100,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4edeld8x",
+        "id": "mwmcuutwip99yb",
         "numero": 11,
         "valor": 355.5,
         "vencimento": "2027-07-18",
@@ -3109,7 +3109,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4e5ue8g0",
+        "id": "mwmcuutwqe9eqc",
         "numero": 12,
         "valor": 355.5,
         "vencimento": "2027-08-18",
@@ -3118,7 +3118,7 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4eoj8nfz",
+        "id": "mwmcuutwi5fnp3",
         "numero": 13,
         "valor": 355.5,
         "vencimento": "2027-09-18",
@@ -3127,91 +3127,10 @@
         "comprovante": null
       },
       {
-        "id": "mu9oox4ez4xtx6",
+        "id": "mwmcuutw6ojhg5",
         "numero": 14,
         "valor": 355.5,
         "vencimento": "2027-10-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4ed1cgy2",
-        "numero": 15,
-        "valor": 355.5,
-        "vencimento": "2027-11-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4e0fp3eo",
-        "numero": 16,
-        "valor": 355.5,
-        "vencimento": "2027-12-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4e6syowr",
-        "numero": 17,
-        "valor": 355.5,
-        "vencimento": "2028-01-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4ehntgbm",
-        "numero": 18,
-        "valor": 355.5,
-        "vencimento": "2028-02-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4e3p935g",
-        "numero": 19,
-        "valor": 355.5,
-        "vencimento": "2028-03-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4erd5ban",
-        "numero": 20,
-        "valor": 355.5,
-        "vencimento": "2028-04-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4ebp8w7b",
-        "numero": 21,
-        "valor": 355.5,
-        "vencimento": "2028-05-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4efsanjl",
-        "numero": 22,
-        "valor": 355.5,
-        "vencimento": "2028-06-18",
-        "link": "",
-        "status": "em_aberto",
-        "comprovante": null
-      },
-      {
-        "id": "mu9oox4epyyr5g",
-        "numero": 23,
-        "valor": 355.5,
-        "vencimento": "2028-07-18",
         "link": "",
         "status": "em_aberto",
         "comprovante": null
