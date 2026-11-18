@@ -3026,8 +3026,15 @@
         "valor": 355.5,
         "vencimento": "2026-11-18",
         "link": "",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mwm5bkhv576yzb",
+          "nome": "Comprovante_18-11-2026_101640.png.webp",
+          "nomeArquivo": "Dominio_Administracao_2026-11-18.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mu9oox4ephlic0",
