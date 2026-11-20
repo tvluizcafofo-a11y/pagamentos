@@ -824,7 +824,14 @@
         "vencimento": "2026-11-20",
         "link": "",
         "status": "pago",
-        "comprovante": null,
+        "comprovante": {
+          "id": "mwp4f7g8cj70s6",
+          "nome": "Comprovante_20-11-2026_121458.png.webp",
+          "nomeArquivo": "Geisa_2026-11-20.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        },
         "credorOverride": "Geisa"
       },
       {
