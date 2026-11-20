@@ -823,7 +823,7 @@
         "valor": 200,
         "vencimento": "2026-11-20",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null,
         "credorOverride": "Geisa"
       },
