@@ -869,5 +869,24 @@
         "status": "recebido"
       }
     ]
+  },
+  {
+    "id": "mws45fhcg068bv",
+    "fonte": "Edgard",
+    "tipo": "outro",
+    "valorBase": 50,
+    "primeiroVencimento": "2026-12-02",
+    "diaVencimento": "",
+    "infinita": false,
+    "dataFim": "2026-12-02",
+    "criadoEm": "2026-11-22T17:31:09.600Z",
+    "parcelas": [
+      {
+        "id": "mws45fhhcdl47x",
+        "vencimento": "2026-12-02",
+        "valor": 50,
+        "status": "em_aberto"
+      }
+    ]
   }
 ]
