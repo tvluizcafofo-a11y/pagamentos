@@ -2286,8 +2286,15 @@
         "valor": 113.44,
         "vencimento": "2026-11-23",
         "link": "40192026311600000000600000004861416360000011344",
-        "status": "em_aberto",
-        "comprovante": null
+        "status": "pago",
+        "comprovante": {
+          "id": "mwtdat45o62a11",
+          "nome": "Comprovante_23-11-2026_113428.png.webp",
+          "nomeArquivo": "Origo_2026-11-23.webp",
+          "tipo": "image/webp",
+          "ext": "webp",
+          "enviado": true
+        }
       },
       {
         "id": "mu9o5xg1oozx6a",
