@@ -3879,5 +3879,42 @@
         "comprovante": null
       }
     ]
+  },
+  {
+    "id": "mwxfza0i156cek",
+    "credor": "Prefeitura de B.H.",
+    "descricao": "IPTU 2026",
+    "valorTotal": 0,
+    "valorParcela": 555.38,
+    "modo": "parcelas",
+    "periodicidade": "mensal",
+    "diaEspecifico": "",
+    "continuada": false,
+    "ancora": "2026-11-30",
+    "qtdParcelas": 2,
+    "primeiroVencimento": "2026-11-30",
+    "ultimoVencimento": "2026-12-30",
+    "criadoEm": "2026-11-26T11:01:08.850Z",
+    "aberto": false,
+    "parcelas": [
+      {
+        "id": "mwxfza0iyjetty",
+        "numero": 1,
+        "valor": 555.38,
+        "vencimento": "2026-11-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      },
+      {
+        "id": "mwxfza0iiq9mn5",
+        "numero": 2,
+        "valor": 555.38,
+        "vencimento": "2026-12-30",
+        "link": "",
+        "status": "em_aberto",
+        "comprovante": null
+      }
+    ]
   }
 ]
