@@ -3904,7 +3904,8 @@
         "vencimento": "2026-11-30",
         "link": "",
         "status": "em_aberto",
-        "comprovante": null
+        "comprovante": null,
+        "descricaoOverride": "IPTU 2026 -IC - 257045 022 0010"
       },
       {
         "id": "mwxfza0iiq9mn5",
