@@ -552,9 +552,10 @@
         "valor": 200,
         "vencimento": "2026-11-27",
         "link": "",
-        "status": "em_aberto",
+        "status": "pago",
         "comprovante": null,
-        "credorOverride": "Geisa"
+        "credorOverride": "Geisa",
+        "descricaoOverride": "Semanada Geisa - Bruno pagou 150"
       },
       {
         "id": "mu8n9k1wiqgwqq",
